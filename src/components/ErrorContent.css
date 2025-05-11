@@ -1,0 +1,12 @@
+.ErrorContent {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 4; */
+}
+
+.ErrorContent__icon {
+    font-size: 100px;
+    color: var(--color-text-secondary);
+}

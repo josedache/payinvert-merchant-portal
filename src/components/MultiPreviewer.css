@@ -1,0 +1,25 @@
+.MultiPreviewer {
+  display: grid;
+  gap: 4px;
+  position: relative;
+}
+
+.MultiPreviewer__toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  @apply flex items-center gap-1 p-2 bg-white bg-opacity-10;
+}
+
+.MultiPreviewer__navigator {
+  @apply font-bold;
+}
+
+.MultiPreviewer__navigatorLeft {
+  left: 0;
+}
+
+.MultiPreviewer__navigatorRight {
+  right: 0;
+}

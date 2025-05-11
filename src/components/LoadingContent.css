@@ -1,0 +1,30 @@
+.LoadingContent {
+  /* padding: 4px; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoadingContent--fullHeight {
+  height: 100%;
+}
+
+.LoadingContent--centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoadingContent-error {
+  /* margin: auto; */
+}
+
+.LoadingContent-blocking {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.06);
+}

@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+.TanStandardTable {
+  overflow: auto;
+  width: 100%;
+
+  /* min-height: 300px; */
+  max-height: calc(100vh - 250px);
+  background: inherit;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.TanStandardTable::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.TanStandardTable__table {
+  min-width: 100%;
+  background: inherit;
+  /* text-indent: 0; */
+  /* border-color: inherit; */
+  border-collapse: collapse;
+}
+
+.TanStandardTable__table__header {
+  top: 0;
+}
+
+.TanStandardTable__pagination {
+  justify-content: flex-end;
+  bottom: 0;
+}
+
+.TanStandardTable__table__header,
+.TanStandardTable__table__footer {
+  font-weight: 600;
+  @apply text-neutral-700 bg-inherit;
+  border-radius: 8px;
+}
+
+.TanStandardTable__table__header,
+/* .TanStandardTable__table__footer, */
+.TanStandardTable__pagination {
+  position: sticky;
+  z-index: 10;
+  @apply bg-neutral-100;
+}
+
+.TanStandardTable__table__header__row,
+.TanStandardTable__table__body__row,
+.TanStandardTable__table__footer__row {
+  background-color: inherit;
+  border-radius: 8px;
+}
+
+.TanStandardTable__table__header__row--relative,
+.TanStandardTable__table__body__row--relative,
+.TanStandardTable__table__footer__row--relative {
+  display: flex;
+  min-width: 100%;
+}
+
+.TanStandardTable__table__header__row--absolute,
+.TanStandardTable__table__body__row--absolute,
+.TanStandardTable__table__footer__row--absolute {
+  display: flex;
+  position: relative;
+  height: 40px;
+}
+
+.TanStandardTable__table__header__row__cell {
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 8px !important;
+}
+
+.TanStandardTable__table__header__row__cell,
+.TanStandardTable__table__body__row__cell,
+.TanStandardTable__table__footer__row__cell {
+  position: relative;
+  padding: 16px 8px;
+  /* height: 48px; */
+  text-align: left;
+  /* border-radius: 8px; */
+  @apply first:rounded-s-xl last:rounded-e-xl;
+}
+
+.TanStandardTable__table__header__row__cell--relative,
+.TanStandardTable__table__body__row__cell--relative,
+.TanStandardTable__table__footer__row__cell--relative {
+  flex: 1 0 auto;
+}
+
+.TanStandardTable__table__header__row__cell--absolute,
+.TanStandardTable__table__body__row__cell--absolute,
+.TanStandardTable__table__footer__row__cell--absolute {
+  position: absolute;
+  height: 40px;
+}
+
+.TanStandardTable__loading,
+.TanStandardTable__empty,
+.TanStandardTable__error {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.TanStandardTable__loading,
+.TanStandardTable__empty,
+.TanStandardTable__error,
+.TanStandardTable__pagination {
+  position: sticky;
+  left: 0;
+  right: 0;
+}
+
+.TanStandardTable__resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: px;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+}
+
+.TanStandardTable__resizer.TanStandardTable__resizing {
+  background: blue;
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .TanStandardTable__resizer {
+    opacity: 0;
+  }
+
+  *:hover > .TanStandardTable__resizer {
+    opacity: 1;
+  }
+}

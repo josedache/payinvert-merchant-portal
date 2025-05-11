@@ -1,0 +1,16 @@
+.PageHeader {
+    @apply flex gap-2 items-center flex-wrap py-2;
+  }
+  
+  .PageHeader__title {
+    @apply font-bold;
+  }
+  
+  .PageHeader__content {
+    @apply hidden md:contents;
+  }
+  
+  .PageHeader-content {
+    @apply flex gap-4 items-center md:hidden mb-2 py-4;
+  }
+  

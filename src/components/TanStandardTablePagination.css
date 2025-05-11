@@ -1,0 +1,16 @@
+.TanStandardTablePagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
+  gap: 2px;
+  background-color: inherit;
+}
+
+.TanStandardTablePagination__info {
+  margin-right: 16px;
+}
+
+.TanStandardTablePagination__page {
+  padding: 8px;
+}

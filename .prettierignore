@@ -1,0 +1,55 @@
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+public/
+coverage/
+
+# Package files
+package-lock.json
+yarn.lock
+npm-shrinkwrap.json
+pnpm-lock.yaml
+
+# Misc
+.DS_Store
+.env
+.env.*
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Generated files
+.eslintcache
+.stylelintcache
+
+# Binary files
+*.min.js
+*.min.css
+*.ico
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.woff
+*.woff2
+*.ttf
+*.eot
+
+# Markdown files (optional, depending on your preferences)
+# *.md
+

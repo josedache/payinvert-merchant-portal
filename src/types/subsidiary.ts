@@ -1,0 +1,20 @@
+export type Subsidiary = {
+  id: number;
+  name: string;
+  businessId: number;
+  businessName: string;
+  description: string;
+  status: string;
+  verificationStatus: string;
+  supportEmail: string;
+  role: string;
+  subsidiaryLogo: string | null;
+  subsidiarySettlementOption: string;
+  roleId: number;
+  defaultEnvId: number | null;
+  isDefault: boolean;
+  country: string;
+  industry: string | null;
+  legalBusinessName: string;
+  businessType: string;
+};

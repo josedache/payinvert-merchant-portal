@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+@import "tailwindcss" important;
+
+@theme inline {
+  --color-primary-main: var(--mui-palette-primary-main);
+  --color-primary-light: var(--mui-palette-primary-light);
+  --color-primary-lighter: var(--mui-palette-primary-lighter);
+  --color-primary-dark: var(--mui-palette-primary-dark);
+  --color-primary-darker: var(--mui-palette-primary-darker);
+  --color-primary-contrastText: var(--mui-palette-primary-contrastText);
+  --color-primary-50: var(--mui-palette-primary-50);
+  --color-primary-100: var(--mui-palette-primary-100);
+  --color-primary-200: var(--mui-palette-primary-200);
+  --color-primary-300: var(--mui-palette-primary-300);
+  --color-primary-400: var(--mui-palette-primary-400);
+  --color-primary-500: var(--mui-palette-primary-500);
+  --color-primary-600: var(--mui-palette-primary-600);
+  --color-primary-700: var(--mui-palette-primary-700);
+  --color-primary-800: var(--mui-palette-primary-800);
+  --color-primary-900: var(--mui-palette-primary-900);
+
+  --color-secondary-main: var(--mui-palette-secondary-main);
+  --color-secondary-light: var(--mui-palette-secondary-light);
+  --color-secondary-lighter: var(--mui-palette-secondary-lighter);
+  --color-secondary-dark: var(--mui-palette-secondary-dark);
+  --color-secondary-darker: var(--mui-palette-secondary-darker);
+  --color-secondary-contrastText: var(--mui-palette-secondary-contrastText);
+  --color-secondary-50: var(--mui-palette-secondary-50);
+  --color-secondary-100: var(--mui-palette-secondary-100);
+  --color-secondary-200: var(--mui-palette-secondary-200);
+  --color-secondary-300: var(--mui-palette-secondary-300);
+  --color-secondary-400: var(--mui-palette-secondary-400);
+  --color-secondary-500: var(--mui-palette-secondary-500);
+  --color-secondary-600: var(--mui-palette-secondary-600);
+  --color-secondary-700: var(--mui-palette-secondary-700);
+  --color-secondary-800: var(--mui-palette-secondary-800);
+  --color-secondary-900: var(--mui-palette-secondary-900);
+
+  --color-success-main: var(--mui-palette-success-main);
+  --color-success-light: var(--mui-palette-success-light);
+  --color-success-lighter: var(--mui-palette-success-lighter);
+  --color-success-dark: var(--mui-palette-success-dark);
+  --color-success-darker: var(--mui-palette-success-darker);
+  --color-success-contrastText: var(--mui-palette-success-contrastText);
+  --color-success-50: var(--mui-palette-success-50);
+  --color-success-100: var(--mui-palette-success-100);
+  --color-success-200: var(--mui-palette-success-200);
+  --color-success-300: var(--mui-palette-success-300);
+  --color-success-400: var(--mui-palette-success-400);
+  --color-success-500: var(--mui-palette-success-500);
+  --color-success-600: var(--mui-palette-success-600);
+  --color-success-700: var(--mui-palette-success-700);
+  --color-success-800: var(--mui-palette-success-800);
+  --color-success-900: var(--mui-palette-success-900);
+
+  --color-error-main: var(--mui-palette-error-main);
+  --color-error-light: var(--mui-palette-error-light);
+  --color-error-lighter: var(--mui-palette-error-lighter);
+  --color-error-dark: var(--mui-palette-error-dark);
+  --color-error-darker: var(--mui-palette-error-darker);
+  --color-error-contrastText: var(--mui-palette-error-contrastText);
+  --color-error-50: var(--mui-palette-error-50);
+  --color-error-100: var(--mui-palette-error-100);
+  --color-error-200: var(--mui-palette-error-200);
+  --color-error-300: var(--mui-palette-error-300);
+  --color-error-400: var(--mui-palette-error-400);
+  --color-error-500: var(--mui-palette-error-500);
+  --color-error-600: var(--mui-palette-error-600);
+  --color-error-700: var(--mui-palette-error-700);
+  --color-error-800: var(--mui-palette-error-800);
+  --color-error-900: var(--mui-palette-error-900);
+
+  --color-info-main: var(--mui-palette-info-main);
+  --color-info-light: var(--mui-palette-info-light);
+  --color-info-lighter: var(--mui-palette-info-lighter);
+  --color-info-dark: var(--mui-palette-info-dark);
+  --color-info-darker: var(--mui-palette-info-darker);
+  --color-info-contrastText: var(--mui-palette-info-contrastText);
+  --color-info-50: var(--mui-palette-info-50);
+  --color-info-100: var(--mui-palette-info-100);
+  --color-info-200: var(--mui-palette-info-200);
+  --color-info-300: var(--mui-palette-info-300);
+  --color-info-400: var(--mui-palette-info-400);
+  --color-info-500: var(--mui-palette-info-500);
+  --color-info-600: var(--mui-palette-info-600);
+  --color-info-700: var(--mui-palette-info-700);
+  --color-info-800: var(--mui-palette-info-800);
+  --color-info-900: var(--mui-palette-info-900);
+
+  --color-warning-main: var(--mui-palette-warning-main);
+  --color-warning-light: var(--mui-palette-warning-light);
+  --color-warning-lighter: var(--mui-palette-warning-lighter);
+  --color-warning-dark: var(--mui-palette-warning-dark);
+  --color-warning-darker: var(--mui-palette-warning-darker);
+  --color-warning-contrastText: var(--mui-palette-warning-contrastText);
+  --color-warning-50: var(--mui-palette-warning-50);
+  --color-warning-100: var(--mui-palette-warning-100);
+  --color-warning-200: var(--mui-palette-warning-200);
+  --color-warning-300: var(--mui-palette-warning-300);
+  --color-warning-400: var(--mui-palette-warning-400);
+  --color-warning-500: var(--mui-palette-warning-500);
+  --color-warning-600: var(--mui-palette-warning-600);
+  --color-warning-700: var(--mui-palette-warning-700);
+  --color-warning-800: var(--mui-palette-warning-800);
+  --color-warning-900: var(--mui-palette-warning-900);
+
+  --color-common-black: var(--mui-palette-common-black);
+  --color-common-white: var(--mui-palette-common-white);
+
+  --color-text-primary: var(--mui-palette-text-primary);
+  --color-text-secondary: var(--mui-palette-text-secondary);
+  --color-text-disabled: var(--mui-palette-text-disabled);
+
+  --color-background-default: var(--mui-palette-background-default);
+  --color-background-paper: var(--mui-palette-background-paper);
+
+  --color-action-active: var(--mui-palette-action-active);
+  --color-action-hover: var(--mui-palette-action-hover);
+  --color-action-selected: var(--mui-palette-action-selected);
+  --color-action-disabled: var(--mui-palette-action-disabled);
+  --color-action-disabledBackground: var(
+    --mui-palette-action-disabledBackground
+  );
+  --color-action-focus: var(--mui-palette-action-focus);
+
+  --z-mobileStepper: var(--mui-zIndex-mobileStepper);
+  --z-fab: var(--mui-zIndex-fab);
+  --z-speedDial: var(--mui-zIndex-speedDial);
+  --z-appBar: var(--mui-zIndex-appBar);
+  --z-drawer: var(--mui-zIndex-drawer);
+  --z-modal: var(--mui-zIndex-modal);
+  --z-snackbar: var(--mui-zIndex-snackbar);
+  --z-tooltip: var(--mui-zIndex-tooltip);
+
+  --font-inter: Inter sans-serif -apple-system BlinkMacSystemFont Ubuntu;
+  --font-KumbhSans: "Kumbh Sans" sans-serif;
+
+  --radius-full: 9999px;
+}
+
+@layer base {
+  .material-symbols-outlined {
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 48;
+  }
+
+  .material-symbols-outlined-fill {
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 48;
+  }
+
+  .material-symbols-outlined-fill-opsz-20 {
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 20;
+  }
+
+  .material-symbols-outlined-fill-1 {
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 48;
+  }
+
+  html,
+  body,
+  #root {
+    @apply font-KumbhSans font-normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    /* overflow: auto; */
+  }
+}
+
+*::after,
+html {
+  box-sizing: border-box;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family:
+    "General Sans", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", "sans-serif", "-apple-system", "BlinkMacSystemFont";
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+  border-radius: 10px;
+  width: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-main;
+}
+
+/* Horizontal scrollbar */
+
+::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  @apply bg-gray-300;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+  @apply bg-primary-main;
+}
+
+/* End Horizontal scrollbar */

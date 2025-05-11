@@ -1,0 +1,12 @@
+.ErrorUI {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 4; */
+}
+
+.ErrorUI__icon {
+  color: var(--color-text-secondary);
+  font-size: 100px;
+}
