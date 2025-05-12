@@ -1,4 +1,4 @@
-import { DialogTitle, IconButton } from "@mui/material";
+import { DialogTitle, DialogTitleProps, IconButton } from "@mui/material";
 import clsx from "clsx";
 import { Icon as Iconify } from "@iconify/react";
 
