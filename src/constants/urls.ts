@@ -7,3 +7,6 @@ export const PASSWORD_RESET = "/password/reset";
 export const DASHBOARD = "/";
 export const INVOICES = "/invoices";
 export const INVOICE_DETAIL = "/invoices/:id";
+export const INVOICE_ADD = "/invoices/add";
+export const BALANCES = "/balances";
+export const BALANCE_HISTORY = "/balances/history";

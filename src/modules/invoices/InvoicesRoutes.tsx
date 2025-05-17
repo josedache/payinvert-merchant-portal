@@ -1,4 +1,4 @@
-import { INVOICES, INVOICE_DETAIL } from "constants/urls";
+import { INVOICES, INVOICE_DETAIL, INVOICE_ADD } from "constants/urls";
 import { RouteObject } from "react-router-dom";
 
 export default [
@@ -9,5 +9,9 @@ export default [
   {
     path: INVOICE_DETAIL,
     lazy: () => import("modules/invoices/pages/InvoiceDetail"),
+  },
+  {
+    path: INVOICE_ADD,
+    lazy: () => import("modules/invoices/pages/AddInvoice"),
   },
 ] as RouteObject[];
