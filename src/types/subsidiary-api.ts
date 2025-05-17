@@ -44,6 +44,7 @@ export type SubsidiaryOtpResendApiRequest = ApiRequest<{
   loginHash: string;
 }>;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type SubsidiaryOtpResendApiResponse = {};
 
 export type SubsidiarySignupApiRequest = ApiRequest<{
