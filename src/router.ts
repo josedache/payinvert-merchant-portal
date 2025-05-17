@@ -40,7 +40,7 @@ const router = createBrowserRouter([
               },
               {
                 path: BALANCES,
-                lazy: () => import("modules/balances/balances"),
+                lazy: () => import("modules/balances/Balances"),
                 children: BalancesRoutes,
               },
             ],
