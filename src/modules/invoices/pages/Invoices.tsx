@@ -8,8 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
+import { INVOICE_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
+import { generatePath, Link } from "react-router-dom";
 
 const Invoices = () => {
   const tableInstance = useTable({ data, columns });
@@ -180,14 +182,16 @@ const Action = () => {
           >
             Copy invoice link
           </Button>
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="fluent:document-search-16-regular" />}
-            className="mb-2 text-black justify-start"
-          >
-            View invoice
-          </Button>
+          <Link to={generatePath(INVOICE_DETAIL, { id: "1" })}>
+            <Button
+              fullWidth
+              variant="text"
+              startIcon={<Icon icon="fluent:document-search-16-regular" />}
+              className="mb-2 text-black justify-start"
+            >
+              View invoice
+            </Button>
+          </Link>
         </div>
       </Popover>
     </div>

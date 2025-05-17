@@ -6,3 +6,4 @@ export const SIGNIN_2FA = "/signin/2fa";
 export const PASSWORD_RESET = "/password/reset";
 export const DASHBOARD = "/";
 export const INVOICES = "/invoices";
+export const INVOICE_DETAIL = "/invoices/:id";
