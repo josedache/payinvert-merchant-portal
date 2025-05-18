@@ -4,7 +4,7 @@ import {
   ENTRY,
   INVOICES,
   PAYMENT_LINK,
-  ROLES_AND_PERMISSIONS,
+  ROLES_AND_PERMISSION,
   TRANSACTION,
 } from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
@@ -12,8 +12,8 @@ import DashboardRoutes from "modules/dashboard/DashboardRoutes";
 import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
 import { BALANCES } from "constants/urls";
 import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
-import RolesAndPermissionsRoutes from "modules/roles-and-permissions/RolesAndPermissionsRoutes";
-import TransactionsRoutes from "modules/transactions/TransactionsRoutes";
+import RolesAndPermissionsRoutes from "modules/role-and-permission/RoleAndPermissionRoutes";
+import TransactionsRoutes from "modules/transaction/TransactionRoutes";
 import { createBrowserRouter } from "react-router-dom";
 import BalancesRoutes from "modules/balances/BalanceRoutes";
 
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
               },
               {
                 path: TRANSACTION,
-                lazy: () => import("modules/transactions/Transactions"),
+                lazy: () => import("modules/transaction/Transaction"),
                 children: TransactionsRoutes,
               },
               {
@@ -64,9 +64,9 @@ const router = createBrowserRouter([
                 children: PaymentLinksRoutes,
               },
               {
-                path: ROLES_AND_PERMISSIONS,
+                path: ROLES_AND_PERMISSION,
                 lazy: () =>
-                  import("modules/roles-and-permissions/RolesAndPermissions"),
+                  import("modules/role-and-permission/RoleAndPermission"),
                 children: RolesAndPermissionsRoutes,
               },
             ],

@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const RolesAndPermissions = () => {
+const RoleAndPermission = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
@@ -9,5 +9,5 @@ const RolesAndPermissions = () => {
     </div>
   );
 };
-export const Component = RolesAndPermissions;
-export default RolesAndPermissions;
+export const Component = RoleAndPermission;
+export default RoleAndPermission;

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-function Transactions() {
+function Transaction() {
   return (
     <>
       <Outlet />
@@ -8,6 +8,6 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default Transaction;
 
-export const Component = Transactions;
+export const Component = Transaction;

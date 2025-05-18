@@ -15,4 +15,4 @@ export const TRANSACTION = "/transaction";
 export const TRANSACTION_DETAIL = "/transaction/:id";
 export const PAYMENT_LINK = "/payment-link";
 export const PAYMENT_LINK_DETAIL = "/payment-link/:id";
-export const ROLES_AND_PERMISSIONS = "/roles-and-permissions";
+export const ROLES_AND_PERMISSION = "/role-and-permission";

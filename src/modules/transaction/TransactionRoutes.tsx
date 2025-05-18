@@ -4,10 +4,10 @@ import { RouteObject } from "react-router-dom";
 export default [
   {
     path: TRANSACTION,
-    lazy: () => import("modules/transactions/pages/Transaction"),
+    lazy: () => import("modules/transaction/pages/Transaction"),
   },
   {
     path: TRANSACTION_DETAIL,
-    lazy: () => import("modules/transactions/pages/TransactionDetails"),
+    lazy: () => import("modules/transaction/pages/TransactionDetails"),
   },
 ] as RouteObject[];
