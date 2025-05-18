@@ -5,8 +5,12 @@ import { useMemo } from "react";
 import * as yup from "yup";
 import StepOne from "../features/StepOne";
 import StepTwo from "../features/StepTwo";
+import { useNavigate, useParams } from "react-router-dom";
+import { INVOICES } from "constants/urls";
 
 const AddInvoice = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const stepper = useStepper({
     initialStep: getEnumStepIndex(FormStep.BUSINESS_DETAILS),
   });
@@ -17,7 +21,9 @@ const AddInvoice = () => {
     () =>
       ({
         business: {},
-        invoice: {},
+        invoice: {
+          items: [{ description: "", quantity: 1, price: 0 }],
+        },
       }) as any,
     []
   );
@@ -42,6 +48,7 @@ const AddInvoice = () => {
             break;
           }
           case FormStep.INVOICE_DETAILS: {
+            navigate(INVOICES);
             break;
           }
 
@@ -75,7 +82,7 @@ const AddInvoice = () => {
     <div className="max-w-xl mx-auto space-y-6">
       <div className="flex justify-between items-center gap-5">
         <Typography variant="h6" className="font-semibold">
-          New Invoice
+          {id ? "Edit" : "New"} Invoice
         </Typography>
         <Typography variant="h6" className="text-gray-500">
           Step {currentStep + 1}{" "}

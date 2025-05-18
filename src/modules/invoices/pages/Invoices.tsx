@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { INVOICE_ADD, INVOICE_DETAIL } from "constants/urls";
+import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
@@ -171,14 +171,16 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="mdi:pencil-outline" />}
-            className="mb-2 text-black justify-start"
-          >
-            Edit invoice
-          </Button>
+          <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
+            <Button
+              fullWidth
+              variant="text"
+              startIcon={<Icon icon="mdi:pencil-outline" />}
+              className="mb-2 text-black justify-start"
+            >
+              Edit invoice
+            </Button>
+          </Link>
           <Button
             fullWidth
             variant="text"

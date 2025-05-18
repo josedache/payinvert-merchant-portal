@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   InputAdornment,
   Paper,
@@ -38,6 +39,52 @@ const StepTwo = ({ formik }: FormContentProps) => {
             {...formik.getFieldProps("invoice.currency")}
           />
         </div>
+
+        {formik.values.invoice.items.map((_, index: number) => (
+          <div key={index} className="space-y-4 pt-4">
+            <Typography variant="h6" className="font-semibold">
+              Item {index + 1}
+            </Typography>
+            <TextField
+              label="Description"
+              multiline
+              rows={4}
+              placeholder="Enter description"
+              className="w-full"
+              {...formik.getFieldProps(`invoice.items.${index}.description`)}
+            />
+            <TextField
+              label="Quantity"
+              placeholder="Enter quantity"
+              className="w-full"
+              {...formik.getFieldProps(`invoice.items.${index}.quantity`)}
+            />
+            <TextField
+              label="Unit price"
+              placeholder="Enter unit price"
+              className="w-full"
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">NGN</InputAdornment>
+                  ),
+                },
+              }}
+              {...formik.getFieldProps(`invoice.items.${index}.price`)}
+            />
+          </div>
+        ))}
+        <Button
+          onClick={() => {
+            formik.setFieldValue("invoice.items", [
+              ...formik.values.invoice.items,
+              { description: "", quantity: 1, price: 0 },
+            ]);
+          }}
+          variant="soft"
+        >
+          Add another item
+        </Button>
       </Paper>
       <Paper elevation={0} className="p-5 space-y-4">
         <TextField

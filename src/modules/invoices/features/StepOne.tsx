@@ -1,7 +1,24 @@
-import { Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  LinearProgress,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { FormContentProps } from "../pages/AddInvoice";
+import { Icon } from "@iconify/react";
+import { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
 const StepOne = ({ formik }: FormContentProps) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    // eslint-disable-next-line no-console
+    console.log(acceptedFiles);
+  }, []);
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+  });
+
   return (
     <div className="space-y-6">
       <Paper elevation={0} className="p-5 space-y-4">
@@ -26,6 +43,37 @@ const StepOne = ({ formik }: FormContentProps) => {
         <Typography variant="h6" className="font-semibold">
           Business Logo
         </Typography>
+        <div
+          {...getRootProps()}
+          className="border rounded-2xl border-dashed flex flex-col items-center justify-center p-6"
+        >
+          <input {...getInputProps()} />
+          <div className="size-36 grid place-content-center rounded-2xl bg-gray-50 text-gray-400">
+            <Icon icon="mdi:image-filter-hdr-outline" width={50} />
+          </div>
+        </div>
+        <Button
+          fullWidth
+          startIcon={<Icon icon="icon-park-outline:add-picture" />}
+        >
+          Upload logo
+        </Button>
+        <div className="space-y-2">
+          <Typography variant="body2" className="font-semibold">
+            business-logo.jpg
+          </Typography>
+          <LinearProgress variant="determinate" value={40} />
+          <div className="flex justify-between items-center gap-2">
+            <Typography variant="body2">Uploading...</Typography>
+            <Typography variant="body2" className="flex items-center">
+              40%{" "}
+              <span>
+                <Icon icon="mdi:dot" />
+              </span>{" "}
+              10 secs left
+            </Typography>
+          </div>
+        </div>
       </Paper>
       <Paper elevation={0} className="p-5 space-y-4">
         <Typography variant="h6" className="font-semibold">
