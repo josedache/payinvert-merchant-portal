@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const TransactionsDetails = () => {
+const TransactionDetails = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
@@ -26,8 +26,8 @@ const TransactionsDetails = () => {
     </div>
   );
 };
-export const Component = TransactionsDetails;
-export default TransactionsDetails;
+export const Component = TransactionDetails;
+export default TransactionDetails;
 
 const TransactionSection = ({
   title,

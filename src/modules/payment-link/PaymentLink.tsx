@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-function PaymentLinks() {
+function PaymentLink() {
   return (
     <>
       <Outlet />
@@ -8,6 +8,6 @@ function PaymentLinks() {
   );
 }
 
-export default PaymentLinks;
+export default PaymentLink;
 
-export const Component = PaymentLinks;
+export const Component = PaymentLink;

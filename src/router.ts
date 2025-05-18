@@ -3,15 +3,15 @@ import {
   DASHBOARD,
   ENTRY,
   INVOICES,
-  PAYMENT_LINKS,
+  PAYMENT_LINK,
   ROLES_AND_PERMISSIONS,
-  TRANSACTIONS,
+  TRANSACTION,
 } from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
 import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
 import { BALANCES } from "constants/urls";
-import PaymentLinksRoutes from "modules/payment-links/PaymentLinksRoutes";
+import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
 import RolesAndPermissionsRoutes from "modules/roles-and-permissions/RolesAndPermissionsRoutes";
 import TransactionsRoutes from "modules/transactions/TransactionsRoutes";
 import { createBrowserRouter } from "react-router-dom";
@@ -54,13 +54,13 @@ const router = createBrowserRouter([
                 children: BalancesRoutes,
               },
               {
-                path: TRANSACTIONS,
+                path: TRANSACTION,
                 lazy: () => import("modules/transactions/Transactions"),
                 children: TransactionsRoutes,
               },
               {
-                path: PAYMENT_LINKS,
-                lazy: () => import("modules/payment-links/PaymentLinks"),
+                path: PAYMENT_LINK,
+                lazy: () => import("modules/payment-link/PaymentLink"),
                 children: PaymentLinksRoutes,
               },
               {

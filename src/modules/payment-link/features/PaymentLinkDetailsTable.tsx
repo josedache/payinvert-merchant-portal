@@ -1,71 +1,57 @@
 import { Icon } from "@iconify/react";
-import { Button, Chip, Popover, Typography } from "@mui/material";
+import { Button, Popover, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { PAYMENT_LINK_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
 
-const PaymentLinksDetailsProductTable = () => {
+const PaymentLinkDetailsTable = () => {
   const tableInstance = useTable({ data, columns });
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography className="text-[18px] font-medium">Product</Typography>
+        <Typography className="text-[18px] font-medium">Manscape</Typography>
         <div className="flex gap-2 items-center">
-          <Button startIcon={<Icon icon="codex:plus" />}>Add product</Button>
+          <Button
+            variant="outlined"
+            startIcon={<Icon icon="mdi:pencil-outline" />}
+          >
+            Edit link
+          </Button>
+          <Button startIcon={<Icon icon="iconamoon:copy-light" />}>
+            Copy link
+          </Button>
         </div>
       </div>
-      <TanStandardTable instance={tableInstance} />
+      <TanStandardTable instance={tableInstance} pagination={false} />
     </div>
   );
 };
-export const Component = PaymentLinksDetailsProductTable;
-export default PaymentLinksDetailsProductTable;
+export const Component = PaymentLinkDetailsTable;
+export default PaymentLinkDetailsTable;
 
 const data = [
   {
-    productName: "Green suit",
-    price: "NGN 25,000",
-    availability: "In-stock",
-    stockCount: 3,
-    soldUnits: 2,
-    revenue: "NGN 50,000",
-    linkUrl: "payinvert.com/manscape/green-suit", // Assuming URL pattern
+    dateCreated: "01 May 2021",
+    type: "Product",
+    linkUrl: "payinvert.com/manscape/green-suit",
   },
 ];
 
 const columns = [
   {
-    header: "Product name",
-    accessorKey: "productName",
+    header: "Date created",
+    accessorKey: "dateCreated",
   },
   {
-    header: "Price",
-    accessorKey: "price",
+    header: "Link type",
+    accessorKey: "type",
   },
   {
-    header: "Availability",
-    accessorKey: "availability",
-    cell: ({ row }) => (
-      <Chip
-        label={row.original.availability}
-        color={row.original.availability === "In-stock" ? "success" : "error"}
-      />
-    ),
-  },
-  {
-    header: "Stock count",
-    accessorKey: "stockCount",
-  },
-  {
-    header: "Sold",
-    accessorKey: "soldUnits",
-  },
-  {
-    header: "Revenue",
-    accessorKey: "revenue",
+    header: "Link URL",
+    accessorKey: "linkUrl",
   },
   {
     header: "Actions",

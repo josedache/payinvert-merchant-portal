@@ -8,19 +8,18 @@ import {
   Typography,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { TRANSACTION_DETAIL } from "constants/urls";
+import { PAYMENT_LINK_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
-import { transactionData } from "../constants/transaction-table-data";
 
-const Transactions = () => {
-  const tableInstance = useTable({ data: transactionData, columns });
+const PaymentLink = () => {
+  const tableInstance = useTable({ data, columns });
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography>Transactions - 122</Typography>
+        <Typography>Payment links - 109</Typography>
         <div className="flex gap-2 items-center">
           <TextField select size="small" label="Filter" className="w-24">
             {[
@@ -46,35 +45,107 @@ const Transactions = () => {
               </MenuItem>
             ))}
           </TextField>
+          <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
+            Create new link
+          </Button>
         </div>
       </div>
       <TanStandardTable instance={tableInstance} />
     </div>
   );
 };
-export const Component = Transactions;
-export default Transactions;
+export const Component = PaymentLink;
+export default PaymentLink;
+
+const data = [
+  {
+    linkName: "Manscape",
+    type: "Subscription",
+    limit: "44",
+    amount: "NGN 1,000",
+    status: "Active",
+  },
+  {
+    linkName: "Donation",
+    type: "One-off",
+    limit: "No limit",
+    amount: "NGN 3,000",
+    status: "Active",
+  },
+  {
+    linkName: "Hair oil",
+    type: "Product",
+    limit: "No limit",
+    amount: "NGN 5,400",
+    status: "Inactive",
+  },
+  {
+    linkName: "Coffee Cuppa",
+    type: "Subscription",
+    limit: "No limit",
+    amount: "NGN 7,000",
+    status: "Active",
+  },
+  {
+    linkName: "JP Leather Bag",
+    type: "Product",
+    limit: "7",
+    amount: "NGN 8,000",
+    status: "Active",
+  },
+  {
+    linkName: "Foamclene",
+    type: "Product",
+    limit: "12",
+    amount: "NGN 3,000",
+    status: "Active",
+  },
+  {
+    linkName: "Bookscout",
+    type: "Subscription",
+    limit: "50",
+    amount: "NGN 11,000",
+    status: "Inactive",
+  },
+  {
+    linkName: "Cubbit Glasses",
+    type: "Product",
+    limit: "No limit",
+    amount: "NGN 2,000",
+    status: "Active",
+  },
+  {
+    linkName: "Pop-up Funding",
+    type: "One-off",
+    limit: "No limit",
+    amount: "NGN 4,500",
+    status: "Inactive",
+  },
+  {
+    linkName: "Shoe Shine Club",
+    type: "Subscription",
+    limit: "20",
+    amount: "NGN 3,600",
+    status: "Active",
+  },
+];
 
 const columns = [
   {
-    header: "Date",
-    accessorKey: "date",
+    header: "Link name",
+    accessorKey: "linkName",
   },
   {
-    header: "Email",
-    accessorKey: "email",
+    header: "Type",
+    accessorKey: "type",
+  },
+  {
+    header: "Limit",
+    accessorKey: "limit",
   },
   {
     header: "Amount",
     accessorKey: "amount",
-  },
-  {
-    header: "Channel",
-    accessorKey: "channel",
-  },
-  {
-    header: "Reference",
-    accessorKey: "reference",
   },
   {
     header: "Status",
@@ -82,13 +153,7 @@ const columns = [
     cell: ({ row }) => (
       <Chip
         label={row.original.status}
-        color={
-          row.original.status === "Completed"
-            ? "success"
-            : row.original.status === "Processing"
-              ? "warning"
-              : "error"
-        }
+        color={row.original.status === "Active" ? "success" : "error"}
       />
     ),
   },
@@ -120,8 +185,16 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
+          <Button
+            fullWidth
+            variant="text"
+            startIcon={<Icon icon="ic:baseline-link-off" />}
+            className="mb-2 text-black justify-start"
+          >
+            Deactivate link
+          </Button>
           <Link
-            to={generatePath(TRANSACTION_DETAIL, {
+            to={generatePath(PAYMENT_LINK_DETAIL, {
               id: "1",
             })}
           >
@@ -137,10 +210,10 @@ const Action = () => {
           <Button
             fullWidth
             variant="text"
-            startIcon={<Icon icon="entypo:text-document" />}
+            startIcon={<Icon icon="iconamoon:copy-light" />}
             className="mb-2 text-black justify-start"
           >
-            Refund
+            Copy link
           </Button>
         </div>
       </Popover>

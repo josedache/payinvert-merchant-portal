@@ -1,13 +1,13 @@
-import { TRANSACTION_DETAIL, TRANSACTIONS } from "constants/urls";
+import { TRANSACTION_DETAIL, TRANSACTION } from "constants/urls";
 import { RouteObject } from "react-router-dom";
 
 export default [
   {
-    path: TRANSACTIONS,
-    lazy: () => import("modules/transactions/pages/Transactions"),
+    path: TRANSACTION,
+    lazy: () => import("modules/transactions/pages/Transaction"),
   },
   {
     path: TRANSACTION_DETAIL,
-    lazy: () => import("modules/transactions/pages/TransactionsDetails"),
+    lazy: () => import("modules/transactions/pages/TransactionDetails"),
   },
 ] as RouteObject[];
