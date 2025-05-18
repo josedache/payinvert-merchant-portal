@@ -10,10 +10,12 @@ import {
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
 import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
+import { BALANCES } from "constants/urls";
 import PaymentLinksRoutes from "modules/paymentLinks/PaymentLinksRoutes";
 import RolesAndPermissionsRoutes from "modules/rolesAndPermissions/RolesAndPermissionsRoutes";
 import TransactionsRoutes from "modules/transactions/TransactionsRoutes";
 import { createBrowserRouter } from "react-router-dom";
+import BalancesRoutes from "modules/balances/BalanceRoutes";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,11 @@ const router = createBrowserRouter([
                 path: INVOICES,
                 lazy: () => import("modules/invoices/Invoices"),
                 children: InvoicesRoutes,
+              },
+              {
+                path: BALANCES,
+                lazy: () => import("modules/balances/Balances"),
+                children: BalancesRoutes,
               },
               {
                 path: TRANSACTIONS,
