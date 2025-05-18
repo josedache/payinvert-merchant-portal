@@ -12,7 +12,7 @@ import { TRANSACTION_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
-import { transactionData } from "../constants/transactionTableData";
+import { transactionData } from "../constants/transaction-table-data";
 
 const Transactions = () => {
   const tableInstance = useTable({ data: transactionData, columns });
