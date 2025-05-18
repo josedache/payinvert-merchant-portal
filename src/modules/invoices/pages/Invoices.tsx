@@ -4,11 +4,12 @@ import {
   Chip,
   MenuItem,
   Popover,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { INVOICE_DETAIL } from "constants/urls";
+import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
@@ -19,7 +20,7 @@ const Invoices = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography>Invoice - 20</Typography>
+        <Typography variant="h6">Invoice - 20</Typography>
         <div className="flex gap-2 items-center">
           <TextField select size="small" label="Filter" className="w-24">
             {[
@@ -45,12 +46,16 @@ const Invoices = () => {
               </MenuItem>
             ))}
           </TextField>
-          <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
-            New Invoice
-          </Button>
+          <Link to={INVOICE_ADD}>
+            <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
+              New Invoice
+            </Button>
+          </Link>
         </div>
       </div>
-      <TanStandardTable instance={tableInstance} />
+      <Paper elevation={0} className="p-4">
+        <TanStandardTable instance={tableInstance} />
+      </Paper>
     </div>
   );
 };
@@ -166,14 +171,16 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="mdi:pencil-outline" />}
-            className="mb-2 text-black justify-start"
-          >
-            Edit invoice
-          </Button>
+          <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
+            <Button
+              fullWidth
+              variant="text"
+              startIcon={<Icon icon="mdi:pencil-outline" />}
+              className="mb-2 text-black justify-start"
+            >
+              Edit invoice
+            </Button>
+          </Link>
           <Button
             fullWidth
             variant="text"

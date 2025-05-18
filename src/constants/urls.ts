@@ -26,3 +26,8 @@ export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
 export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
+
+export const INVOICE_ADD = "/invoices/add";
+export const INVOICE_EDIT = "/invoices/:id/edit";
+export const BALANCES = "/balances";
+export const BALANCE_HISTORY = "/balances/history";
