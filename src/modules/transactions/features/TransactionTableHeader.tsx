@@ -3,7 +3,7 @@ import { MenuItem, TextField, Typography } from "@mui/material";
 const TransactionsTableHeader = () => {
   return (
     <div className="flex justify-between items-center gap-4">
-      <Typography>Transactions - 122</Typography>
+      <Typography className="text-[18px] font-medium">Transactions - 122</Typography>
       <div className="flex gap-2 items-center">
         <TextField select size="small" label="Filter" className="w-24">
           {[

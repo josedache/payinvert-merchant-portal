@@ -19,7 +19,9 @@ const PaymentLink = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography>Payment links - 109</Typography>
+        <Typography className="text-[18px] font-medium">
+          Payment links - 109
+        </Typography>
         <div className="flex gap-2 items-center">
           <TextField select size="small" label="Filter" className="w-24">
             {[
