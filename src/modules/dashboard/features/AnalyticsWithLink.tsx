@@ -1,6 +1,8 @@
 import { Button, Chip, Paper, Typography } from "@mui/material";
 import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
+import { BALANCES } from "constants/urls";
 
 type TProps = {
   icon: string;
@@ -54,9 +56,11 @@ const AnalyticsWithLink = ({
         </div>
       </div>
       <div className="flex justify-end p-1 bg-green-50">
-        <Button variant="text" endIcon={<Icon icon="uil:arrow-right" />}>
-          View balance
-        </Button>
+        <Link to={BALANCES}>
+          <Button variant="text" endIcon={<Icon icon="uil:arrow-right" />}>
+            View balance
+          </Button>
+        </Link>
       </div>
     </Paper>
   );
