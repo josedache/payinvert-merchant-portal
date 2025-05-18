@@ -35,12 +35,7 @@ const router = createBrowserRouter([
                 children: DashboardRoutes,
               },
               {
-                path: urlConstants.INVOICES,
-                lazy: () => import("modules/invoices/Invoices"),
-                children: InvoicesRoutes,
-              },
-              {
-                path: urlConstants.INVOICES,
+                path: urlConstants.BUSINESS_INVOICES,
                 lazy: () => import("modules/invoices/Invoices"),
                 children: InvoicesRoutes,
               },

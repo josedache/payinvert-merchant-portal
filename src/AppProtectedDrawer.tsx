@@ -62,6 +62,12 @@ function AppProtectedDrawer() {
             },
             {
               icon: "hugeicons:dashboard-square-01",
+              label: "Invoices",
+              to: urlsConstant.BUSINESS_INVOICES,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
               label: "Customers",
               to: urlsConstant.BUSINESS_CUSTOMERS,
               kycAllow: true,

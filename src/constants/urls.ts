@@ -5,11 +5,13 @@ export const SIGNIN = "/signin";
 export const SIGNIN_2FA = "/signin/2fa";
 export const PASSWORD_RESET = "/password/reset";
 export const DASHBOARD = "/";
-export const INVOICES = "/invoices";
-export const INVOICE_DETAIL = "/invoices/:id";
 
 export const BUSINESS = "/business";
 export const BUSINESS_TRANSACTIONS = "/business/transactions";
+export const BUSINESS_INVOICES = "/business/invoices";
+export const BUSINESS_INVOICES_DETAIL = "/business/invoices/:id";
+export const BUSINESS_INVOICES_ADD = "/business/invoices/add";
+export const BUSINESS_INVOICES_EDIT = "/business/invoices/:id/edit";
 export const BUSINESS_CUSTOMERS = "/business/customers";
 export const BUSINESS_PAYMENT_LINKS = "/business/payment-links";
 
@@ -27,7 +29,5 @@ export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
 
-export const INVOICE_ADD = "/invoices/add";
-export const INVOICE_EDIT = "/invoices/:id/edit";
 export const BALANCES = "/balances";
 export const BALANCE_HISTORY = "/balances/history";
