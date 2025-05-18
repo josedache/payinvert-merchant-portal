@@ -30,7 +30,9 @@ function AuthSignin() {
       email: "",
       password: "",
     },
-    validateOnMount: true,
+    validateOnMount: false,
+    validateOnChange: false,
+    validateOnBlur: false,
     validationSchema: yup.object({
       email: yup.string().label("Email").email().trim().required(),
       password: yup.string().label("Password").trim().required(),

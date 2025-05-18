@@ -60,7 +60,7 @@ const data = [
 function Dashboard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-      <Paper elevation={0} className="p-4 flex gap-2">
+      <Paper className="p-4 flex gap-2">
         <div className="size-12 shrink-0 grid place-items-center rounded-full text-pink-500 bg-pink-50 mt-2">
           <Icon icon="ph:timer-duotone" width={24} />
         </div>
@@ -100,10 +100,7 @@ function Dashboard() {
         amount="42,650"
         trend="-3"
       />
-      <Paper
-        elevation={0}
-        className="col-span-1 p-4 row-span-1 md:col-span-2 lg:row-span-2"
-      >
+      <Paper className="col-span-1 p-4 row-span-1 md:col-span-2 lg:row-span-2">
         <div className="flex justify-between gap-5 flex-col md:flex-row">
           <div className="space-y-1">
             <Typography>Transactions</Typography>

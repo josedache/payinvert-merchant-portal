@@ -20,7 +20,7 @@ const AnalyticsWithLink = ({
   trend,
 }: TProps) => {
   return (
-    <Paper elevation={0} className="space-y-5 flex flex-col justify-between">
+    <Paper className="space-y-5 flex flex-col justify-between">
       <div className="p-4 flex gap-2">
         <div
           className={cn(
