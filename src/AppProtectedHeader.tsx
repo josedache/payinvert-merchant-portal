@@ -2,14 +2,15 @@ import {
   AppBar,
   AppBarProps,
   Avatar,
-  CardActionArea,
+  Badge,
+  ButtonBase,
   Divider,
   Icon,
   IconButton,
   ListItemButton,
   Paper,
   Popover,
-  Toolbar,
+  Switch,
   Typography,
 } from "@mui/material";
 import { Icon as Iconify } from "@iconify/react";
@@ -21,9 +22,15 @@ import Logo from "components/Logo";
 import useSidebarIcon from "hooks/use-sidebar-icon";
 import useAuthUser from "hooks/use-auth-user";
 import useLogout from "hooks/use-logout";
+import PageHeader from "components/PageHeader";
+import { useLocation } from "react-router-dom";
+import { DASHBOARD } from "constants/urls";
+import firstCharToUpperCase from "utils/string/first-char-toUpperCase";
 
 function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;
+  const location = useLocation();
+  const { pathname } = location;
 
   const infoPopover = usePopover();
   const authUser = useAuthUser();
@@ -32,21 +39,46 @@ function AppProtectedHeader(props: AppBarProps) {
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
+  const isDashboard = pathname === DASHBOARD;
+
+  const allPaths = pathname.split("/").filter((item) => item !== "");
+  const highlightedPath = [...allPaths].splice(1); // Exclude the first item
+  const getPathLink = (item) =>
+    allPaths
+      .slice(0, allPaths?.findIndex((path) => path === item) + 1)
+      .join("/")
+      .replace(/-/g, "_");
+
+  const breadCrumbs = isDashboard
+    ? [
+        {
+          name: "Dashboard",
+          to: DASHBOARD,
+        },
+      ]
+    : highlightedPath?.map((item) => ({
+        name: firstCharToUpperCase(item?.split("-")).join(" "),
+        to: getPathLink(item),
+      }));
+
   return (
     <AppBar
       elevation={0}
       position="sticky"
       color="inherit"
+      sx={{
+        backgroundColor: "background.default",
+      }}
       className={clsx(
         sidebarIcon.isOpen
           ? "lg:w-[calc(100%-270px)] lg:ml-[270px]"
           : "lg:w-[calc(100%-80px)]  lg:ml-[80px]",
-        "w-full border-y-0 border-x-0 border-b-1 border-b-[#E0E5EB] bg-background-default rounded-none py-2"
+        "w-full rounded-none bg-none pt-4"
       )}
       {...restProps}
     >
-      <Toolbar disableGutters>
-        <div className="md:flex hidden items-center justify-center gap-2 px-10 w-full">
+      <Paper className="py-4">
+        <div className="md:flex hidden items-center justify-center gap-2 px-6 w-full">
           <IconButton
             className="lg:hidden"
             color="inherit"
@@ -57,30 +89,28 @@ function AppProtectedHeader(props: AppBarProps) {
             </Icon>
           </IconButton>
 
-          <div className="flex-1" />
-
-          <div className=" border-1 rounded-full w-10 h-10 border-[#EDEFF2] bg-[#FAFAFA]">
-            <IconButton disabled>
-              <Iconify
-                className="MuiIcon-root"
-                icon="hugeicons:notification-02"
-              />
-            </IconButton>
+          <div>
+            <PageHeader breadcrumbs={breadCrumbs} />
           </div>
 
-          <CardActionArea
-            sx={{
-              background:
-                "linear-gradient(221deg, #C63E0E 27.25%, #FF7849 102.65%);Linear Gradient",
-            }}
-            className="p-1.5 w-[40px] h-[40px] rounded-full"
-            onClick={infoPopover.togglePopover}
-          >
+          <div className="flex-1" />
+
+          <Switch />
+
+          <IconButton>
+            <Badge variant="dot" color="error">
+              <Iconify className="MuiIcon-root" icon="pajamas:notifications" />
+            </Badge>
+          </IconButton>
+
+          <ButtonBase className="rounded-full">
             <Avatar
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M14 7a6.98 6.98 0 0 1-1.941 4.838A6.98 6.98 0 0 1 7.02 14h-.04a6.98 6.98 0 0 1-5.039-2.162A7 7 0 1 1 14 7m-2.757 3.5A5.49 5.49 0 0 0 7 8.5a5.49 5.49 0 0 0-4.243 2A5.49 5.49 0 0 0 7 12.5a5.49 5.49 0 0 0 4.243-2M7 7.5a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5' clip-rule='evenodd'/%3E%3C/svg%3E"
-              className="w-full h-full text-primary-500"
+              color="inherit"
+              onClick={infoPopover.togglePopover}
+              src=""
+              className="w-[40px] h-[40px]"
             />
-          </CardActionArea>
+          </ButtonBase>
 
           <Popover
             open={infoPopover.isOpen}
@@ -130,7 +160,7 @@ function AppProtectedHeader(props: AppBarProps) {
         </div>
 
         <div className="flex md:hidden items-center justify-between gap-2 px-8 w-full">
-          <Logo variant="2" />
+          <Logo className="w-full h-full max-w-[90px]" variant="2" />
 
           <IconButton onClick={() => sideNavigation.toggle()}>
             <Icon>
@@ -138,7 +168,7 @@ function AppProtectedHeader(props: AppBarProps) {
             </Icon>
           </IconButton>
         </div>
-      </Toolbar>
+      </Paper>
     </AppBar>
   );
 }

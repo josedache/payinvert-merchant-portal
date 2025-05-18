@@ -1,8 +1,5 @@
 import { useMemo } from "react";
 import {
-  Dialog,
-  DialogContent,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -10,13 +7,11 @@ import {
   Typography,
   useMediaQuery,
   ListItemButton,
-  Button,
   Popover,
   Avatar,
-  ListItemIcon,
-  Tooltip,
-  Card,
-  Icon,
+  Paper,
+  Badge,
+  Collapse,
 } from "@mui/material";
 import clsx from "clsx";
 import { Link, matchPath, useLocation } from "react-router-dom";
@@ -27,13 +22,11 @@ import MediaBreakpoint from "enums/media-breakpoint";
 import Logo from "components/Logo";
 import useToggle from "hooks/use-toggle";
 import usePopover from "hooks/use-popover";
-import { DASHBOARD } from "constants/urls";
+import * as urlsConstant from "constants/urls";
 import useSidebarIcon from "hooks/use-sidebar-icon";
 
 function AppProtectedDrawer() {
-  const islg = useMediaQuery(MediaBreakpoint.LG);
-
-  // const { logout } = useLogout();
+  const isLg = useMediaQuery(MediaBreakpoint.LG);
 
   const infoPopover = usePopover();
 
@@ -44,89 +37,151 @@ function AppProtectedDrawer() {
     {
       links: [
         {
-          icon: "hugeicons:dashboard-square-01",
-          label: "Dashboard",
-          to: DASHBOARD,
+          label: "Home",
+          to: urlsConstant.DASHBOARD,
           kycAllow: true,
-        },
-      ],
-    },
-    {
-      links: [
-        {
-          icon: "hugeicons:wallet-add-01",
-          label: "Main Wallet",
-          to: "/main-wallet",
-          kycAllow: false,
+          links: [
+            {
+              icon: "ic:twotone-dashboard",
+              label: "Overview",
+              to: urlsConstant.DASHBOARD,
+              kycAllow: true,
+            },
+          ],
         },
         {
-          icon: "hugeicons:money-receive-02",
-          label: "Collections",
-          to: "/collections",
-          kycAllow: false,
+          label: "Business",
+          to: urlsConstant.BUSINESS,
+          kycAllow: true,
+          links: [
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Transactions",
+              to: urlsConstant.BUSINESS_TRANSACTIONS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Customers",
+              to: urlsConstant.BUSINESS_CUSTOMERS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Payment Links",
+              to: urlsConstant.BUSINESS_PAYMENT_LINKS,
+              kycAllow: true,
+            },
+          ],
+        },
+        {
+          label: "Account",
+          to: urlsConstant.ACCOUNT,
+          kycAllow: true,
+          links: [
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Settlements",
+              to: urlsConstant.ACCOUNT_SETTLEMENTS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Payouts",
+              to: urlsConstant.ACCOUNT_PAYOUTS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Balances",
+              to: urlsConstant.ACCOUNT_BALANCES,
+              kycAllow: true,
+            },
+          ],
+        },
+        {
+          label: "Settings",
+          to: urlsConstant.SETTINGS,
+          kycAllow: true,
+          links: [
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Business",
+              to: urlsConstant.SETTINGS_BUSINESS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Compliance Information",
+              to: urlsConstant.SETTINGS_COMPLIANCE_INFO,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Payout Accounts",
+              to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Roles & Permissions",
+              to: urlsConstant.SETTINGS_ROLES_AND_PERMISSIONS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Users",
+              to: urlsConstant.SETTINGS_USERS,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "Preferences",
+              to: urlsConstant.SETTINGS_PREFERENCES,
+              kycAllow: true,
+            },
+            {
+              icon: "hugeicons:dashboard-square-01",
+              label: "API Keys & Webhooks",
+              to: urlsConstant.SETTINGS_API_WEBHOOKS,
+              kycAllow: true,
+            },
+          ],
         },
       ],
     },
   ];
 
-  const collapseToIcon = islg && !sidebarIcon.isOpen;
+  const collapseToIcon = isLg && !sidebarIcon.isOpen;
 
   return (
     <>
       <div className="relative">
         <Drawer
           open={sideNavigation.isOpen}
-          variant={islg ? "permanent" : "temporary"}
-          anchor={islg ? "left" : "right"}
+          variant={isLg ? "permanent" : "temporary"}
+          anchor={isLg ? "left" : "right"}
           slotProps={{
             paper: {
               className: clsx(
                 collapseToIcon ? "w-[80px]" : "w-[270px]",
-                "flex flex-col border-r-1 border-[#E0E5EB]  bg-background-default text-primary-contrastText transition-all",
-                islg ? "" : "bg-none"
+                "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all",
+                isLg ? "" : "bg-none"
               ),
             },
           }}
           onClose={() => sideNavigation.toggle()}
         >
-          <Toolbar className="flex items-center px-5 py-6 justify-between ">
-            {islg && (
-              <div className="flex items-center justify-between w-full">
-                <div>
-                  <Logo variant="2" />
-                </div>
-
-                <IconButton
-                  size="small"
-                  className={clsx(
-                    "p-1  bg-white border-neutral-200 border-1",
-                    collapseToIcon ? "opacity-0 visible" : ""
-                  )}
-                  onClick={sidebarIcon.toggle as any}
-                >
-                  <Iconify
-                    icon="hugeicons:arrow-left-double"
-                    width="20"
-                    height="20"
-                  />
-                </IconButton>
-              </div>
+          <Toolbar className="flex items-center px-0 pt-4  justify-between ">
+            {isLg && (
+              <Paper className="py-4 px-3 w-full flex justify-center">
+                <Logo className="w-full h-full max-w-[150px]" variant="2" />
+              </Paper>
             )}
-            {!islg && (
+
+            {!isLg && (
               <div className="flex gap-4">
-                {" "}
-                <Card
-                  sx={{
-                    background:
-                      "linear-gradient(221deg, #C63E0E 27.25%, #FF7849 102.65%);Linear Gradient",
-                  }}
-                  className="p-1.5 w-[40px] h-[40px] rounded-full"
-                >
-                  <Avatar
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M14 7a6.98 6.98 0 0 1-1.941 4.838A6.98 6.98 0 0 1 7.02 14h-.04a6.98 6.98 0 0 1-5.039-2.162A7 7 0 1 1 14 7m-2.757 3.5A5.49 5.49 0 0 0 7 8.5a5.49 5.49 0 0 0-4.243 2A5.49 5.49 0 0 0 7 12.5a5.49 5.49 0 0 0 4.243-2M7 7.5a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5' clip-rule='evenodd'/%3E%3C/svg%3E"
-                    className="w-full h-full text-primary-500"
-                  />
-                </Card>
+                <Avatar src="" className="w-[40px] h-[40px]" />
                 <Popover
                   open={infoPopover.isOpen}
                   anchorEl={infoPopover.anchorEl}
@@ -136,69 +191,53 @@ function AppProtectedDrawer() {
                   className="p-2"
                 ></Popover>
                 <div className=" border rounded-full w-10 h-10 border-neutral-100 ">
-                  <IconButton
-                    color="inherit"
-                    className="bg-neutral-50"
-                    disabled
-                  >
-                    {/* <Badge badgeContent={7} color="error"> */}
-                    <Iconify
-                      className="MuiIcon-root text-[#292D32]"
-                      icon="hugeicons:notification-02"
-                    />
-                    {/* </Badge> */}
+                  <IconButton>
+                    <Badge variant="dot" color="error">
+                      <Iconify
+                        className="MuiIcon-root"
+                        icon="pajamas:notifications"
+                      />
+                    </Badge>
                   </IconButton>
                 </div>
               </div>
             )}
-            {!islg && (
+
+            {!isLg && (
               <IconButton onClick={() => sideNavigation.toggle()}>
-                <Iconify icon="hugeicons:cancel-02" width="24" height="24" />
+                <Iconify icon="iconoir:cancel" width="24" height="24" />
               </IconButton>
             )}
           </Toolbar>
 
-          <List className="flex-1 min-h-0 overflow-y-auto mt-6">
-            {NAV_LINKS.map(({ links }, index) => {
+          <List
+            disablePadding
+            className="flex-1 min-h-0 gap-6 overflow-y-auto scrollbar-hidden mt-4"
+          >
+            {NAV_LINKS.map(({ links }) => {
               return (
-                <>
-                  {index ? (
-                    <div className="py-3s">
-                      <Divider className="bg-white " />
-                    </div>
-                  ) : null}
-                  <div className="p-3">
-                    {links.map((item, index) => {
-                      return (
-                        <AppProtectedDrawerItem
-                          key={index}
-                          collapseToIcon={collapseToIcon}
-                          item={item}
-                        />
-                      );
-                    })}
-                  </div>
-                </>
+                <div>
+                  {links.map((item, index) => {
+                    return (
+                      <AppProtectedDrawerItem
+                        key={index}
+                        collapseToIcon={collapseToIcon}
+                        item={item}
+                      />
+                    );
+                  })}
+                </div>
               );
             })}
           </List>
-        </Drawer>
 
-        {collapseToIcon ? (
-          <IconButton
-            size="small"
-            className="absolute top-8 p-1  bg-white border-neutral-200 border-1 left-[65px] b-10 z-[1000000]"
-            onClick={() => {
-              sidebarIcon.toggle();
-            }}
-          >
-            <Iconify
-              icon="hugeicons:arrow-right-double"
-              width="18"
-              height="18"
-            />
-          </IconButton>
-        ) : null}
+          <footer className="text-[#424242] py-5">
+            <Typography>
+              Copyright © {new Date().getFullYear()} All rights reserved
+            </Typography>
+            <Typography>All rights reserved</Typography>
+          </footer>
+        </Drawer>
       </div>
     </>
   );
@@ -208,17 +247,10 @@ export default AppProtectedDrawer;
 
 function AppProtectedDrawerItem(props: any) {
   const item = props.item;
-  const collapseToIcon = props.collapseToIcon;
-  const { kycAllow, label, to, links, icon, onClick } = item;
 
-  const [isKycDialog, toggleKycDialog] = useToggle();
-
-  // const authUser = useAuthUser();
+  const { kycAllow, label, to, links, onClick } = item;
 
   const isKycCompleted = false;
-  // authUser?.kyc_validation?.basic &&
-  // authUser?.kyc_validation?.nin &&
-  // authUser?.kyc_validation?.bank;
 
   const isGroup = !!links;
 
@@ -243,11 +275,20 @@ function AppProtectedDrawerItem(props: any) {
 
   return (
     <>
-      <Tooltip title={collapseToIcon ? label : ""} arrow placement="right">
+      <Paper
+        elevation={!!match || !isSubMenu ? 0 : 1}
+        className={clsx(
+          "mb-6 p-0 mt-0 overflow-hidden",
+          !!match || isSubMenu ? "bg-white" : "bg-transparent"
+        )}
+      >
         <ListItemButton
+          disableRipple
+          disableTouchRipple
+          disableGutters
           className={clsx(
-            "rounded-lg flex gap-2 py-3 my-[6px] text-[#1D2129]",
-            !!match && "bg-[#E8ECF1] "
+            "flex px-4 gap-2 py-3 ",
+            !!match && !isGroup && "bg-[#EDFAF1] text-primary-contrastText"
           )}
           {...(isGroup
             ? { onClick: toggleSubMenu }
@@ -255,30 +296,16 @@ function AppProtectedDrawerItem(props: any) {
               ? onClick
                 ? { onClick }
                 : { component: Link, to }
-              : { onClick: toggleKycDialog, disabled: true })}
+              : { disabled: true })}
         >
-          <ListItemIcon
-            sx={[
-              {
-                color: "#1D2129",
-                minWidth: 0,
-                justifyContent: "center",
-              },
-            ]}
-          >
-            <Iconify icon={icon} className="text-2xl" />
-          </ListItemIcon>
-
           <Typography
             className={clsx(
-              collapseToIcon ? "opacity-0" : "",
-              "font-medium flex-1"
+              isGroup ? "font-bold uppercase" : "",
+              "text-[#616161] flex-1"
             )}
-            noWrap
           >
             {label}
           </Typography>
-
           {isGroup && (
             <Iconify
               className="text-2xl"
@@ -286,29 +313,41 @@ function AppProtectedDrawerItem(props: any) {
             />
           )}
         </ListItemButton>
-      </Tooltip>
 
-      <Dialog open={isKycDialog} fullWidth onClose={toggleKycDialog}>
-        <DialogContent>
-          <div className="flex flex-col gap-4 items-center">
-            <Icon color="warning" className="text-8xl">
-              sentiment_satisfied
-            </Icon>
-            <Typography className="text-center text-text-secondary">
-              Your KYC information is incomplete please update your profile to
-              yield and perform other actions.
-            </Typography>
-            <Button
-              // component={Link}
-              // to={DASHBOARD_KYC}
-              onClick={toggleKycDialog as any}
-              className="mt-4"
-            >
-              Update profile
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+        {isGroup && (
+          <Collapse in={isSubMenu} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {links?.map(
+                ({ label, icon, to, toMatchExclude, ...rest }, index) => (
+                  <ListItemButton
+                    key={index}
+                    selected={
+                      match?.pathnameBase === to &&
+                      !toMatchExclude?.includes(match?.pathname)
+                    }
+                    className={clsx(
+                      "px-4 font-bold rounded-none py-3",
+                      match?.pathnameBase === to &&
+                        !toMatchExclude?.includes(match?.pathname) &&
+                        "bg-[#EDFAF1] text-[#016E20]"
+                    )}
+                    component={Link}
+                    to={to}
+                    {...rest}
+                  >
+                    <Iconify
+                      icon={icon}
+                      className="text-2xl mr-5 text-[#19943C]"
+                    />
+
+                    <Typography className="font-medium">{label}</Typography>
+                  </ListItemButton>
+                )
+              )}
+            </List>
+          </Collapse>
+        )}
+      </Paper>
     </>
   );
 }

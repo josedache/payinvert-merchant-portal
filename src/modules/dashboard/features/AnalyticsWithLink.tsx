@@ -18,7 +18,7 @@ const AnalyticsWithLink = ({
   trend,
 }: TProps) => {
   return (
-    <Paper elevation={0} className="space-y-5 flex flex-col justify-between">
+    <Paper className="space-y-5 flex flex-col justify-between overflow-hidden">
       <div className="p-4 flex gap-2">
         <div
           className={cn(
@@ -54,7 +54,11 @@ const AnalyticsWithLink = ({
         </div>
       </div>
       <div className="flex justify-end p-1 bg-green-50">
-        <Button variant="text" endIcon={<Icon icon="uil:arrow-right" />}>
+        <Button
+          variant="text"
+          className="font-semibold"
+          endIcon={<Icon icon="uil:arrow-right" />}
+        >
           View balance
         </Button>
       </div>

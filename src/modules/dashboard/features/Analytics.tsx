@@ -12,7 +12,7 @@ type TProps = {
 
 const Analytics = ({ icon, className, label, amount, trend }: TProps) => {
   return (
-    <Paper elevation={0} className="p-4 flex gap-2">
+    <Paper className="p-4 flex gap-2">
       <div
         className={cn(
           "size-12 shrink-0 grid place-items-center rounded-full mt-2",
