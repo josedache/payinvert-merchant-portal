@@ -2,7 +2,7 @@ import { Button, Chip, Paper, Typography } from "@mui/material";
 import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import { ACCOUNT_BALANCES } from "constants/urls";
+import { BALANCE } from "constants/urls";
 
 type TProps = {
   icon: string;
@@ -56,12 +56,8 @@ const AnalyticsWithLink = ({
         </div>
       </div>
       <div className="flex justify-end p-1 bg-green-50">
-        <Link to={ACCOUNT_BALANCES}>
-          <Button
-            variant="text"
-            className="font-semibold"
-            endIcon={<Icon icon="uil:arrow-right" />}
-          >
+        <Link to={BALANCE}>
+          <Button variant="text" endIcon={<Icon icon="uil:arrow-right" />}>
             View balance
           </Button>
         </Link>

@@ -11,7 +11,7 @@ import { FormContentProps } from "../pages/AddInvoice";
 const StepTwo = ({ formik }: FormContentProps) => {
   return (
     <div className="space-y-6">
-      <Paper elevation={0} className="p-5 space-y-4">
+      <Paper className="p-5 space-y-4">
         <Typography variant="h6" className="font-semibold">
           Invoice details
         </Typography>
@@ -86,7 +86,7 @@ const StepTwo = ({ formik }: FormContentProps) => {
           Add another item
         </Button>
       </Paper>
-      <Paper elevation={0} className="p-5 space-y-4">
+      <Paper className="p-5 space-y-4">
         <TextField
           label="Invoice notes"
           placeholder="Enter invoice notes"

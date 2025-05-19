@@ -7,13 +7,14 @@ import {
 } from "@mui/material";
 import { FormContentProps } from "../pages/AddInvoice";
 import { Icon } from "@iconify/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import ImagePreviewer from "components/ImagePreviewer";
 
 const StepOne = ({ formik }: FormContentProps) => {
+  const [file, setFile] = useState(null);
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    // eslint-disable-next-line no-console
-    console.log(acceptedFiles);
+    setFile(acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -21,7 +22,7 @@ const StepOne = ({ formik }: FormContentProps) => {
 
   return (
     <div className="space-y-6">
-      <Paper elevation={0} className="p-5 space-y-4">
+      <Paper className="p-5 space-y-4">
         <Typography variant="h6" className="font-semibold">
           Business details
         </Typography>
@@ -39,7 +40,7 @@ const StepOne = ({ formik }: FormContentProps) => {
           {...formik.getFieldProps("business.email")}
         />
       </Paper>
-      <Paper elevation={0} className="p-5 space-y-4">
+      <Paper className="p-5 space-y-4">
         <Typography variant="h6" className="font-semibold">
           Business Logo
         </Typography>
@@ -47,10 +48,14 @@ const StepOne = ({ formik }: FormContentProps) => {
           {...getRootProps()}
           className="border rounded-2xl border-dashed flex flex-col items-center justify-center p-6"
         >
-          <input {...getInputProps()} />
-          <div className="size-36 grid place-content-center rounded-2xl bg-gray-50 text-gray-400">
-            <Icon icon="mdi:image-filter-hdr-outline" width={50} />
-          </div>
+          <input {...getInputProps()} accept="image/*" />
+          {file ? (
+            <ImagePreviewer src={file} />
+          ) : (
+            <div className="size-36 grid place-content-center rounded-2xl bg-gray-50 text-gray-400">
+              <Icon icon="mdi:image-filter-hdr-outline" width={50} />
+            </div>
+          )}
         </div>
         <Button
           fullWidth
@@ -75,7 +80,7 @@ const StepOne = ({ formik }: FormContentProps) => {
           </div>
         </div>
       </Paper>
-      <Paper elevation={0} className="p-5 space-y-4">
+      <Paper className="p-5 space-y-4">
         <Typography variant="h6" className="font-semibold">
           Customer details
         </Typography>

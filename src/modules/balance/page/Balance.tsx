@@ -1,16 +1,16 @@
+import { BALANCE_HISTORY } from "constants/urls";
 import { Button, Chip, Paper, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import { ACCOUNT_BALANCE_HISTORY } from "constants/urls";
 
-const Balances = () => {
+const Balance = () => {
   return (
     <div className="space-y-8">
       <div className="flex justify-end gap-2 items-center">
         <Button startIcon={<Icon icon="solar:wallet-money-bold-duotone" />}>
           Top up
         </Button>
-        <Link to={ACCOUNT_BALANCE_HISTORY}>
+        <Link to={BALANCE_HISTORY}>
           <Button
             variant="soft"
             startIcon={<Icon icon="fluent:document-search-20-filled" />}
@@ -21,7 +21,7 @@ const Balances = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Paper elevation={0} className="space-y-5 p-4 flex gap-2">
+        <Paper className="space-y-5 p-4 flex gap-2">
           <div className="size-12 shrink-0 grid place-items-center rounded-full mt-2 text-green-500 bg-green-50">
             <Icon icon="si:money-duotone" width={24} />
           </div>
@@ -53,7 +53,7 @@ const Balances = () => {
             </div>
           </div>
         </Paper>
-        <Paper elevation={0} className="space-y-5 p-4 flex gap-2">
+        <Paper className="space-y-5 p-4 flex gap-2">
           <div className="size-12 shrink-0 grid place-items-center rounded-full mt-2 text-red-500 bg-red-50">
             <Icon icon="si:money-duotone" width={24} />
           </div>
@@ -68,7 +68,7 @@ const Balances = () => {
             </Typography>
           </div>
         </Paper>
-        <Paper elevation={0} className="space-y-5 p-4 flex gap-2">
+        <Paper className="space-y-5 p-4 flex gap-2">
           <div className="size-12 shrink-0 grid place-items-center rounded-full mt-2 text-blue-500 bg-blue-50">
             <Icon icon="basil:bank-outline" width={24} />
           </div>
@@ -89,5 +89,5 @@ const Balances = () => {
     </div>
   );
 };
-export const Component = Balances;
-export default Balances;
+export const Component = Balance;
+export default Balance;

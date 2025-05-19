@@ -1,11 +1,9 @@
-import { ACCOUNT_BALANCES } from "constants/urls";
+import { ACCOUNT } from "constants/urls";
 import { RouteObject } from "react-router-dom";
-import BalancesRoutes from "modules/balances/BalanceRoutes";
 
 export default [
   {
-    path: ACCOUNT_BALANCES,
-    lazy: () => import("modules/balances/Balances"),
-    children: BalancesRoutes,
+    path: ACCOUNT,
+    lazy: () => import("modules/account/pages/Account"),
   },
 ] as RouteObject[];

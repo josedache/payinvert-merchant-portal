@@ -1,24 +1,23 @@
 import AppErrorBoundary from "./AppErrorBoundary";
 import { createBrowserRouter } from "react-router-dom";
 import {
-  DASHBOARD,
-  ENTRY,
-  INVOICES,
+  INVOICE,
   PAYMENT_LINK,
   ROLES_AND_PERMISSION,
   TRANSACTION,
-  BALANCES
+  BALANCE,
 } from "constants/urls";
 import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
-import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
 import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
 import RolesAndPermissionsRoutes from "modules/role-and-permission/RoleAndPermissionRoutes";
 import TransactionsRoutes from "modules/transaction/TransactionRoutes";
 import SettingsRoutes from "modules/settings/SettingsRoutes";
 import AccountRoutes from "modules/account/AccountRoutes";
 import BusinessRoutes from "modules/business/BusinessRoutes";
+import BalancesRoutes from "modules/balance/BalanceRoutes";
+import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +75,16 @@ const router = createBrowserRouter([
                 lazy: () =>
                   import("modules/role-and-permission/RoleAndPermission"),
                 children: RolesAndPermissionsRoutes,
+              },
+              {
+                path: INVOICE,
+                lazy: () => import("modules/invoice/Invoice"),
+                children: InvoicesRoutes,
+              },
+              {
+                path: BALANCE,
+                lazy: () => import("modules/balance/Balance"),
+                children: BalancesRoutes,
               },
             ],
           },
