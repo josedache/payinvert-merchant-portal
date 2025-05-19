@@ -1,8 +1,21 @@
 import AppErrorBoundary from "./AppErrorBoundary";
+import { createBrowserRouter } from "react-router-dom";
+import {
+  DASHBOARD,
+  ENTRY,
+  INVOICES,
+  PAYMENT_LINK,
+  ROLES_AND_PERMISSION,
+  TRANSACTION,
+  BALANCES
+} from "constants/urls";
+import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
-import { createBrowserRouter } from "react-router-dom";
-import * as urlConstants from "constants/urls";
+import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
+import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
+import RolesAndPermissionsRoutes from "modules/role-and-permission/RoleAndPermissionRoutes";
+import TransactionsRoutes from "modules/transaction/TransactionRoutes";
 import SettingsRoutes from "modules/settings/SettingsRoutes";
 import AccountRoutes from "modules/account/AccountRoutes";
 import BusinessRoutes from "modules/business/BusinessRoutes";
@@ -48,7 +61,22 @@ const router = createBrowserRouter([
                 lazy: () => import("modules/account/Account"),
                 children: AccountRoutes,
               },
-              {},
+              {
+                path: TRANSACTION,
+                lazy: () => import("modules/transaction/Transaction"),
+                children: TransactionsRoutes,
+              },
+              {
+                path: PAYMENT_LINK,
+                lazy: () => import("modules/payment-link/PaymentLink"),
+                children: PaymentLinksRoutes,
+              },
+              {
+                path: ROLES_AND_PERMISSION,
+                lazy: () =>
+                  import("modules/role-and-permission/RoleAndPermission"),
+                children: RolesAndPermissionsRoutes,
+              },
             ],
           },
         ],

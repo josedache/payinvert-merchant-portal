@@ -30,3 +30,19 @@ export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
 export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
+
+export const INVOICES = "/invoices";
+export const INVOICE_DETAIL = "/invoices/:id";
+export const INVOICE_ADD = "/invoices/add";
+export const INVOICE_EDIT = "/invoices/:id/edit";
+
+export const BALANCES = "/balances";
+export const BALANCE_HISTORY = "/balances/history";
+
+export const TRANSACTION = "/transaction";
+export const TRANSACTION_DETAIL = "/transaction/:id";
+
+export const PAYMENT_LINK = "/payment-link";
+export const PAYMENT_LINK_DETAIL = "/payment-link/:id";
+
+export const ROLES_AND_PERMISSION = "/role-and-permission";
