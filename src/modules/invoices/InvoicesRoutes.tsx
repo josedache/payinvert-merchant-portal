@@ -1,26 +1,26 @@
 import {
-  INVOICES,
-  INVOICE_DETAIL,
-  INVOICE_ADD,
-  INVOICE_EDIT,
+  BUSINESS_INVOICES,
+  BUSINESS_INVOICES_ADD,
+  BUSINESS_INVOICES_DETAIL,
+  BUSINESS_INVOICES_EDIT,
 } from "constants/urls";
 import { RouteObject } from "react-router-dom";
 
 export default [
   {
-    path: INVOICES,
+    path: BUSINESS_INVOICES,
     lazy: () => import("modules/invoices/pages/Invoices"),
   },
   {
-    path: INVOICE_DETAIL,
+    path: BUSINESS_INVOICES_DETAIL,
     lazy: () => import("modules/invoices/pages/InvoiceDetail"),
   },
   {
-    path: INVOICE_ADD,
+    path: BUSINESS_INVOICES_ADD,
     lazy: () => import("modules/invoices/pages/AddInvoice"),
   },
   {
-    path: INVOICE_EDIT,
+    path: BUSINESS_INVOICES_EDIT,
     lazy: () => import("modules/invoices/pages/AddInvoice"),
   },
 ] as RouteObject[];

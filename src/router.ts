@@ -1,4 +1,5 @@
 import AppErrorBoundary from "./AppErrorBoundary";
+import { createBrowserRouter } from "react-router-dom";
 import {
   DASHBOARD,
   ENTRY,
@@ -6,20 +7,22 @@ import {
   PAYMENT_LINK,
   ROLES_AND_PERMISSION,
   TRANSACTION,
+  BALANCES
 } from "constants/urls";
+import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
 import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
-import { BALANCES } from "constants/urls";
 import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
 import RolesAndPermissionsRoutes from "modules/role-and-permission/RoleAndPermissionRoutes";
 import TransactionsRoutes from "modules/transaction/TransactionRoutes";
-import { createBrowserRouter } from "react-router-dom";
-import BalancesRoutes from "modules/balances/BalanceRoutes";
+import SettingsRoutes from "modules/settings/SettingsRoutes";
+import AccountRoutes from "modules/account/AccountRoutes";
+import BusinessRoutes from "modules/business/BusinessRoutes";
 
 const router = createBrowserRouter([
   {
-    path: ENTRY,
+    path: urlConstants.ENTRY,
     lazy: () => import("./App"),
     ErrorBoundary: AppErrorBoundary,
     children: [
@@ -39,19 +42,24 @@ const router = createBrowserRouter([
             lazy: () => import("./AppProtectedWithNavigation"),
             children: [
               {
-                path: DASHBOARD,
+                path: urlConstants.DASHBOARD,
                 lazy: () => import("modules/dashboard/Dashboard"),
                 children: DashboardRoutes,
               },
               {
-                path: INVOICES,
-                lazy: () => import("modules/invoices/Invoices"),
-                children: InvoicesRoutes,
+                path: urlConstants.BUSINESS,
+                lazy: () => import("modules/business/Business"),
+                children: BusinessRoutes,
               },
               {
-                path: BALANCES,
-                lazy: () => import("modules/balances/Balances"),
-                children: BalancesRoutes,
+                path: urlConstants.SETTINGS,
+                lazy: () => import("modules/settings/Settings"),
+                children: SettingsRoutes,
+              },
+              {
+                path: urlConstants.ACCOUNT,
+                lazy: () => import("modules/account/Account"),
+                children: AccountRoutes,
               },
               {
                 path: TRANSACTION,

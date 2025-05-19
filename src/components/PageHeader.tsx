@@ -7,12 +7,13 @@ import {
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import "./PageHeader.css";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 /**
  *
  * @param {PageHeaderProps} props
  */
-function PageHeader(props: any) {
+function PageHeader(props: PageHeaderProps) {
   const {
     title,
     className,
@@ -24,11 +25,7 @@ function PageHeader(props: any) {
   } = props;
   return (
     <div>
-      <Toolbar
-        disableGutters
-        className={clsx("PageHeader", className, classes?.root)}
-        {...rest}
-      >
+      <div className={clsx("PageHeader", className, classes?.root)} {...rest}>
         {beforeTitle}
         <Typography
           variant="h5"
@@ -41,23 +38,45 @@ function PageHeader(props: any) {
         </div>
         <div className="flex-1" />
         {!!breadcrumbs.length && (
-          <Breadcrumbs>
+          <Breadcrumbs
+            separator={
+              <Icon
+                icon="iconamoon:arrow-right-2-light"
+                width="20"
+                height="20"
+              />
+            }
+          >
             {breadcrumbs.map((breadcrumb: any, key: number) => {
               const isPage = key === breadcrumbs.length - 1;
 
               if (isPage) {
-                return <Typography key={key}>{breadcrumb.name}</Typography>;
+                return (
+                  <Typography
+                    className="text-[#0A0A0A] font-semibold"
+                    key={key}
+                  >
+                    {breadcrumb.name}
+                  </Typography>
+                );
               }
 
               return (
-                <MuiLink key={key} component={Link} to={breadcrumb.to || "#"}>
+                <MuiLink
+                  underline="hover"
+                  key={key}
+                  color="inherit"
+                  component={Link}
+                  className="text-[#616161] font-medium"
+                  to={breadcrumb.to || "#"}
+                >
                   {breadcrumb.name}
                 </MuiLink>
               );
             })}
           </Breadcrumbs>
         )}
-      </Toolbar>
+      </div>
       {!!children && (
         <Toolbar
           disableGutters
@@ -77,10 +96,13 @@ PageHeader.defaultProps = {
 
 export default PageHeader;
 
-/**
- * @typedef {{
- * breadcrumbs: {name: string, to: string}[];
- * classes: {root: string; title: string; content: string; rootContent: string}
- * beforeTitle: import("react").ReactNode
- * } & import("react").ComponentPropsWithoutRef<'div'>} PageHeaderProps
- */
+type PageHeaderProps = {
+  breadcrumbs: { name: string; to: string }[];
+  classes: {
+    root: string;
+    title: string;
+    content: string;
+    rootContent: string;
+  };
+  beforeTitle?: React.ReactNode;
+} & React.ComponentPropsWithoutRef<"div">;

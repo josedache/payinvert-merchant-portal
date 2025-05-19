@@ -1,7 +1,7 @@
-import { BALANCE_HISTORY } from "constants/urls";
 import { Button, Chip, Paper, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import { ACCOUNT_BALANCE_HISTORY } from "constants/urls";
 
 const Balances = () => {
   return (
@@ -10,7 +10,7 @@ const Balances = () => {
         <Button startIcon={<Icon icon="solar:wallet-money-bold-duotone" />}>
           Top up
         </Button>
-        <Link to={BALANCE_HISTORY}>
+        <Link to={ACCOUNT_BALANCE_HISTORY}>
           <Button
             variant="soft"
             startIcon={<Icon icon="fluent:document-search-20-filled" />}

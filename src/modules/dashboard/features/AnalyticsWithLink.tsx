@@ -2,7 +2,7 @@ import { Button, Chip, Paper, Typography } from "@mui/material";
 import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import { BALANCES } from "constants/urls";
+import { ACCOUNT_BALANCES } from "constants/urls";
 
 type TProps = {
   icon: string;
@@ -20,7 +20,7 @@ const AnalyticsWithLink = ({
   trend,
 }: TProps) => {
   return (
-    <Paper className="space-y-5 flex flex-col justify-between">
+    <Paper className="space-y-5 flex flex-col justify-between overflow-hidden">
       <div className="p-4 flex gap-2">
         <div
           className={cn(
@@ -56,8 +56,12 @@ const AnalyticsWithLink = ({
         </div>
       </div>
       <div className="flex justify-end p-1 bg-green-50">
-        <Link to={BALANCES}>
-          <Button variant="text" endIcon={<Icon icon="uil:arrow-right" />}>
+        <Link to={ACCOUNT_BALANCES}>
+          <Button
+            variant="text"
+            className="font-semibold"
+            endIcon={<Icon icon="uil:arrow-right" />}
+          >
             View balance
           </Button>
         </Link>

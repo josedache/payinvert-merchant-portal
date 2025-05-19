@@ -100,20 +100,39 @@ export const theme = responsiveFontSizes(
         palette: {
           ...commonPaletteOptions,
           background: {
-            default: "#F6F8FB",
+            default: "#F5F5F5",
+            paper: "#FFFFFF",
           },
         },
       },
     },
-    // shadows: [
-    //   "none",
-    //   " 0px -8px 16px 6px rgba(16, 24, 40, 0.05), 0px 0px 6px -5px rgba(16, 24, 40, 0.03)",
-    //   "0px 2px 5px 0px rgba(145, 158, 171, 0.12),0px 2px 2px 0px rgba(145, 158, 171, 0.12),0px 3px 1px -2px rgba(145, 158, 171, 0.12)",
-    //   "0px 2px 9px 0px rgba(145, 158, 171, 0.12),0px 1px 3px 0px rgba(145, 158, 171, 0.12),0px 3px 3px -2px rgba(145, 158, 171, 0.12)",
-    //   "0px 4px 4px -1px rgba(145, 158, 171, 0.12),0px 0px 5px 0px rgba(145, 158, 171, 0.12),0px 1px 10px 0px rgba(145, 158, 171, 0.12)",
-    //   "0px 6px 6px -1px rgba(145, 158, 171, 0.12),0px -1px 10px 0px rgba(145, 158, 171, 0.12),0px 1px 14px 0px rgba(145, 158, 171, 0.12)",
-    //   "0px 6px 6px -1px rgba(145, 158, 171, 0.2),0px -2px 12px 0px rgba(145, 158, 171, 0.2),0px 1px 18px 0px rgba(145, 158, 171, 0.2)",
-    // ] as any,
+    shadows: [
+      "none",
+      "0px 1px 2px 0px rgba(0, 0, 0, 0.03), 0px 1px 2px 0px rgba(0, 0, 0, 0.12)",
+      "0px 2px 5px 0px rgba(145, 158, 171, 0.12),0px 2px 2px 0px rgba(145, 158, 171, 0.12),0px 3px 1px -2px rgba(145, 158, 171, 0.12)",
+      "0px 2px 9px 0px rgba(145, 158, 171, 0.12),0px 1px 3px 0px rgba(145, 158, 171, 0.12),0px 3px 3px -2px rgba(145, 158, 171, 0.12)",
+      "0px 4px 4px -1px rgba(145, 158, 171, 0.12),0px 0px 5px 0px rgba(145, 158, 171, 0.12),0px 1px 10px 0px rgba(145, 158, 171, 0.12)",
+      "0px 6px 6px -1px rgba(145, 158, 171, 0.12),0px -1px 10px 0px rgba(145, 158, 171, 0.12),0px 1px 14px 0px rgba(145, 158, 171, 0.12)",
+      "0px 6px 6px -1px rgba(145, 158, 171, 0.2),0px -2px 12px 0px rgba(145, 158, 171, 0.2),0px 1px 18px 0px rgba(145, 158, 171, 0.2)",
+      "0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12), 0px 5px 5px -3px rgba(0, 0, 0, 0.2)",
+      "0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12), 0px 5px 6px -3px rgba(0, 0, 0, 0.2)",
+      "0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12), 0px 7px 8px -4px rgba(0, 0, 0, 0.2)",
+      "0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12), 0px 8px 10px -5px rgba(0, 0, 0, 0.2)",
+      "0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12), 0px 11px 15px -7px rgba(0, 0, 0, 0.2)",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+    ],
     breakpoints: {
       values: {
         xs: 0,
@@ -164,6 +183,64 @@ export const theme = responsiveFontSizes(
       MuiContainer: {
         defaultProps: {
           maxWidth: "xl",
+        },
+      },
+      MuiSwitch: {
+        defaultProps: {
+          color: "primary",
+        },
+        styleOverrides: {
+          root: ({ theme }) => ({
+            width: 50,
+            height: 26,
+            padding: 0,
+            "& .MuiSwitch-switchBase": {
+              padding: 0,
+              margin: 3,
+              transitionDuration: "300ms",
+              "&.Mui-checked": {
+                transform: "translateX(23px)",
+                color: "#fff",
+                "& + .MuiSwitch-track": {
+                  border: "2px solid #B6DBC1",
+                  opacity: 1,
+                  backgroundColor: "transparent",
+                },
+                "& .MuiSwitch-thumb": {
+                  backgroundColor: "#339E52",
+                },
+                "&.Mui-disabled + .MuiSwitch-track": {
+                  opacity: 0.5,
+                },
+              },
+              "&.Mui-focusVisible .MuiSwitch-thumb": {
+                backgroundColor: "#fff",
+              },
+              "&.Mui-disabled .MuiSwitch-thumb": {
+                color: "#0ff",
+              },
+              "&.Mui-disabled + .MuiSwitch-track": {
+                opacity: 0.7,
+                backgroundColor: "#F5F5F5",
+              },
+            },
+            "& .MuiSwitch-thumb": {
+              boxSizing: "border-box",
+              boxShadow: "0px 1px 4px 0px #00000036",
+              backgroundColor: "#757575",
+              width: 20,
+              height: 20,
+            },
+            "& .MuiSwitch-track": {
+              borderRadius: 26 / 2,
+              border: "2px solid #E0E0E0",
+              backgroundColor: "#F5F5F5",
+              opacity: 1,
+              transition: theme.transitions.create(["background-color"], {
+                duration: 500,
+              }),
+            },
+          }),
         },
       },
       MuiIcon: {
