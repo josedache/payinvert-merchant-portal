@@ -6,7 +6,7 @@ const CustomStepIconRoot = styled("div")<{ ownerState: { active: boolean } }>(
     color: "#eaeaf0",
     display: "flex",
     height: 22,
-    margin: 5,
+    margin: 2,
     alignItems: "center",
     "& .QontoStepIcon-completedIcon": {
       color: "#784af4",
@@ -46,8 +46,8 @@ function StepperIcon(props) {
             <Icon
               className="text-[#616161] bg-transparent rounded-full"
               icon="hugeicons:circle"
-              width="24"
-              height="24"
+              width="20"
+              height="20"
             />
           )}
         </>

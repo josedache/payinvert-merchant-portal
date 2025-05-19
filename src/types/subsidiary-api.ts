@@ -89,3 +89,36 @@ export type SubsidiaryCompleteForgotPasswordApiResponse = {
 export type SubsidiaryMeApiRequest = ApiRequest;
 
 export type SubsidiaryMeApiResponse = SubsidiaryLoginApiResponse;
+
+export type UpdateSubsidiaryComplianceProfileApiRequest = {
+  businessTypeId: number;
+  countryId: number;
+  description: string;
+  businessName: string;
+  bvn: string;
+  industryId: number;
+};
+export type UpdateSubsidiaryComplianceProfileApiResponse = { message: string };
+
+export type UpdateSubsidiaryComplianceBankApiRequest = {
+  bankId: string;
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
+};
+export type UpdateSubsidiaryComplianceBankApiResponse = { message: string };
+
+export type UpdateSubsidiaryComplianceDirectorApiRequest = {
+  FullName: string;
+  Identity: string;
+  IdNumber: string;
+};
+export type UpdateSubsidiaryComplianceDirectorApiResponse = { message: string };
+
+export type UpdateSubsidiaryComplianceKycDetailsApiRequest = {
+  Identity: string;
+  ProofOfAddress: string;
+};
+export type UpdateSubsidiaryComplianceKycDetailsApiResponse = {
+  message: string;
+};
