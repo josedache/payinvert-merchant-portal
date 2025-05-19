@@ -1,12 +1,11 @@
 import AppErrorBoundary from "./AppErrorBoundary";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
-import InvoicesRoutes from "modules/invoices/InvoicesRoutes";
-import { BALANCES } from "constants/urls";
 import { createBrowserRouter } from "react-router-dom";
 import * as urlConstants from "constants/urls";
 import SettingsRoutes from "modules/settings/SettingsRoutes";
-import BalancesRoutes from "modules/balances/BalanceRoutes";
+import AccountRoutes from "modules/account/AccountRoutes";
+import BusinessRoutes from "modules/business/BusinessRoutes";
 
 const router = createBrowserRouter([
   {
@@ -35,9 +34,9 @@ const router = createBrowserRouter([
                 children: DashboardRoutes,
               },
               {
-                path: urlConstants.BUSINESS_INVOICES,
-                lazy: () => import("modules/invoices/Invoices"),
-                children: InvoicesRoutes,
+                path: urlConstants.BUSINESS,
+                lazy: () => import("modules/business/Business"),
+                children: BusinessRoutes,
               },
               {
                 path: urlConstants.SETTINGS,
@@ -45,10 +44,11 @@ const router = createBrowserRouter([
                 children: SettingsRoutes,
               },
               {
-                path: BALANCES,
-                lazy: () => import("modules/balances/Balances"),
-                children: BalancesRoutes,
+                path: urlConstants.ACCOUNT,
+                lazy: () => import("modules/account/Account"),
+                children: AccountRoutes,
               },
+              {},
             ],
           },
         ],

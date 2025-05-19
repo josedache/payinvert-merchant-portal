@@ -4,6 +4,7 @@ export const SIGNUP_VERIFY = "/signup/verify";
 export const SIGNIN = "/signin";
 export const SIGNIN_2FA = "/signin/2fa";
 export const PASSWORD_RESET = "/password/reset";
+
 export const DASHBOARD = "/";
 
 export const BUSINESS = "/business";
@@ -19,6 +20,7 @@ export const ACCOUNT = "/account";
 export const ACCOUNT_SETTLEMENTS = "/account/settlements";
 export const ACCOUNT_PAYOUTS = "/account/payouts";
 export const ACCOUNT_BALANCES = "/account/balances";
+export const ACCOUNT_BALANCE_HISTORY = "/account/balances/history";
 
 export const SETTINGS = "/settings";
 export const SETTINGS_BUSINESS = "/settings/business";
@@ -28,6 +30,3 @@ export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
 export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
-
-export const BALANCES = "/balances";
-export const BALANCE_HISTORY = "/balances/history";

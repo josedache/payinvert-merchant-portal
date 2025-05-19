@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-function Compliance() {
+function Business() {
   return (
     <>
       <Outlet />
@@ -8,6 +8,6 @@ function Compliance() {
   );
 }
 
-export default Compliance;
+export default Business;
 
-export const Component = Compliance;
+export const Component = Business;
