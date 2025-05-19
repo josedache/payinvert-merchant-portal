@@ -4,8 +4,8 @@ import { Subsidiary } from "types/subsidiary.ts";
 import { Notification } from "types/notification.ts";
 
 export type SubsidiaryLoginApiRequest = ApiRequest<{
-  Email: string;
-  Password: string;
+  email: string;
+  password: string;
 }>;
 
 export type SubsidiaryLoginApiResponse = {
