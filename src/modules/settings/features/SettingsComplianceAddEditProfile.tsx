@@ -10,7 +10,7 @@ type SettingsComplianceAddEditProfileProps =
 export default function SettingsComplianceAddEditProfile(
   props: SettingsComplianceAddEditProfileProps
 ) {
-  const { formik } = props;
+  const { isPreview, isInitialOnboarding, formik } = props;
   return (
     <Paper className="w-full max-w-xl p-6">
       <form onSubmit={formik.handleSubmit}>
@@ -18,28 +18,34 @@ export default function SettingsComplianceAddEditProfile(
           <Typography variant="h6" className="font-semibold">
             Profile
           </Typography>
+
           <TextField
-            {...getTextFieldProps(formik, "businessType")}
+            {...getTextFieldProps(formik, "businessTypeId")}
             label="Business Type"
             select
             fullWidth
+            disabled={isPreview}
           />
           <TextField
             {...getTextFieldProps(formik, "businessEmail")}
             label="Business Email"
             fullWidth
+            disabled={isPreview}
           />
+
           <TextField
-            {...getTextFieldProps(formik, "country")}
+            {...getTextFieldProps(formik, "countryId")}
             label="Country"
             select
             fullWidth
+            disabled={isPreview}
           />
           <TextField
             {...getTextFieldProps(formik, "description")}
             label="Description"
             rows={3}
             fullWidth
+            disabled={isPreview}
           />
         </div>
 
@@ -48,9 +54,10 @@ export default function SettingsComplianceAddEditProfile(
             Registration
           </Typography>
           <TextField
-            {...getTextFieldProps(formik, "legalBusinessName")}
+            {...getTextFieldProps(formik, "businessName")}
             label="Legal Business Name"
             fullWidth
+            disabled={isPreview}
           />
 
           <NumberTextField
@@ -59,25 +66,29 @@ export default function SettingsComplianceAddEditProfile(
             {...getTextFieldProps(formik, "bvn")}
             label="BVN"
             fullWidth
+            disabled={isPreview}
           />
 
           <TextField
-            {...getTextFieldProps(formik, "industry")}
+            {...getTextFieldProps(formik, "industryId")}
             label="Industry"
             fullWidth
+            disabled={isPreview}
             select
           />
         </div>
 
-        <Button
-          startIcon={<Icon icon="humbleicons:check" width="20" height="20" />}
-          fullWidth
-          size="large"
-          className="mt-10"
-          type="submit"
-        >
-          Save and Continue
-        </Button>
+        {!isPreview ? (
+          <Button
+            startIcon={<Icon icon="humbleicons:check" width="20" height="20" />}
+            fullWidth
+            size="large"
+            className="mt-10"
+            type="submit"
+          >
+            {isInitialOnboarding ? "Save and Continue" : "Save"}
+          </Button>
+        ) : null}
       </form>
     </Paper>
   );

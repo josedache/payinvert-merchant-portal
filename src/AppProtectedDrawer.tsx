@@ -181,6 +181,7 @@ function AppProtectedDrawer() {
           <Toolbar className="flex items-center px-0 pt-4  justify-between ">
             {isLg && (
               <Paper className="py-4 px-3 w-full flex justify-center">
+                \
                 <Logo className="w-full h-full max-w-[150px]" variant="2" />
               </Paper>
             )}

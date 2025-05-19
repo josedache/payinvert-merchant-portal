@@ -10,16 +10,19 @@ type SettingsComplianceAddEditBankDetailsProps =
 export default function SettingsComplianceAddEditBankDetails(
   props: SettingsComplianceAddEditBankDetailsProps
 ) {
-  const { formik } = props;
+  const { isPreview, isInitialOnboarding, formik } = props;
 
   return (
     <Paper className="w-full max-w-xl p-6">
       <form onSubmit={formik.handleSubmit}>
         <div className="grid grid-cols-1 gap-4">
-          <TextField
-            {...getTextFieldProps(formik, "directorFullName")}
+          <NumberTextField
+            freeSolo
+            maskOptions={{ min: 0, max: 10 }}
+            {...getTextFieldProps(formik, "accountNumber")}
             label="Account Number"
             fullWidth
+            disabled={isPreview}
           />
 
           <NumberTextField
@@ -28,25 +31,29 @@ export default function SettingsComplianceAddEditBankDetails(
             {...getTextFieldProps(formik, "bankName")}
             label="Bank Name"
             fullWidth
+            disabled={isPreview}
           />
 
           <TextField
             {...getTextFieldProps(formik, "accountName")}
             label="Account Name"
             fullWidth
+            disabled={isPreview}
             select
           />
         </div>
 
-        <Button
-          startIcon={<Icon icon="humbleicons:check" width="20" height="20" />}
-          fullWidth
-          size="large"
-          className="mt-10"
-          type="submit"
-        >
-          Save and Continue
-        </Button>
+        {!isPreview ? (
+          <Button
+            startIcon={<Icon icon="humbleicons:check" width="20" height="20" />}
+            fullWidth
+            size="large"
+            className="mt-10"
+            type="submit"
+          >
+            {isInitialOnboarding ? "Save and Continue" : "Save"}
+          </Button>
+        ) : null}
       </form>
     </Paper>
   );

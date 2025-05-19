@@ -19,6 +19,14 @@ import {
   SubsidiarySignupApiResponse,
   SubsidiaryVerificationEmailResendApiRequest,
   SubsidiaryVerificationEmailResendApiResponse,
+  UpdateSubsidiaryComplianceBankApiRequest,
+  UpdateSubsidiaryComplianceBankApiResponse,
+  UpdateSubsidiaryComplianceDirectorApiRequest,
+  UpdateSubsidiaryComplianceDirectorApiResponse,
+  UpdateSubsidiaryComplianceKycDetailsApiRequest,
+  UpdateSubsidiaryComplianceKycDetailsApiResponse,
+  UpdateSubsidiaryComplianceProfileApiRequest,
+  UpdateSubsidiaryComplianceProfileApiResponse,
 } from "types/subsidiary-api.ts";
 
 export const BASE_URL = "/subsidiary";
@@ -123,6 +131,52 @@ export const subsidiaryApi = baseApi.injectEndpoints({
         ...config,
       }),
       providesTags: [{ type: USER }],
+    }),
+
+    //Compliance
+    updateSubsidiaryComplianceProfile: builder.mutation<
+      UpdateSubsidiaryComplianceProfileApiResponse,
+      UpdateSubsidiaryComplianceProfileApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/profile",
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }],
+    }),
+    updateSubsidiaryComplianceBank: builder.mutation<
+      UpdateSubsidiaryComplianceBankApiResponse,
+      UpdateSubsidiaryComplianceBankApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/bank",
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }],
+    }),
+    updateSubsidiaryComplianceDirector: builder.mutation<
+      UpdateSubsidiaryComplianceDirectorApiResponse,
+      UpdateSubsidiaryComplianceDirectorApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/director",
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }],
+    }),
+    updateSubsidiaryComplianceKycDetails: builder.mutation<
+      UpdateSubsidiaryComplianceKycDetailsApiResponse,
+      UpdateSubsidiaryComplianceKycDetailsApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/kyc-details",
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }],
     }),
   }),
 });
