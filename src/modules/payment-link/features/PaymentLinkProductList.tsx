@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { Button, Chip, Popover, Typography } from "@mui/material";
+import { Button, Chip, Paper, Popover, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { PAYMENT_LINK_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
@@ -17,7 +17,10 @@ const PaymentLinkProductList = () => {
           <Button startIcon={<Icon icon="codex:plus" />}>Add product</Button>
         </div>
       </div>
-      <TanStandardTable instance={tableInstance} pagination={false} />
+
+      <Paper elevation={0} className="p-4">
+        <TanStandardTable instance={tableInstance} pagination={false} />
+      </Paper>
     </div>
   );
 };
