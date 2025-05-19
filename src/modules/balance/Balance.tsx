@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-function Invoices() {
+function Balance() {
   return (
     <>
       <Outlet />
@@ -8,6 +8,6 @@ function Invoices() {
   );
 }
 
-export default Invoices;
+export default Balance;
 
-export const Component = Invoices;
+export const Component = Balance;

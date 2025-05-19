@@ -7,7 +7,7 @@ const InvoiceDetail = () => {
         Invoice details
       </Typography>
 
-      <Paper elevation={0} className="p-5 space-y-4">
+      <Paper className="p-5 space-y-4">
         <div className="flex justify-between items-center gap-5">
           <Typography variant="h6" className="font-semibold">
             Invoice number: CW8392903

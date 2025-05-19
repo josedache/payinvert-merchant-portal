@@ -45,7 +45,7 @@ const BalanceHistory = () => {
         </div>
       </div>
 
-      <Paper elevation={0} className="p-4">
+      <Paper className="p-4">
         <TanStandardTable instance={tableInstance} />
       </Paper>
     </div>

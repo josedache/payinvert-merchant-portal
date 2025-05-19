@@ -32,13 +32,13 @@ export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
 
-export const INVOICES = "/invoices";
-export const INVOICE_DETAIL = "/invoices/:id";
-export const INVOICE_ADD = "/invoices/add";
-export const INVOICE_EDIT = "/invoices/:id/edit";
+export const INVOICE = "/invoice";
+export const INVOICE_DETAIL = "/invoice/:id";
+export const INVOICE_ADD = "/invoice/add";
+export const INVOICE_EDIT = "/invoice/:id/edit";
 
-export const BALANCES = "/balances";
-export const BALANCE_HISTORY = "/balances/history";
+export const BALANCE = "/balance";
+export const BALANCE_HISTORY = "/balance/history";
 
 export const TRANSACTION = "/transaction";
 export const TRANSACTION_DETAIL = "/transaction/:id";

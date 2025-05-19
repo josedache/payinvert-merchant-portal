@@ -9,16 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import {
-  BUSINESS_INVOICES,
-  BUSINESS_INVOICES_ADD,
-  BUSINESS_INVOICES_EDIT,
-} from "constants/urls";
+import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
 
-const Invoices = () => {
+const Invoice = () => {
   const tableInstance = useTable({ data, columns });
 
   return (
@@ -50,21 +46,21 @@ const Invoices = () => {
               </MenuItem>
             ))}
           </TextField>
-          <Link to={BUSINESS_INVOICES_ADD}>
+          <Link to={INVOICE_ADD}>
             <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
               New Invoice
             </Button>
           </Link>
         </div>
       </div>
-      <Paper elevation={0} className="p-4">
+      <Paper className="p-4">
         <TanStandardTable instance={tableInstance} />
       </Paper>
     </div>
   );
 };
-export const Component = Invoices;
-export default Invoices;
+export const Component = Invoice;
+export default Invoice;
 
 const data = [
   {
@@ -175,7 +171,7 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Link to={generatePath(BUSINESS_INVOICES_EDIT, { id: "1" })}>
+          <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
             <Button
               fullWidth
               variant="text"
@@ -193,7 +189,7 @@ const Action = () => {
           >
             Copy invoice link
           </Button>
-          <Link to={generatePath(BUSINESS_INVOICES, { id: "1" })}>
+          <Link to={generatePath(INVOICE_DETAIL, { id: "1" })}>
             <Button
               fullWidth
               variant="text"

@@ -63,7 +63,7 @@ function AppProtectedDrawer() {
             {
               icon: "hugeicons:dashboard-square-01",
               label: "Invoices",
-              to: urlsConstant.BUSINESS_INVOICES,
+              to: urlsConstant.INVOICE,
               kycAllow: true,
             },
             {
@@ -100,7 +100,7 @@ function AppProtectedDrawer() {
             {
               icon: "hugeicons:dashboard-square-01",
               label: "Balances",
-              to: urlsConstant.ACCOUNT_BALANCES,
+              to: urlsConstant.BALANCE,
               kycAllow: true,
             },
           ],

@@ -6,7 +6,7 @@ import * as yup from "yup";
 import StepOne from "../features/StepOne";
 import StepTwo from "../features/StepTwo";
 import { useNavigate, useParams } from "react-router-dom";
-import { BUSINESS_INVOICES } from "constants/urls";
+import { INVOICE } from "constants/urls";
 
 const AddInvoice = () => {
   const { id } = useParams();
@@ -48,7 +48,7 @@ const AddInvoice = () => {
             break;
           }
           case FormStep.INVOICE_DETAILS: {
-            navigate(BUSINESS_INVOICES);
+            navigate(INVOICE);
             break;
           }
 
