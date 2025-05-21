@@ -1,5 +1,6 @@
 import AppErrorBoundary from "./AppErrorBoundary";
 import { createBrowserRouter } from "react-router-dom";
+
 import {
   INVOICE,
   PAYMENT_LINK,

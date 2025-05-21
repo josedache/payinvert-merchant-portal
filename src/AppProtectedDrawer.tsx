@@ -12,6 +12,7 @@ import {
   Paper,
   Badge,
   Collapse,
+  Icon,
 } from "@mui/material";
 import clsx from "clsx";
 import { Link, matchPath, useLocation } from "react-router-dom";
@@ -24,6 +25,8 @@ import useToggle from "hooks/use-toggle";
 import usePopover from "hooks/use-popover";
 import * as urlsConstant from "constants/urls";
 import useSidebarIcon from "hooks/use-sidebar-icon";
+
+import * as CustomIcon from "assets/icons";
 
 function AppProtectedDrawer() {
   const isLg = useMediaQuery(MediaBreakpoint.LG);
@@ -55,27 +58,27 @@ function AppProtectedDrawer() {
           kycAllow: true,
           links: [
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Transactions />,
               label: "Transactions",
-              to: urlsConstant.BUSINESS_TRANSACTIONS,
+              to: urlsConstant.TRANSACTION,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Invoices />,
               label: "Invoices",
               to: urlsConstant.INVOICE,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Customers />,
               label: "Customers",
               to: urlsConstant.BUSINESS_CUSTOMERS,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.PaymentLinks />,
               label: "Payment Links",
-              to: urlsConstant.BUSINESS_PAYMENT_LINKS,
+              to: urlsConstant.PAYMENT_LINK,
               kycAllow: true,
             },
           ],
@@ -86,19 +89,19 @@ function AppProtectedDrawer() {
           kycAllow: true,
           links: [
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Settlements />,
               label: "Settlements",
-              to: urlsConstant.ACCOUNT_SETTLEMENTS,
+              to: urlsConstant.BALANCE,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.PayoutAccount />,
               label: "Payouts",
               to: urlsConstant.ACCOUNT_PAYOUTS,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Balances />,
               label: "Balances",
               to: urlsConstant.BALANCE,
               kycAllow: true,
@@ -111,43 +114,43 @@ function AppProtectedDrawer() {
           kycAllow: true,
           links: [
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Profile />,
               label: "Business",
               to: urlsConstant.SETTINGS_BUSINESS,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Compliance />,
               label: "Compliance Information",
               to: urlsConstant.SETTINGS_COMPLIANCE_INFO,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.PayoutAccount />,
               label: "Payout Accounts",
               to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.RolesPermissions />,
               label: "Roles & Permissions",
-              to: urlsConstant.SETTINGS_ROLES_AND_PERMISSIONS,
+              to: urlsConstant.ROLES_AND_PERMISSION,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.UserSubsidiaries />,
               label: "Users",
               to: urlsConstant.SETTINGS_USERS,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.Preferences />,
               label: "Preferences",
               to: urlsConstant.SETTINGS_PREFERENCES,
               kycAllow: true,
             },
             {
-              icon: "hugeicons:dashboard-square-01",
+              icon: <CustomIcon.ApiWebhooks />,
               label: "API Keys & Webhooks",
               to: urlsConstant.SETTINGS_API_WEBHOOKS,
               kycAllow: true,
@@ -293,9 +296,16 @@ function AppProtectedDrawerItem(props: any) {
           disableRipple
           disableTouchRipple
           disableGutters
+          sx={{
+            "&.MuiButtonBase-root:hover": {
+              bgcolor: "transparent",
+            },
+          }}
           className={clsx(
             "flex px-4 gap-2 py-3 ",
-            !!match && !isGroup && "bg-[#EDFAF1] text-primary-contrastText"
+            !!match && !isGroup
+              ? "bg-[#EDFAF1] text-primary-contrastText"
+              : "bg-transparent"
           )}
           {...(isGroup
             ? { onClick: toggleSubMenu }
@@ -316,6 +326,8 @@ function AppProtectedDrawerItem(props: any) {
           {isGroup && (
             <Iconify
               className="text-2xl"
+              width={18}
+              height={18}
               icon={isSubMenu ? "mingcute:up-line" : "mingcute:down-line"}
             />
           )}
@@ -327,6 +339,7 @@ function AppProtectedDrawerItem(props: any) {
               {links?.map(
                 ({ label, icon, to, toMatchExclude, ...rest }, index) => (
                   <ListItemButton
+                    disableRipple
                     key={index}
                     selected={
                       match?.pathnameBase === to &&
@@ -342,10 +355,16 @@ function AppProtectedDrawerItem(props: any) {
                     to={to}
                     {...rest}
                   >
-                    <Iconify
-                      icon={icon}
-                      className="text-2xl mr-5 text-[#19943C]"
-                    />
+                    {typeof icon === "string" ? (
+                      <Iconify
+                        icon={icon}
+                        className="text-2xl mr-5 text-[#19943C]"
+                      />
+                    ) : (
+                      <Icon className="text-2xl mr-5 text-[#19943C]">
+                        {icon}
+                      </Icon>
+                    )}
 
                     <Typography className="font-medium">{label}</Typography>
                   </ListItemButton>
