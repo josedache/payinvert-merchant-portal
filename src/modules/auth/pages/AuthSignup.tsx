@@ -10,6 +10,7 @@ import PasswordTextField from "components/PasswordTextField.tsx";
 import { LoadingButton } from "@mui/lab";
 import { subsidiaryApi } from "apis/subsidiary.ts";
 import AlphabetTextField from "components/AlphabetTextField.tsx";
+import NumberTextField from "components/NumberTextField.tsx";
 
 function AuthSignup() {
   const { enqueueSnackbar } = useSnackbar();
@@ -24,7 +25,7 @@ function AuthSignup() {
       firstName: "",
       lastName: "",
       userEmail: "",
-      phoneNumber: "",
+      mobileNumber: "",
       businessName: "",
       password: "",
       confirmpassword: "",
@@ -34,6 +35,13 @@ function AuthSignup() {
       firstName: yup.string().label("First Name").trim().required(),
       lastName: yup.string().label("Last Name").trim().required(),
       userEmail: yup.string().label("Email").email().trim().required(),
+      mobileNumber: yup
+        .string()
+        .label("Mobile Number")
+        .trim()
+        .length(11)
+        .required(),
+      businessName: yup.string().label("Business Name").trim().required(),
       password: yup
         .string()
         .label("Password")
@@ -105,22 +113,22 @@ function AuthSignup() {
               {...getTextFieldProps(formik, "userEmail")}
               required
             />
-            {/*<NumberTextField*/}
-            {/*  freeSolo*/}
-            {/*  maskOptions={{ min: 0, max: 11 }}*/}
-            {/*  fullWidth*/}
-            {/*  label="Phone number"*/}
-            {/*  placeholder="Enter your Phone number"*/}
-            {/*  {...getTextFieldProps(formik, "phoneNumber")}*/}
-            {/*  required*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*  fullWidth*/}
-            {/*  label="Business Name"*/}
-            {/*  placeholder="Enter your Business Name"*/}
-            {/*  {...getTextFieldProps(formik, "businessName")}*/}
-            {/*  required*/}
-            {/*/>*/}
+            <NumberTextField
+              freeSolo
+              maskOptions={{ min: 0, max: 11 }}
+              fullWidth
+              label="Phone number"
+              placeholder="Enter your Phone number"
+              {...getTextFieldProps(formik, "mobileNumber")}
+              required
+            />
+            <TextField
+              fullWidth
+              label="Business Name"
+              placeholder="Enter your Business Name"
+              {...getTextFieldProps(formik, "businessName")}
+              required
+            />
             <PasswordTextField
               fullWidth
               label="Password"

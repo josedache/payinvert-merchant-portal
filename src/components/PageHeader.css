@@ -1,16 +1,33 @@
 .PageHeader {
-    @apply flex gap-2 items-center flex-wrap py-2;
-  }
-  
-  .PageHeader__title {
-    @apply font-bold;
-  }
-  
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.PageHeader__title {
+  font-weight: bold; /* equivalent to font-bold */
+}
+
+.PageHeader__content {
+  display: none; /* equivalent to hidden */
+}
+
+@media (min-width: 768px) {
+  /* equivalent to md */
   .PageHeader__content {
-    @apply hidden md:contents;
+    display: contents; /* equivalent to md:contents */
   }
-  
+}
+
+.PageHeader-content {
+  display: flex;
+  gap: 1rem; /* equivalent to gap-4 */
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  /* equivalent to md */
   .PageHeader-content {
-    @apply flex gap-4 items-center md:hidden mb-2 py-4;
+    display: none; /* equivalent to md:hidden */
   }
-  
+}

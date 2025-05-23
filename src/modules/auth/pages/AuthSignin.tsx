@@ -30,7 +30,9 @@ function AuthSignin() {
       email: "",
       password: "",
     },
-    validateOnMount: true,
+    validateOnMount: false,
+    validateOnChange: false,
+    validateOnBlur: false,
     validationSchema: yup.object({
       email: yup.string().label("Email").email().trim().required(),
       password: yup.string().label("Password").trim().required(),
@@ -39,8 +41,8 @@ function AuthSignin() {
       try {
         const data = await loginSubsidiaryMutation({
           body: {
-            Email: values.email,
-            Password: btoa(values.password ?? ""),
+            email: values.email,
+            password: btoa(values.password ?? ""),
           },
         }).unwrap();
 

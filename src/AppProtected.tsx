@@ -47,11 +47,14 @@ function AppProtected() {
       error={subsidiaryMeQueryResult.isError}
       onRetry={subsidiaryMeQueryResult.refetch}
       renderLoading={() => (
-        <div className="flex flex-col justify-center items-center h-full">
-          <Logo />
+        <div className="flex flex-col justify-center items-center h-screen">
+          <div>
+            <Logo className="w-full h-full max-w-[100px]" />
+          </div>
           <CircularProgress size={25} />
         </div>
       )}
+      className="h-screen"
     >
       {() => (
         <>

@@ -1,0 +1,17 @@
+export { default as Transactions } from "assets/icons/transactions.svg?react";
+export { default as Invoices } from "assets/icons/invoices.svg?react";
+export { default as PaymentLinks } from "assets/icons/payment-links.svg?react";
+export { default as Customers } from "assets/icons/customers.svg?react";
+export { default as Products } from "assets/icons/products.svg";
+export { default as ApiWebhooks } from "assets/icons/api-webhooks.svg?react";
+export { default as AuditTrails } from "assets/icons/audit-trails.svg?react";
+export { default as PayoutAccount } from "assets/icons/payout-account.svg?react";
+export { default as Preferences } from "assets/icons/preferences.svg?react";
+export { default as Profile } from "assets/icons/profile.svg?react";
+export { default as RolesPermissions } from "assets/icons/roles-permissions.svg?react";
+export { default as UserSubsidiaries } from "assets/icons/users-subsidiaries.svg?react";
+export { default as Compliance } from "assets/icons/compliance.svg?react";
+export { default as Balances } from "assets/icons/balances.svg?react";
+export { default as Payouts } from "assets/icons/payouts.svg?react";
+export { default as Settlements } from "assets/icons/settlements.svg?react";
+export { default as VirtualWallets } from "assets/icons/virtual-wallets.svg?react";
