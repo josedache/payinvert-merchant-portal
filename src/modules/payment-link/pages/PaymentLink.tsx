@@ -52,6 +52,7 @@ const PaymentLink = () => {
           </Button>
         </div>
       </div>
+
       <TanStandardTable instance={tableInstance} />
     </div>
   );

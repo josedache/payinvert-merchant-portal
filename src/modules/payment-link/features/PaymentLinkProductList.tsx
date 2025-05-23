@@ -17,6 +17,7 @@ const PaymentLinkProductList = () => {
           <Button startIcon={<Icon icon="codex:plus" />}>Add product</Button>
         </div>
       </div>
+
       <TanStandardTable instance={tableInstance} pagination={false} />
     </div>
   );
