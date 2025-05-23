@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Button, Chip, Paper, Popover } from "@mui/material";
+import { Button, Chip, Popover } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
 import TanStandardTable, {
   TanStandardTableProps,
@@ -10,11 +10,7 @@ import { generatePath, Link } from "react-router-dom";
 import { TRANSACTION_DETAIL } from "constants/urls";
 
 function TransactionTable(props: TransactionTableProps) {
-  return (
-    <Paper elevation={0} className="p-4">
-      <TanStandardTable {...props} />
-    </Paper>
-  );
+  return <TanStandardTable {...props} />;
 }
 
 export default TransactionTable;

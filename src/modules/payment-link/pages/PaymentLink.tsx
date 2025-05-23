@@ -3,7 +3,6 @@ import {
   Button,
   Chip,
   MenuItem,
-  Paper,
   Popover,
   TextField,
   Typography,
@@ -54,9 +53,7 @@ const PaymentLink = () => {
         </div>
       </div>
 
-      <Paper elevation={0} className="p-4">
-        <TanStandardTable instance={tableInstance} />
-      </Paper>
+      <TanStandardTable instance={tableInstance} />
     </div>
   );
 };
