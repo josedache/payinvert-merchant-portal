@@ -25,7 +25,6 @@ const PaymentLinkDetailsTable = () => {
           </Button>
         </div>
       </div>
-
       <TanStandardTable instance={tableInstance} pagination={false} />
     </div>
   );
