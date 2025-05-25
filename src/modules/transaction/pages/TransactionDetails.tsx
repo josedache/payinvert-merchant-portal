@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 const TransactionDetails = () => {
   return (
@@ -38,9 +38,9 @@ const TransactionSection = ({
 }) => (
   <div className="rounded-bl-[8px] rounded-br-[8px] rounded-tl-[8px] rounded-tr-[8px] shadow-[0px_1px_2px_0px_#0000001F] z-10">
     <div className="bg-[#EDEDED] rounded-tl-[8px] rounded-tr-[8px] py-2.5 px-5">
-      <Typography className="text-xl font-semibold">{title}</Typography>
+      <Typography className="text-[18px] font-semibold">{title}</Typography>
     </div>
-    <div className="">
+    <Paper className="">
       {Object.entries(data).map(([label, value], index) => (
         <div
           key={index}
@@ -49,12 +49,12 @@ const TransactionSection = ({
           <Typography className="flex-2 text-[16px] font-semibold">
             {label}
           </Typography>
-          <Typography className="flex-3 text-[15px] font-medium">
+          <Typography className="flex-3 text-[16px] font-medium">
             {value}
           </Typography>
         </div>
       ))}
-    </div>
+    </Paper>
   </div>
 );
 
