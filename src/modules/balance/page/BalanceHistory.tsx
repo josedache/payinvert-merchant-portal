@@ -1,9 +1,8 @@
 import useTable from "hooks/use-table";
 import {
-  Button,
   Chip,
+  IconButton,
   MenuItem,
-  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -45,9 +44,7 @@ const BalanceHistory = () => {
         </div>
       </div>
 
-      <Paper className="p-4">
-        <TanStandardTable instance={tableInstance} />
-      </Paper>
+      <TanStandardTable instance={tableInstance} />
     </div>
   );
 };
@@ -107,11 +104,8 @@ const columns = [
 
 const Action = () => {
   return (
-    <Button
-      variant="text"
-      size="small"
-      startIcon={<Icon icon="uil:ellipsis-v" />}
-      className="text-black"
-    />
+    <IconButton>
+      <Icon icon="uil:ellipsis-v" />
+    </IconButton>
   );
 };

@@ -19,6 +19,8 @@ import AccountRoutes from "modules/account/AccountRoutes";
 import BusinessRoutes from "modules/business/BusinessRoutes";
 import BalancesRoutes from "modules/balance/BalanceRoutes";
 import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
+import CustomerRoutes from "modules/customer/CustomerRoutes";
+import SettlementRoutes from "modules/settlement/SettlementRoutes";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +88,24 @@ const router = createBrowserRouter([
                 path: BALANCE,
                 lazy: () => import("modules/balance/Balance"),
                 children: BalancesRoutes,
+              },
+              {
+                path: urlConstants.CUSTOMER,
+                lazy: () => import("modules/customer/Customer"),
+                children: CustomerRoutes,
+              },
+              {
+                path: urlConstants.SETTLEMENT,
+                lazy: () => import("modules/settlement/Settlement"),
+                children: SettlementRoutes,
+              },
+              {
+                path: urlConstants.PAYOUT,
+                lazy: () => import("modules/payout/Payout"),
+              },
+              {
+                path: urlConstants.PREFERENCES,
+                lazy: () => import("modules/preference/Preference"),
               },
             ],
           },

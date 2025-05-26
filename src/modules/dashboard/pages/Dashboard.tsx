@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import Analytics from "../features/Analytics";
 import AnalyticsWithLink from "../features/AnalyticsWithLink";
+import * as CustomIcon from "assets/icons";
 
 const data = [
   {
@@ -61,11 +62,11 @@ function Dashboard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       <Paper className="p-4 flex gap-2">
-        <div className="size-12 shrink-0 grid place-items-center rounded-full text-pink-500 bg-pink-50 mt-2">
-          <Icon icon="ph:timer-duotone" width={24} />
+        <div className="size-12 shrink-0 grid place-items-center rounded-full text-pink-600 bg-pink-50 mt-2">
+          <CustomIcon.Count />
         </div>
         <div className="space-y-2">
-          <Typography>Transaction Count</Typography>
+          <Typography className="font-semibold">Transaction Count</Typography>
           <Typography variant="h4" className="font-semibold">
             175
           </Typography>
@@ -80,22 +81,22 @@ function Dashboard() {
         </div>
       </Paper>
       <Analytics
-        icon="material-symbols:speed-outline"
-        className="text-purple-500 bg-purple-50"
+        icon={<CustomIcon.Volume />}
+        className="text-purple-600 bg-purple-50"
         label="volume"
         amount="960,000"
         trend="-2"
       />
       <Analytics
-        icon="icon-park-twotone:round-caliper"
-        className="text-orange-500 bg-orange-50"
+        icon={<CustomIcon.Settlements />}
+        className="text-orange-600 bg-orange-50"
         label="settlements"
         amount="140,650"
         trend="+6"
       />
       <AnalyticsWithLink
-        icon="si:money-duotone"
-        className="text-green-500 bg-green-50"
+        icon={<CustomIcon.Balances />}
+        className="text-green-600 bg-green-50"
         label="Available"
         amount="42,650"
         trend="-3"
@@ -103,18 +104,18 @@ function Dashboard() {
       <Paper className="col-span-1 p-4 row-span-1 md:col-span-2 lg:row-span-2">
         <div className="flex justify-between gap-5 flex-col md:flex-row">
           <div className="space-y-1">
-            <Typography>Transactions</Typography>
+            <Typography className="font-semibold">Transactions</Typography>
             <Typography className="text-gray-500">
               Track inflow and outflow of money over time
             </Typography>
 
             <div className="pt-4 flex gap-4">
               <div className="flex items-center gap-1">
-                <div className="h-2 w-6 bg-blue-500" />
+                <div className="h-1.5 w-6 bg-blue-500" />
                 <Typography variant="body2">Total inflow</Typography>
               </div>
               <div className="flex items-center gap-1">
-                <div className="h-2 w-6 bg-orange-500" />
+                <div className="h-1.5 w-6 bg-orange-500" />
                 <Typography variant="body2">Total outflow</Typography>
               </div>
             </div>
@@ -178,8 +179,8 @@ function Dashboard() {
         </ResponsiveContainer>
       </Paper>
       <AnalyticsWithLink
-        icon="solar:wallet-money-bold-duotone"
-        className="text-blue-500 bg-blue-50"
+        icon={<CustomIcon.VirtualWallets />}
+        className="text-blue-600 bg-blue-50"
         label="Ledger"
         amount="122,600"
         trend="+6"

@@ -15,3 +15,7 @@ export { default as Balances } from "assets/icons/balances.svg?react";
 export { default as Payouts } from "assets/icons/payouts.svg?react";
 export { default as Settlements } from "assets/icons/settlements.svg?react";
 export { default as VirtualWallets } from "assets/icons/virtual-wallets.svg?react";
+export { default as UserAdd } from "assets/icons/user-add.svg?react";
+export { default as Caution } from "assets/icons/caution.svg?react";
+export { default as Count } from "assets/icons/count.svg?react";
+export { default as Volume } from "assets/icons/volume.svg?react";

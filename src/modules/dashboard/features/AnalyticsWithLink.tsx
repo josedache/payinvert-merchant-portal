@@ -3,9 +3,11 @@ import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { BALANCE } from "constants/urls";
+import { ReactNode } from "react";
+import * as CustomIcon from "assets/icons";
 
 type TProps = {
-  icon: string;
+  icon: ReactNode;
   className: string;
   label: string;
   amount: string;
@@ -28,10 +30,15 @@ const AnalyticsWithLink = ({
             className
           )}
         >
-          <Icon icon={icon} width={24} />
+          {icon}
         </div>
         <div className="space-y-2">
-          <Typography>{label} balance</Typography>
+          <Typography className="font-semibold flex items-center gap-2">
+            {label} balance{" "}
+            <span>
+              <CustomIcon.Caution />
+            </span>
+          </Typography>
           <Typography variant="h4" className="font-semibold flex items-center">
             <span className="text-base font-medium pr-1">NGN</span> {amount}{" "}
             <span className="text-base font-medium pt-2">.00</span>
