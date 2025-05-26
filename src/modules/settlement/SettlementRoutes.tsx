@@ -1,0 +1,9 @@
+import { SETTLEMENT } from "constants/urls";
+import { RouteObject } from "react-router-dom";
+
+export default [
+  {
+    path: SETTLEMENT,
+    lazy: () => import("modules/settlement/pages/Settlement"),
+  },
+] as RouteObject[];

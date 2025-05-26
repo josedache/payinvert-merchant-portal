@@ -2,25 +2,25 @@ import { Icon } from "@iconify/react";
 import {
   Button,
   Chip,
+  IconButton,
   MenuItem,
   Popover,
   TextField,
   Typography,
-  IconButton,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
+import { CUSTOMER_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
+import * as CustomIcon from "assets/icons";
 
-const Invoice = () => {
+const Customer = () => {
   const tableInstance = useTable({ data, columns });
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography variant="h6">Invoice - 20</Typography>
+        <Typography variant="h6">Customers - 20</Typography>
         <div className="flex gap-2 items-center">
           <TextField select size="small" label="Filter" className="w-24">
             {[
@@ -46,11 +46,8 @@ const Invoice = () => {
               </MenuItem>
             ))}
           </TextField>
-          <Link to={INVOICE_ADD}>
-            <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
-              New Invoice
-            </Button>
-          </Link>
+
+          <Button startIcon={<CustomIcon.UserAdd />}>Add new customer</Button>
         </div>
       </div>
 
@@ -58,79 +55,41 @@ const Invoice = () => {
     </div>
   );
 };
-export const Component = Invoice;
-export default Invoice;
+export const Component = Customer;
+export default Customer;
 
 const data = [
   {
     name: "John Doe",
     email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Paid",
+    phoneNumber: "+234 123 456 789",
+    country: "Nigeria",
+    status: "Active",
   },
   {
     name: "John Doe",
     email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Paid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
+    phoneNumber: "+234 123 456 789",
+    country: "Nigeria",
+    status: "Blacklisted",
   },
 ];
 const columns = [
   {
-    header: "Customer name",
+    header: "Name",
     accessorKey: "name",
   },
   {
-    header: "Company email",
+    header: "Email",
     accessorKey: "email",
   },
   {
-    header: "Invoice number",
-    accessorKey: "invoiceNumber",
+    header: "Mobile number",
+    accessorKey: "phoneNumber",
   },
   {
-    header: "Amount",
-    accessorKey: "amount",
-  },
-  {
-    header: "Date issued",
-    accessorKey: "date",
+    header: "Country",
+    accessorKey: "country",
   },
   {
     header: "Status",
@@ -138,7 +97,7 @@ const columns = [
     cell: ({ row }) => (
       <Chip
         label={row.original.status}
-        color={row.original.status === "Paid" ? "success" : "error"}
+        color={row.original.status === "Active" ? "success" : "error"}
       />
     ),
   },
@@ -166,7 +125,7 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
+          {/* <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
             <Button
               fullWidth
               variant="text"
@@ -183,15 +142,15 @@ const Action = () => {
             className="mb-2 text-black justify-start"
           >
             Copy invoice link
-          </Button>
-          <Link to={generatePath(INVOICE_DETAIL, { id: "1" })}>
+          </Button> */}
+          <Link to={generatePath(CUSTOMER_DETAIL, { id: "1" })}>
             <Button
               fullWidth
               variant="text"
-              startIcon={<Icon icon="fluent:document-search-16-regular" />}
-              className="mb-2 text-black justify-start"
+              startIcon={<Icon icon="formkit:eye" />}
+              className="text-black justify-start"
             >
-              View invoice
+              View customer
             </Button>
           </Link>
         </div>

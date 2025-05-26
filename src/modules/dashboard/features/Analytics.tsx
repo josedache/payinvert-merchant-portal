@@ -1,9 +1,10 @@
 import { Chip, Paper, Typography } from "@mui/material";
 import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
+import { ReactNode } from "react";
 
 type TProps = {
-  icon: string;
+  icon: ReactNode;
   className: string;
   label: string;
   amount: string;
@@ -19,10 +20,10 @@ const Analytics = ({ icon, className, label, amount, trend }: TProps) => {
           className
         )}
       >
-        <Icon icon={icon} width={24} />
+        {icon}
       </div>
       <div className="space-y-2">
-        <Typography>Transaction {label}</Typography>
+        <Typography className="font-semibold">Transaction {label}</Typography>
         <Typography variant="h4" className="font-semibold flex items-center">
           <span className="text-base font-medium pr-1">NGN</span> {amount}{" "}
           <span className="text-base font-medium pt-2">.00</span>

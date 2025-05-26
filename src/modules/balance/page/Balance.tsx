@@ -26,7 +26,7 @@ const Balance = () => {
             <Icon icon="si:money-duotone" width={24} />
           </div>
           <div className="space-y-2">
-            <Typography>Available balance</Typography>
+            <Typography className="font-semibold">Available balance</Typography>
             <Typography
               variant="h4"
               className="font-semibold flex items-center"
@@ -58,7 +58,7 @@ const Balance = () => {
             <Icon icon="si:money-duotone" width={24} />
           </div>
           <div className="space-y-2">
-            <Typography>Blocked funds</Typography>
+            <Typography className="font-semibold">Blocked funds</Typography>
             <Typography
               variant="h4"
               className="font-semibold flex items-center"
@@ -73,7 +73,9 @@ const Balance = () => {
             <Icon icon="basil:bank-outline" width={24} />
           </div>
           <div className="space-y-2">
-            <Typography>Guaranty Trust Bank</Typography>
+            <Typography className="font-semibold">
+              Guaranty Trust Bank
+            </Typography>
             <Typography
               variant="h4"
               className="font-semibold flex items-center"

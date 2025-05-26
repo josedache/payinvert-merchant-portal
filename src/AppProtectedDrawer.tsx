@@ -72,7 +72,7 @@ function AppProtectedDrawer() {
             {
               icon: <CustomIcon.Customers />,
               label: "Customers",
-              to: urlsConstant.BUSINESS_CUSTOMERS,
+              to: urlsConstant.CUSTOMER,
               kycAllow: true,
             },
             {
@@ -91,13 +91,13 @@ function AppProtectedDrawer() {
             {
               icon: <CustomIcon.Settlements />,
               label: "Settlements",
-              to: urlsConstant.BALANCE,
+              to: urlsConstant.SETTLEMENT,
               kycAllow: true,
             },
             {
               icon: <CustomIcon.PayoutAccount />,
               label: "Payouts",
-              to: urlsConstant.ACCOUNT_PAYOUTS,
+              to: urlsConstant.PAYOUT,
               kycAllow: true,
             },
             {
@@ -146,7 +146,7 @@ function AppProtectedDrawer() {
             {
               icon: <CustomIcon.Preferences />,
               label: "Preferences",
-              to: urlsConstant.SETTINGS_PREFERENCES,
+              to: urlsConstant.PREFERENCES,
               kycAllow: true,
             },
             {

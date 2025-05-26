@@ -1,26 +1,22 @@
 import { Icon } from "@iconify/react";
 import {
-  Button,
   Chip,
+  IconButton,
   MenuItem,
   Popover,
   TextField,
   Typography,
-  IconButton,
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
-import { generatePath, Link } from "react-router-dom";
 
-const Invoice = () => {
+const Settlement = () => {
   const tableInstance = useTable({ data, columns });
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography variant="h6">Invoice - 20</Typography>
+        <Typography variant="h6">Settlements - 20</Typography>
         <div className="flex gap-2 items-center">
           <TextField select size="small" label="Filter" className="w-24">
             {[
@@ -46,11 +42,6 @@ const Invoice = () => {
               </MenuItem>
             ))}
           </TextField>
-          <Link to={INVOICE_ADD}>
-            <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
-              New Invoice
-            </Button>
-          </Link>
         </div>
       </div>
 
@@ -58,79 +49,48 @@ const Invoice = () => {
     </div>
   );
 };
-export const Component = Invoice;
-export default Invoice;
+export const Component = Settlement;
+export default Settlement;
 
 const data = [
   {
     name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
     amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Paid",
+    settlement_fee: "NGN 100.00",
+    currency: "NGN",
+    status: "Active",
   },
   {
     name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
     amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
+    settlement_fee: "NGN 100.00",
+    currency: "NGN",
+    status: "Processing",
   },
   {
     name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
     amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Paid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
-  },
-  {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    invoiceNumber: "INV-001",
-    amount: "NGN 10,000.00",
-    date: "Mar 01, 2023",
-    status: "Unpaid",
+    settlement_fee: "NGN 100.00",
+    currency: "NGN",
+    status: "Failed",
   },
 ];
 const columns = [
   {
-    header: "Customer name",
+    header: "Business name",
     accessorKey: "name",
-  },
-  {
-    header: "Company email",
-    accessorKey: "email",
-  },
-  {
-    header: "Invoice number",
-    accessorKey: "invoiceNumber",
   },
   {
     header: "Amount",
     accessorKey: "amount",
   },
   {
-    header: "Date issued",
-    accessorKey: "date",
+    header: "Settlement fee",
+    accessorKey: "settlement_fee",
+  },
+  {
+    header: "Currency",
+    accessorKey: "currency",
   },
   {
     header: "Status",
@@ -138,7 +98,7 @@ const columns = [
     cell: ({ row }) => (
       <Chip
         label={row.original.status}
-        color={row.original.status === "Paid" ? "success" : "error"}
+        color={getStatusColor(row.original.status)}
       />
     ),
   },
@@ -166,7 +126,7 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
+          {/* <Link to={generatePath(INVOICE_EDIT, { id: "1" })}>
             <Button
               fullWidth
               variant="text"
@@ -183,19 +143,20 @@ const Action = () => {
             className="mb-2 text-black justify-start"
           >
             Copy invoice link
-          </Button>
-          <Link to={generatePath(INVOICE_DETAIL, { id: "1" })}>
-            <Button
-              fullWidth
-              variant="text"
-              startIcon={<Icon icon="fluent:document-search-16-regular" />}
-              className="mb-2 text-black justify-start"
-            >
-              View invoice
-            </Button>
-          </Link>
+          </Button> */}
         </div>
       </Popover>
     </div>
   );
+};
+
+export const getStatusColor = (status: string) => {
+  switch (status) {
+    case "Processing":
+      return "warning";
+    case "Failed":
+      return "error";
+    default:
+      return "success";
+  }
 };

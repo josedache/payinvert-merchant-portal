@@ -48,3 +48,10 @@ export const PAYMENT_LINK_DETAIL = "/payment-link/:id";
 export const PAYMENT_LINK_PRODUCT_DETAIL = "/payment-link/product/:id";
 
 export const ROLES_AND_PERMISSION = "/role-and-permission";
+
+export const CUSTOMER = "/customer";
+export const CUSTOMER_DETAIL = "/customer/:id";
+
+export const SETTLEMENT = "/settlement";
+export const PAYOUT = "/payout";
+export const PREFERENCES = "/preferences";
