@@ -45,6 +45,7 @@ export const TRANSACTION_DETAIL = "/transaction/:id";
 
 export const PAYMENT_LINK = "/payment-link";
 export const PAYMENT_LINK_DETAIL = "/payment-link/:id";
+export const PAYMENT_LINK_PRODUCT_DETAIL = "/payment-link/product/:id";
 
 export const ROLES_AND_PERMISSION = "/role-and-permission";
 

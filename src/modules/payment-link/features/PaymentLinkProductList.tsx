@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
-import { Button, Chip, Popover, Typography } from "@mui/material";
+import { Avatar, Button, Chip, Popover, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { PAYMENT_LINK_DETAIL } from "constants/urls";
+import { PAYMENT_LINK_PRODUCT_DETAIL } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
@@ -17,6 +17,7 @@ const PaymentLinkProductList = () => {
           <Button startIcon={<Icon icon="codex:plus" />}>Add product</Button>
         </div>
       </div>
+
       <TanStandardTable instance={tableInstance} pagination={false} />
     </div>
   );
@@ -40,6 +41,14 @@ const columns = [
   {
     header: "Product name",
     accessorKey: "productName",
+    cell: ({ row }) => (
+      <div className="flex items-center gap-4">
+        <Avatar className="w-16 h-16" variant="rounded" src="" />
+        <Typography className="text-[15px] font-medium">
+          {row.original.productName}
+        </Typography>
+      </div>
+    ),
   },
   {
     header: "Price",
@@ -95,16 +104,8 @@ const Action = () => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="ic:baseline-link-off" />}
-            className="mb-2 text-black justify-start"
-          >
-            Deactivate link
-          </Button>
           <Link
-            to={generatePath(PAYMENT_LINK_DETAIL, {
+            to={generatePath(PAYMENT_LINK_PRODUCT_DETAIL, {
               id: "1",
             })}
           >
@@ -117,14 +118,6 @@ const Action = () => {
               View details
             </Button>
           </Link>
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="iconamoon:copy-light" />}
-            className="mb-2 text-black justify-start"
-          >
-            Copy link
-          </Button>
         </div>
       </Popover>
     </div>

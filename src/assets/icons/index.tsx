@@ -19,3 +19,4 @@ export { default as UserAdd } from "assets/icons/user-add.svg?react";
 export { default as Caution } from "assets/icons/caution.svg?react";
 export { default as Count } from "assets/icons/count.svg?react";
 export { default as Volume } from "assets/icons/volume.svg?react";
+export { default as Rider } from "assets/icons/rider.svg?react";

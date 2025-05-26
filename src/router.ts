@@ -7,6 +7,7 @@ import {
   ROLES_AND_PERMISSION,
   TRANSACTION,
   BALANCE,
+  SETTINGS_API_WEBHOOKS,
 } from "constants/urls";
 import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
@@ -21,6 +22,7 @@ import BalancesRoutes from "modules/balance/BalanceRoutes";
 import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
 import CustomerRoutes from "modules/customer/CustomerRoutes";
 import SettlementRoutes from "modules/settlement/SettlementRoutes";
+import ApiKeyAndWebhookRoutes from "modules/api-key-and-webhook/ApiKeyAndWebhookRoutes";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,12 @@ const router = createBrowserRouter([
                 lazy: () =>
                   import("modules/role-and-permission/RoleAndPermission"),
                 children: RolesAndPermissionsRoutes,
+              },
+              {
+                path: SETTINGS_API_WEBHOOKS,
+                lazy: () =>
+                  import("modules/api-key-and-webhook/ApiKeyAndWebhook"),
+                children: ApiKeyAndWebhookRoutes,
               },
               {
                 path: INVOICE,
