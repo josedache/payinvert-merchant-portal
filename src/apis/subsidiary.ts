@@ -38,7 +38,7 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       SubsidiaryLoginApiRequest
     >({
       query: (config) => ({
-        url: BASE_URL + "/dashboard/login",
+        url: BASE_URL + "/dashboard/business/login",
         method: "post",
         ...config,
       }),
@@ -71,7 +71,7 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       SubsidiarySignupApiRequest
     >({
       query: (config) => ({
-        url: BASE_URL + "/dashboard/signup",
+        url: BASE_URL + "/dashboard/business-signup",
         method: "post",
         ...config,
       }),

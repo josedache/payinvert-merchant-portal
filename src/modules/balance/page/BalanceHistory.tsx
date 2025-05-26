@@ -9,9 +9,39 @@ import {
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
+import usePagination from "hooks/use-pagination.ts";
+import { useMemo } from "react";
+import { walletApi } from "apis/wallet.ts";
+import { Wallet } from "types/wallet.ts";
+import { ColumnDef } from "@tanstack/react-table";
+import * as dfns from "date-fns";
+import CurrencyTypography from "components/CurrencyTypography.tsx";
 
 const BalanceHistory = () => {
-  const tableInstance = useTable({ data, columns });
+  const [pagination, setPagination] = usePagination();
+
+  const walletTransactionsQueryResult = walletApi.useGetWalletTransactionsQuery(
+    useMemo(
+      () => ({
+        params: {
+          Page: pagination.pageIndex + 1,
+          Limit: pagination.pageSize,
+        },
+      }),
+      [pagination.pageIndex, pagination.pageSize]
+    )
+  );
+
+  const walletTransactions = walletTransactionsQueryResult.data;
+
+  const tableInstance = useTable({
+    data: walletTransactions,
+    columns,
+    // manualPagination: true,
+    // pageCount: orders?.page?.totalPage ?? 1,
+    state: { pagination },
+    onPaginationChange: setPagination,
+  });
 
   return (
     <div className="space-y-6">
@@ -45,8 +75,14 @@ const BalanceHistory = () => {
         </div>
       </div>
 
-      <Paper className="p-4">
-        <TanStandardTable instance={tableInstance} />
+      <Paper>
+        <TanStandardTable
+          instance={tableInstance}
+          loading={walletTransactionsQueryResult.isFetching}
+          error={walletTransactionsQueryResult.isError}
+          onEmptyRetry={walletTransactionsQueryResult.refetch}
+          onErrorRetry={walletTransactionsQueryResult.refetch}
+        />
       </Paper>
     </div>
   );
@@ -54,48 +90,47 @@ const BalanceHistory = () => {
 export const Component = BalanceHistory;
 export default BalanceHistory;
 
-const data = [
-  {
-    date: "Mar 01, 2023",
-    amount: "NGN 10,000.00",
-    direction: "Debit",
-    balance: "NGN 10,000.00",
-    details: "Invoice payment",
-  },
-  {
-    date: "Mar 01, 2023",
-    amount: "NGN 10,000.00",
-    direction: "Credit",
-    balance: "NGN 10,000.00",
-    details: "Invoice payment",
-  },
-];
-const columns = [
+const columns: ColumnDef<Wallet, any>[] = [
   {
     header: "Date",
     accessorKey: "date",
+    cell: ({ getValue }) =>
+      getValue() ? (
+        <Typography>
+          {dfns.format(
+            new Date(getValue()[0], getValue()[1] - 1, getValue()[2]),
+            "dd MMM yyyy"
+          )}
+        </Typography>
+      ) : null,
   },
   {
     header: "Amount",
     accessorKey: "amount",
+    cell: ({ getValue }) => (
+      <CurrencyTypography>{getValue()}</CurrencyTypography>
+    ),
   },
   {
     header: "Direction",
     accessorKey: "direction",
     cell: ({ row }) => (
       <Chip
-        label={row.original.direction}
-        color={row.original.direction === "Debit" ? "error" : "success"}
+        label={row.original.debit ? "Debit" : "Credit"}
+        color={row.original.debit ? "error" : "success"}
       />
     ),
   },
   {
     header: "Balance",
-    accessorKey: "balance",
+    accessorKey: "runningBalance",
+    cell: ({ getValue }) => (
+      <CurrencyTypography>{getValue()}</CurrencyTypography>
+    ),
   },
   {
     header: "Details",
-    accessorKey: "details",
+    accessorKey: "transactionType.value",
   },
   {
     header: "Actions",

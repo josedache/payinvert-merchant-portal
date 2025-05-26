@@ -47,7 +47,7 @@
 .TanStandardTable__pagination {
     position: sticky;
     z-index: 10;
-    @apply bg-neutral-100;
+    @apply bg-neutral-200;
 }
 
 .TanStandardTable__table__header__row,

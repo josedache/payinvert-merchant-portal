@@ -63,16 +63,16 @@ function AppProtectedDrawer() {
               to: urlsConstant.TRANSACTION,
               kycAllow: true,
             },
-            {
-              icon: <CustomIcon.Invoices />,
-              label: "Invoices",
-              to: urlsConstant.INVOICE,
-              kycAllow: true,
-            },
+            // {
+            //   icon: <CustomIcon.Invoices />,
+            //   label: "Invoices",
+            //   to: urlsConstant.INVOICE,
+            //   kycAllow: true,
+            // },
             {
               icon: <CustomIcon.Customers />,
               label: "Customers",
-              to: urlsConstant.BUSINESS_CUSTOMERS,
+              to: urlsConstant.CUSTOMER,
               kycAllow: true,
             },
             {

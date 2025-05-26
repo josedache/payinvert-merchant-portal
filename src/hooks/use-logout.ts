@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { logout as logoutAction } from "configs/store-actions";
 import useStoreDispatch from "./use-store-dispatch";
+
 // import { userApi } from "apis/user-api";
 
 function useLogout() {
@@ -12,7 +13,7 @@ function useLogout() {
   const logout = useCallback(
     function logout() {
       const res = dispatch(logoutAction());
-      // window.location.reload();
+      window.location.reload();
       return res;
     },
     [dispatch]

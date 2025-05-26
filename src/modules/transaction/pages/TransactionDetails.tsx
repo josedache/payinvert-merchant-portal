@@ -1,6 +1,20 @@
 import { Paper, Typography } from "@mui/material";
+import { orderApi } from "apis/order.ts";
+import { useMemo } from "react";
+import { useParams } from "react-router-dom";
+import LoadingContent from "components/LoadingContent.tsx";
+import * as dfns from "date-fns";
 
 const TransactionDetails = () => {
+  const { id } = useParams();
+
+  const ordersQueryResult = orderApi.useGetOrdersQuery(
+    useMemo(() => ({ params: { id: id } }), [id]),
+    { skip: !id }
+  );
+
+  const order = ordersQueryResult.data?.data?.items?.[0];
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
@@ -9,20 +23,90 @@ const TransactionDetails = () => {
         </Typography>
       </div>
 
-      <div className="space-y-8">
-        <TransactionSection
-          title="Order details"
-          data={transactionDetailsData.orderDetails}
-        />
-        <TransactionSection
-          title="Customer details"
-          data={transactionDetailsData.customerDetails}
-        />
-        <TransactionSection
-          title="Payment details"
-          data={transactionDetailsData.paymentDetails}
-        />
-      </div>
+      <LoadingContent
+        loading={ordersQueryResult.isLoading}
+        error={ordersQueryResult.isError}
+        onRetry={ordersQueryResult.refetch}
+      >
+        {() => (
+          <>
+            <div className="space-y-8">
+              <TransactionSection
+                title="Order details"
+                items={[
+                  { label: "Order reference", value: order?.orderReference },
+                  {
+                    label: "Payment reference",
+                    value: order?.paymentReference,
+                  },
+                  {
+                    label: "Payment response code",
+                    value: order?.paymentResponseCode,
+                  },
+                  {
+                    label: "Payment response message",
+                    value: order?.paymentResponseMessage,
+                  },
+                ]}
+              />
+              <TransactionSection
+                title="Customer details"
+                items={[
+                  { label: "Customer name", value: order?.customerName },
+                  { label: "Customer email", value: order?.customerEmail },
+                  {
+                    label: "Customer phone number",
+                    value: order?.customerPhone,
+                  },
+                  { label: "Country", value: "" },
+                ]}
+              />
+              <TransactionSection
+                title="Payment details"
+                items={[
+                  { label: "Payment method", value: order?.paymentTypeName },
+                  { label: "Currency", value: order?.currency },
+                  { label: "Amount", value: order?.amount },
+                  { label: "Status", value: order?.orderStatus },
+                  { label: "Narration", value: order?.narration },
+                  { label: "Remarks", value: order?.remarks },
+                  { label: "Fee", value: order?.fee },
+                  { label: "Subsidiary fee", value: order?.subsidiaryFee },
+                  { label: "Customer fee", value: order?.customerFee },
+                  { label: "Who bears fee?", value: order?.whoBearsFee },
+                  {
+                    label: "Date created",
+                    value: order?.dateCreated
+                      ? dfns.format(
+                          order?.dateCreated,
+                          "dd MMM yyyy hh:mm:ss aaa"
+                        )
+                      : null,
+                  },
+                  {
+                    label: "Date updated",
+                    value: order?.dateUpdated
+                      ? dfns.format(
+                          order?.dateUpdated,
+                          "dd MMM yyyy hh:mm:ss aaa"
+                        )
+                      : null,
+                  },
+                  {
+                    label: "Date payment confirmed",
+                    value: order?.datePaymentConfirmed
+                      ? dfns.format(
+                          order?.datePaymentConfirmed,
+                          "dd MMM yyyy hh:mm:ss aaa"
+                        )
+                      : null,
+                  },
+                ]}
+              />
+            </div>
+          </>
+        )}
+      </LoadingContent>
     </div>
   );
 };
@@ -31,59 +115,27 @@ export default TransactionDetails;
 
 const TransactionSection = ({
   title,
-  data,
+  items,
 }: {
   title: string;
-  data: Record<string, string>;
+  items: { label: string; value: any }[];
 }) => (
   <div className="rounded-bl-[8px] rounded-br-[8px] rounded-tl-[8px] rounded-tr-[8px] shadow-[0px_1px_2px_0px_#0000001F] z-10">
     <div className="bg-[#EDEDED] rounded-tl-[8px] rounded-tr-[8px] py-2.5 px-5">
-      <Typography className="text-[18px] font-semibold">{title}</Typography>
+      <Typography variant="h6" className="font-semibold">
+        {title}
+      </Typography>
     </div>
     <Paper className="">
-      {Object.entries(data).map(([label, value], index) => (
+      {items.map(({ label, value }, index) => (
         <div
           key={index}
           className="py-3.5 px-5 flex items-center justify-between gap-2"
         >
-          <Typography className="flex-2 text-[16px] font-semibold">
-            {label}
-          </Typography>
-          <Typography className="flex-3 text-[16px] font-medium">
-            {value}
-          </Typography>
+          <Typography className="flex-2 font-semibold">{label}</Typography>
+          <Typography className="flex-3">{value ?? "N/A"}</Typography>
         </div>
       ))}
     </Paper>
   </div>
 );
-
-const transactionDetailsData = {
-  orderDetails: {
-    "Order reference": "7jlu9x8cxjl",
-    "Payment reference": "PARORD-D7A30881-9846-4273-933B-B1C3EF016307",
-    "Payment response code": "02",
-    "Payment response message": "N/A",
-  },
-  customerDetails: {
-    "Customer name": "Gani Fawehinmi",
-    "Customer email": "gani@email.com",
-    "Customer phone number": "08091982819",
-    Country: "Nigeria",
-  },
-  paymentDetails: {
-    "Payment method": "Bank account",
-    Currency: "NGN",
-    Amount: "NGN 25,000",
-    Status: "Initiated",
-    Narration: "The leather bag",
-    Remarks: "Order initiated and created successfully",
-    Fee: "NGN 320.00",
-    "Subsidiary fee": "NGN 0.00",
-    "Customer fee": "NGN 0.00",
-    "Who bears fee?": "–",
-    "Date created": "19 Jan 2022  5:00pm",
-    "Date updated": "N/A",
-    "Date payment confirmed": "N/A",
-  },
-};

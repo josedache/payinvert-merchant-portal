@@ -8,6 +8,7 @@ import {
   TRANSACTION,
   BALANCE,
   SETTINGS_API_WEBHOOKS,
+  CUSTOMER,
 } from "constants/urls";
 import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
@@ -21,6 +22,7 @@ import BusinessRoutes from "modules/business/BusinessRoutes";
 import BalancesRoutes from "modules/balance/BalanceRoutes";
 import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
 import ApiKeyAndWebhookRoutes from "modules/api-key-and-webhook/ApiKeyAndWebhookRoutes";
+import CustomerRoutes from "modules/customer/CustomerRoutes.tsx";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +96,11 @@ const router = createBrowserRouter([
                 path: BALANCE,
                 lazy: () => import("modules/balance/Balance"),
                 children: BalancesRoutes,
+              },
+              {
+                path: CUSTOMER,
+                lazy: () => import("modules/customer/Customer"),
+                children: CustomerRoutes,
               },
             ],
           },

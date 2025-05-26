@@ -1,18 +1,33 @@
 import { Icon } from "@iconify/react";
-import { Button, Popover, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
-import { PAYMENT_LINK_DETAIL } from "constants/urls";
-import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
-import { generatePath, Link } from "react-router-dom";
+import { PaymentLink } from "types/payment-link.ts";
+import { ColumnDef } from "@tanstack/react-table";
+import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction.tsx";
+import { useMemo } from "react";
+import useClipboard from "hooks/use-clipboard.ts";
+import { useSnackbar } from "notistack";
+import * as dfns from "date-fns";
 
-const PaymentLinkDetailsTable = () => {
-  const tableInstance = useTable({ data, columns });
+const PaymentLinkDetailsTable = (props: PaymentLinkDetailsTableProps) => {
+  const { paymentLink } = props;
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  const clipboard = useClipboard();
+
+  const tableInstance = useTable({
+    data: useMemo(() => [paymentLink], [paymentLink]),
+    columns,
+  });
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography className="text-[18px] font-medium">Manscape</Typography>
+        <Typography className="text-[18px] font-medium">
+          {paymentLink?.name}
+        </Typography>
         <div className="flex gap-2 items-center">
           <Button
             variant="outlined"
@@ -20,99 +35,56 @@ const PaymentLinkDetailsTable = () => {
           >
             Edit link
           </Button>
-          <Button startIcon={<Icon icon="iconamoon:copy-light" />}>
+          <Button
+            startIcon={<Icon icon="iconamoon:copy-light" />}
+            onClick={() => {
+              clipboard.writeText(paymentLink.paymentLinkUrl, () =>
+                enqueueSnackbar("Payment link copied to clipboard", {
+                  variant: "success",
+                })
+              );
+            }}
+          >
             Copy link
           </Button>
         </div>
       </div>
-      <TanStandardTable instance={tableInstance} pagination={false} />
+      <Paper className="overflow-hidden">
+        <TanStandardTable instance={tableInstance} pagination={false} />
+      </Paper>
     </div>
   );
 };
 export const Component = PaymentLinkDetailsTable;
 export default PaymentLinkDetailsTable;
 
-const data = [
-  {
-    dateCreated: "01 May 2021",
-    type: "Product",
-    linkUrl: "payinvert.com/manscape/green-suit",
-  },
-];
-
-const columns = [
+const columns: ColumnDef<PaymentLink, any>[] = [
   {
     header: "Date created",
     accessorKey: "dateCreated",
+    cell: ({ getValue }) =>
+      getValue() ? (
+        <Typography>
+          {dfns.format(getValue(), "dd-MMM-yyyy hh:mm:ss aaa")}
+        </Typography>
+      ) : (
+        <Typography>--</Typography>
+      ),
   },
   {
     header: "Link type",
-    accessorKey: "type",
+    accessorKey: "paymentType",
   },
   {
     header: "Link URL",
-    accessorKey: "linkUrl",
+    accessorKey: "paymentLinkUrl",
   },
   {
     header: "Actions",
     id: "actions",
     size: 80,
-    cell: () => <Action />,
+    cell: ({ row }) => <PaymentLinkTableAction paymentLink={row.original} />,
   },
 ];
 
-const Action = () => {
-  const popover = usePopover();
-  return (
-    <div>
-      <Button
-        variant="text"
-        size="small"
-        startIcon={<Icon icon="uil:ellipsis-v" />}
-        className="text-black"
-        onClick={popover.togglePopover}
-      />
-      <Popover
-        open={popover.isOpen}
-        anchorEl={popover.anchorEl}
-        onClose={popover.togglePopover}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        transformOrigin={{ vertical: "top", horizontal: "center" }}
-        slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
-      >
-        <div className="p-2 space-y-2 w-full">
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="ic:baseline-link-off" />}
-            className="mb-2 text-black justify-start"
-          >
-            Deactivate link
-          </Button>
-          <Link
-            to={generatePath(PAYMENT_LINK_DETAIL, {
-              id: "1",
-            })}
-          >
-            <Button
-              fullWidth
-              variant="text"
-              startIcon={<Icon icon="icon-park-twotone:file-search-two" />}
-              className="mb-2 text-black justify-start"
-            >
-              View details
-            </Button>
-          </Link>
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="iconamoon:copy-light" />}
-            className="mb-2 text-black justify-start"
-          >
-            Copy link
-          </Button>
-        </div>
-      </Popover>
-    </div>
-  );
-};
+type PaymentLinkDetailsTableProps = { paymentLink: PaymentLink };

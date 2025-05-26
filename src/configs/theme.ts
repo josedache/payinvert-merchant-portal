@@ -52,6 +52,13 @@ const commonPaletteOptions: PaletteOptions = {
     "700": "#353941",
     "800": "#1C202A",
     "900": "#030712",
+    main: "#686A71",
+  },
+  white: {
+    main: "#FFFFFF",
+  },
+  black: {
+    main: "#000000",
   },
   success: {
     "50": "#F0FDF4",
@@ -410,14 +417,14 @@ export const theme = responsiveFontSizes(
               ...(ownerState.variant === "contained"
                 ? {
                     "&.Mui-disabled": {
-                      backgroundColor: alpha(
-                        theme.palette[ownerState.color]?.main,
-                        0.4
-                      ),
-                      color: alpha(
-                        theme.palette[ownerState.color]?.contrastText,
-                        0.9
-                      ),
+                      // backgroundColor: alpha(
+                      //   theme.palette[ownerState.color]?.main,
+                      //   0.4
+                      // ),
+                      // color: alpha(
+                      //   theme.palette[ownerState.color]?.contrastText,
+                      //   0.9
+                      // ),
                     },
                   }
                 : {}),
@@ -582,7 +589,7 @@ export const theme = responsiveFontSizes(
       MuiTextField: {
         defaultProps: { variant: "outlined" },
         styleOverrides: {
-          root: () => {
+          root: ({ownerState}) => {
             return {
               // "& .MuiFilledInput-input": {
               //   borderRadius: 16,
@@ -612,32 +619,32 @@ export const theme = responsiveFontSizes(
                 },
               },
 
-              // ...(ownerState.variant === "outlined"
-              //   ? {
-              //       paddingTop: ownerState.label
-              //         ? ownerState.size === "small"
-              //           ? 18
-              //           : 24
-              //         : undefined,
-              //
-              //       "& .MuiInputLabel-shrink": {
-              //         transform:
-              //           ownerState.size === "small"
-              //             ? "translate(0px, 0px) scale(0.70)"
-              //             : "translate(0px, 0px) scale(0.90)",
-              //       },
-              //
-              //       "& .MuiInputBase-root": {
-              //         backgroundColor: "#FFFFFF",
-              //         borderRadius: 8,
-              //
-              //         "& > fieldset": {
-              //           border: "1px solid #D1D5DB",
-              //         },
-              //       },
-              //     }
-              //   : {}),
-              //
+              ...(ownerState.variant === "outlined"
+                ? {
+                    // paddingTop: ownerState.label
+                    //   ? ownerState.size === "small"
+                    //     ? 18
+                    //     : 24
+                    //   : undefined,
+                    //
+                    // "& .MuiInputLabel-shrink": {
+                    //   transform:
+                    //     ownerState.size === "small"
+                    //       ? "translate(0px, 0px) scale(0.70)"
+                    //       : "translate(0px, 0px) scale(0.90)",
+                    // },
+
+                    "& .MuiInputBase-root": {
+                      backgroundColor: "#FFFFFF",
+                      // borderRadius: 8,
+                      //
+                      // "& > fieldset": {
+                      //   border: "1px solid #D1D5DB",
+                      // },
+                    },
+                  }
+                : {}),
+
               // ...(ownerState.variant === "filled"
               //   ? {
               //       "& .MuiInputBase-root": {
@@ -704,10 +711,14 @@ export default theme;
 declare module "@mui/material/styles" {
   interface Palette {
     neutral: Palette["primary"];
+    white: Palette["primary"];
+    black: Palette["primary"];
   }
 
   interface PaletteOptions {
     neutral?: PaletteOptions["primary"];
+    white?: PaletteOptions["primary"];
+    black?: PaletteOptions["primary"];
   }
 
   interface PaletteColor {
