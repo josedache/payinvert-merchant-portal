@@ -106,7 +106,7 @@ function AppProtectedDrawer() {
               {
                 icon: <CustomIcon.Settlements />,
                 label: "Settlements",
-                to: urlsConstant.BALANCE,
+                to: urlsConstant.ACCOUNT_SETTLEMENTS,
                 kycAllow: isActiveClient,
               },
               {
