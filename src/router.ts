@@ -9,6 +9,7 @@ import {
   BALANCE,
   SETTINGS_API_WEBHOOKS,
   SETTINGS_PAYOUT_ACCOUNTS,
+  SETTINGS_USERS_SUBSIDIARIES,
 } from "constants/urls";
 import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
@@ -23,6 +24,7 @@ import BalancesRoutes from "modules/balance/BalanceRoutes";
 import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
 import ApiKeyAndWebhookRoutes from "modules/api-key-and-webhook/ApiKeyAndWebhookRoutes";
 import PayoutAccountRoutes from "modules/payout-account/PayoutAccountRoutes";
+import UserRoutes from "modules/user/UserRoutes";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +93,11 @@ const router = createBrowserRouter([
                 path: SETTINGS_PAYOUT_ACCOUNTS,
                 lazy: () => import("modules/payout-account/PayoutAccount"),
                 children: PayoutAccountRoutes,
+              },
+              {
+                path: SETTINGS_USERS_SUBSIDIARIES,
+                lazy: () => import("modules/user/User"),
+                children: UserRoutes,
               },
               {
                 path: INVOICE,

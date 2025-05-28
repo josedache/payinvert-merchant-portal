@@ -28,7 +28,8 @@ export const SETTINGS_BUSINESS = "/settings/business";
 export const SETTINGS_COMPLIANCE_INFO = "/settings/compliance";
 export const SETTINGS_PAYOUT_ACCOUNTS = "/settings/payout-accounts";
 export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
-export const SETTINGS_USERS = "/settings/users";
+export const SETTINGS_USERS = "/settings/users/user-subsidiaries/:id";
+export const SETTINGS_USERS_SUBSIDIARIES = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
 

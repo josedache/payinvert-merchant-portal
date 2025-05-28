@@ -140,7 +140,7 @@ function AppProtectedDrawer() {
             {
               icon: <CustomIcon.UserSubsidiaries />,
               label: "Users",
-              to: urlsConstant.SETTINGS_USERS,
+              to: urlsConstant.SETTINGS_USERS_SUBSIDIARIES,
               kycAllow: true,
             },
             {
