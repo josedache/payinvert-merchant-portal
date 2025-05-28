@@ -1,7 +1,5 @@
 import { ApiRequest, ApiResponse } from "types/api.ts";
-import { AuthUser, User } from "types/user.ts";
-import { Subsidiary } from "types/subsidiary.ts";
-import { Notification } from "types/notification.ts";
+import { AuthUser } from "types/user.ts";
 import { Bank } from "./bank";
 
 export type SubsidiaryLoginApiRequest = ApiRequest<{
@@ -9,28 +7,7 @@ export type SubsidiaryLoginApiRequest = ApiRequest<{
   password: string;
 }>;
 
-export type SubsidiaryLoginApiResponse = {
-  notifications: Notification[];
-  token: {
-    accessToken: string;
-  };
-  user: User;
-  loginHash: string | null;
-  envronmentDetail: {
-    id: number;
-    name: string;
-  };
-  id: string;
-  subsidiaryDetails: {
-    total: number;
-    subsidiaries: Subsidiary[];
-  };
-  activeSubsidiary: Subsidiary | null;
-  routeToGetStarted: boolean;
-  status: string;
-  statusCode: string;
-  message: string;
-};
+export type SubsidiaryLoginApiResponse = AuthUser;
 
 export type SubsidiaryLoginCompleteApiRequest = ApiRequest<{
   otp: string;

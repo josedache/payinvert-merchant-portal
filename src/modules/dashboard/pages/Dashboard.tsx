@@ -15,6 +15,7 @@ import { subsidiaryApi } from "apis/subsidiary";
 import AnalyticsChip from "components/AnalyticsChip";
 import { useState } from "react";
 import { format } from "date-fns";
+import { Settlements } from "assets/icons";
 
 const chartFilterOptions = [
   {
@@ -40,8 +41,8 @@ function Dashboard() {
   const chartData = getDashboardChartQuery?.data?.chartData || [];
   const data = Object.keys(chartData).map((key) => ({
     name: key,
-    inflow: chartData[key].DEBIT || 0,
-    outflow: chartData[key].CREDIT || 0,
+    inflow: chartData[key].CREDIT || 0,
+    outflow: chartData[key].DEBIT || 0,
     amt: chartData[key].DEBIT + chartData[key].CREDIT || 0,
   }));
 
@@ -52,7 +53,7 @@ function Dashboard() {
           <Icon icon="ph:timer-duotone" width={24} />
         </div>
         <div className="space-y-2">
-          <Typography>Transaction Count</Typography>
+          <Typography className="font-medium">Transaction Count</Typography>
           <Typography variant="h4" className="font-semibold">
             {getDashboardChartQuery?.data?.transactionCount?.data || "0"}
           </Typography>
@@ -66,44 +67,45 @@ function Dashboard() {
           </div>
         </div>
       </Paper>
-      <Analytics
-        icon="material-symbols:speed-outline"
-        className="text-purple-500 bg-purple-50"
-        label="volume"
-        amount={String(
-          getDashboardChartQuery?.data?.transactionVolume?.data || 0
-        )}
-        trend={String(
-          getDashboardChartQuery?.data?.transactionVolume?.percentage || 0
-        )}
-      />
-      <Analytics
-        icon="icon-park-twotone:round-caliper"
-        className="text-orange-500 bg-orange-50"
-        label="settlements"
-        amount={String(
-          getDashboardChartQuery?.data?.transactionSettlement?.data || 0
-        )}
-        trend={String(
-          getDashboardChartQuery?.data?.transactionSettlement?.percentage || 0
-        )}
-      />
-      <AnalyticsWithLink
-        icon="si:money-duotone"
-        className="text-green-500 bg-green-50"
-        label="Available"
-        amount={String(
-          getDashboardChartQuery?.data?.availableBalance?.data || "0"
-        )}
-        trend={String(
-          getDashboardChartQuery?.data?.availableBalance?.percentage || 0
-        )}
-      />
+      {[
+        {
+          Component: Analytics,
+          icon: "material-symbols:speed-outline",
+          className: "text-purple-500 bg-purple-50",
+          label: "volume",
+          dataKey: "transactionVolume",
+        },
+        {
+          Component: Analytics,
+          icon: <Settlements />,
+          className: "text-orange-500 bg-orange-50",
+          label: "settlements",
+          dataKey: "transactionSettlement",
+        },
+        {
+          Component: AnalyticsWithLink,
+          icon: "si:money-duotone",
+          className: "text-green-500 bg-green-50",
+          label: "Available",
+          dataKey: "availableBalance",
+        },
+      ].map(({ Component, icon, className, label, dataKey }) => (
+        <Component
+          key={dataKey}
+          icon={icon}
+          className={className}
+          label={label}
+          amount={String(getDashboardChartQuery?.data?.[dataKey]?.data || "0")}
+          trend={String(
+            getDashboardChartQuery?.data?.[dataKey]?.percentage || 0
+          )}
+        />
+      ))}
       <Paper className="col-span-1 p-4 row-span-1 md:col-span-2 lg:row-span-2">
         <div className="flex justify-between gap-5 flex-col md:flex-row">
           <div className="space-y-1">
-            <Typography>Transactions</Typography>
-            <Typography className="text-gray-500">
+            <Typography className="font-medium">Transactions</Typography>
+            <Typography variant="body2" className="text-gray-500">
               Track inflow and outflow of money over time
             </Typography>
 
@@ -123,6 +125,7 @@ function Dashboard() {
               value={chartFilter}
               onChange={(e) => setChartFilter(e.target.value)}
               select
+              disabled={getDashboardChartQuery.isFetching}
               size="small"
               className="w-28"
             >

@@ -27,139 +27,156 @@ import * as urlsConstant from "constants/urls";
 import useSidebarIcon from "hooks/use-sidebar-icon";
 
 import * as CustomIcon from "assets/icons";
+import useAuthUser from "hooks/use-auth-user";
 
 function AppProtectedDrawer() {
   const isLg = useMediaQuery(MediaBreakpoint.LG);
 
   const infoPopover = usePopover();
+  const authUser = useAuthUser();
 
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
-  const NAV_LINKS = [
-    {
-      links: [
-        {
-          label: "Home",
-          to: urlsConstant.DASHBOARD,
-          kycAllow: true,
-          links: [
-            {
-              icon: "ic:twotone-dashboard",
-              label: "Overview",
-              to: urlsConstant.DASHBOARD,
-              kycAllow: true,
-            },
-          ],
-        },
-        {
-          label: "Business",
-          to: urlsConstant.BUSINESS,
-          kycAllow: true,
-          links: [
-            {
-              icon: <CustomIcon.Transactions />,
-              label: "Transactions",
-              to: urlsConstant.TRANSACTION,
-              kycAllow: true,
-            },
-            // {
-            //   icon: <CustomIcon.Invoices />,
-            //   label: "Invoices",
-            //   to: urlsConstant.INVOICE,
-            //   kycAllow: true,
-            // },
-            {
-              icon: <CustomIcon.Customers />,
-              label: "Customers",
-              to: urlsConstant.CUSTOMER,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.PaymentLinks />,
-              label: "Payment Links",
-              to: urlsConstant.PAYMENT_LINK,
-              kycAllow: true,
-            },
-          ],
-        },
-        {
-          label: "Account",
-          to: urlsConstant.ACCOUNT,
-          kycAllow: true,
-          links: [
-            {
-              icon: <CustomIcon.Settlements />,
-              label: "Settlements",
-              to: urlsConstant.BALANCE,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.PayoutAccount />,
-              label: "Payouts",
-              to: urlsConstant.ACCOUNT_PAYOUTS,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.Balances />,
-              label: "Balances",
-              to: urlsConstant.BALANCE,
-              kycAllow: true,
-            },
-          ],
-        },
-        {
-          label: "Settings",
-          to: urlsConstant.SETTINGS,
-          kycAllow: true,
-          links: [
-            {
-              icon: <CustomIcon.Profile />,
-              label: "Business",
-              to: urlsConstant.SETTINGS_BUSINESS,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.Compliance />,
-              label: "Compliance Information",
-              to: urlsConstant.SETTINGS_COMPLIANCE_INFO,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.PayoutAccount />,
-              label: "Payout Accounts",
-              to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.RolesPermissions />,
-              label: "Roles & Permissions",
-              to: urlsConstant.ROLES_AND_PERMISSION,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.UserSubsidiaries />,
-              label: "Users",
-              to: urlsConstant.SETTINGS_USERS,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.Preferences />,
-              label: "Preferences",
-              to: urlsConstant.SETTINGS_PREFERENCES,
-              kycAllow: true,
-            },
-            {
-              icon: <CustomIcon.ApiWebhooks />,
-              label: "API Keys & Webhooks",
-              to: urlsConstant.SETTINGS_API_WEBHOOKS,
-              kycAllow: true,
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  const isActiveClient = authUser?.businessDetails?.active || false;
+
+  const NAV_LINKS = useMemo(
+    () => [
+      {
+        links: [
+          {
+            label: "Home",
+            to: urlsConstant.DASHBOARD,
+            kycAllow: true,
+            links: [
+              {
+                icon: "ic:twotone-dashboard",
+                label: "Overview",
+                to: urlsConstant.DASHBOARD,
+                kycAllow: true,
+              },
+              ...(!isActiveClient
+                ? [
+                    {
+                      icon: <CustomIcon.Compliance />,
+                      label: "Compliance",
+                      to: urlsConstant.DASHBOARD_ONBOARDING,
+                      kycAllow: true,
+                    },
+                  ]
+                : []),
+            ],
+          },
+          {
+            label: "Business",
+            to: urlsConstant.BUSINESS,
+            kycAllow: true,
+            links: [
+              {
+                icon: <CustomIcon.Transactions />,
+                label: "Transactions",
+                to: urlsConstant.TRANSACTION,
+                kycAllow: isActiveClient,
+              },
+              // {
+              //   icon: <CustomIcon.Invoices />,
+              //   label: "Invoices",
+              //   to: urlsConstant.INVOICE,
+              //   kycAllow: true,
+              // },
+              {
+                icon: <CustomIcon.Customers />,
+                label: "Customers",
+                to: urlsConstant.CUSTOMER,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.PaymentLinks />,
+                label: "Payment Links",
+                to: urlsConstant.PAYMENT_LINK,
+                kycAllow: isActiveClient,
+              },
+            ],
+          },
+          {
+            label: "Account",
+            to: urlsConstant.ACCOUNT,
+            kycAllow: true,
+            links: [
+              {
+                icon: <CustomIcon.Settlements />,
+                label: "Settlements",
+                to: urlsConstant.BALANCE,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.PayoutAccount />,
+                label: "Payouts",
+                to: urlsConstant.ACCOUNT_PAYOUTS,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.Balances />,
+                label: "Balances",
+                to: urlsConstant.BALANCE,
+                kycAllow: isActiveClient,
+              },
+            ],
+          },
+          {
+            label: "Settings",
+            to: urlsConstant.SETTINGS,
+            kycAllow: true,
+            links: [
+              {
+                icon: <CustomIcon.Profile />,
+                label: "Business",
+                to: urlsConstant.SETTINGS_BUSINESS,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.Compliance />,
+                label: "Compliance Information",
+                to: urlsConstant.SETTINGS_COMPLIANCE_INFO,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.PayoutAccount />,
+                label: "Payout Accounts",
+                to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.RolesPermissions />,
+                label: "Roles & Permissions",
+                to: urlsConstant.ROLES_AND_PERMISSION,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.UserSubsidiaries />,
+                label: "Users",
+                to: urlsConstant.SETTINGS_USERS,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.Preferences />,
+                label: "Preferences",
+                to: urlsConstant.SETTINGS_PREFERENCES,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.ApiWebhooks />,
+                label: "API Keys & Webhooks",
+                to: urlsConstant.SETTINGS_API_WEBHOOKS,
+                kycAllow: isActiveClient,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    [isActiveClient]
+  );
 
   const collapseToIcon = isLg && !sidebarIcon.isOpen;
 
@@ -351,6 +368,7 @@ function AppProtectedDrawerItem(props: any) {
                         !toMatchExclude?.includes(match?.pathname) &&
                         "bg-[#EDFAF1] text-[#016E20]"
                     )}
+                    disabled={!rest?.kycAllow}
                     component={Link}
                     to={to}
                     {...rest}

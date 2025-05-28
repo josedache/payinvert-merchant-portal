@@ -41,9 +41,6 @@ export const slice = createSlice({
           const token = payload?.token?.accessToken;
           state.authUser = {
             ...payload,
-            activeSubsidiary:
-              payload?.activeSubsidiary ??
-              payload?.subsidiaryDetails?.subsidiaries?.[0],
             token: token,
             expiresIn: String(dfns.addSeconds(new Date(), 3600)),
             isAuthenticated: !!token,
@@ -57,9 +54,6 @@ export const slice = createSlice({
           state.authUser = {
             ...state.authUser,
             ...payload,
-            // activeSubsidiary:
-            //   payload?.activeSubsidiary ??
-            //   payload?.subsidiaryDetails?.subsidiaries?.[0],
             token: token,
             expiresIn: String(dfns.addSeconds(new Date(), 3600)),
             isAuthenticated: !!token,

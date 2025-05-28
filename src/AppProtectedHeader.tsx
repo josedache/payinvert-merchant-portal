@@ -32,10 +32,15 @@ import { DASHBOARD, DASHBOARD_ONBOARDING } from "constants/urls";
 import firstCharToUpperCase from "utils/string/first-char-toUpperCase";
 import React from "react";
 import useToggle from "hooks/use-toggle";
+import { subsidiaryApi } from "apis/subsidiary";
 
 function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;
-  const [checked, setChecked] = React.useState(false);
+  const authUser = useAuthUser();
+
+  const [checked, setChecked] = React.useState(
+    authUser?.businessDetails?.status?.id === 200 || false
+  );
   const [openIncompleteKycDialog, toggleOpenIncompleteKycDialog] = useToggle();
   const [
     openCompliancePendingApprovalDialog,
@@ -46,17 +51,31 @@ function AppProtectedHeader(props: AppBarProps) {
   const { pathname } = location;
 
   const infoPopover = usePopover();
-  const authUser = useAuthUser();
   const { logout } = useLogout();
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
+  const getComplianceInfoQuery =
+    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isComplianceCompleted = Object.keys(
+      getComplianceInfoQuery?.data || {}
+    )?.every(
+      (key) => Number(getComplianceInfoQuery?.data?.[key]?.percentage) === 100
+    );
     const isChecked = event.target.checked;
+
+    if (isComplianceCompleted && isChecked) {
+      toggleOpenIncompleteKycDialog();
+      return;
+    }
+
     if (authUser?.businessDetails?.status?.id === 200 && isChecked) {
       toggleOpenCompliancePendingApprovalDialog();
       return;
     }
+
     if (isChecked) {
       toggleOpenIncompleteKycDialog();
       return;
@@ -124,6 +143,7 @@ function AppProtectedHeader(props: AppBarProps) {
 
             <Switch
               checked={checked}
+              disabled={true}
               onChange={handleChange}
               inputProps={{ "aria-label": "controlled" }}
             />

@@ -11,7 +11,12 @@ import * as yup from "yup";
 import { AuthSigninFormikValues } from "modules/auth/types/auth-signin.ts";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
-import { DASHBOARD, SIGNIN_2FA, SIGNUP } from "constants/urls.ts";
+import {
+  DASHBOARD,
+  DASHBOARD_ONBOARDING,
+  SIGNIN_2FA,
+  SIGNUP,
+} from "constants/urls.ts";
 import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
 import PasswordTextField from "components/PasswordTextField.tsx";
 import AuthPasswordResetRequest from "modules/auth/features/AuthPasswordResetRequest.tsx";
@@ -51,7 +56,9 @@ function AuthSignin() {
             variant: "success",
           });
 
-          return navigate(DASHBOARD);
+          return navigate(
+            !data?.businessDetails?.active ? DASHBOARD_ONBOARDING : DASHBOARD
+          );
         } else {
           enqueueSnackbar(
             data?.message || "An OTP is sent to your email address",
