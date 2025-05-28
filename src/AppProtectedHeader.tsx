@@ -37,6 +37,11 @@ function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;
   const [checked, setChecked] = React.useState(false);
   const [openIncompleteKycDialog, toggleOpenIncompleteKycDialog] = useToggle();
+  const [
+    openCompliancePendingApprovalDialog,
+    toggleOpenCompliancePendingApprovalDialog,
+  ] = useToggle();
+
   const location = useLocation();
   const { pathname } = location;
 
@@ -48,6 +53,10 @@ function AppProtectedHeader(props: AppBarProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
+    if (authUser?.businessDetails?.status?.id === 200 && isChecked) {
+      toggleOpenCompliancePendingApprovalDialog();
+      return;
+    }
     if (isChecked) {
       toggleOpenIncompleteKycDialog();
       return;
@@ -200,6 +209,11 @@ function AppProtectedHeader(props: AppBarProps) {
         onClose={toggleOpenIncompleteKycDialog}
         className="flex items-center justify-center"
       />
+      <CompliancePendingApprovalDialog
+        open={openCompliancePendingApprovalDialog}
+        onClose={toggleOpenCompliancePendingApprovalDialog}
+        className="flex items-center justify-center"
+      />
     </>
   );
 }
@@ -245,6 +259,56 @@ const IncompleteKycDialog = (props: DialogProps) => {
               }}
             >
               Go to KYC
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const CompliancePendingApprovalDialog = (props: DialogProps) => {
+  const navigate = useNavigate();
+  return (
+    <Dialog
+      sx={{
+        "& .MuiPaper-root": {
+          width: "100%",
+          maxWidth: "400px",
+        },
+      }}
+      {...props}
+      fullWidth
+      maxWidth="xl"
+      className="flex items-center justify-center"
+    >
+      <DialogContent>
+        <div className="">
+          <Typography variant="h6" className="font-semibold">
+            Compliance Pending Approval
+          </Typography>
+          <Typography variant="body2" className="text-gray-500">
+            Your account is currently under review by our compliance team.
+            Please wait for approval before proceeding.
+          </Typography>
+
+          <div className="flex justify-end">
+            <Button
+              variant="contained"
+              className="mt-10"
+              endIcon={
+                <Iconify
+                  width={12}
+                  height={12}
+                  icon="material-symbols:arrow-forward-ios"
+                />
+              }
+              onClick={() => {
+                navigate(DASHBOARD);
+                props.onClose(null, "backdropClick");
+              }}
+            >
+              Back to dashboard
             </Button>
           </div>
         </div>

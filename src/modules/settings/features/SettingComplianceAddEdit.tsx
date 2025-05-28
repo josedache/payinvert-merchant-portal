@@ -1,8 +1,14 @@
-import { Button, Step, StepContent, StepLabel, Stepper } from "@mui/material";
+import {
+  Paper,
+  Skeleton,
+  Step,
+  StepContent,
+  StepLabel,
+  Stepper,
+} from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
-import { Icon } from "@iconify/react/dist/iconify.js";
 
 import StepperIcon from "components/StepperIcon";
 import useStepper from "hooks/use-stepper";
@@ -14,6 +20,11 @@ import SettingsComplianceAddEditKycDetails from "./SettingsComplianceAddEditKycD
 import SettingsComplianceAddEditDirectorsInfo from "./SettingsComplianceAddEditDirectorsInfo";
 import useToggle from "hooks/use-toggle";
 import clsx from "clsx";
+import { subsidiaryApi } from "apis/subsidiary";
+import LoadingContent from "components/LoadingContent";
+import { useEffect } from "react";
+import { DASHBOARD } from "constants/urls";
+import { useNavigate } from "react-router-dom";
 
 type SettingComplianceAddEditProps = {
   isInitialOnboarding?: boolean;
@@ -25,64 +36,156 @@ export default function SettingComplianceAddEdit(
   const { isInitialOnboarding } = props;
   const { enqueueSnackbar } = useSnackbar();
   const stepper = useStepper();
+  const navigate = useNavigate();
 
-  const [isEdit, toggleIsEdit] = useToggle();
+  const [isEdit] = useToggle();
+
+  const [updateComplianceProfileMutation] =
+    subsidiaryApi.useUpdateSubsidiaryComplianceProfileMutation();
+  const [updateComplianceBankMutation] =
+    subsidiaryApi.useUpdateSubsidiaryComplianceBankMutation();
+  const [updateComplianceDirectorMutation] =
+    subsidiaryApi.useUpdateSubsidiaryComplianceDirectorMutation();
+  const [updateComplianceKycDetailsMutation] =
+    subsidiaryApi.useUpdateSubsidiaryComplianceKycDetailsMutation();
+
+  const getComplianceInfoQuery =
+    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
+  const complianceInfo = getComplianceInfoQuery?.data;
 
   const getValidationSchemas = {
-    // [SettingsComplianceStep.PROFILE]: {
-    //   businessTypeId: yup.string().required("Business Type is required"),
-    //   businessName: yup.string().email().required("Business Name is required"),
-    //   countryId: yup.string().required("Country is required"),
-    //   description: yup.string().required("Description is required"),
-    //   industryId: yup.string().required("Industry is required"),
-    //   bvn: yup.string().required("BVN is required"),
-    // },
-    // [SettingsComplianceStep.BANK_DETAILS]: {
-    //   bankId: yup.string().required("Bank is required"),
-    //   bankName: yup.string().required("Bank Name is required"),
-    //   accountName: yup.string().required("Account Name is required"),
-    //   accountNumber: yup
-    //     .string()
-    //     .matches(/^[0-9]+$/, "Account Number must be a number")
-    //     .required("Account Number is required"),
-    // },
-    // [SettingsComplianceStep.DIRECTORS_INFO]: {
-    //   IdNumber: yup.string().required("Id Number is required"),
-    //   FullName: yup.string().required("Full Name is required"),
-    //   directorIdentity: yup.string().required("Identity is required"),
-    // },
-    // [SettingsComplianceStep.KYC_DETAILS]: {
-    //   KycIdentity: yup.string().required("KYC Identity is required"),
-    //   ProofOfAddress: yup.string().required("Proof of Address is required"),
-    // },
+    [SettingsComplianceStep.PROFILE]: {
+      businessTypeId: yup
+        .string()
+        .label("Business type")
+        .required("Business Type is required"),
+      businessName: yup
+        .string()
+        .label("Business Name")
+        .required("Business Name is required"),
+      countryId: yup.string().label("Country").required("Country is required"),
+      description: yup.string().required("Description is required"),
+      industryId: yup
+        .string()
+        .label("Industry")
+        .required("Industry is required"),
+      bvn: yup.string().required("BVN is required"),
+    },
+    [SettingsComplianceStep.BANK_DETAILS]: {
+      bankId: yup.string().label("Bank").required("Bank is required"),
+      bankName: yup
+        .string()
+        .label("Bank Name")
+        .required("Bank Name is required"),
+      accountName: yup.string().required("Account Name is required"),
+      accountNumber: yup
+        .string()
+        .label("Account Number")
+        .matches(/^[0-9]+$/, "Account Number must be a number")
+        .required("Account Number is required"),
+    },
+    [SettingsComplianceStep.DIRECTORS_INFO]: {
+      IdNumber: yup
+        .string()
+        .label("ID Number")
+        .required("Id Number is required"),
+      FullName: yup.string().required("Full Name is required"),
+      directorIdentity: yup.string().required("Identity is required"),
+    },
+    [SettingsComplianceStep.KYC_DETAILS]: {
+      KycIdentity: yup
+        .string()
+        .label("KYC Identity")
+        .required("KYC Identity is required"),
+      ProofOfAddress: yup
+        .string()
+        .label("Proof of Address")
+        .required("Proof of Address is required"),
+    },
   }[stepper.step];
 
   const formik = useFormik<SettingComplianceFormikValues>({
-    initialValues: {},
+    initialValues: {
+      businessTypeId:
+        complianceInfo?.profileCompliance?.businessType?.id || null,
+      countryId: complianceInfo?.profileCompliance?.country?.id || null,
+      description: complianceInfo?.profileCompliance?.description || null,
+      businessName: complianceInfo?.profileCompliance?.businessName || null,
+      bvn: complianceInfo?.profileCompliance?.bvn || "",
+      industryId: complianceInfo?.profileCompliance?.industry?.id || null,
+
+      bankId: null,
+      bankName: complianceInfo?.bankCompliance?.bankName || null,
+      accountName: complianceInfo?.bankCompliance?.accountName || null,
+      accountNumber: complianceInfo?.bankCompliance?.accountNumber || null,
+
+      IdNumber: complianceInfo?.directorCompliance?.idNumber || null,
+      FullName: complianceInfo?.directorCompliance?.fullName || null,
+      directorIdentity: complianceInfo?.directorCompliance?.identity || null,
+
+      KycIdentity:
+        complianceInfo?.kycDetailsCompliance?.meansOfIdentification || null,
+      ProofOfAddress:
+        complianceInfo?.kycDetailsCompliance?.proofOfAddress || null,
+    },
     validationSchema: yup.object({
       ...getValidationSchemas,
     }),
+    enableReinitialize: true,
     onSubmit: async (values) => {
       try {
         switch (stepper.step) {
           case SettingsComplianceStep.PROFILE: {
+            await updateComplianceProfileMutation({
+              body: {
+                businessTypeId: values?.businessTypeId,
+                countryId: values?.countryId,
+                description: values?.description,
+                businessName: values?.businessName,
+                bvn: values?.bvn,
+                industryId: values?.industryId,
+              },
+            }).unwrap();
             stepper.go(SettingsComplianceStep.BANK_DETAILS);
             break;
           }
           case SettingsComplianceStep.BANK_DETAILS: {
+            await updateComplianceBankMutation({
+              body: {
+                bankId: values?.bankId,
+                bankName: values?.bankName,
+                accountName: values?.accountName,
+                accountNumber: values?.accountNumber,
+              },
+            }).unwrap();
             stepper.next();
             break;
           }
           case SettingsComplianceStep.DIRECTORS_INFO: {
+            await updateComplianceDirectorMutation({
+              body: {
+                IdNumber: values?.IdNumber,
+                FullName: values?.FullName,
+                Identity: values?.directorIdentity,
+              },
+            }).unwrap();
             stepper.next();
             break;
           }
           case SettingsComplianceStep.KYC_DETAILS: {
-            stepper.next();
+            await updateComplianceKycDetailsMutation({
+              body: {
+                Identity: values?.KycIdentity,
+                ProofOfAddress: values?.ProofOfAddress,
+              },
+            }).unwrap();
+            navigate(DASHBOARD);
+            enqueueSnackbar("Compliance Submitted and pending approval", {
+              variant: "success",
+            });
             break;
           }
         }
-        console.error(values);
       } catch (error) {
         enqueueSnackbar(error?.message || error?.data?.message || "Failed", {
           variant: "error",
@@ -91,7 +194,10 @@ export default function SettingComplianceAddEdit(
     },
   });
 
-  const isPreview = !isInitialOnboarding && !isEdit;
+  const isPreview =
+    (!isInitialOnboarding && !isEdit) ||
+    complianceInfo?.[Object.keys(complianceInfo || {})[stepper.step]]
+      ?.compliancePercentage >= 100;
 
   const contentProps = {
     isInitialOnboarding,
@@ -119,6 +225,28 @@ export default function SettingComplianceAddEdit(
     },
   ];
 
+  useEffect(() => {
+    if (isInitialOnboarding) {
+      const isStepComplete = (step: number): boolean =>
+        Number(
+          complianceInfo?.[Object.keys(complianceInfo || {})[step]]
+            ?.compliancePercentage
+        ) >= 100;
+
+      const findNextIncompleteStep = (step: number): number =>
+        isStepComplete(step) ? findNextIncompleteStep(step + 1) : step;
+
+      const nextStep = findNextIncompleteStep(stepper.step);
+
+      if (nextStep >= steps.length) {
+        navigate(DASHBOARD);
+      } else {
+        stepper.go(nextStep);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [complianceInfo]);
+
   return (
     <div
       className={clsx(
@@ -132,9 +260,17 @@ export default function SettingComplianceAddEdit(
           orientation="vertical"
           className="px-4"
         >
-          {steps.map((step) => (
+          {steps.map((step, stepIndex) => (
             <Step key={step.label}>
-              <StepLabel StepIconComponent={StepperIcon}>
+              <StepLabel
+                onClick={() => {
+                  if (!isInitialOnboarding) {
+                    stepper.go(stepIndex);
+                  }
+                }}
+                className={clsx(!isInitialOnboarding && "cursor-pointer")}
+                StepIconComponent={StepperIcon}
+              >
                 {step.label}
               </StepLabel>
               <StepContent className="block md:hidden">
@@ -148,17 +284,36 @@ export default function SettingComplianceAddEdit(
       </div>
 
       <div className="w-full max-w-xl md:block hidden">
-        {steps[stepper.step].content}
+        <LoadingContent
+          loading={getComplianceInfoQuery.isLoading}
+          renderLoading={() => (
+            <Paper className="w-full max-w-xl p-6">
+              <div className="grid grid-cols-1 gap-4">
+                {Array(5)
+                  .fill(5)
+                  .map((i) => (
+                    <Skeleton
+                      variant="rounded"
+                      className="w-full h-[50px]"
+                      key={i}
+                    />
+                  ))}
+              </div>
+            </Paper>
+          )}
+        >
+          {steps[stepper.step].content}
+        </LoadingContent>
       </div>
 
       {!isInitialOnboarding && (
         <div className="flex md:block justify-end">
-          <Button
+          {/* <Button
             onClick={toggleIsEdit}
             startIcon={<Icon icon="ic:outline-edit" width="20" height="20" />}
           >
             Edit
-          </Button>
+          </Button> */}
         </div>
       )}
     </div>

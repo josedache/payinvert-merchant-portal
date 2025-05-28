@@ -1,7 +1,8 @@
-import { ApiRequest } from "types/api.ts";
-import { User } from "types/user.ts";
+import { ApiRequest, ApiResponse } from "types/api.ts";
+import { AuthUser, User } from "types/user.ts";
 import { Subsidiary } from "types/subsidiary.ts";
 import { Notification } from "types/notification.ts";
+import { Bank } from "./bank";
 
 export type SubsidiaryLoginApiRequest = ApiRequest<{
   email: string;
@@ -90,35 +91,141 @@ export type SubsidiaryMeApiRequest = ApiRequest;
 
 export type SubsidiaryMeApiResponse = SubsidiaryLoginApiResponse;
 
-export type UpdateSubsidiaryComplianceProfileApiRequest = {
+export type UpdateSubsidiaryComplianceProfileApiRequest = ApiRequest<{
   businessTypeId: number;
   countryId: number;
   description: string;
   businessName: string;
   bvn: string;
   industryId: number;
-};
+}>;
 export type UpdateSubsidiaryComplianceProfileApiResponse = { message: string };
 
-export type UpdateSubsidiaryComplianceBankApiRequest = {
+export type UpdateSubsidiaryComplianceBankApiRequest = ApiRequest<{
   bankId: string;
   bankName: string;
   accountName: string;
   accountNumber: string;
-};
+}>;
 export type UpdateSubsidiaryComplianceBankApiResponse = { message: string };
 
-export type UpdateSubsidiaryComplianceDirectorApiRequest = {
+export type UpdateSubsidiaryComplianceDirectorApiRequest = ApiRequest<{
   FullName: string;
   Identity: string;
   IdNumber: string;
-};
+}>;
 export type UpdateSubsidiaryComplianceDirectorApiResponse = { message: string };
 
-export type UpdateSubsidiaryComplianceKycDetailsApiRequest = {
+export type UpdateSubsidiaryComplianceKycDetailsApiRequest = ApiRequest<{
   Identity: string;
   ProofOfAddress: string;
-};
+}>;
 export type UpdateSubsidiaryComplianceKycDetailsApiResponse = {
   message: string;
 };
+
+export type GetSubsidiaryComplianceInfoApiResponse = {
+  profileCompliance: {
+    businessType: {
+      id: number;
+      name: string;
+    };
+    country: {
+      id: number;
+      name: string;
+    };
+    description: string;
+    businessName: string;
+    bvn: string;
+    industry: {
+      id: number;
+      name: string;
+    };
+    compliancePercentage: number;
+  };
+  bankCompliance: {
+    bankName: string | null;
+    accountName: string | null;
+    accountNumber: string | null;
+    compliancePercentage: number;
+  };
+  directorCompliance: {
+    idNumber: string | null;
+    fullName: string | null;
+    identity: string | null;
+    compliancePercentage: number;
+  };
+  kycDetailsCompliance: {
+    meansOfIdentification: string | null;
+    proofOfAddress: string | null;
+    compliancePercentage: number;
+  };
+};
+
+export type GetSubsidiaryBankApiResponse = { banks: Bank[] };
+
+export type GetSubsidiaryResolveBankApiResponse = ApiResponse<Bank>;
+export type GetSubsidiaryResolveBankApiRequest = ApiRequest<{
+  accountNumber: string;
+  bankCode: string;
+}>;
+
+export type GetSubsidiaryBusinessCategoryListApiResponse = ApiResponse<
+  {
+    name: string;
+    description: string | null;
+    isActive: boolean | null;
+    id: number;
+    dateCreated: string;
+    dateUpdated: string | null;
+    dateDeleted: string | null;
+    createdBy: number;
+    updatedBy: number | null;
+    deletedBy: number | null;
+  }[]
+>;
+
+export type GetSubsidiaryBusinessChartApiResponse = {
+  transactionCount: {
+    data: number;
+    percentage: number;
+  };
+  availableBalance: {
+    data: number;
+    percentage: number;
+  };
+  transactionVolume: {
+    data: number;
+    percentage: number;
+  };
+  transactionSettlement: {
+    data: number;
+    percentage: number;
+  };
+  ledgerBalance: {
+    data: number;
+    percentage: number;
+  };
+  chartData: Record<
+    string,
+    {
+      DEBIT: number;
+      CREDIT: number;
+    }
+  >;
+};
+export type GetSubsidiaryDropdownEnumsApiResponse = ApiResponse<{
+  name: string;
+  description: string;
+  value: number;
+}>;
+export type GetSubsidiaryDropdownApiResponse = {
+  id: number;
+  name: string;
+  position: number;
+  description: string;
+  active: boolean;
+  mandatory: boolean;
+}[];
+
+export type GetSubsidiaryDashboardUserDetailsApiResponse = AuthUser;

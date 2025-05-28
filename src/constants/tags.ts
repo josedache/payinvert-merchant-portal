@@ -4,3 +4,4 @@ export const CUSTOMER = "CUSTOMER";
 export const WALLET = "WALLET";
 export const TRANSACTION = "TRANSACTION";
 export const ORDER = "ORDER";
+export const COMPLIANCE = "COMPLIANCE";

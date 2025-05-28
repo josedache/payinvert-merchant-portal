@@ -26,14 +26,6 @@ export default function SettingsComplianceAddEditDirectorsInfo(
             required
           />
 
-          <TextField
-            {...getTextFieldProps(formik, "directorIdentity")}
-            label="Director's Id"
-            fullWidth
-            disabled={isPreview}
-            required
-          />
-
           <FileUploadInput
             label="Director's ID"
             onChange={(e) => {
@@ -41,6 +33,7 @@ export default function SettingsComplianceAddEditDirectorsInfo(
               formik.setFieldValue("directorIdentity", file);
             }}
             {...getTextFieldHelperTextAndError(formik, "directorIdentity")}
+            disabled={isPreview}
             required
             // slotProps={{
             //   input: {
@@ -67,6 +60,7 @@ export default function SettingsComplianceAddEditDirectorsInfo(
             size="large"
             className="mt-10"
             type="submit"
+            loading={formik.isSubmitting}
           >
             {isInitialOnboarding ? "Save and Continue" : "Save"}
           </Button>
