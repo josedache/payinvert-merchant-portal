@@ -146,12 +146,12 @@ function AppProtectedDrawer() {
                 to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
                 kycAllow: isActiveClient,
               },
-              {
-                icon: <CustomIcon.RolesPermissions />,
-                label: "Roles & Permissions",
-                to: urlsConstant.ROLES_AND_PERMISSION,
-                kycAllow: isActiveClient,
-              },
+              // {
+              //   icon: <CustomIcon.RolesPermissions />,
+              //   label: "Roles & Permissions",
+              //   to: urlsConstant.ROLES_AND_PERMISSION,
+              //   kycAllow: isActiveClient,
+              // },
               {
                 icon: <CustomIcon.UserSubsidiaries />,
                 label: "Users",

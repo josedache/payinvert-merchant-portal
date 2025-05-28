@@ -43,17 +43,10 @@ export default function SettingsComplianceAddEditBankDetails(
           </TextField>
 
           <TextField
-            label="Bank Name"
-            {...getTextFieldProps(formik, "bankName")}
-            fullWidth
-            disabled={isPreview}
-          />
-
-          <TextField
             {...getTextFieldProps(formik, "accountName")}
             label="Account Name"
             fullWidth
-            disabled={isPreview}
+            disabled
           />
         </div>
 

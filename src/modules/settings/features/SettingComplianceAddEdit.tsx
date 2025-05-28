@@ -23,7 +23,7 @@ import clsx from "clsx";
 import { subsidiaryApi } from "apis/subsidiary";
 import LoadingContent from "components/LoadingContent";
 import { useEffect } from "react";
-import { DASHBOARD } from "constants/urls";
+import { DASHBOARD_ONBOARDING } from "constants/urls";
 import { useNavigate } from "react-router-dom";
 
 type SettingComplianceAddEditProps = {
@@ -116,7 +116,8 @@ export default function SettingComplianceAddEdit(
 
       bankId: null,
       bankName: complianceInfo?.bankCompliance?.bankName || null,
-      accountName: complianceInfo?.bankCompliance?.accountName || null,
+      // accountName: complianceInfo?.bankCompliance?.accountName || null,
+      accountName: complianceInfo?.profileCompliance?.businessName || null,
       accountNumber: complianceInfo?.bankCompliance?.accountNumber || null,
 
       IdNumber: complianceInfo?.directorCompliance?.idNumber || null,
@@ -179,7 +180,7 @@ export default function SettingComplianceAddEdit(
                 ProofOfAddress: values?.ProofOfAddress,
               },
             }).unwrap();
-            navigate(DASHBOARD);
+            navigate(DASHBOARD_ONBOARDING);
             enqueueSnackbar("Compliance Submitted and pending approval", {
               variant: "success",
             });
@@ -239,7 +240,7 @@ export default function SettingComplianceAddEdit(
       const nextStep = findNextIncompleteStep(stepper.step);
 
       if (nextStep >= steps.length) {
-        navigate(DASHBOARD);
+        navigate(DASHBOARD_ONBOARDING);
       } else {
         stepper.go(nextStep);
       }
