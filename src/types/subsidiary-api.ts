@@ -121,6 +121,7 @@ export type GetSubsidiaryComplianceInfoApiResponse = {
     compliancePercentage: number;
   };
   bankCompliance: {
+    bankId: number | null;
     bankName: string | null;
     accountName: string | null;
     accountNumber: string | null;

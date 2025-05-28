@@ -107,27 +107,30 @@ export default function SettingComplianceAddEdit(
   const formik = useFormik<SettingComplianceFormikValues>({
     initialValues: {
       businessTypeId:
-        complianceInfo?.profileCompliance?.businessType?.id || null,
-      countryId: complianceInfo?.profileCompliance?.country?.id || null,
-      description: complianceInfo?.profileCompliance?.description || null,
-      businessName: complianceInfo?.profileCompliance?.businessName || null,
+        complianceInfo?.profileCompliance?.businessType?.id || ("" as never),
+      countryId:
+        complianceInfo?.profileCompliance?.country?.id || ("" as never),
+      description: complianceInfo?.profileCompliance?.description || "",
+      businessName: complianceInfo?.profileCompliance?.businessName || "",
       bvn: complianceInfo?.profileCompliance?.bvn || "",
-      industryId: complianceInfo?.profileCompliance?.industry?.id || null,
+      industryId:
+        complianceInfo?.profileCompliance?.industry?.id || ("" as never),
 
-      bankId: null,
-      bankName: complianceInfo?.bankCompliance?.bankName || null,
+      bankId:
+        (complianceInfo?.bankCompliance?.bankId as never) || ("" as never),
+      bankName: complianceInfo?.bankCompliance?.bankName || "",
       // accountName: complianceInfo?.bankCompliance?.accountName || null,
-      accountName: complianceInfo?.profileCompliance?.businessName || null,
-      accountNumber: complianceInfo?.bankCompliance?.accountNumber || null,
+      accountName: complianceInfo?.profileCompliance?.businessName || "", // TODO: revers back when bank enquiry is completed
+      accountNumber: complianceInfo?.bankCompliance?.accountNumber || "",
 
-      IdNumber: complianceInfo?.directorCompliance?.idNumber || null,
-      FullName: complianceInfo?.directorCompliance?.fullName || null,
-      directorIdentity: complianceInfo?.directorCompliance?.identity || null,
+      IdNumber: complianceInfo?.directorCompliance?.idNumber || "",
+      FullName: complianceInfo?.directorCompliance?.fullName || "",
+      directorIdentity: complianceInfo?.directorCompliance?.identity || "",
 
       KycIdentity:
-        complianceInfo?.kycDetailsCompliance?.meansOfIdentification || null,
+        complianceInfo?.kycDetailsCompliance?.meansOfIdentification || "",
       ProofOfAddress:
-        complianceInfo?.kycDetailsCompliance?.proofOfAddress || null,
+        complianceInfo?.kycDetailsCompliance?.proofOfAddress || "",
     },
     validationSchema: yup.object({
       ...getValidationSchemas,
