@@ -31,7 +31,6 @@ const Balance = () => {
         <Button
           component={Link}
           to={BALANCE_HISTORY}
-          disabled
           variant="soft"
           startIcon={<Icon icon="fluent:document-search-20-filled" />}
         >

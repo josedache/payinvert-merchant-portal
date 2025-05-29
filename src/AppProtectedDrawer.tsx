@@ -106,14 +106,14 @@ function AppProtectedDrawer() {
               {
                 icon: <CustomIcon.Settlements />,
                 label: "Settlements",
-                to: urlsConstant.ACCOUNT_SETTLEMENTS,
+                to: urlsConstant.SETTLEMENTS,
                 kycAllow: isActiveClient,
               },
               {
                 icon: <CustomIcon.PayoutAccount />,
                 label: "Payouts",
                 to: urlsConstant.ACCOUNT_PAYOUTS,
-                kycAllow: isActiveClient,
+                kycAllow: false,
               },
               {
                 icon: <CustomIcon.Balances />,
@@ -128,42 +128,42 @@ function AppProtectedDrawer() {
             to: urlsConstant.SETTINGS,
             kycAllow: true,
             links: [
-              {
-                icon: <CustomIcon.Profile />,
-                label: "Business",
-                to: urlsConstant.SETTINGS_BUSINESS,
-                kycAllow: isActiveClient,
-              },
+              // {
+              //   icon: <CustomIcon.Profile />,
+              //   label: "Business",
+              //   to: urlsConstant.SETTINGS_BUSINESS,
+              //   kycAllow: isActiveClient,
+              // },
               {
                 icon: <CustomIcon.Compliance />,
                 label: "Compliance Information",
                 to: urlsConstant.SETTINGS_COMPLIANCE_INFO,
                 kycAllow: true,
               },
-              {
-                icon: <CustomIcon.PayoutAccount />,
-                label: "Payout Accounts",
-                to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
-                kycAllow: isActiveClient,
-              },
+              // {
+              //   icon: <CustomIcon.PayoutAccount />,
+              //   label: "Payout Accounts",
+              //   to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
+              //   kycAllow: isActiveClient,
+              // },
               // {
               //   icon: <CustomIcon.RolesPermissions />,
               //   label: "Roles & Permissions",
               //   to: urlsConstant.ROLES_AND_PERMISSION,
               //   kycAllow: isActiveClient,
               // },
-              {
-                icon: <CustomIcon.UserSubsidiaries />,
-                label: "Users",
-                to: urlsConstant.SETTINGS_USERS,
-                kycAllow: isActiveClient,
-              },
-              {
-                icon: <CustomIcon.Preferences />,
-                label: "Preferences",
-                to: urlsConstant.SETTINGS_PREFERENCES,
-                kycAllow: isActiveClient,
-              },
+              // {
+              //   icon: <CustomIcon.UserSubsidiaries />,
+              //   label: "Users",
+              //   to: urlsConstant.SETTINGS_USERS,
+              //   kycAllow: isActiveClient,
+              // },
+              // {
+              //   icon: <CustomIcon.Preferences />,
+              //   label: "Preferences",
+              //   to: urlsConstant.SETTINGS_PREFERENCES,
+              //   kycAllow: isActiveClient,
+              // },
               {
                 icon: <CustomIcon.ApiWebhooks />,
                 label: "API Keys & Webhooks",

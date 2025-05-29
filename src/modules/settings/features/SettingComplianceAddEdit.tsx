@@ -223,10 +223,14 @@ export default function SettingComplianceAddEdit(
       label: "Director's Information",
       content: <SettingsComplianceAddEditDirectorsInfo {...contentProps} />,
     },
-    {
-      label: "KYC Details",
-      content: <SettingsComplianceAddEditKycDetails {...contentProps} />,
-    },
+    ...(isInitialOnboarding
+      ? [
+          {
+            label: "KYC Details",
+            content: <SettingsComplianceAddEditKycDetails {...contentProps} />,
+          },
+        ]
+      : []),
   ];
 
   useEffect(() => {
