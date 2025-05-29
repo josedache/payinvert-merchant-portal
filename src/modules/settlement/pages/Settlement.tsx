@@ -18,6 +18,7 @@ const Settlement = () => {
         params: {
           Page: pagination.pageIndex + 1,
           Limit: pagination.pageSize,
+          Type: "Credit",
         },
       }),
       [pagination.pageIndex, pagination.pageSize]
