@@ -14,10 +14,8 @@ import { subsidiaryApi } from "apis/subsidiary.ts";
 function AppProtected() {
   const { logout } = useLogout();
 
-  const subsidiaryMeQueryResult = subsidiaryApi.useGetSubsidiaryMeQuery(
-    undefined,
-    { skip: true }
-  );
+  const subsidiaryMeQueryResult =
+    subsidiaryApi.useGetSubsidiaryDashboardUserDetailsQuery();
 
   const authUser = useAuthUser();
 

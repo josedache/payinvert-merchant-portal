@@ -1,6 +1,8 @@
 import { baseApi } from "configs/store-query.ts";
 import { PAYMENT_LINK } from "constants/tags.ts";
 import {
+  ServiceBusinessSizesListApiRequest,
+  ServiceBusinessSizesListApiResponse,
   ServiceCountryListApiRequest,
   ServiceCountryListApiResponse,
   ServiceCurrencyListApiRequest,
@@ -23,6 +25,13 @@ export const serviceApi = baseApi.injectEndpoints({
       ServiceCurrencyListApiRequest
     >({
       query: () => `${BASE_URL}/currencies`,
+      providesTags: [PAYMENT_LINK],
+    }),
+    getBusinessSizes: builder.query<
+      ServiceBusinessSizesListApiResponse,
+      ServiceBusinessSizesListApiRequest
+    >({
+      query: () => `${BASE_URL}/business-sizes`,
       providesTags: [PAYMENT_LINK],
     }),
   }),

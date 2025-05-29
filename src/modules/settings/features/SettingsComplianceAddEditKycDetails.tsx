@@ -53,6 +53,7 @@ export default function SettingsComplianceAddEditKycDetails(
             size="large"
             className="mt-10"
             type="submit"
+            loading={formik.isSubmitting}
           >
             {isInitialOnboarding ? "Save and Continue" : "Save"}
           </Button>

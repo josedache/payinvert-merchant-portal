@@ -1,23 +1,41 @@
 import { BALANCE_HISTORY } from "constants/urls";
-import { Button, Chip, Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import { subsidiaryApi } from "apis/subsidiary";
+import currency from "currency.js";
+import AnalyticsChip from "components/AnalyticsChip";
 
 const Balance = () => {
+  const getDashboardChartQuery =
+    subsidiaryApi.useGetSubsidiaryDashboardChartQuery({
+      params: { ChartFilter: "Week" },
+    });
+
+  const amount = getDashboardChartQuery?.data?.availableBalance?.data || 0.0;
+  const trend =
+    getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
+
+  const getComplianceInfoQuery =
+    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
+  const complianceInfo = getComplianceInfoQuery?.data;
   return (
     <div className="space-y-8">
       <div className="flex justify-end gap-2 items-center">
-        <Button startIcon={<Icon icon="solar:wallet-money-bold-duotone" />}>
+        <Button
+          disabled
+          startIcon={<Icon icon="solar:wallet-money-bold-duotone" />}
+        >
           Top up
         </Button>
-        <Link to={BALANCE_HISTORY}>
-          <Button
-            variant="soft"
-            startIcon={<Icon icon="fluent:document-search-20-filled" />}
-          >
-            View balance history
-          </Button>
-        </Link>
+        <Button
+          component={Link}
+          to={BALANCE_HISTORY}
+          variant="soft"
+          startIcon={<Icon icon="fluent:document-search-20-filled" />}
+        >
+          View balance history
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -31,24 +49,21 @@ const Balance = () => {
               variant="h4"
               className="font-semibold flex items-center"
             >
-              <span className="text-base font-medium pr-1">NGN</span> 42,650{" "}
-              <span className="text-base font-medium pt-2">.00</span>
+              <Typography className="font-medium pr-1">NGN</Typography>{" "}
+              {currency(amount, { symbol: "" }).format()?.split(".")?.[0] ||
+                "0"}
+              <Typography
+                component="span"
+                variant="body1"
+                className="font-medium pt-2"
+              >
+                .
+                {currency(amount, { symbol: "" }).format()?.split(".")?.[1] ||
+                  "00"}
+              </Typography>
             </Typography>
             <div className="flex items-center gap-2 pt-5">
-              <Chip
-                icon={
-                  <Icon
-                    icon={
-                      "+6".startsWith("+")
-                        ? "ph:trend-up-fill"
-                        : "ph:trend-down-fill"
-                    }
-                    width={15}
-                  />
-                }
-                label={`${"+6"}%`}
-                color={"+6".startsWith("+") ? "success" : "error"}
-              />
+              <AnalyticsChip label={String(trend)} />
               <Typography className="text-gray-500">from last week</Typography>
             </div>
           </div>
@@ -73,12 +88,14 @@ const Balance = () => {
             <Icon icon="basil:bank-outline" width={24} />
           </div>
           <div className="space-y-2">
-            <Typography>Guaranty Trust Bank</Typography>
+            <Typography>
+              {complianceInfo?.bankCompliance?.bankName || "N/A"}
+            </Typography>
             <Typography
               variant="h4"
               className="font-semibold flex items-center"
             >
-              2201945601
+              {complianceInfo?.bankCompliance?.accountNumber || "N/A"}
             </Typography>
             <Typography>
               This account is linked to your Payinvert balance

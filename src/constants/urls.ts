@@ -51,3 +51,5 @@ export const ROLES_AND_PERMISSION = "/role-and-permission";
 
 export const CUSTOMER = "/customers";
 export const CUSTOMER_DETAIL = "/customers/:id";
+
+export const SETTLEMENTS = "/settlements";

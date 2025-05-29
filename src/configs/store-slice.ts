@@ -41,13 +41,10 @@ export const slice = createSlice({
           const token = payload?.token?.accessToken;
           state.authUser = {
             ...payload,
-            activeSubsidiary:
-              payload?.activeSubsidiary ??
-              payload?.subsidiaryDetails?.subsidiaries?.[0],
             token: token,
             expiresIn: String(dfns.addSeconds(new Date(), 3600)),
             isAuthenticated: !!token,
-          } as AuthUser;
+          } as unknown as AuthUser;
         }
       )
       .addMatcher(
@@ -57,59 +54,23 @@ export const slice = createSlice({
           state.authUser = {
             ...state.authUser,
             ...payload,
-            activeSubsidiary:
-              payload?.activeSubsidiary ??
-              payload?.subsidiaryDetails?.subsidiaries?.[0],
             token: token,
             expiresIn: String(dfns.addSeconds(new Date(), 3600)),
             isAuthenticated: !!token,
-          } as AuthUser;
+          } as unknown as AuthUser;
         }
       )
-      // .addMatcher(
-      //   userApi.endpoints.userRefreshToken.matchFulfilled,
-      //   (state, { payload }) => {
-      //     state.authUser.token = payload.data.token;
-      //     state.authUser.refreshToken = payload.data.refreshToken;
-      //     state.authUser.expiresIn = String(
-      //       addSeconds(new Date(), payload?.data?.login_expiry)
-      //     );
-      //   }
-      // )
-      // .addMatcher(
-      //   userApi.endpoints.sendUserResetPassword.matchFulfilled,
-      //   (state, { payload }) => {
-      //     state.authUser = { token: payload?.token };
-      //   }
-      // )
-      // .addMatcher(
-      //   userApi.endpoints.verifyUserResetPassword.matchFulfilled,
-      //   (state, { payload }) => {
-      //     state.authUser.token = payload?.data?.token;
-      //   }
-      // )
-      // .addMatcher(userApi.endpoints.resetPassword.matchFulfilled, (state) => {
-      //   state.authUser = null;
-      // })
       .addMatcher(
-        subsidiaryApi.endpoints.getSubsidiaryMe.matchFulfilled,
+        subsidiaryApi.endpoints.getSubsidiaryDashboardUserDetails
+          .matchFulfilled,
         (state, { payload }) => {
-          const token = payload?.token?.accessToken;
           state.authUser = {
             ...state.authUser,
             ...payload,
-            token: token,
+            token: state.authUser?.token ?? payload?.token?.accessToken,
           } as AuthUser;
         }
       ),
-  // .addMatcher(
-  //   userApi.endpoints.getUserSelfieFile.matchFulfilled,
-  //   (state, { payload }) => {
-  //     state.authUser.avatar = isBase64DataURL(payload.data)
-  //       ? payload.data
-  //       : `data:image/png;base64,${payload.data}`;
-  //   }
-  // ),
 });
 
 export const { setAuthUser, toggleIconSidebar } = slice.actions;

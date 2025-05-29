@@ -1,4 +1,4 @@
-import { Chip, MenuItem, Paper, TextField, Typography } from "@mui/material";
+import { MenuItem, Paper, TextField, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import {
   LineChart,
@@ -11,53 +11,41 @@ import {
 } from "recharts";
 import Analytics from "../features/Analytics";
 import AnalyticsWithLink from "../features/AnalyticsWithLink";
+import { subsidiaryApi } from "apis/subsidiary";
+import AnalyticsChip from "components/AnalyticsChip";
+import { useState } from "react";
+import { format } from "date-fns";
+import { Settlements } from "assets/icons";
 
-const data = [
+const chartFilterOptions = [
   {
-    name: "Mar 01",
-    outflow: 4000,
-    inflow: 2400,
-    amt: 2400,
+    value: "Week",
+    label: "This Week",
   },
   {
-    name: "Mar 02",
-    outflow: 3000,
-    inflow: 1398,
-    amt: 2210,
+    value: "Month",
+    label: "This Month",
   },
   {
-    name: "Mar 03",
-    outflow: 2000,
-    inflow: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Mar 04",
-    outflow: 2780,
-    inflow: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Mar 05",
-    outflow: 1890,
-    inflow: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Mar 06",
-    outflow: 2390,
-    inflow: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Mar 07",
-    outflow: 3490,
-    inflow: 4300,
-    amt: 2100,
+    value: "Year",
+    label: "This Year",
   },
 ];
 
 function Dashboard() {
+  const [chartFilter, setChartFilter] = useState("Week");
+  const getDashboardChartQuery =
+    subsidiaryApi.useGetSubsidiaryDashboardChartQuery({
+      params: { ChartFilter: chartFilter as any },
+    });
+  const chartData = getDashboardChartQuery?.data?.chartData || [];
+  const data = Object.keys(chartData).map((key) => ({
+    name: key,
+    inflow: chartData[key].CREDIT || 0,
+    outflow: chartData[key].DEBIT || 0,
+    amt: chartData[key].DEBIT + chartData[key].CREDIT || 0,
+  }));
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       <Paper className="p-4 flex gap-2">
@@ -65,46 +53,59 @@ function Dashboard() {
           <Icon icon="ph:timer-duotone" width={24} />
         </div>
         <div className="space-y-2">
-          <Typography>Transaction Count</Typography>
+          <Typography className="font-medium">Transaction Count</Typography>
           <Typography variant="h4" className="font-semibold">
-            175
+            {getDashboardChartQuery?.data?.transactionCount?.data || "0"}
           </Typography>
           <div className="flex items-center gap-2 pt-5">
-            <Chip
-              icon={<Icon icon="ph:trend-up-fill" width={15} />}
-              label="+1%"
-              color="success"
+            <AnalyticsChip
+              label={String(
+                getDashboardChartQuery?.data?.transactionCount?.percentage || 0
+              )}
             />
             <Typography className="text-gray-500">from last week</Typography>
           </div>
         </div>
       </Paper>
-      <Analytics
-        icon="material-symbols:speed-outline"
-        className="text-purple-500 bg-purple-50"
-        label="volume"
-        amount="960,000"
-        trend="-2"
-      />
-      <Analytics
-        icon="icon-park-twotone:round-caliper"
-        className="text-orange-500 bg-orange-50"
-        label="settlements"
-        amount="140,650"
-        trend="+6"
-      />
-      <AnalyticsWithLink
-        icon="si:money-duotone"
-        className="text-green-500 bg-green-50"
-        label="Available"
-        amount="42,650"
-        trend="-3"
-      />
+      {[
+        {
+          Component: Analytics,
+          icon: "material-symbols:speed-outline",
+          className: "text-purple-500 bg-purple-50",
+          label: "volume",
+          dataKey: "transactionVolume",
+        },
+        {
+          Component: Analytics,
+          icon: <Settlements />,
+          className: "text-orange-500 bg-orange-50",
+          label: "settlements",
+          dataKey: "transactionSettlement",
+        },
+        {
+          Component: AnalyticsWithLink,
+          icon: "si:money-duotone",
+          className: "text-green-500 bg-green-50",
+          label: "Available",
+          dataKey: "availableBalance",
+        },
+      ].map(({ Component, icon, className, label, dataKey }) => (
+        <Component
+          key={dataKey}
+          icon={icon}
+          className={className}
+          label={label}
+          amount={String(getDashboardChartQuery?.data?.[dataKey]?.data || "0")}
+          trend={String(
+            getDashboardChartQuery?.data?.[dataKey]?.percentage || 0
+          )}
+        />
+      ))}
       <Paper className="col-span-1 p-4 row-span-1 md:col-span-2 lg:row-span-2">
         <div className="flex justify-between gap-5 flex-col md:flex-row">
           <div className="space-y-1">
-            <Typography>Transactions</Typography>
-            <Typography className="text-gray-500">
+            <Typography className="font-medium">Transactions</Typography>
+            <Typography variant="body2" className="text-gray-500">
               Track inflow and outflow of money over time
             </Typography>
 
@@ -120,25 +121,15 @@ function Dashboard() {
             </div>
           </div>
           <div className="flex gap-2">
-            <TextField select label="This Week" size="small" className="w-28">
-              {[
-                {
-                  value: "all",
-                  label: "This Week",
-                },
-              ].map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField select label="Export" size="small" className="w-24">
-              {[
-                {
-                  value: "all",
-                  label: "Export",
-                },
-              ].map((option) => (
+            <TextField
+              value={chartFilter}
+              onChange={(e) => setChartFilter(e.target.value)}
+              select
+              disabled={getDashboardChartQuery.isFetching}
+              size="small"
+              className="w-28"
+            >
+              {chartFilterOptions?.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -159,7 +150,21 @@ function Dashboard() {
             }}
           >
             <CartesianGrid vertical={false} />
-            <XAxis dataKey="name" axisLine={false} tickLine={false} />
+            <XAxis
+              dataKey="name"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(unixTime) =>
+                format(
+                  unixTime,
+                  chartFilter === "Week"
+                    ? "EEE"
+                    : chartFilter === "Month"
+                      ? "MMM d"
+                      : "MMM"
+                )
+              }
+            />
             <YAxis axisLine={false} tickLine={false} />
             <Tooltip />
             <Line
@@ -181,8 +186,12 @@ function Dashboard() {
         icon="solar:wallet-money-bold-duotone"
         className="text-blue-500 bg-blue-50"
         label="Ledger"
-        amount="122,600"
-        trend="+6"
+        amount={String(
+          getDashboardChartQuery?.data?.ledgerBalance?.data || "0"
+        )}
+        trend={String(
+          getDashboardChartQuery?.data?.ledgerBalance?.percentage || 0
+        )}
       />
     </div>
   );

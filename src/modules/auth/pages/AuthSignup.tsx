@@ -95,8 +95,8 @@ function AuthSignup() {
           <div className="grid gap-4 p-6 -mx-6 max-h-[calc(100vh-350px)] overflow-y-auto">
             <AlphabetTextField
               fullWidth
-              label="First Name & Middle Name"
-              placeholder="Enter your Name"
+              label="First Name"
+              placeholder="Enter your First Name"
               {...getTextFieldProps(formik, "firstName")}
               required
             />

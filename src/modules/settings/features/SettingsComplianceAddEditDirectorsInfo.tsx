@@ -26,29 +26,24 @@ export default function SettingsComplianceAddEditDirectorsInfo(
             required
           />
 
-          <TextField
-            {...getTextFieldProps(formik, "directorIdentity")}
-            label="Director's Id"
-            fullWidth
-            disabled={isPreview}
-            required
-          />
-
-          <FileUploadInput
-            label="Director's ID"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              formik.setFieldValue("directorIdentity", file);
-            }}
-            {...getTextFieldHelperTextAndError(formik, "directorIdentity")}
-            required
-            // slotProps={{
-            //   input: {
-            //     accept:
-            //       ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
-            //   },
-            // }}
-          />
+          {!isPreview ? (
+            <FileUploadInput
+              label="Director's ID"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                formik.setFieldValue("directorIdentity", file);
+              }}
+              {...getTextFieldHelperTextAndError(formik, "directorIdentity")}
+              disabled={isPreview}
+              required
+              // slotProps={{
+              //   input: {
+              //     accept:
+              //       ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+              //   },
+              // }}
+            />
+          ) : null}
 
           <NumberTextField
             freeSolo
@@ -67,6 +62,7 @@ export default function SettingsComplianceAddEditDirectorsInfo(
             size="large"
             className="mt-10"
             type="submit"
+            loading={formik.isSubmitting}
           >
             {isInitialOnboarding ? "Save and Continue" : "Save"}
           </Button>

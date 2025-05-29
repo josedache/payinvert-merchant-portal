@@ -1,8 +1,9 @@
-import { Button, Paper, TextField } from "@mui/material";
+import { Button, MenuItem, Paper, TextField } from "@mui/material";
 import NumberTextField from "components/NumberTextField";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { SettingsComplianceContentProps } from "../types/SettingComplianceForm";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import { subsidiaryApi } from "apis/subsidiary";
 
 type SettingsComplianceAddEditBankDetailsProps =
   {} & SettingsComplianceContentProps;
@@ -11,6 +12,8 @@ export default function SettingsComplianceAddEditBankDetails(
   props: SettingsComplianceAddEditBankDetailsProps
 ) {
   const { isPreview, isInitialOnboarding, formik } = props;
+  const getBanksQuery = subsidiaryApi.useGetSubsidiaryBanksQuery();
+  const banks = getBanksQuery?.data?.banks || [];
 
   return (
     <Paper className="w-full max-w-xl p-6">
@@ -25,21 +28,25 @@ export default function SettingsComplianceAddEditBankDetails(
             disabled={isPreview}
           />
 
-          <NumberTextField
-            freeSolo
-            maskOptions={{ min: 0, max: 11 }}
-            {...getTextFieldProps(formik, "bankName")}
-            label="Bank Name"
+          <TextField
+            {...getTextFieldProps(formik, "bankId")}
+            label="Bank"
+            select
             fullWidth
             disabled={isPreview}
-          />
+          >
+            {banks?.map?.((bank) => (
+              <MenuItem key={bank.id} value={bank.id}>
+                {bank.name}
+              </MenuItem>
+            ))}
+          </TextField>
 
           <TextField
             {...getTextFieldProps(formik, "accountName")}
             label="Account Name"
             fullWidth
-            disabled={isPreview}
-            select
+            disabled
           />
         </div>
 
@@ -50,6 +57,7 @@ export default function SettingsComplianceAddEditBankDetails(
             size="large"
             className="mt-10"
             type="submit"
+            loading={formik.isSubmitting}
           >
             {isInitialOnboarding ? "Save and Continue" : "Save"}
           </Button>

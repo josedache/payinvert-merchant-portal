@@ -32,22 +32,50 @@ import { DASHBOARD, DASHBOARD_ONBOARDING } from "constants/urls";
 import firstCharToUpperCase from "utils/string/first-char-toUpperCase";
 import React from "react";
 import useToggle from "hooks/use-toggle";
+import { subsidiaryApi } from "apis/subsidiary";
 
 function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;
-  const [checked, setChecked] = React.useState(false);
+  const authUser = useAuthUser();
+
+  const [checked, setChecked] = React.useState(
+    authUser?.businessDetails?.status?.id === 200 || false
+  );
   const [openIncompleteKycDialog, toggleOpenIncompleteKycDialog] = useToggle();
+  const [
+    openCompliancePendingApprovalDialog,
+    toggleOpenCompliancePendingApprovalDialog,
+  ] = useToggle();
+
   const location = useLocation();
   const { pathname } = location;
 
   const infoPopover = usePopover();
-  const authUser = useAuthUser();
   const { logout } = useLogout();
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
+  const getComplianceInfoQuery =
+    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isComplianceCompleted = Object.keys(
+      getComplianceInfoQuery?.data || {}
+    )?.every(
+      (key) => Number(getComplianceInfoQuery?.data?.[key]?.percentage) === 100
+    );
     const isChecked = event.target.checked;
+
+    if (isComplianceCompleted && isChecked) {
+      toggleOpenIncompleteKycDialog();
+      return;
+    }
+
+    if (authUser?.businessDetails?.status?.id === 200 && isChecked) {
+      toggleOpenCompliancePendingApprovalDialog();
+      return;
+    }
+
     if (isChecked) {
       toggleOpenIncompleteKycDialog();
       return;
@@ -115,6 +143,7 @@ function AppProtectedHeader(props: AppBarProps) {
 
             <Switch
               checked={checked}
+              disabled={true}
               onChange={handleChange}
               inputProps={{ "aria-label": "controlled" }}
             />
@@ -200,6 +229,11 @@ function AppProtectedHeader(props: AppBarProps) {
         onClose={toggleOpenIncompleteKycDialog}
         className="flex items-center justify-center"
       />
+      <CompliancePendingApprovalDialog
+        open={openCompliancePendingApprovalDialog}
+        onClose={toggleOpenCompliancePendingApprovalDialog}
+        className="flex items-center justify-center"
+      />
     </>
   );
 }
@@ -245,6 +279,56 @@ const IncompleteKycDialog = (props: DialogProps) => {
               }}
             >
               Go to KYC
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const CompliancePendingApprovalDialog = (props: DialogProps) => {
+  const navigate = useNavigate();
+  return (
+    <Dialog
+      sx={{
+        "& .MuiPaper-root": {
+          width: "100%",
+          maxWidth: "400px",
+        },
+      }}
+      {...props}
+      fullWidth
+      maxWidth="xl"
+      className="flex items-center justify-center"
+    >
+      <DialogContent>
+        <div className="">
+          <Typography variant="h6" className="font-semibold">
+            Compliance Pending Approval
+          </Typography>
+          <Typography variant="body2" className="text-gray-500">
+            Your account is currently under review by our compliance team.
+            Please wait for approval before proceeding.
+          </Typography>
+
+          <div className="flex justify-end">
+            <Button
+              variant="contained"
+              className="mt-10"
+              endIcon={
+                <Iconify
+                  width={12}
+                  height={12}
+                  icon="material-symbols:arrow-forward-ios"
+                />
+              }
+              onClick={() => {
+                navigate(DASHBOARD);
+                props.onClose(null, "backdropClick");
+              }}
+            >
+              Back to dashboard
             </Button>
           </div>
         </div>

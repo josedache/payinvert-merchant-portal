@@ -1,8 +1,10 @@
-import { Button, Chip, Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { BALANCE } from "constants/urls";
+import AnalyticsChip from "components/AnalyticsChip";
+import currency from "currency.js";
 
 type TProps = {
   icon: string;
@@ -33,24 +35,20 @@ const AnalyticsWithLink = ({
         <div className="space-y-2">
           <Typography>{label} balance</Typography>
           <Typography variant="h4" className="font-semibold flex items-center">
-            <span className="text-base font-medium pr-1">NGN</span> {amount}{" "}
-            <span className="text-base font-medium pt-2">.00</span>
+            <Typography className="font-medium pr-1">NGN</Typography>{" "}
+            {currency(amount, { symbol: "" }).format()?.split(".")?.[0] || "0"}
+            <Typography
+              component="span"
+              variant="body1"
+              className="font-medium pt-2"
+            >
+              .
+              {currency(amount, { symbol: "" }).format()?.split(".")?.[1] ||
+                "00"}
+            </Typography>
           </Typography>
           <div className="flex items-center gap-2 pt-5">
-            <Chip
-              icon={
-                <Icon
-                  icon={
-                    trend.startsWith("+")
-                      ? "ph:trend-up-fill"
-                      : "ph:trend-down-fill"
-                  }
-                  width={15}
-                />
-              }
-              label={`${trend}%`}
-              color={trend.startsWith("+") ? "success" : "error"}
-            />
+            <AnalyticsChip label={trend} />
             <Typography className="text-gray-500">from last week</Typography>
           </div>
         </div>
