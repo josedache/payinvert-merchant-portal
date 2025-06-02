@@ -5,22 +5,38 @@ import TransactionTable, {
 } from "modules/transaction/features/TransactionTable.tsx";
 import usePagination from "hooks/use-pagination.ts";
 import { orderApi } from "apis/order.ts";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import useTable from "hooks/use-table.ts";
 import { PaymentLink } from "types/payment-link.ts";
+import { useSnackbar } from "notistack";
+import { TransactionFilterState } from "modules/transaction/features/TransactionFilter.tsx";
+import * as dfns from "date-fns";
 
 function PaymentLinkTransactionList(props: PaymentLinkTransactionListProps) {
   const { paymentLink } = props;
 
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [filter, setFilter] = useState(() => ({}) as TransactionFilterState);
+
   const [pagination, setPagination] = usePagination();
+
+  const [getOrdersQuery] = orderApi.useLazyGetOrdersQuery();
 
   const ordersQueryResult = orderApi.useGetOrdersQuery(
     useMemo(
       () => ({
         params: {
+          PaymentLinkId: paymentLink?.id,
           Page: pagination.pageIndex + 1,
           Limit: pagination.pageSize,
-          PaymentLinkId: paymentLink?.id,
+          Status: filter.Status || undefined,
+          FromDate: filter.FromDate
+            ? dfns.format(filter.FromDate, "yyyy-MM-dd")
+            : undefined,
+          ToDate: filter.ToDate
+            ? dfns.format(filter.ToDate, "yyyy-MM-dd")
+            : undefined,
         },
       }),
       [pagination.pageIndex, pagination.pageSize, paymentLink?.id]
@@ -38,10 +54,36 @@ function PaymentLinkTransactionList(props: PaymentLinkTransactionListProps) {
     onPaginationChange: setPagination,
   });
 
+  async function handleExport() {
+    try {
+      const data = await getOrdersQuery({
+        params: {
+          PaymentLinkId: paymentLink?.id,
+          Status: filter.Status || undefined,
+          FromDate: filter.FromDate || undefined,
+          ToDate: filter.ToDate || undefined,
+          isExport: true,
+        },
+      }).unwrap();
+      enqueueSnackbar(data?.message || "Transactions exported Successful", {
+        variant: "success",
+      });
+    } catch (error) {
+      enqueueSnackbar(error?.message || "Transaction Export Failed", {
+        variant: "error",
+      });
+    }
+  }
+
   return (
     <>
       <div className="space-y-6">
-        <TransactionsTableHeader total={orders?.page?.total} />
+        <TransactionsTableHeader
+          total={orders?.page?.total}
+          filter={filter}
+          onFilterApply={setFilter}
+          onExport={handleExport as any}
+        />
         <Paper>
           <TransactionTable
             instance={tableInstance}

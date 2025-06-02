@@ -30,7 +30,8 @@ function AuthSignup() {
       password: "",
       confirmpassword: "",
     },
-    validateOnMount: true,
+    validateOnMount: false,
+    validateOnBlur: false,
     validationSchema: yup.object({
       firstName: yup.string().label("First Name").trim().required(),
       lastName: yup.string().label("Last Name").trim().required(),
