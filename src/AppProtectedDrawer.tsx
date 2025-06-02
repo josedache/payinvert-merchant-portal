@@ -103,22 +103,22 @@ function AppProtectedDrawer() {
             to: urlsConstant.ACCOUNT,
             kycAllow: true,
             links: [
+              // {
+              //   icon: <CustomIcon.Settlements />,
+              //   label: "Settlements",
+              //   to: urlsConstant.SETTLEMENTS,
+              //   kycAllow: isActiveClient,
+              // },
+              // {
+              //   icon: <CustomIcon.PayoutAccount />,
+              //   label: "Payouts",
+              //   to: urlsConstant.ACCOUNT_PAYOUTS,
+              //   kycAllow: false,
+              // },
               {
-                icon: <CustomIcon.Settlements />,
-                label: "Settlements",
-                to: urlsConstant.SETTLEMENTS,
-                kycAllow: isActiveClient,
-              },
-              {
-                icon: <CustomIcon.PayoutAccount />,
-                label: "Payouts",
-                to: urlsConstant.ACCOUNT_PAYOUTS,
-                kycAllow: false,
-              },
-              {
-                icon: <CustomIcon.Balances />,
-                label: "Balances",
-                to: urlsConstant.BALANCE,
+                icon: <CustomIcon.Wallet />,
+                label: "Wallet",
+                to: urlsConstant.WALLET,
                 kycAllow: isActiveClient,
               },
             ],

@@ -33,6 +33,15 @@ export default function SettingsComplianceAddEditBankDetails(
             label="Bank"
             select
             fullWidth
+            onChange={(e) => {
+              formik.setFieldValue("bankId", e.target.value);
+              formik.setFieldValue(
+                "bankName",
+                banks?.find(
+                  (bank) => String(bank.id) === String(e.target.value)
+                )
+              );
+            }}
             disabled={isPreview}
           >
             {banks?.map?.((bank) => (

@@ -40,6 +40,8 @@ export const INVOICE_EDIT = "/invoice/:id/edit";
 export const BALANCE = "/balance";
 export const BALANCE_HISTORY = "/balance/history";
 
+export const WALLET = "/wallet";
+
 export const TRANSACTION = "/transaction";
 export const TRANSACTION_DETAIL = "/transaction/:id";
 
