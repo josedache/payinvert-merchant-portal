@@ -200,7 +200,7 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
             className="font-medium  text-text-secondary"
           >
             Enter the <b>6-digit</b> code sent to your email address
-            <b>{authUser?.user?.emailAddress}</b> to withdraw{" "}
+            <b> {authUser?.user?.emailAddress}</b> to withdraw{" "}
             <b>
               {currency(formik.values.amount || 0, {
                 symbol: "₦",
@@ -227,57 +227,59 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
                 },
               }}
             />
-            <Countdown date={countdownDate}>
-              {(countdown) => {
-                const isCodeSent =
-                  countdown.days ||
-                  countdown.minutes ||
-                  countdown.seconds ||
-                  countdown.seconds;
+            {!!formik === false && (
+              <Countdown date={countdownDate}>
+                {(countdown) => {
+                  const isCodeSent =
+                    countdown.days ||
+                    countdown.minutes ||
+                    countdown.seconds ||
+                    countdown.seconds;
 
-                return (
-                  <>
-                    <div className="flex items-center justify-center">
-                      <Typography className="text-center">
-                        Didn’t receive code?{" "}
-                        {isCodeSent ? (
-                          <Typography
-                            variant="body2"
-                            color="primary"
-                            className="text-center"
-                          >
-                            Resend OTP in{" "}
+                  return (
+                    <>
+                      <div className="flex items-center justify-center">
+                        <Typography className="text-center">
+                          Didn’t receive code?{" "}
+                          {isCodeSent ? (
                             <Typography
-                              component="span"
+                              variant="body2"
                               color="primary"
+                              className="text-center"
+                            >
+                              Resend OTP in{" "}
+                              <Typography
+                                component="span"
+                                color="primary"
+                                className=""
+                              >
+                                {countdown.minutes}:
+                                {countdown.seconds < 10
+                                  ? `0${countdown.seconds}`
+                                  : countdown.seconds}
+                              </Typography>
+                            </Typography>
+                          ) : (
+                            <ButtonBase
+                              disableRipple
+                              color="primary"
+                              // disabled={
+                              //   signupYieldUserMutationResult?.isLoading
+                              // }
+                              component={MuiLink}
+                              onClick={sendOtp}
                               className=""
                             >
-                              {countdown.minutes}:
-                              {countdown.seconds < 10
-                                ? `0${countdown.seconds}`
-                                : countdown.seconds}
-                            </Typography>
-                          </Typography>
-                        ) : (
-                          <ButtonBase
-                            disableRipple
-                            color="primary"
-                            // disabled={
-                            //   signupYieldUserMutationResult?.isLoading
-                            // }
-                            component={MuiLink}
-                            onClick={sendOtp}
-                            className=""
-                          >
-                            Resend OTP
-                          </ButtonBase>
-                        )}
-                      </Typography>
-                    </div>
-                  </>
-                );
-              }}
-            </Countdown>
+                              Resend OTP
+                            </ButtonBase>
+                          )}
+                        </Typography>
+                      </div>
+                    </>
+                  );
+                }}
+              </Countdown>
+            )}
           </div>
         }
         <div className="mt-10 grid grid-cols-2 gap-2">
