@@ -19,7 +19,7 @@ import { LoadingButton } from "@mui/lab";
 import OtpInput from "components/OtpInput";
 import NumberInput from "components/NumberInput";
 import { generatePath, useNavigate } from "react-router-dom";
-import { TRANSACTION_DETAIL } from "constants/urls.ts";
+import { TRANSACTION } from "constants/urls.ts";
 import CurrencyTextField from "components/CurrencyTextField";
 import { Check } from "assets/icons";
 import { subsidiaryApi } from "apis/subsidiary";
@@ -104,9 +104,10 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
           }
           case 2: {
             navigate(
-              generatePath(TRANSACTION_DETAIL, {
-                id: String(initiatePayoutMutationResult?.data?.data?.id),
-              })
+              //   generatePath(TRANSACTION_DETAIL, {
+              //     id: String(initiatePayoutMutationResult?.data?.data?.id),
+              //   })
+              generatePath(TRANSACTION)
             );
             break;
           }
