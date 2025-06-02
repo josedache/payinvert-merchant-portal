@@ -209,75 +209,77 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
             to your bank account.
           </Typography>
         </div>
-        <div className="grid gap-4 my-4">
-          <OtpInput
-            value={formik.values.otp}
-            onChange={(otp) => {
-              formik.setFieldValue("otp", otp);
-            }}
-            numInputs={6}
-            shouldAutoFocus
-            inputType="password"
-            slot={{ input: NumberInput }}
-            slotProps={{
-              input: {
-                style: { opacity: formik.isSubmitting ? 0.5 : 1 },
-                disabled: formik.isSubmitting,
-              },
-            }}
-          />
-          <Countdown date={countdownDate}>
-            {(countdown) => {
-              const isCodeSent =
-                countdown.days ||
-                countdown.minutes ||
-                countdown.seconds ||
-                countdown.seconds;
+        {
+          <div className="grid gap-4 my-4">
+            <OtpInput
+              value={formik.values.otp}
+              onChange={(otp) => {
+                formik.setFieldValue("otp", otp);
+              }}
+              numInputs={6}
+              shouldAutoFocus
+              inputType="password"
+              slot={{ input: NumberInput }}
+              slotProps={{
+                input: {
+                  style: { opacity: formik.isSubmitting ? 0.5 : 1 },
+                  disabled: formik.isSubmitting,
+                },
+              }}
+            />
+            <Countdown date={countdownDate}>
+              {(countdown) => {
+                const isCodeSent =
+                  countdown.days ||
+                  countdown.minutes ||
+                  countdown.seconds ||
+                  countdown.seconds;
 
-              return (
-                <>
-                  <div className="flex items-center justify-center">
-                    <Typography className="text-center">
-                      Didn’t receive code?{" "}
-                      {isCodeSent ? (
-                        <Typography
-                          variant="body2"
-                          color="primary"
-                          className="text-center"
-                        >
-                          Resend OTP in{" "}
+                return (
+                  <>
+                    <div className="flex items-center justify-center">
+                      <Typography className="text-center">
+                        Didn’t receive code?{" "}
+                        {isCodeSent ? (
                           <Typography
-                            component="span"
+                            variant="body2"
                             color="primary"
+                            className="text-center"
+                          >
+                            Resend OTP in{" "}
+                            <Typography
+                              component="span"
+                              color="primary"
+                              className=""
+                            >
+                              {countdown.minutes}:
+                              {countdown.seconds < 10
+                                ? `0${countdown.seconds}`
+                                : countdown.seconds}
+                            </Typography>
+                          </Typography>
+                        ) : (
+                          <ButtonBase
+                            disableRipple
+                            color="primary"
+                            // disabled={
+                            //   signupYieldUserMutationResult?.isLoading
+                            // }
+                            component={MuiLink}
+                            onClick={sendOtp}
                             className=""
                           >
-                            {countdown.minutes}:
-                            {countdown.seconds < 10
-                              ? `0${countdown.seconds}`
-                              : countdown.seconds}
-                          </Typography>
-                        </Typography>
-                      ) : (
-                        <ButtonBase
-                          disableRipple
-                          color="primary"
-                          // disabled={
-                          //   signupYieldUserMutationResult?.isLoading
-                          // }
-                          component={MuiLink}
-                          onClick={sendOtp}
-                          className=""
-                        >
-                          Resend OTP
-                        </ButtonBase>
-                      )}
-                    </Typography>
-                  </div>
-                </>
-              );
-            }}
-          </Countdown>
-        </div>
+                            Resend OTP
+                          </ButtonBase>
+                        )}
+                      </Typography>
+                    </div>
+                  </>
+                );
+              }}
+            </Countdown>
+          </div>
+        }
         <div className="mt-10 grid grid-cols-2 gap-2">
           <Button
             onClick={onClose}
@@ -316,7 +318,9 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
                 symbol: "₦",
               }).format()}
             </b>{" "}
-            to your bank account <b>user account number</b> was successful.
+            to your bank account{" "}
+            <b>{complianceInfo?.bankCompliance?.accountNumber || "N/A"}</b> was
+            successful.
           </Typography>
         </div>
 
