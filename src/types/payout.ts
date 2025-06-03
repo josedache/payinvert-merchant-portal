@@ -20,4 +20,4 @@ export type verifyNewPayoutRequest = ApiRequest<{
   otp: string;
   reference: string;
 }>;
-export type verifyNewPayoutResponse = ApiResponse<void>;
+export type verifyNewPayoutResponse = ApiResponse<number>;

@@ -10,25 +10,29 @@ import {
 import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
 import usePagination from "hooks/use-pagination.ts";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { walletApi } from "apis/wallet.ts";
 import { Wallet } from "types/wallet.ts";
 import { ColumnDef } from "@tanstack/react-table";
 import * as dfns from "date-fns";
 import CurrencyTypography from "components/CurrencyTypography.tsx";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const WalletHistory = () => {
   const [pagination, setPagination] = usePagination();
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const walletTransactionsQueryResult = walletApi.useGetWalletTransactionsQuery(
     useMemo(
       () => ({
         params: {
+          ...(startDate && endDate ? { StartDate: startDate, endDate } : {}),
           Page: pagination.pageIndex + 1,
-          Limit: pagination.pageSize,
+          Limit: 10,
         },
       }),
-      [pagination.pageIndex, pagination.pageSize]
+      [pagination.pageIndex, startDate, endDate]
     )
   );
 
@@ -48,18 +52,39 @@ const WalletHistory = () => {
       <div className="flex justify-between items-center gap-4">
         <div />{" "}
         <div className="flex gap-2 items-center">
-          <TextField select size="small" label="Filter" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          <div className="flex items-center gap-1">
+            <DatePicker
+              value={startDate} // Initial date range (optional)
+              onChange={(value) => {
+                setStartDate(value);
+              }}
+              format="dd/MM/yyyy" // Date format (default is "MM/dd/yyyy")
+              slotProps={{
+                textField: { size: "small" },
+              }}
+              disableFuture
+              slots={{
+                openPickerIcon: () => <Icon icon="solar:calendar-broken" />,
+              }}
+              className="max-w-[150px]"
+            />
+            -
+            <DatePicker
+              value={endDate}
+              onChange={(value) => {
+                setEndDate(value);
+              }}
+              format="dd/MM/yyyy"
+              disableFuture
+              slotProps={{
+                textField: { size: "small" },
+              }}
+              slots={{
+                openPickerIcon: () => <Icon icon="solar:calendar-broken" />,
+              }}
+              className="max-w-[150px]"
+            />
+          </div>
           <TextField select size="small" label="Export" className="w-24">
             {[
               {
