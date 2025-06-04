@@ -118,12 +118,9 @@ export default function SettingComplianceAddEdit(
 
       bankId:
         (complianceInfo?.bankCompliance?.bankId as never) || ("" as never),
-      bankName: complianceInfo?.bankCompliance?.bankName || "", // TODO: revers back when bank enquiry is completed
+      bankName: complianceInfo?.bankCompliance?.bankName || "bank name", // TODO: revers back when bank enquiry is completed
       // accountName: complianceInfo?.bankCompliance?.accountName || null,
-      accountName:
-        complianceInfo?.bankCompliance?.accountName ||
-        complianceInfo?.profileCompliance?.businessName ||
-        "", // TODO: revers back when bank enquiry is completed
+      accountName: complianceInfo?.profileCompliance?.businessName || "", // TODO: revers back when bank enquiry is completed
       accountNumber: complianceInfo?.bankCompliance?.accountNumber || "",
 
       IdNumber: complianceInfo?.directorCompliance?.idNumber || "",
