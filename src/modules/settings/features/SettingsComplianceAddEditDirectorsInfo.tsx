@@ -20,7 +20,7 @@ export default function SettingsComplianceAddEditDirectorsInfo(
         <div className="grid grid-cols-1 gap-4">
           <TextField
             {...getTextFieldProps(formik, "FullName")}
-            label="Director's full"
+            label="Director's fullname"
             fullWidth
             disabled={isPreview}
             required
