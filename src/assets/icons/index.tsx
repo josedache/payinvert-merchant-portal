@@ -16,3 +16,6 @@ export { default as Payouts } from "assets/icons/payouts.svg?react";
 export { default as Settlements } from "assets/icons/settlements.svg?react";
 export { default as VirtualWallets } from "assets/icons/virtual-wallets.svg?react";
 export { default as Rider } from "assets/icons/rider.svg?react";
+export { default as Wallet } from "assets/icons/wallet.svg?react";
+export { default as MakePayout } from "assets/icons/make-payout.svg?react";
+export { default as Check } from "assets/icons/check.svg?react";

@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { SettingsComplianceContentProps } from "../types/SettingComplianceForm";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
 import { subsidiaryApi } from "apis/subsidiary";
+import { useEffect } from "react";
 
 type SettingsComplianceAddEditBankDetailsProps =
   {} & SettingsComplianceContentProps;
@@ -14,6 +15,14 @@ export default function SettingsComplianceAddEditBankDetails(
   const { isPreview, isInitialOnboarding, formik } = props;
   const getBanksQuery = subsidiaryApi.useGetSubsidiaryBanksQuery();
   const banks = getBanksQuery?.data?.banks || [];
+
+  useEffect(() => {
+    formik.setFieldValue(
+      "bankName",
+      banks?.find((bank) => Number(bank.id) === Number(formik.values.bankId))
+        ?.name || ""
+    );
+  }, [formik.values.bankId]);
 
   return (
     <Paper className="w-full max-w-xl p-6">
@@ -33,6 +42,9 @@ export default function SettingsComplianceAddEditBankDetails(
             label="Bank"
             select
             fullWidth
+            onChange={(e) => {
+              formik.setFieldValue("bankId", e.target.value);
+            }}
             disabled={isPreview}
           >
             {banks?.map?.((bank) => (
@@ -42,12 +54,12 @@ export default function SettingsComplianceAddEditBankDetails(
             ))}
           </TextField>
 
-          <TextField
+          {/* <TextField
             {...getTextFieldProps(formik, "accountName")}
             label="Account Name"
             fullWidth
             disabled
-          />
+          /> */}
         </div>
 
         {!isPreview ? (

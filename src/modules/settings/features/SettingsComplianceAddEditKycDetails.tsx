@@ -17,7 +17,7 @@ export default function SettingsComplianceAddEditKycDetails(
       <form onSubmit={formik.handleSubmit}>
         <div className="grid grid-cols-1 gap-4">
           <FileUploadInput
-            label="Means of identification"
+            label="CAC Registration Document"
             onChange={(e) => {
               const file = e.target.files[0];
               formik.setFieldValue("KycIdentity", file);
@@ -30,7 +30,7 @@ export default function SettingsComplianceAddEditKycDetails(
           />
 
           <FileUploadInput
-            label="Proof of address"
+            label="Proof of Address: (Valid Utility Bill)"
             onChange={(e) => {
               const file = e.target.files[0];
               formik.setFieldValue("ProofOfAddress", file);

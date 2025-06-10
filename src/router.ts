@@ -24,6 +24,7 @@ import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
 import ApiKeyAndWebhookRoutes from "modules/api-key-and-webhook/ApiKeyAndWebhookRoutes";
 import CustomerRoutes from "modules/customer/CustomerRoutes.tsx";
 import SettlementRoutes from "modules/settlement/SettlementRoutes";
+import WalletRoutes from "modules/wallet/WalletRoutes";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,11 @@ const router = createBrowserRouter([
                 path: urlConstants.SETTLEMENTS,
                 lazy: () => import("modules/settlement/Settlement"),
                 children: SettlementRoutes,
+              },
+              {
+                path: urlConstants.WALLET,
+                lazy: () => import("modules/wallet/Wallet"),
+                children: WalletRoutes,
               },
             ],
           },

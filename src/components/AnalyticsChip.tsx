@@ -6,7 +6,7 @@ type AnalyticsChipProps = {
 } & ChipProps;
 export default function AnalyticsChip(props: AnalyticsChipProps) {
   const { label, ...rest } = props;
-  const trendSymbol = Number(label) > 0 ? "+" : Number(label) === 0 ? "" : "-";
+  const trendSymbol = Number(label) > 0 ? "+" : Number(label) === 0 ? "" : "";
   const formattedLabel = `${trendSymbol}${label}%`;
   const color =
     Number(label) > 0 ? "success" : Number(label) === 0 ? "secondary" : "error";
