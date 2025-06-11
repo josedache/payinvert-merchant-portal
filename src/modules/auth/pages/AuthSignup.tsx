@@ -42,7 +42,12 @@ function AuthSignup() {
         .trim()
         .length(11)
         .required(),
-      businessName: yup.string().label("Business Name").trim().required(),
+      businessName: yup
+        .string()
+        .label("Business Name")
+        .trim()
+        .max(500, "Business Name must be less than 500 characters")
+        .required(),
       password: yup
         .string()
         .label("Password")

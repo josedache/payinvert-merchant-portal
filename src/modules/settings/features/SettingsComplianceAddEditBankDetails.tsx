@@ -22,6 +22,7 @@ export default function SettingsComplianceAddEditBankDetails(
       banks?.find((bank) => Number(bank.id) === Number(formik.values.bankId))
         ?.name || ""
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formik.values.bankId]);
 
   return (

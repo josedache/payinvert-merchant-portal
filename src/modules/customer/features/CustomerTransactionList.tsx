@@ -39,6 +39,7 @@ function CustomerTransactionList(props: CustomerTransactionListProps) {
             : undefined,
         },
       }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [pagination.pageIndex, pagination.pageSize, customer.id]
     )
   );
