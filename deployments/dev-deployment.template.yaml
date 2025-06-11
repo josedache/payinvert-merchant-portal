@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $projectName
+  labels:
+    app: $projectName
+spec:
+  replicas: $replicaNumber
+  selector:
+    matchLabels:
+      app: $projectName
+  template:
+    metadata:
+      labels:
+        app: $projectName
+    spec:
+      containers:
+        - name: $projectName
+          image: $registry/$projectName:$imageTag
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $projectName
+spec:
+  selector:
+    app: $projectName
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
