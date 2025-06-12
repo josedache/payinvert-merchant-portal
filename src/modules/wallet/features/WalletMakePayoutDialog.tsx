@@ -336,7 +336,12 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
           >
             cancel
           </Button>
-          <LoadingButton loading={formik.isSubmitting} type="submit" fullWidth>
+          <LoadingButton
+            disabled
+            loading={formik.isSubmitting}
+            type="submit"
+            fullWidth
+          >
             View Receipt
           </LoadingButton>
         </div>
