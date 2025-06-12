@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 children: BusinessRoutes,
               },
               {
-                path: urlConstants.SETTINGS,
+                path: urlConstants.COMPLIANCE,
                 lazy: () => import("modules/settings/Settings"),
                 children: SettingsRoutes,
               },

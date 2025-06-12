@@ -153,7 +153,7 @@ function AuthSignup() {
               By clicking this "Create Account" Button, you agree to the{" "}
               <a
                 className="text-primary-main"
-                href="https://payinvert.com/terms-conditions"
+                href="https://payinvert.com/legal#privacy"
                 target="_blank"
               >
                 Terms
@@ -161,7 +161,7 @@ function AuthSignup() {
               of acceptable use,{" "}
               <a
                 className="text-primary-main"
-                href="https://payinvert.com/privacy-policy"
+                href="https://payinvert.com/legal#privacy"
                 target="_blank"
               >
                 Privacy Policy
@@ -169,7 +169,7 @@ function AuthSignup() {
               and{" "}
               <a
                 className="text-primary-main"
-                href="https://payinvert.com/cookies"
+                href="https://payinvert.com/legal#privacy"
                 target="_blank"
               >
                 Cookie Policy

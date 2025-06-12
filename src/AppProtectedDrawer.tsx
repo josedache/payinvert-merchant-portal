@@ -137,7 +137,7 @@ function AppProtectedDrawer() {
               {
                 icon: <CustomIcon.Compliance />,
                 label: "Compliance Information",
-                to: urlsConstant.SETTINGS_COMPLIANCE_INFO,
+                to: urlsConstant.COMPLIANCE,
                 kycAllow: true,
               },
               // {

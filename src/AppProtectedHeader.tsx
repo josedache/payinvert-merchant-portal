@@ -86,7 +86,7 @@ function AppProtectedHeader(props: AppBarProps) {
   const isDashboard = pathname === DASHBOARD;
 
   const allPaths = pathname.split("/").filter((item) => item !== "");
-  const highlightedPath = [...allPaths].splice(1); // Exclude the first item
+  const highlightedPath = [...allPaths]; // Exclude the first item
   const getPathLink = (item) =>
     allPaths
       .slice(0, allPaths?.findIndex((path) => path === item) + 1)

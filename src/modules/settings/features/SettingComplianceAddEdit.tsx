@@ -23,7 +23,7 @@ import clsx from "clsx";
 import { subsidiaryApi } from "apis/subsidiary";
 import LoadingContent from "components/LoadingContent";
 import { useEffect } from "react";
-import { SETTINGS_COMPLIANCE_INFO } from "constants/urls";
+import { COMPLIANCE } from "constants/urls";
 import { useNavigate } from "react-router-dom";
 
 type SettingComplianceAddEditProps = {
@@ -183,7 +183,7 @@ export default function SettingComplianceAddEdit(
                 ProofOfAddress: values?.ProofOfAddress,
               },
             }).unwrap();
-            navigate(SETTINGS_COMPLIANCE_INFO);
+            navigate(COMPLIANCE);
             enqueueSnackbar("Compliance Submitted and pending approval", {
               variant: "success",
             });
@@ -247,7 +247,7 @@ export default function SettingComplianceAddEdit(
       const nextStep = findNextIncompleteStep(stepper.step);
 
       if (nextStep >= steps.length) {
-        navigate(SETTINGS_COMPLIANCE_INFO);
+        navigate(COMPLIANCE);
       } else {
         stepper.go(nextStep);
       }
