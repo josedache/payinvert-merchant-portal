@@ -21,6 +21,8 @@ export default function FileUploadInput(props: FileUploadInputProps) {
   } = props;
   const { enqueueSnackbar } = useSnackbar();
 
+  const defaultFileType = "image/jpeg,image/png,application/pdf";
+
   const restrictImageSize = (event) => {
     if (event.target.files && event.target.files[0]) {
       if (event.target.files[0].size > maxSize) {
@@ -47,6 +49,10 @@ export default function FileUploadInput(props: FileUploadInputProps) {
       inputRef={fileRef}
       slotProps={{
         ...slotProps,
+        htmlInput: {
+          accept: defaultFileType,
+          ...slotProps?.htmlInput,
+        },
         input: {
           ...slotProps?.input,
           endAdornment: (

@@ -136,9 +136,10 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
             {...getTextFieldProps(formik, "amount")}
           />
           <div className="flex justify-between w-full mt-1">
-            <Typography variant="caption" color="success">
-              +N25(Processing fee)
-            </Typography>
+            <div />
+            {/* <Typography variant="caption"  color="success">
+              +N50(Processing fee)
+            </Typography> */}
             <Typography color="textSecondary" variant="caption">
               Wallet balance:{" "}
               <span className="font-semibold">

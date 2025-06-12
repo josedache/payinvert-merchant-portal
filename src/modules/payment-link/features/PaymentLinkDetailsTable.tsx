@@ -64,7 +64,7 @@ const columns: ColumnDef<PaymentLink, any>[] = [
     accessorKey: "dateCreated",
     cell: ({ getValue }) =>
       getValue() ? (
-        <Typography>
+        <Typography noWrap>
           {dfns.format(getValue(), "dd-MMM-yyyy hh:mm:ss aaa")}
         </Typography>
       ) : (
@@ -78,6 +78,7 @@ const columns: ColumnDef<PaymentLink, any>[] = [
   {
     header: "Link URL",
     accessorKey: "paymentLinkUrl",
+    cell: ({ getValue }) => <Typography noWrap>{getValue()}</Typography>,
   },
   {
     header: "Actions",

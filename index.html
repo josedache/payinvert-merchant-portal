@@ -13,6 +13,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>PG Merchant</title>
+
+    <script>
+      (function (d, t) {
+        var BASE_URL = "http://52.211.20.139:3000";
+        var g = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+        g.src = BASE_URL + "/packs/js/sdk.js";
+        g.defer = true;
+        g.async = true;
+        s.parentNode.insertBefore(g, s);
+        g.onload = function () {
+          window.chatwootSDK.run({
+            websiteToken: "MR67SsNXa6qyjqxdwQzB4BkT",
+            baseUrl: BASE_URL,
+          });
+        };
+      })(document, "script");
+    </script>
   </head>
   <body>
     <div id="root"></div>
