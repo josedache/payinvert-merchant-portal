@@ -1,12 +1,5 @@
 import useTable from "hooks/use-table";
-import {
-  Button,
-  Chip,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
 import usePagination from "hooks/use-pagination.ts";
@@ -17,6 +10,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import * as dfns from "date-fns";
 import CurrencyTypography from "components/CurrencyTypography.tsx";
 import { DatePicker } from "@mui/x-date-pickers";
+import { TransactionTypeEnum } from "modules/transaction/enums/TransactionTypeEnum";
+import TransactionDirectionChip from "modules/transaction/features/TransactionDirectionChip";
 
 const WalletHistory = () => {
   const [pagination, setPagination] = usePagination();
@@ -27,7 +22,12 @@ const WalletHistory = () => {
     useMemo(
       () => ({
         params: {
-          ...(startDate && endDate ? { StartDate: startDate, endDate } : {}),
+          ...(startDate && endDate
+            ? {
+                startDate: new Date(startDate).toISOString(),
+                endDate: new Date(endDate).toISOString(),
+              }
+            : {}),
           Page: pagination.pageIndex + 1,
           Limit: 10,
         },
@@ -36,7 +36,7 @@ const WalletHistory = () => {
     )
   );
 
-  const walletTransactions = walletTransactionsQueryResult.data;
+  const walletTransactions = walletTransactionsQueryResult.data?.items || [];
 
   const tableInstance = useTable({
     data: walletTransactions,
@@ -58,6 +58,7 @@ const WalletHistory = () => {
               onChange={(value) => {
                 setStartDate(value);
               }}
+              maxDate={endDate}
               format="dd/MM/yyyy" // Date format (default is "MM/dd/yyyy")
               slotProps={{
                 textField: { size: "small" },
@@ -74,6 +75,7 @@ const WalletHistory = () => {
               onChange={(value) => {
                 setEndDate(value);
               }}
+              minDate={startDate}
               format="dd/MM/yyyy"
               disableFuture
               slotProps={{
@@ -85,18 +87,6 @@ const WalletHistory = () => {
               className="max-w-[150px]"
             />
           </div>
-          <TextField select size="small" label="Export" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
         </div>
       </div>
 
@@ -139,12 +129,7 @@ const columns: ColumnDef<Wallet, any>[] = [
   {
     header: "Direction",
     accessorKey: "direction",
-    cell: ({ row }) => (
-      <Chip
-        label={row.original.debit ? "Debit" : "Credit"}
-        color={row.original.debit ? "error" : "success"}
-      />
-    ),
+    cell: ({ row }) => <TransactionDirectionChip transaction={row?.original} />,
   },
   {
     header: "Balance",
@@ -155,23 +140,31 @@ const columns: ColumnDef<Wallet, any>[] = [
   },
   {
     header: "Details",
-    accessorKey: "transactionType.value",
+    cell: ({ row }) => (
+      <Typography className="text-gray-500">
+        {(row?.original?.transactionType
+          ?.transactionTypeEnum as unknown as TransactionTypeEnum) ===
+        TransactionTypeEnum.AMOUNT_HOLD
+          ? "Processing"
+          : row?.original?.transactionType?.value}
+      </Typography>
+    ),
   },
-  {
-    header: "Actions",
-    id: "actions",
-    size: 80,
-    cell: () => <Action />,
-  },
+  // {
+  //   header: "Actions",
+  //   id: "actions",
+  //   size: 80,
+  //   cell: () => <Action />,
+  // },
 ];
 
-const Action = () => {
-  return (
-    <Button
-      variant="text"
-      size="small"
-      startIcon={<Icon icon="uil:ellipsis-v" />}
-      className="text-black"
-    />
-  );
-};
+// const Action = () => {
+//   return (
+//     <Button
+//       variant="text"
+//       size="small"
+//       startIcon={<Icon icon="uil:ellipsis-v" />}
+//       className="text-black"
+//     />
+//   );
+// };

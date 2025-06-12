@@ -32,7 +32,7 @@ const BalanceHistory = () => {
     )
   );
 
-  const walletTransactions = walletTransactionsQueryResult.data;
+  const walletTransactions = walletTransactionsQueryResult.data?.items || [];
 
   const tableInstance = useTable({
     data: walletTransactions,

@@ -36,12 +36,6 @@ export default function SettingsComplianceAddEditDirectorsInfo(
               {...getTextFieldHelperTextAndError(formik, "directorIdentity")}
               disabled={isPreview}
               required
-              // slotProps={{
-              //   input: {
-              //     accept:
-              //       ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
-              //   },
-              // }}
             />
           ) : null}
 

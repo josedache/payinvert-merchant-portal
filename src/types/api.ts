@@ -20,3 +20,16 @@ export type ApiResponse<T = any> = {
   size: number;
   pages: number;
 };
+
+export type ApiPaginationResponse<T = any> = {
+  items: T[];
+  page: {
+    total: number;
+    size: number;
+    totalPage: number;
+    currentPage: number;
+    previousPage: number;
+    nextPage: number;
+    todayDate: string;
+  };
+};

@@ -42,7 +42,12 @@ function AuthSignup() {
         .trim()
         .length(11)
         .required(),
-      businessName: yup.string().label("Business Name").trim().required(),
+      businessName: yup
+        .string()
+        .label("Business Name")
+        .trim()
+        .max(500, "Business Name must be less than 500 characters")
+        .required(),
       password: yup
         .string()
         .label("Password")
@@ -148,7 +153,7 @@ function AuthSignup() {
               By clicking this "Create Account" Button, you agree to the{" "}
               <a
                 className="text-primary-main"
-                href="https://payinvert.com/terms-conditions"
+                href="https://payinvert.com/legal#privacy"
                 target="_blank"
               >
                 Terms
@@ -156,7 +161,7 @@ function AuthSignup() {
               of acceptable use,{" "}
               <a
                 className="text-primary-main"
-                href="https://payinvert.com/privacy-policy"
+                href="https://payinvert.com/legal#privacy"
                 target="_blank"
               >
                 Privacy Policy
@@ -164,7 +169,7 @@ function AuthSignup() {
               and{" "}
               <a
                 className="text-primary-main"
-                href="https://payinvert.com/cookies"
+                href="https://payinvert.com/legal#privacy"
                 target="_blank"
               >
                 Cookie Policy

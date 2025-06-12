@@ -1,6 +1,7 @@
-import { ApiRequest } from "types/api.ts";
-import { Wallet } from "types/wallet.ts";
+import { ApiPaginationResponse, ApiRequest } from "types/api.ts";
 
 export type WalletTransactionListApiRequest = ApiRequest;
 
-export type WalletTransactionListApiResponse = Wallet[];
+export type WalletTransactionListApiResponse = ApiPaginationResponse<{
+  Wallet;
+}>;

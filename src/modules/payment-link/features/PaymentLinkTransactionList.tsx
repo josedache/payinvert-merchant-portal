@@ -39,6 +39,7 @@ function PaymentLinkTransactionList(props: PaymentLinkTransactionListProps) {
             : undefined,
         },
       }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [pagination.pageIndex, pagination.pageSize, paymentLink?.id]
     )
   );

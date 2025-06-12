@@ -37,6 +37,8 @@ function AuthSignin() {
     },
     validateOnMount: false,
     validateOnChange: false,
+    validateOnBlur: false,
+    enableReinitialize: true,
     validationSchema: yup.object({
       email: yup.string().label("Email").email().trim().required(),
       password: yup.string().label("Password").trim().required(),

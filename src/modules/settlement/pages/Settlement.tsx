@@ -25,7 +25,7 @@ const Settlement = () => {
     )
   );
 
-  const walletTransactions = walletTransactionsQueryResult.data;
+  const walletTransactions = walletTransactionsQueryResult.data?.items;
 
   const tableInstance = useTable({
     data: walletTransactions,
@@ -40,7 +40,7 @@ const Settlement = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
         <Typography variant="h6">
-          Settlement - {walletTransactionsQueryResult?.data?.length || 0}
+          Settlement - {walletTransactionsQueryResult?.data?.page?.total || 0}
         </Typography>
         <div className="flex gap-2 items-center">
           <TextField select size="small" label="Filter" className="w-24">

@@ -2,7 +2,6 @@ import { Typography } from "@mui/material";
 import clsx from "clsx";
 import "./EmptyUI.css";
 import { ComponentPropsWithoutRef } from "react";
-import { Icon as Iconify } from "@iconify/react";
 
 /**
  *
@@ -14,7 +13,7 @@ export function EmptyTableUI(props: EmptyTableUIProps) {
   return (
     <div className={clsx("EmptyUI", className)} {...rest}>
       <div className={clsx("EmptyUI__icon")}>
-        <Iconify icon="ph:empty-duotone" />
+        {/* <Iconify icon="ph:empty-duotone" /> */}
       </div>
       <Typography variant="h5" className={clsx("EmptyUI__text", "font-bold")}>
         {title || "No data"}
