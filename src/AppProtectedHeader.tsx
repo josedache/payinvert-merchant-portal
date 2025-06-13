@@ -26,10 +26,8 @@ import Logo from "components/Logo";
 import useSidebarIcon from "hooks/use-sidebar-icon";
 import useAuthUser from "hooks/use-auth-user";
 import useLogout from "hooks/use-logout";
-import PageHeader from "components/PageHeader";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DASHBOARD, DASHBOARD_ONBOARDING } from "constants/urls";
-import firstCharToUpperCase from "utils/string/first-char-toUpperCase";
 import React from "react";
 import useToggle from "hooks/use-toggle";
 import { subsidiaryApi } from "apis/subsidiary";
@@ -46,9 +44,6 @@ function AppProtectedHeader(props: AppBarProps) {
     openCompliancePendingApprovalDialog,
     toggleOpenCompliancePendingApprovalDialog,
   ] = useToggle();
-
-  const location = useLocation();
-  const { pathname } = location;
 
   const infoPopover = usePopover();
   const { logout } = useLogout();
@@ -83,28 +78,6 @@ function AppProtectedHeader(props: AppBarProps) {
     setChecked(isChecked);
   };
 
-  const isDashboard = pathname === DASHBOARD;
-
-  const allPaths = pathname.split("/").filter((item) => item !== "");
-  const highlightedPath = [...allPaths]; // Exclude the first item
-  const getPathLink = (item) =>
-    allPaths
-      .slice(0, allPaths?.findIndex((path) => path === item) + 1)
-      .join("/")
-      .replace(/-/g, "_");
-
-  const breadCrumbs = isDashboard
-    ? [
-        {
-          name: "Dashboard",
-          to: DASHBOARD,
-        },
-      ]
-    : highlightedPath?.map((item) => ({
-        name: firstCharToUpperCase(item?.split("-")).join(" "),
-        to: getPathLink(item),
-      }));
-
   return (
     <>
       {" "}
@@ -135,9 +108,7 @@ function AppProtectedHeader(props: AppBarProps) {
               </Icon>
             </IconButton>
 
-            <div>
-              <PageHeader breadcrumbs={breadCrumbs} />
-            </div>
+            <div></div>
 
             <div className="flex-1" />
 
