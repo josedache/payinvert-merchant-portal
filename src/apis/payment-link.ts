@@ -7,6 +7,8 @@ import {
   PaymentLinkListApiResponse,
   PaymentLinkTypesApiRequest,
   PaymentLinkTypesApiResponse,
+  UpdatePaymentLinkStatusApiRequest,
+  UpdatePaymentLinkStatusApiResponse,
 } from "types/payment-link-api.ts";
 
 export const BASE_URL = "/subsidiary/dashboard/payment/link";
@@ -40,6 +42,17 @@ export const paymentLinkApi = baseApi.injectEndpoints({
       query: (config) => ({
         url: `${BASE_URL}/create`,
         method: "post",
+        ...config,
+      }),
+      invalidatesTags: [PAYMENT_LINK],
+    }),
+    updatePaymentLinkStatus: builder.mutation<
+      UpdatePaymentLinkStatusApiResponse,
+      UpdatePaymentLinkStatusApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/update-status`,
+        method: "put",
         ...config,
       }),
       invalidatesTags: [PAYMENT_LINK],

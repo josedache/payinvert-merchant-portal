@@ -48,3 +48,14 @@ export type PaymentLinkTypesApiRequest = ApiRequest;
 export type PaymentLinkTypesApiResponse = ApiResponse & {
   paymentLinkTypes: PaymentLinkType[];
 };
+
+export type UpdatePaymentLinkStatusApiResponse = ApiResponse;
+
+export type UpdatePaymentLinkStatusApiRequest = ApiRequest<
+  void,
+  void,
+  {
+    Action: "Activate" | "Deactivate";
+    Reference: string;
+  }
+>;
