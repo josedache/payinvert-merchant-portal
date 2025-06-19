@@ -6,6 +6,8 @@ import { PAYMENT_LINK_DETAIL } from "constants/urls.ts";
 import { PaymentLink } from "types/payment-link.ts";
 import useClipboard from "hooks/use-clipboard.ts";
 import { useSnackbar } from "notistack";
+import { paymentLinkApi } from "apis/payment-link";
+import { LoadingButton } from "@mui/lab";
 
 const PaymentLinkTableAction = (props: PaymentLinkListActionProps) => {
   const { paymentLink } = props;
@@ -15,6 +17,31 @@ const PaymentLinkTableAction = (props: PaymentLinkListActionProps) => {
   const clipboard = useClipboard();
 
   const popover = usePopover();
+
+  const [
+    updatePaymentLinkStatusMutation,
+    updatePaymentLinkStatusMutationResult,
+  ] = paymentLinkApi.useUpdatePaymentLinkStatusMutation();
+
+  const handleUpdatePaymentLinkStatus = async (reference, status) => {
+    try {
+      await updatePaymentLinkStatusMutation({
+        params: {
+          Action: status,
+          Reference: reference,
+        },
+      }).unwrap();
+      enqueueSnackbar(`Status updated successfully`, {
+        variant: "success",
+      });
+      popover.togglePopover();
+    } catch (error) {
+      console.error("Failed to update payment link status:", error);
+      enqueueSnackbar(`Failed to ${status} payment link`, {
+        variant: "error",
+      });
+    }
+  };
 
   return (
     <div>
@@ -32,14 +59,21 @@ const PaymentLinkTableAction = (props: PaymentLinkListActionProps) => {
         slotProps={{ paper: { className: "w-48 bg-gray-50", elevation: 2 } }}
       >
         <div className="p-2 space-y-2 w-full">
-          <Button
+          <LoadingButton
             fullWidth
             variant="text"
+            onClick={() => {
+              handleUpdatePaymentLinkStatus(
+                paymentLink.reference,
+                paymentLink?.isActive ? "Deactivate" : "Activate"
+              );
+            }}
+            disabled={updatePaymentLinkStatusMutationResult?.isLoading}
             startIcon={<Iconify icon="ic:baseline-link-off" />}
             className="mb-2 text-black justify-start"
           >
-            Deactivate link
-          </Button>
+            {paymentLink?.isActive ? "Deactivate" : "Activate"} link
+          </LoadingButton>
           <Link
             to={generatePath(PAYMENT_LINK_DETAIL, {
               id: String(paymentLink.id),

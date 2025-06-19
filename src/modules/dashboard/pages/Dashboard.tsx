@@ -146,7 +146,7 @@ function Dashboard() {
           <LineChart
             data={data}
             margin={{
-              left: -20,
+              left: 20,
             }}
           >
             <CartesianGrid vertical={false} />
