@@ -11,13 +11,12 @@ COPY . .
 
 RUN yarn build
 
-
 FROM nginx:1.27.3-alpine
 
 # Set up SSL certificates
-COPY ./certs/crt.pem /etc/ssl/keys/crt.pem
-COPY ./certs/key.pem /etc/ssl/keys/key.pem
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built application from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
