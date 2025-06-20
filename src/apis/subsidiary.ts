@@ -1,5 +1,5 @@
 import { baseApi } from "configs/store-query";
-import { COMPLIANCE, USER } from "constants/tags.ts";
+import { COMPLIANCE, KEY, PAYMENT_LINK, USER } from "constants/tags.ts";
 import { ApiRequest } from "types/api";
 import {
   GetSubsidiaryBankApiResponse,
@@ -15,6 +15,12 @@ import {
   SubsidiaryBusinessEmailVerifyResendApiResponse,
   SubsidiaryCompleteForgotPasswordApiRequest,
   SubsidiaryCompleteForgotPasswordApiResponse,
+  SubsidiaryDashboardKeyCreateNewAuthApiRequest,
+  SubsidiaryDashboardKeyCreateNewAuthApiResponse,
+  SubsidiaryDashboardKeysNewApiRequest,
+  SubsidiaryDashboardKeysNewApiResponse,
+  SubsidiaryDashboardPaymentLinkStatusUpdateApiRequest,
+  SubsidiaryDashboardPaymentLinkStatusUpdateApiResponse,
   SubsidiaryForgotPasswordApiRequest,
   SubsidiaryForgotPasswordApiResponse,
   SubsidiaryLoginApiRequest,
@@ -245,6 +251,38 @@ export const subsidiaryApi = baseApi.injectEndpoints({
         url: `${BASE_URL}/dashboard/user-details`,
       }),
       providesTags: [{ type: USER }],
+    }),
+    getSubsidiaryDashboardKeysNew: builder.query<
+      SubsidiaryDashboardKeysNewApiResponse,
+      SubsidiaryDashboardKeysNewApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/dashboard/subsidiary/get-keys/new`,
+        ...config,
+      }),
+      providesTags: [KEY],
+    }),
+    createSubsidiaryDashboardKeyAuthNew: builder.mutation<
+      SubsidiaryDashboardKeyCreateNewAuthApiResponse,
+      SubsidiaryDashboardKeyCreateNewAuthApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/dashboard/auth/new-key/new`,
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [KEY],
+    }),
+    updateSubsidiaryDashboardPaymentLinkStatus: builder.mutation<
+      SubsidiaryDashboardPaymentLinkStatusUpdateApiResponse,
+      SubsidiaryDashboardPaymentLinkStatusUpdateApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/dashboard/payment/link/update-status`,
+        method: "put",
+        ...config,
+      }),
+      invalidatesTags: [{ type: PAYMENT_LINK }],
     }),
   }),
 });

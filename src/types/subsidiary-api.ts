@@ -207,3 +207,28 @@ export type GetSubsidiaryDropdownApiResponse = {
 }[];
 
 export type GetSubsidiaryDashboardUserDetailsApiResponse = AuthUser;
+
+export type SubsidiaryDashboardKeysNewApiRequest = ApiRequest;
+
+export type SubsidiaryDashboardKeysNewApiResponse = {
+  apiKeys: {
+    publicKey: string;
+    secretKey: string;
+    encryptionKey: string;
+  };
+};
+
+export type SubsidiaryDashboardKeyCreateNewAuthApiRequest = ApiRequest;
+
+export type SubsidiaryDashboardKeyCreateNewAuthApiResponse = ApiResponse;
+
+export type SubsidiaryDashboardPaymentLinkStatusUpdateApiRequest = ApiRequest<
+  void,
+  void,
+  {
+    Action: "Activate" | "Deactivate";
+    Reference: string;
+  }
+>;
+
+export type SubsidiaryDashboardPaymentLinkStatusUpdateApiResponse = ApiResponse;
