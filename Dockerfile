@@ -17,6 +17,7 @@ FROM nginx:1.27.3-alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY 403.html /usr/share/nginx/html/403.html
 
 # Copy built application from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
