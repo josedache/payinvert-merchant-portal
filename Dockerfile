@@ -11,7 +11,7 @@ COPY . .
 
 RUN yarn build
 
-FROM nginx:1.27.3-alpine
+FROM openresty/openresty:alpine
 
 # Set up SSL certificates
 RUN rm /etc/nginx/conf.d/default.conf
