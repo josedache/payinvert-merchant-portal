@@ -5,3 +5,4 @@ export const WALLET = "WALLET";
 export const TRANSACTION = "TRANSACTION";
 export const ORDER = "ORDER";
 export const COMPLIANCE = "COMPLIANCE";
+export const KEY = "KEY";

@@ -164,12 +164,12 @@ function AppProtectedDrawer() {
               //   to: urlsConstant.SETTINGS_PREFERENCES,
               //   kycAllow: isActiveClient,
               // },
-              // {
-              //   icon: <CustomIcon.ApiWebhooks />,
-              //   label: "API Keys & Webhooks",
-              //   to: urlsConstant.SETTINGS_API_WEBHOOKS,
-              //   kycAllow: false,
-              // },
+              {
+                icon: <CustomIcon.ApiWebhooks />,
+                label: "API Keys & Webhooks",
+                to: urlsConstant.SETTINGS_API_WEBHOOKS,
+                kycAllow: isActiveClient,
+              },
             ],
           },
         ],
@@ -365,7 +365,7 @@ function AppProtectedDrawerItem(props: any) {
                       "px-4 font-bold rounded-none py-3",
                       match?.pathnameBase === to &&
                         !toMatchExclude?.includes(match?.pathname) &&
-                        "bg-[#EDFAF1] text-[#016E20]"
+                        "bg-primary-lighter text-primary-main"
                     )}
                     disabled={!rest?.kycAllow}
                     component={Link}
@@ -375,10 +375,10 @@ function AppProtectedDrawerItem(props: any) {
                     {typeof icon === "string" ? (
                       <Iconify
                         icon={icon}
-                        className="text-2xl mr-5 text-[#19943C]"
+                        className="text-2xl mr-5 text-primary-main"
                       />
                     ) : (
-                      <Icon className="text-2xl mr-5 text-[#19943C]">
+                      <Icon className="text-2xl mr-5 text-primary-main">
                         {icon}
                       </Icon>
                     )}

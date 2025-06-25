@@ -18,27 +18,30 @@ const commonPaletteOptions: PaletteOptions = {
     // "200": "#FFD1C1",
     // "300": "#FFB398",
     // "400": "#FF8D65",
-    "500": "#19943C",
+    "500": "#578300",
     // "600": "#BF4D25",
     // "700": "#803419",
     // "800": "#4D1F0F",
     // "900": "#260F07",
+    lighter: "#F4F7EE",
+    main: "#578300",
     // darker: "#260F07",
     contrastText: "#FFFFFF",
   },
   secondary: {
-    "50": "#F3F1F5",
-    "100": "#E7E2EA",
-    "200": "#D0C5D6",
-    "300": "#B09FBA",
-    "400": "#886F97",
-    "500": "#613F75",
-    "600": "#492F58",
-    "700": "#31203B",
-    "800": "#1D1323",
-    "900": "#1D1323",
-    main: "#613F75",
-    darker: "#1D1323",
+    // "50": "#F3F1F5",
+    // "100": "#E7E2EA",
+    // "200": "#D0C5D6",
+    // "300": "#B09FBA",
+    // "400": "#886F97",
+    "500": "#00B4C7",
+    // "600": "#492F58",
+    // "700": "#31203B",
+    // "800": "#1D1323",
+    // "900": "#1D1323",
+    lighter: "#CCF0F4",
+    main: "#00B4C7",
+    // darker: "#1D1323",
     contrastText: "#FFFFFF",
   },
   neutral: {
@@ -589,7 +592,7 @@ export const theme = responsiveFontSizes(
       MuiTextField: {
         defaultProps: { variant: "outlined" },
         styleOverrides: {
-          root: ({ownerState}) => {
+          root: ({ ownerState }) => {
             return {
               // "& .MuiFilledInput-input": {
               //   borderRadius: 16,
