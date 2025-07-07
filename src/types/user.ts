@@ -19,6 +19,9 @@ export type AuthUser = {
   notifications: Notification[];
   token: {
     accessToken: string;
+    authSession: string;
+    userAgent: string;
+    refreshToken: string;
   };
   isAuthenticated?: boolean;
   expiresIn?: string;

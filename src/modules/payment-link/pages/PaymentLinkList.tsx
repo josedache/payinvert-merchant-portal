@@ -108,7 +108,7 @@ const columns: ColumnDef<PaymentLink, any>[] = [
     header: "Limit",
     accessorKey: "limit",
     cell: ({ getValue }) =>
-      getValue() === null ? (
+      !getValue() ? (
         <Typography>No Limit</Typography>
       ) : (
         <CurrencyTypography>{getValue()}</CurrencyTypography>
