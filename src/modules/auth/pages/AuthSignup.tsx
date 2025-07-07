@@ -54,7 +54,7 @@ function AuthSignup() {
         .trim()
         .min(8, "Your password must be at least 8 characters long")
         .max(25)
-        .matches(/^(?=.{8,})/, "Must Contain 8 Characters")
+        .matches(/^(?=.{12,})/, "Must Contain 12 Characters")
         .matches(/^(?=.*[a-z])/, "Must Contain One Lowercase")
         .matches(/^(?=.*[A-Z])/, "Must Contain One Uppercase")
         .matches(/^(?=.*\d)/, "Must contain a number")

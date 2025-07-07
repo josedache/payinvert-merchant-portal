@@ -50,6 +50,14 @@ export const BASE_URL = "/subsidiary";
 
 export const subsidiaryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    logoutSubsidiary: builder.mutation({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/logout/new",
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }],
+    }),
     loginSubsidiary: builder.mutation<
       SubsidiaryLoginApiResponse,
       SubsidiaryLoginApiRequest

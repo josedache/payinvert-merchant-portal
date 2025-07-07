@@ -8,6 +8,7 @@ import { API_BASE_URL } from "constants/env";
 import * as tags from "constants/tags";
 import store from "./store";
 import { logout } from "./store-actions";
+import { InitialState } from "configs/store-slice.ts";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
@@ -16,12 +17,13 @@ export const baseApi = createApi({
     prepareHeaders(headers, { getState }) {
       headers = new Headers(headers);
 
-      const { authUser } = (getState() as any)?.global ?? {};
+      const { authUser } = ((getState() as any)?.global ?? {}) as InitialState;
 
-      const token = authUser?.token;
+      const { accessToken, authSession } = authUser?.token ?? {};
 
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+      if (accessToken && authSession) {
+        headers.set("Authorization", `Bearer ${accessToken}`);
+        headers.set("Auth-Session", authSession);
       }
 
       headers.set("ngrok-skip-browser-warning", "true");

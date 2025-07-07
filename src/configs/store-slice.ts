@@ -4,7 +4,7 @@ import { AuthUser } from "../types/user.ts";
 import { subsidiaryApi } from "apis/subsidiary.ts";
 import * as dfns from "date-fns";
 
-type InitialState = {
+export type InitialState = {
   authUser: AuthUser;
   isSideNavigation: boolean;
   isIconSidebar: boolean;
@@ -38,13 +38,11 @@ export const slice = createSlice({
       .addMatcher(
         subsidiaryApi.endpoints.loginSubsidiary.matchFulfilled,
         (state, { payload }) => {
-          const token = payload?.token?.accessToken;
           state.authUser = {
             ...payload,
-            token: token,
             expiresIn: String(dfns.addSeconds(new Date(), 3600)),
-            isAuthenticated: !!token,
-          } as unknown as AuthUser;
+            isAuthenticated: !!payload?.token?.accessToken,
+          } as AuthUser;
         }
       )
       .addMatcher(
