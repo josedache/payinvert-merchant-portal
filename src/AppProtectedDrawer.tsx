@@ -197,8 +197,8 @@ function AppProtectedDrawer() {
           paper: {
             className: clsx(
               collapseToIcon ? "w-[80px]" : "w-[270px]",
-              "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all",
-              isLg ? "" : "bg-none"
+              "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all bg-white",
+              // isLg ? "" : "bg-none"
             ),
           },
         }}
@@ -206,8 +206,9 @@ function AppProtectedDrawer() {
       >
         <Toolbar className="flex items-center px-0 pt-4  justify-between ">
           {isLg && (
-            <Paper className="py-4 px-3 w-full flex justify-center">
+            <Paper elevation={0} className="py-4 px-3 w-full flex justify-center">
               <Logo className="w-full h-full max-w-[150px]" variant="2" />
+              {/*<Logo width={48} height={48} className="" variant="1" />*/}
             </Paper>
           )}
 
@@ -306,10 +307,11 @@ function AppProtectedDrawerItem(props: any) {
 
   return (
     <Paper
-      elevation={!!match || !isSubMenu ? 0 : 1}
+      // elevation={!!match || !isSubMenu ? 0 : 1}
+      elevation={0}
       className={clsx(
         "mb-6 p-0 mt-0 overflow-hidden",
-        !!match || isSubMenu ? "bg-white" : "bg-transparent"
+        // !!match || isSubMenu ? "bg-white" : "bg-transparent"
       )}
     >
       <ListItemButton

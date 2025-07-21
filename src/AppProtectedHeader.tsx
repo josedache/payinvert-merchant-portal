@@ -80,7 +80,6 @@ function AppProtectedHeader(props: AppBarProps) {
 
   return (
     <>
-      {" "}
       <AppBar
         elevation={0}
         position="sticky"
@@ -92,11 +91,12 @@ function AppProtectedHeader(props: AppBarProps) {
           sidebarIcon.isOpen
             ? "lg:w-[calc(100%-270px)] lg:ml-[270px]"
             : "lg:w-[calc(100%-80px)]  lg:ml-[80px]",
-          "w-full rounded-none bg-none pt-4"
+          // "w-full rounded-none bg-none pt-4"
+          "rounded-none"
         )}
         {...restProps}
       >
-        <Paper className="py-4">
+        <Paper elevation={0} className="py-4 rounded-none">
           <div className="md:flex hidden items-center justify-center gap-2 px-6 w-full">
             <IconButton
               className="lg:hidden"

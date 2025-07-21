@@ -16,10 +16,21 @@ export const collectionAccountApi = baseApi.injectEndpoints({
       CollectionAccountListApiRequest
     >({
       query: (config) => ({
-        url: `${BASE_URL}/business`,
+        url: `${BASE_URL}/business/`,
         ...config,
       }),
       providesTags: [COLLECTION_ACCOUNT],
+    }),
+    createCollectionAccountBusiness: builder.mutation<
+      CollectionAccountCreateApiResponse,
+      CollectionAccountCreateApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/business/`,
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [COLLECTION_ACCOUNT],
     }),
     createCollectionAccount: builder.mutation<
       CollectionAccountCreateApiResponse,

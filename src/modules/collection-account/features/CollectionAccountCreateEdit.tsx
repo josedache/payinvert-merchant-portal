@@ -17,6 +17,7 @@ import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
 import { collectionAccountApi } from "apis/collection-account.ts";
 import * as yup from "yup";
 import NumberTextField from "components/NumberTextField.tsx";
+import { subsidiaryApi } from "apis/subsidiary-enum.ts";
 
 function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
   const { children, onClose, ...restProps } = props;
@@ -26,7 +27,12 @@ function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
   const [isOpen, toggleOpen, setOpen] = useToggle();
 
   const [createCollectionAccountMutation] =
-    collectionAccountApi.useCreateCollectionAccountMutation();
+    collectionAccountApi.useCreateCollectionAccountBusinessMutation();
+
+  const collectionBankEnumsQueryResult =
+    subsidiaryApi.useGetSubsidiaryCollectionBankEnumsQuery(undefined);
+
+  const collectionBankEnums = collectionBankEnumsQueryResult.data;
 
   const formik = useFormik({
     initialValues: {
@@ -124,20 +130,20 @@ function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
               required
               select
             >
-              {[{ label: "KKU", value: "KKU" }]?.map(({ label, value }) => (
-                <MenuItem key={label} value={value}>
-                  {value}
+              {collectionBankEnums?.map(({ name }) => (
+                <MenuItem key={name} value={name}>
+                  {name}
                 </MenuItem>
               ))}
             </TextField>
-            <TextField
-              className="md:col-span-2"
-              fullWidth
-              label="External ID"
-              placeholder="Enter your external ID"
-              {...getTextFieldProps(formik, "externalId")}
-              required
-            />
+            {/*<TextField*/}
+            {/*  className="md:col-span-2"*/}
+            {/*  fullWidth*/}
+            {/*  label="External ID"*/}
+            {/*  placeholder="Enter your external ID"*/}
+            {/*  {...getTextFieldProps(formik, "externalId")}*/}
+            {/*  required*/}
+            {/*/>*/}
           </div>
         </DialogContent>
         <DialogActions>
