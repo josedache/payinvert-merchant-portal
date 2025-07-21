@@ -16,7 +16,7 @@ export function EmptyTableUI(props: EmptyTableUIProps) {
         {/* <Iconify icon="ph:empty-duotone" /> */}
       </div>
       <Typography variant="h5" className={clsx("EmptyUI__text", "font-bold")}>
-        {title || "No data"}
+        {title ?? "No data"}
       </Typography>
       <Typography
         variant="subtitle2"

@@ -55,7 +55,7 @@ function AppProtectedHeader(props: AppBarProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isComplianceCompleted = Object.keys(
-      getComplianceInfoQuery?.data || {}
+      getComplianceInfoQuery?.data ?? {}
     )?.every(
       (key) => Number(getComplianceInfoQuery?.data?.[key]?.percentage) === 100
     );

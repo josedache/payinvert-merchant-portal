@@ -80,10 +80,10 @@ function CustomError(props) {
  * @param {LoadingUIProps} props
  */
 function renderErrorDefault(props) {
-  const Error = props.Error ?? CustomError;
+  const ErrorComponent = props.Error ?? CustomError;
 
   return (
-    <Error
+    <ErrorComponent
       onRetry={props.onRetry}
       {...props.ErrorProps}
       className={cn("LoadingContent-error", props.ErrorProps?.className)}

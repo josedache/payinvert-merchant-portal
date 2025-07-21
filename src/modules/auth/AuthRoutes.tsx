@@ -4,6 +4,7 @@ import {
   SIGNIN_2FA,
   PASSWORD_RESET,
   SIGNUP_VERIFY,
+  SIGNUP_VERIFY_REQUEST,
 } from "constants/urls";
 import { RouteObject } from "react-router-dom";
 
@@ -11,6 +12,10 @@ export default [
   {
     path: SIGNUP,
     lazy: () => import("modules/auth/pages/AuthSignup"),
+  },
+  {
+    path: SIGNUP_VERIFY_REQUEST,
+    lazy: () => import("modules/auth/pages/AuthSignupVerificationRequest"),
   },
   {
     path: SIGNUP_VERIFY,

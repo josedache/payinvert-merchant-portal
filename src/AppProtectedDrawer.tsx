@@ -38,11 +38,12 @@ function AppProtectedDrawer() {
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
-  const isActiveClient = authUser?.businessDetails?.active || false;
+  const isActiveClient = authUser?.businessDetails?.active ?? false;
 
   const NAV_LINKS = useMemo(
     () => [
       {
+        key: "main",
         links: [
           {
             label: "Home",
@@ -103,6 +104,12 @@ function AppProtectedDrawer() {
             to: urlsConstant.ACCOUNT,
             kycAllow: true,
             links: [
+              {
+                icon: <CustomIcon.VirtualWallets />,
+                label: "Collection Accounts",
+                to: urlsConstant.COLLECTION_ACCOUNT,
+                kycAllow: isActiveClient,
+              },
               // {
               //   icon: <CustomIcon.Settlements />,
               //   label: "Settlements",
@@ -181,91 +188,89 @@ function AppProtectedDrawer() {
   const collapseToIcon = isLg && !sidebarIcon.isOpen;
 
   return (
-    <>
-      <div className="relative">
-        <Drawer
-          open={sideNavigation.isOpen}
-          variant={isLg ? "permanent" : "temporary"}
-          anchor={isLg ? "left" : "right"}
-          slotProps={{
-            paper: {
-              className: clsx(
-                collapseToIcon ? "w-[80px]" : "w-[270px]",
-                "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all",
-                isLg ? "" : "bg-none"
-              ),
-            },
-          }}
-          onClose={() => sideNavigation.toggle()}
-        >
-          <Toolbar className="flex items-center px-0 pt-4  justify-between ">
-            {isLg && (
-              <Paper className="py-4 px-3 w-full flex justify-center">
-                <Logo className="w-full h-full max-w-[150px]" variant="2" />
-              </Paper>
-            )}
+    <div className="relative">
+      <Drawer
+        open={sideNavigation.isOpen}
+        variant={isLg ? "permanent" : "temporary"}
+        anchor={isLg ? "left" : "right"}
+        slotProps={{
+          paper: {
+            className: clsx(
+              collapseToIcon ? "w-[80px]" : "w-[270px]",
+              "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all",
+              isLg ? "" : "bg-none"
+            ),
+          },
+        }}
+        onClose={() => sideNavigation.toggle()}
+      >
+        <Toolbar className="flex items-center px-0 pt-4  justify-between ">
+          {isLg && (
+            <Paper className="py-4 px-3 w-full flex justify-center">
+              <Logo className="w-full h-full max-w-[150px]" variant="2" />
+            </Paper>
+          )}
 
-            {!isLg && (
-              <div className="flex gap-4">
-                <Avatar src="" className="w-[40px] h-[40px]" />
-                <Popover
-                  open={infoPopover.isOpen}
-                  anchorEl={infoPopover.anchorEl}
-                  onClose={infoPopover.togglePopover}
-                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                  transformOrigin={{ vertical: "top", horizontal: "right" }}
-                  className="p-2"
-                ></Popover>
-                <div className=" border rounded-full w-10 h-10 border-neutral-100 ">
-                  <IconButton>
-                    <Badge variant="dot" color="error">
-                      <Iconify
-                        className="MuiIcon-root"
-                        icon="pajamas:notifications"
-                      />
-                    </Badge>
-                  </IconButton>
-                </div>
+          {!isLg && (
+            <div className="flex gap-4">
+              <Avatar src="" className="w-[40px] h-[40px]" />
+              <Popover
+                open={infoPopover.isOpen}
+                anchorEl={infoPopover.anchorEl}
+                onClose={infoPopover.togglePopover}
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
+                className="p-2"
+              ></Popover>
+              <div className=" border rounded-full w-10 h-10 border-neutral-100 ">
+                <IconButton>
+                  <Badge variant="dot" color="error">
+                    <Iconify
+                      className="MuiIcon-root"
+                      icon="pajamas:notifications"
+                    />
+                  </Badge>
+                </IconButton>
               </div>
-            )}
+            </div>
+          )}
 
-            {!isLg && (
-              <IconButton onClick={() => sideNavigation.toggle()}>
-                <Iconify icon="iconoir:cancel" width="24" height="24" />
-              </IconButton>
-            )}
-          </Toolbar>
+          {!isLg && (
+            <IconButton onClick={() => sideNavigation.toggle()}>
+              <Iconify icon="iconoir:cancel" width="24" height="24" />
+            </IconButton>
+          )}
+        </Toolbar>
 
-          <List
-            disablePadding
-            className="flex-1 min-h-0 gap-6 overflow-y-auto scrollbar-hidden mt-4"
-          >
-            {NAV_LINKS.map(({ links }) => {
-              return (
-                <div>
-                  {links.map((item, index) => {
-                    return (
-                      <AppProtectedDrawerItem
-                        key={index}
-                        collapseToIcon={collapseToIcon}
-                        item={item}
-                      />
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </List>
+        <List
+          disablePadding
+          className="flex-1 min-h-0 gap-6 overflow-y-auto scrollbar-hidden mt-4"
+        >
+          {NAV_LINKS.map(({ links, key }) => {
+            return (
+              <div key={key}>
+                {links.map((item) => {
+                  return (
+                    <AppProtectedDrawerItem
+                      key={item.label}
+                      collapseToIcon={collapseToIcon}
+                      item={item}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </List>
 
-          <footer className="text-[#424242] py-5">
-            <Typography>
-              Copyright © {new Date().getFullYear()} All rights reserved
-            </Typography>
-            <Typography>All rights reserved</Typography>
-          </footer>
-        </Drawer>
-      </div>
-    </>
+        <footer className="text-[#424242] py-5">
+          <Typography>
+            Copyright © {new Date().getFullYear()} All rights reserved
+          </Typography>
+          <Typography>All rights reserved</Typography>
+        </footer>
+      </Drawer>
+    </div>
   );
 }
 
@@ -300,97 +305,95 @@ function AppProtectedDrawerItem(props: any) {
   const [isSubMenu, toggleSubMenu] = useToggle();
 
   return (
-    <>
-      <Paper
-        elevation={!!match || !isSubMenu ? 0 : 1}
+    <Paper
+      elevation={!!match || !isSubMenu ? 0 : 1}
+      className={clsx(
+        "mb-6 p-0 mt-0 overflow-hidden",
+        !!match || isSubMenu ? "bg-white" : "bg-transparent"
+      )}
+    >
+      <ListItemButton
+        disableRipple
+        disableTouchRipple
+        disableGutters
+        sx={{
+          "&.MuiButtonBase-root:hover": {
+            bgcolor: "transparent",
+          },
+        }}
         className={clsx(
-          "mb-6 p-0 mt-0 overflow-hidden",
-          !!match || isSubMenu ? "bg-white" : "bg-transparent"
+          "flex px-4 gap-2 py-3 ",
+          !!match && !isGroup
+            ? "bg-[#EDFAF1] text-primary-contrastText"
+            : "bg-transparent"
         )}
+        {...(isGroup
+          ? { onClick: toggleSubMenu }
+          : isKycCompleted || kycAllow
+            ? onClick
+              ? { onClick }
+              : { component: Link, to }
+            : { disabled: true })}
       >
-        <ListItemButton
-          disableRipple
-          disableTouchRipple
-          disableGutters
-          sx={{
-            "&.MuiButtonBase-root:hover": {
-              bgcolor: "transparent",
-            },
-          }}
+        <Typography
           className={clsx(
-            "flex px-4 gap-2 py-3 ",
-            !!match && !isGroup
-              ? "bg-[#EDFAF1] text-primary-contrastText"
-              : "bg-transparent"
+            isGroup ? "font-bold uppercase" : "",
+            "text-[#616161] flex-1"
           )}
-          {...(isGroup
-            ? { onClick: toggleSubMenu }
-            : isKycCompleted || kycAllow
-              ? onClick
-                ? { onClick }
-                : { component: Link, to }
-              : { disabled: true })}
         >
-          <Typography
-            className={clsx(
-              isGroup ? "font-bold uppercase" : "",
-              "text-[#616161] flex-1"
-            )}
-          >
-            {label}
-          </Typography>
-          {isGroup && (
-            <Iconify
-              className="text-2xl"
-              width={18}
-              height={18}
-              icon={isSubMenu ? "mingcute:up-line" : "mingcute:down-line"}
-            />
-          )}
-        </ListItemButton>
-
+          {label}
+        </Typography>
         {isGroup && (
-          <Collapse in={isSubMenu} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {links?.map(
-                ({ label, icon, to, toMatchExclude, ...rest }, index) => (
-                  <ListItemButton
-                    disableRipple
-                    key={index}
-                    selected={
-                      match?.pathnameBase === to &&
-                      !toMatchExclude?.includes(match?.pathname)
-                    }
-                    className={clsx(
-                      "px-4 font-bold rounded-none py-3",
-                      match?.pathnameBase === to &&
-                        !toMatchExclude?.includes(match?.pathname) &&
-                        "bg-primary-lighter text-primary-main"
-                    )}
-                    disabled={!rest?.kycAllow}
-                    component={Link}
-                    to={to}
-                    {...rest}
-                  >
-                    {typeof icon === "string" ? (
-                      <Iconify
-                        icon={icon}
-                        className="text-2xl mr-5 text-primary-main"
-                      />
-                    ) : (
-                      <Icon className="text-2xl mr-5 text-primary-main">
-                        {icon}
-                      </Icon>
-                    )}
-
-                    <Typography className="font-medium">{label}</Typography>
-                  </ListItemButton>
-                )
-              )}
-            </List>
-          </Collapse>
+          <Iconify
+            className="text-2xl"
+            width={18}
+            height={18}
+            icon={isSubMenu ? "mingcute:up-line" : "mingcute:down-line"}
+          />
         )}
-      </Paper>
-    </>
+      </ListItemButton>
+
+      {isGroup && (
+        <Collapse in={isSubMenu} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {links?.map(
+              ({ label, icon, to, toMatchExclude, ...rest }) => (
+                <ListItemButton
+                  disableRipple
+                  key={label}
+                  selected={
+                    match?.pathnameBase === to &&
+                    !toMatchExclude?.includes(match?.pathname)
+                  }
+                  className={clsx(
+                    "px-4 font-bold rounded-none py-3",
+                    match?.pathnameBase === to &&
+                      !toMatchExclude?.includes(match?.pathname) &&
+                      "bg-primary-lighter text-primary-main"
+                  )}
+                  disabled={!rest?.kycAllow}
+                  component={Link}
+                  to={to}
+                  {...rest}
+                >
+                  {typeof icon === "string" ? (
+                    <Iconify
+                      icon={icon}
+                      className="text-2xl mr-5 text-primary-main"
+                    />
+                  ) : (
+                    <Icon className="text-2xl mr-5 text-primary-main">
+                      {icon}
+                    </Icon>
+                  )}
+
+                  <Typography className="font-medium">{label}</Typography>
+                </ListItemButton>
+              )
+            )}
+          </List>
+        </Collapse>
+      )}
+    </Paper>
   );
 }

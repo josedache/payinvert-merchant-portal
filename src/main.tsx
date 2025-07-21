@@ -7,17 +7,32 @@ import MuiDatePickerProvider from "./providers/MuiDatePickerProvider.tsx";
 import MuiSnackbarProvider from "./providers/MuiSnackbarProvider.tsx";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import { PRODUCTION } from "constants/env.ts";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ReduxStoreProvider>
-      <MuiThemeProvider>
-        <MuiDatePickerProvider>
-          <MuiSnackbarProvider>
-            <RouterProvider router={router} />
-          </MuiSnackbarProvider>
-        </MuiDatePickerProvider>
-      </MuiThemeProvider>
-    </ReduxStoreProvider>
-  </StrictMode>
-);
+enableMocking().then(() => {
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <ReduxStoreProvider>
+        <MuiThemeProvider>
+          <MuiDatePickerProvider>
+            <MuiSnackbarProvider>
+              <RouterProvider router={router} />
+            </MuiSnackbarProvider>
+          </MuiDatePickerProvider>
+        </MuiThemeProvider>
+      </ReduxStoreProvider>
+    </StrictMode>
+  );
+});
+
+async function enableMocking() {
+  if (PRODUCTION) {
+    return;
+  }
+
+  // const { worker } = await import("configs/msw-worker");
+  //
+  // // `worker.start()` returns a Promise that resolves
+  // // once the Service Worker is up and ready to intercept requests.
+  // return worker.start();
+}

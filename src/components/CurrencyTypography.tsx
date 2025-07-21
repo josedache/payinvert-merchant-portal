@@ -11,9 +11,7 @@ export const CurrencyTypography = forwardRef(
    */
   function CurrencyTypography(props: CurrencyTypographyProps, ref: any) {
     const { children, currency, blur, className, ...rest } = props;
-    const _currency = Currency[currency || "NGN"] || Currency.NGN;
-
-    // const theme = useTheme();
+    const _currency = Currency[currency ?? "NGN"] || Currency.NGN;
 
     return (
       <Typography

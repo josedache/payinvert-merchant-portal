@@ -4,11 +4,7 @@ import { DASHBOARD } from "constants/urls";
 import { Outlet, redirect } from "react-router-dom";
 
 function AppPublic() {
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 }
 
 export default AppPublic;

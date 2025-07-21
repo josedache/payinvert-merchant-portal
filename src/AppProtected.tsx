@@ -28,7 +28,6 @@ function AppProtected() {
         );
 
         if (differenceInExpiration <= 30) {
-          // setRefreshTokenDialog(true);
         }
 
         if (differenceInExpiration <= 0) {
@@ -56,11 +55,7 @@ function AppProtected() {
       )}
       className="h-screen"
     >
-      {() => (
-        <>
-          <Outlet />
-        </>
-      )}
+      {() => <Outlet />}
     </LoadingContent>
   );
 }

@@ -6,3 +6,4 @@ export const TRANSACTION = "TRANSACTION";
 export const ORDER = "ORDER";
 export const COMPLIANCE = "COMPLIANCE";
 export const KEY = "KEY";
+export const COLLECTION_ACCOUNT = "COLLECTION_ACCOUNT";

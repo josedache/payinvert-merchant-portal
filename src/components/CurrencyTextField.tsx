@@ -8,7 +8,7 @@ const CurrencyTextField = forwardRef(function CurrencyTextField(
   ref: any
 ) {
   const { code, slotProps, ...restProps } = props;
-  const currency = Currency[code || "NGN"];
+  const currency = Currency[code ?? "NGN"];
 
   return (
     <NumberTextField

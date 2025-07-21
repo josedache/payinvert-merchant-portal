@@ -33,7 +33,13 @@
       "providers/*": ["src/providers/*"],
       "utils/*": ["src/utils/*"],
       "types/*": ["src/types/*"]
-    }
+    },
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom",
+      "cypress",
+      "@testing-library/cypress"
+    ]
   },
-  "include": ["src"]
+  "include": ["src", "vitest-setup.ts",  "./cypress.d.ts"]
 }
