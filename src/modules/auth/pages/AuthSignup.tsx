@@ -71,7 +71,8 @@ function AuthSignup() {
         const data = await signupSubsidiaryMutation({
           body: {
             ...values,
-            password: btoa(values.password ?? ""),
+            // password: btoa(values.password ?? ""),
+            password: values.password,
             confirmpassword: btoa(values.confirmpassword ?? ""),
           },
         }).unwrap();
