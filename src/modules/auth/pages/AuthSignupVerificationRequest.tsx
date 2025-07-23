@@ -20,7 +20,7 @@ function AuthSignupVerificationRequest() {
   const [
     resendSubsidiaryVerificationEmailMutation,
     resendSubsidiaryVerificationEmailMutationResult,
-  ] = subsidiaryApi.useResendSubsidiaryVerificationEmailMutation();
+  ] = subsidiaryApi.useResendSubsidiaryVerificationEmailNewMutation()
 
   const [
     verifySubsidiaryBusinessEmailMutation,

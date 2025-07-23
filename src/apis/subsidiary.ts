@@ -113,6 +113,17 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: USER }],
     }),
+    resendSubsidiaryVerificationEmailNew: builder.mutation<
+      SubsidiaryVerificationEmailResendApiResponse,
+      SubsidiaryVerificationEmailResendApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/resend/verification/email/new",
+        method: "get",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }],
+    }),
     verifySubsidiaryBusinessEmail: builder.mutation<
       SubsidiaryBusinessEmailVerifyResendApiResponse,
       SubsidiaryBusinessEmailVerifyResendApiRequest

@@ -48,7 +48,8 @@ function AuthSignin() {
         const data = await loginSubsidiaryMutation({
           body: {
             email: values.email,
-            password: btoa(values.password ?? ""),
+            // password: btoa(values.password ?? ""),
+            password: values.password,
           },
         }).unwrap();
 
