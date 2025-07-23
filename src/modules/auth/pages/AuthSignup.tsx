@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { AuthSignupFormikValues } from "modules/auth/types/auth-signup.ts";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
-import { SIGNIN, SIGNUP_VERIFY } from "constants/urls.ts";
+import { SIGNIN, SIGNUP_VERIFY_REQUEST } from "constants/urls.ts";
 import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
 import PasswordTextField from "components/PasswordTextField.tsx";
 import { LoadingButton } from "@mui/lab";
@@ -77,11 +77,17 @@ function AuthSignup() {
           },
         }).unwrap();
 
-        enqueueSnackbar(data?.message || "Sign up Successful", {
-          variant: "success",
-        });
+        enqueueSnackbar(
+          data?.message ||
+            "Sign up Successful, Check your email for verification",
+          {
+            variant: "success",
+          }
+        );
 
-        return navigate(SIGNUP_VERIFY, { state: { email: values.userEmail } });
+        return navigate(SIGNUP_VERIFY_REQUEST, {
+          state: { email: values.userEmail },
+        });
       } catch (error) {
         enqueueSnackbar(
           error?.message || error?.data?.message || "Failed to Login",

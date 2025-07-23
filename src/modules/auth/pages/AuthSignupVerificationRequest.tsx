@@ -1,5 +1,5 @@
 import { useSnackbar } from "notistack";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { DASHBOARD, SIGNIN } from "constants/urls.ts";
 import { Button, Icon, Paper, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -11,7 +11,9 @@ function AuthSignupVerificationRequest() {
   const { enqueueSnackbar } = useSnackbar();
 
   const navigate = useNavigate();
-  const { email } = useParams<{ email: string }>();
+  const location = useLocation();
+
+  const email = location.state?.email;
 
   const authUser = useAuthUser();
 
@@ -28,14 +30,15 @@ function AuthSignupVerificationRequest() {
   async function resendVerificationEmail() {
     try {
       const data = await resendSubsidiaryVerificationEmailMutation({
-        body: { identifier: email, loginHash: authUser?.loginHash },
+        params: { Email: email },
       }).unwrap();
-      enqueueSnackbar(data?.message ?? "Account verified successfully!", {
+      enqueueSnackbar(data?.message ?? "Verification link sent successfully!", {
         variant: "success",
       });
     } catch (error) {
       enqueueSnackbar(
-        error?.data?.errors?.[0]?.defaultUserMessage || `Failed to verify!`,
+        error?.data?.errors?.[0]?.defaultUserMessage ||
+          `Failed to resend link!`,
         {
           variant: "error",
         }

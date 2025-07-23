@@ -37,7 +37,11 @@ export type SubsidiarySignupApiRequest = ApiRequest<{
 
 export type SubsidiarySignupApiResponse = { message: string };
 
-export type SubsidiaryVerificationEmailResendApiRequest = ApiRequest;
+export type SubsidiaryVerificationEmailResendApiRequest = ApiRequest<
+  void,
+  void,
+  { Email: string }
+>;
 
 export type SubsidiaryVerificationEmailResendApiResponse = { message: string };
 
