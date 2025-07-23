@@ -1,5 +1,4 @@
 import { Button, Paper, TextField } from "@mui/material";
-import NumberTextField from "components/NumberTextField";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { SettingsComplianceContentProps } from "../types/SettingComplianceForm";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
@@ -39,9 +38,7 @@ export default function SettingsComplianceAddEditDirectorsInfo(
             />
           ) : null}
 
-          <NumberTextField
-            freeSolo
-            maskOptions={{ min: 0, max: 11 }}
+          <TextField
             {...getTextFieldProps(formik, "IdNumber")}
             label="ID Number"
             fullWidth
