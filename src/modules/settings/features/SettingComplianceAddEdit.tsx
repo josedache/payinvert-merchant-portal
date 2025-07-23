@@ -64,7 +64,7 @@ export default function SettingComplianceAddEdit(
         .label("Business Name")
         .required("Business Name is required"),
       countryId: yup.string().label("Country").required("Country is required"),
-      description: yup.string().required("Description is required"),
+      description: yup.string().max(50).required("Description is required"),
       industryId: yup
         .string()
         .label("Industry")

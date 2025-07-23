@@ -2,13 +2,12 @@ import { Button, Icon, Paper, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
-import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { SIGNIN } from "constants/urls.ts";
 import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
 import PasswordTextField from "components/PasswordTextField.tsx";
 import { LoadingButton } from "@mui/lab";
 import { subsidiaryApi } from "apis/subsidiary.ts";
-import { extractSearchParams } from "utils/url/extract-search-params.ts";
 import NumberTextField from "components/NumberTextField.tsx";
 
 function AuthPasswordReset() {
@@ -16,11 +15,9 @@ function AuthPasswordReset() {
 
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
+  const location = useLocation();
 
-  const { identifier } = extractSearchParams(searchParams, {
-    identifier: "josedache0@gmail.com",
-  });
+  const identifier = location.state?.identifier;
 
   const [completeSubsidiaryForgotPasswordMutation] =
     subsidiaryApi.useCompleteSubsidiaryForgotPasswordMutation();
@@ -44,7 +41,7 @@ function AuthPasswordReset() {
         .trim()
         .min(8, "Your password must be at least 8 characters long")
         .max(25)
-        .matches(/^(?=.{8,})/, "Must Contain 8 Characters")
+        .matches(/^(?=.{12,})/, "Must Contain 12 Characters")
         .matches(/^(?=.*[a-z])/, "Must Contain One Lowercase")
         .matches(/^(?=.*[A-Z])/, "Must Contain One Uppercase")
         .matches(/^(?=.*\d)/, "Must contain a number")
@@ -62,8 +59,8 @@ function AuthPasswordReset() {
           body: {
             identifier: identifier,
             otp: values.otp,
-            newPassword: btoa(values.newPassword ?? ""),
-            confirmPassword: btoa(values.confirmPassword ?? ""),
+            newPassword: values.newPassword,
+            confirmPassword: values.confirmPassword,
           },
         }).unwrap();
 

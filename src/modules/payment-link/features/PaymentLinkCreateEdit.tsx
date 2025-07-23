@@ -89,6 +89,10 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
     setOpen(false);
   }
 
+  const isSingleUsage = paymentLinkTypes
+    ?.find((type) => type.code === formik.values.paymentType)
+    ?.paymentLinkName?.match(/^Single/i);
+
   return (
     <>
       <Dialog open={isOpen} fullWidth {...restProps}>
@@ -141,7 +145,11 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
           >
             {paymentLinkTypes?.map((paymentType) => (
               <MenuItem key={paymentType.id} value={paymentType.code}>
-                {paymentType.paymentLinkName}
+                {paymentType.paymentLinkName?.match(/^Single/i)
+                  ? "Single Usage"
+                  : paymentType.paymentLinkName?.match(/^Multiple/i)
+                    ? "Multiple Usage"
+                    : paymentType.paymentLinkName}
               </MenuItem>
             ))}
           </TextField>
@@ -152,13 +160,15 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
             placeholder="Enter an amount"
             {...getTextFieldProps(formik, "amount")}
           />
-          <NumberTextField
-            fullWidth
-            margin="normal"
-            label="Limit (Optional)"
-            placeholder="Enter a limit"
-            {...getTextFieldProps(formik, "limit")}
-          />
+          {!isSingleUsage && formik.values.paymentType ? (
+            <NumberTextField
+              fullWidth
+              margin="normal"
+              label="Limit (Optional)"
+              placeholder="Enter a limit"
+              {...getTextFieldProps(formik, "limit")}
+            />
+          ) : null}
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={handleClose}>
