@@ -314,5 +314,16 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: PAYMENT_LINK }],
     }),
+    regenerateSubsidiaryDashboardAuthNewKeyNew: builder.mutation<
+      SubsidiaryDashboardKeyCreateNewAuthApiResponse,
+      SubsidiaryDashboardKeyCreateNewAuthApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/dashboard/auth/new-key/new`,
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [KEY],
+    }),
   }),
 });

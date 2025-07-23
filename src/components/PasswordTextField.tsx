@@ -19,8 +19,10 @@ function PasswordTextField(props: TextFieldProps) {
       slotProps={{
         ...slotProps,
         input: {
+          ...slotProps?.input,
           endAdornment: (
             <InputAdornment position="end">
+              {(slotProps?.input as any)?.endAdornment}
               <IconButton
                 aria-label="toggle password visibility"
                 onClick={handleVisible}

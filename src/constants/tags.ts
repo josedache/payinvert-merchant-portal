@@ -7,3 +7,5 @@ export const ORDER = "ORDER";
 export const COMPLIANCE = "COMPLIANCE";
 export const KEY = "KEY";
 export const COLLECTION_ACCOUNT = "COLLECTION_ACCOUNT";
+export const WEBHOOK = "WEBHOOK";
+export const API_KEY = "API_KEY";
