@@ -73,7 +73,7 @@ function AuthSignup() {
             ...values,
             // password: btoa(values.password ?? ""),
             password: values.password,
-            confirmpassword: btoa(values.confirmpassword ?? ""),
+            confirmpassword: values.confirmpassword,
           },
         }).unwrap();
 
