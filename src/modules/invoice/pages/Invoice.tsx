@@ -13,50 +13,55 @@ import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
+import PageTitle from "components/PageTitle.tsx";
 
 const Invoice = () => {
   const tableInstance = useTable({ data, columns });
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center gap-4">
-        <Typography variant="h6">Invoice - 20</Typography>
-        <div className="flex gap-2 items-center">
-          <TextField select size="small" label="Filter" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField select size="small" label="Export" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <Link to={INVOICE_ADD}>
-            <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
-              New Invoice
-            </Button>
-          </Link>
+    <>
+      <PageTitle>Invoices</PageTitle>
+
+      <div className="space-y-6">
+        <div className="flex justify-between items-center gap-4">
+          <Typography variant="h6">Invoice - 20</Typography>
+          <div className="flex gap-2 items-center">
+            <TextField select size="small" label="Filter" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select size="small" label="Export" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <Link to={INVOICE_ADD}>
+              <Button startIcon={<Icon icon="ic:twotone-receipt-long" />}>
+                New Invoice
+              </Button>
+            </Link>
+          </div>
         </div>
+        <Paper className="p-4">
+          <TanStandardTable instance={tableInstance} />
+        </Paper>
       </div>
-      <Paper className="p-4">
-        <TanStandardTable instance={tableInstance} />
-      </Paper>
-    </div>
+    </>
   );
 };
 export const Component = Invoice;

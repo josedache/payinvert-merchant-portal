@@ -4,19 +4,21 @@ import { useMemo } from "react";
 import CustomerTransactionList from "modules/customer/features/CustomerTransactionList.tsx";
 import LoadingContent from "components/LoadingContent.tsx";
 import CustomerDetailsDetails from "modules/customer/features/CustomerDetailsDetails.tsx";
+import PageTitle from "components/PageTitle.tsx";
 
 function CustomerDetails() {
   const { id } = useParams();
 
   const customerQueryResult = customerApi.useGetCustomersQuery(
     useMemo(() => ({ params: { id: id } }), [id]),
-    { skip: !id }
+    { skip: !id },
   );
 
   const customer = customerQueryResult.data?.data?.items?.[0];
 
   return (
     <>
+      <PageTitle>Customers  <span className="mx-2 text-text-secondary">&gt;</span> Customer information</PageTitle>
       <LoadingContent
         loading={customerQueryResult.isLoading}
         error={customerQueryResult.isError}

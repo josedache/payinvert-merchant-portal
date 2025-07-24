@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
+import PageTitle from "components/PageTitle.tsx";
 
 function ApiKeyAndWebhook() {
   return (
     <>
+      <PageTitle>API keys & Webhooks</PageTitle>
       <Outlet />
     </>
   );

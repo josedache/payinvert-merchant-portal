@@ -147,12 +147,12 @@ function AppProtectedDrawer() {
                 to: urlsConstant.COMPLIANCE,
                 kycAllow: true,
               },
-              // {
-              //   icon: <CustomIcon.PayoutAccount />,
-              //   label: "Payout Accounts",
-              //   to: urlsConstant.SETTINGS_PAYOUT_ACCOUNTS,
-              //   kycAllow: isActiveClient,
-              // },
+              {
+                icon: <CustomIcon.PayoutAccount />,
+                label: "Payout Accounts",
+                to: urlsConstant.PAYOUT_SETTING,
+                kycAllow: isActiveClient,
+              },
               // {
               //   icon: <CustomIcon.RolesPermissions />,
               //   label: "Roles & Permissions",

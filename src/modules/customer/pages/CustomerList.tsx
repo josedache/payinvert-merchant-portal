@@ -8,6 +8,7 @@ import CustomerStatus from "modules/customer/features/CustomerStatus.tsx";
 import { customerApi } from "apis/customer.ts";
 import CustomerTableAction from "modules/customer/features/CustomerTableAction.tsx";
 import usePagination from "hooks/use-pagination.ts";
+import PageTitle from "components/PageTitle.tsx";
 
 const CustomerList = () => {
   const [pagination, setPagination] = usePagination();
@@ -33,52 +34,55 @@ const CustomerList = () => {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center gap-4">
-        <Typography className="text-[18px] font-medium">
-          Customers - {customers?.page?.total ?? 0}
-        </Typography>
-        <div className="flex gap-2 items-center">
-          <TextField select size="small" label="Filter" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField select size="small" label="Export" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          {/*<Button startIcon={<Icon icon="mdi:user-add" />}>*/}
-          {/*  Add new customer*/}
-          {/*</Button>*/}
+    <>
+      <PageTitle>Customers</PageTitle>
+      <div className="space-y-6">
+        <div className="flex justify-between items-center gap-4">
+          <Typography className="text-[18px] font-medium">
+            Customers - {customers?.page?.total ?? 0}
+          </Typography>
+          <div className="flex gap-2 items-center">
+            <TextField select size="small" label="Filter" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select size="small" label="Export" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            {/*<Button startIcon={<Icon icon="mdi:user-add" />}>*/}
+            {/*  Add new customer*/}
+            {/*</Button>*/}
+          </div>
         </div>
-      </div>
 
-      <Paper>
-        <TanStandardTable
-          instance={tableInstance}
-          loading={customerQueryResult.isLoading}
-          error={customerQueryResult.isError}
-          onEmptyRetry={customerQueryResult.refetch}
-          onErrorRetry={customerQueryResult.refetch}
-        />
-      </Paper>
-    </div>
+        <Paper>
+          <TanStandardTable
+            instance={tableInstance}
+            loading={customerQueryResult.isLoading}
+            error={customerQueryResult.isError}
+            onEmptyRetry={customerQueryResult.refetch}
+            onErrorRetry={customerQueryResult.refetch}
+          />
+        </Paper>
+      </div>
+    </>
   );
 };
 export const Component = CustomerList;

@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import LoadingContent from "components/LoadingContent.tsx";
 import PaymentLinkTransactionList from "modules/payment-link/features/PaymentLinkTransactionList.tsx";
+import PageTitle from "components/PageTitle.tsx";
 
 const PaymentLinkDetails = () => {
   const { id } = useParams();
@@ -17,21 +18,28 @@ const PaymentLinkDetails = () => {
   const paymentLink = paymentLinkQueryResult.data?.items?.[0];
 
   return (
-    <LoadingContent
-      loading={paymentLinkQueryResult.isLoading}
-      error={paymentLinkQueryResult.isError}
-      onRetry={paymentLinkQueryResult.refetch}
-    >
-      {() => (
-        <>
-          <div className="space-y-8">
-            <PaymentLinkDetailsTable paymentLink={paymentLink} />
-            {/*<PaymentLinkDetailsProductTable />*/}
-            <PaymentLinkTransactionList paymentLink={paymentLink} />
-          </div>
-        </>
-      )}
-    </LoadingContent>
+    <>
+      <PageTitle>
+        Payment links <span className="mx-2 text-text-secondary">&gt;</span>{" "}
+        {paymentLink?.name ?? "Payment link details"}
+      </PageTitle>
+
+      <LoadingContent
+        loading={paymentLinkQueryResult.isLoading}
+        error={paymentLinkQueryResult.isError}
+        onRetry={paymentLinkQueryResult.refetch}
+      >
+        {() => (
+          <>
+            <div className="space-y-8">
+              <PaymentLinkDetailsTable paymentLink={paymentLink} />
+              {/*<PaymentLinkDetailsProductTable />*/}
+              <PaymentLinkTransactionList paymentLink={paymentLink} />
+            </div>
+          </>
+        )}
+      </LoadingContent>
+    </>
   );
 };
 export const Component = PaymentLinkDetails;

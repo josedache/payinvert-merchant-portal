@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import LoadingContent from "components/LoadingContent.tsx";
 import * as dfns from "date-fns";
+import PageTitle from "components/PageTitle.tsx";
 
 const TransactionDetails = () => {
   const { id } = useParams();
@@ -16,98 +17,101 @@ const TransactionDetails = () => {
   const order = ordersQueryResult.data?.data?.items?.[0];
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center gap-4">
-        <Typography className="text-[18px] font-medium">
-          Transaction details
-        </Typography>
-      </div>
+    <>
+      <PageTitle>Transactions  <span className="mx-2 text-text-secondary">&gt;</span> Transaction details</PageTitle>
+      <div className="space-y-6">
+        <div className="flex justify-between items-center gap-4">
+          <Typography className="text-[18px] font-medium">
+            Transaction details
+          </Typography>
+        </div>
 
-      <LoadingContent
-        loading={ordersQueryResult.isLoading}
-        error={ordersQueryResult.isError}
-        onRetry={ordersQueryResult.refetch}
-      >
-        {() => (
-          <>
-            <div className="space-y-8">
-              <TransactionSection
-                title="Order details"
-                items={[
-                  { label: "Order reference", value: order?.orderReference },
-                  {
-                    label: "Payment reference",
-                    value: order?.paymentReference,
-                  },
-                  {
-                    label: "Payment response code",
-                    value: order?.paymentResponseCode,
-                  },
-                  {
-                    label: "Payment response message",
-                    value: order?.paymentResponseMessage,
-                  },
-                ]}
-              />
-              <TransactionSection
-                title="Customer details"
-                items={[
-                  { label: "Customer name", value: order?.customerName },
-                  { label: "Customer email", value: order?.customerEmail },
-                  {
-                    label: "Customer phone number",
-                    value: order?.customerPhone,
-                  },
-                  { label: "Country", value: "" },
-                ]}
-              />
-              <TransactionSection
-                title="Payment details"
-                items={[
-                  { label: "Payment method", value: order?.paymentTypeName },
-                  { label: "Currency", value: order?.currency },
-                  { label: "Amount", value: order?.amount },
-                  { label: "Status", value: order?.orderStatus },
-                  { label: "Narration", value: order?.narration },
-                  { label: "Remarks", value: order?.remarks },
-                  { label: "Fee", value: order?.fee },
-                  { label: "Subsidiary fee", value: order?.subsidiaryFee },
-                  { label: "Customer fee", value: order?.customerFee },
-                  { label: "Who bears fee?", value: order?.whoBearsFee },
-                  {
-                    label: "Date created",
-                    value: order?.dateCreated
-                      ? dfns.format(
-                          order?.dateCreated,
-                          "dd MMM yyyy hh:mm:ss aaa"
-                        )
-                      : null,
-                  },
-                  {
-                    label: "Date updated",
-                    value: order?.dateUpdated
-                      ? dfns.format(
-                          order?.dateUpdated,
-                          "dd MMM yyyy hh:mm:ss aaa"
-                        )
-                      : null,
-                  },
-                  {
-                    label: "Date payment confirmed",
-                    value: order?.datePaymentConfirmed
-                      ? dfns.format(
-                          order?.datePaymentConfirmed,
-                          "dd MMM yyyy hh:mm:ss aaa"
-                        )
-                      : null,
-                  },
-                ]}
-              />
-            </div>
-          </>
-        )}
-      </LoadingContent>
-    </div>
+        <LoadingContent
+          loading={ordersQueryResult.isLoading}
+          error={ordersQueryResult.isError}
+          onRetry={ordersQueryResult.refetch}
+        >
+          {() => (
+            <>
+              <div className="space-y-8">
+                <TransactionSection
+                  title="Order details"
+                  items={[
+                    { label: "Order reference", value: order?.orderReference },
+                    {
+                      label: "Payment reference",
+                      value: order?.paymentReference,
+                    },
+                    {
+                      label: "Payment response code",
+                      value: order?.paymentResponseCode,
+                    },
+                    {
+                      label: "Payment response message",
+                      value: order?.paymentResponseMessage,
+                    },
+                  ]}
+                />
+                <TransactionSection
+                  title="Customer details"
+                  items={[
+                    { label: "Customer name", value: order?.customerName },
+                    { label: "Customer email", value: order?.customerEmail },
+                    {
+                      label: "Customer phone number",
+                      value: order?.customerPhone,
+                    },
+                    { label: "Country", value: "" },
+                  ]}
+                />
+                <TransactionSection
+                  title="Payment details"
+                  items={[
+                    { label: "Payment method", value: order?.paymentTypeName },
+                    { label: "Currency", value: order?.currency },
+                    { label: "Amount", value: order?.amount },
+                    { label: "Status", value: order?.orderStatus },
+                    { label: "Narration", value: order?.narration },
+                    { label: "Remarks", value: order?.remarks },
+                    { label: "Fee", value: order?.fee },
+                    { label: "Subsidiary fee", value: order?.subsidiaryFee },
+                    { label: "Customer fee", value: order?.customerFee },
+                    { label: "Who bears fee?", value: order?.whoBearsFee },
+                    {
+                      label: "Date created",
+                      value: order?.dateCreated
+                        ? dfns.format(
+                            order?.dateCreated,
+                            "dd MMM yyyy hh:mm:ss aaa"
+                          )
+                        : null,
+                    },
+                    {
+                      label: "Date updated",
+                      value: order?.dateUpdated
+                        ? dfns.format(
+                            order?.dateUpdated,
+                            "dd MMM yyyy hh:mm:ss aaa"
+                          )
+                        : null,
+                    },
+                    {
+                      label: "Date payment confirmed",
+                      value: order?.datePaymentConfirmed
+                        ? dfns.format(
+                            order?.datePaymentConfirmed,
+                            "dd MMM yyyy hh:mm:ss aaa"
+                          )
+                        : null,
+                    },
+                  ]}
+                />
+              </div>
+            </>
+          )}
+        </LoadingContent>
+      </div>
+    </>
   );
 };
 export const Component = TransactionDetails;

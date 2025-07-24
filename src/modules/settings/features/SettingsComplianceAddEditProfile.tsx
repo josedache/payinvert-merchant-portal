@@ -77,10 +77,12 @@ export default function SettingsComplianceAddEditProfile(
             Registration
           </Typography>
           <TextField
-            {...getTextFieldProps(formik, "businessName")}
+            /*{...getTextFieldProps(formik, "businessName")}*/
             label="Legal Business Name"
             fullWidth
-            disabled={isPreview}
+            // disabled={isPreview}
+            value={formik.values.businessName}
+            disabled
           />
 
           <NumberTextField

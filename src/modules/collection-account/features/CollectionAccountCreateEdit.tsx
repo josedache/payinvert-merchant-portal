@@ -48,7 +48,7 @@ function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
       accountFirstName: yup.string().label("First Name").required(),
       accountLastName: yup.string().label("Last Name").required(),
       mobileNumber: yup.string().label("Mobile Number").required(),
-      bvn: yup.string().label("BVN").required(),
+      bvn: yup.string().label("BVN").optional(),
       externalId: yup.string().label("Website URL").optional(),
     }),
     onSubmit: async () => {
@@ -103,15 +103,15 @@ function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
               {...getTextFieldProps(formik, "accountLastName")}
               required
             />
-            <NumberTextField
-              freeSolo
-              className="md:col-span-2"
-              fullWidth
-              label="BVN"
-              placeholder="Enter a bvn"
-              {...getTextFieldProps(formik, "bvn")}
-              required
-            />
+            {/*<NumberTextField*/}
+            {/*  freeSolo*/}
+            {/*  className="md:col-span-2"*/}
+            {/*  fullWidth*/}
+            {/*  label="BVN"*/}
+            {/*  placeholder="Enter a bvn"*/}
+            {/*  {...getTextFieldProps(formik, "bvn")}*/}
+            {/*  required*/}
+            {/*/>*/}
             <NumberTextField
               freeSolo
               className="md:col-span-2"

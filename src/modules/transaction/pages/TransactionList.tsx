@@ -8,6 +8,7 @@ import usePagination from "hooks/use-pagination.ts";
 import { TransactionFilterState } from "modules/transaction/features/TransactionFilter.tsx";
 import { useSnackbar } from "notistack";
 import * as dfns from "date-fns";
+import PageTitle from "components/PageTitle.tsx";
 
 const TransactionList = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -69,23 +70,26 @@ const TransactionList = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <TransactionsTableHeader
-        total={orders?.page?.total}
-        filter={filter}
-        onFilterApply={setFilter}
-        onExport={handleExport as any}
-      />
-      <Paper>
-        <TransactionTable
-          instance={tableInstance}
-          loading={ordersQueryResult.isFetching}
-          error={ordersQueryResult.isError}
-          onEmptyRetry={ordersQueryResult.refetch}
-          onErrorRetry={ordersQueryResult.refetch}
+    <>
+      <PageTitle>Transactions</PageTitle>
+      <div className="space-y-6">
+        <TransactionsTableHeader
+          total={orders?.page?.total}
+          filter={filter}
+          onFilterApply={setFilter}
+          onExport={handleExport as any}
         />
-      </Paper>
-    </div>
+        <Paper>
+          <TransactionTable
+            instance={tableInstance}
+            loading={ordersQueryResult.isFetching}
+            error={ordersQueryResult.isError}
+            onEmptyRetry={ordersQueryResult.refetch}
+            onErrorRetry={ordersQueryResult.refetch}
+          />
+        </Paper>
+      </div>
+    </>
   );
 };
 export const Component = TransactionList;

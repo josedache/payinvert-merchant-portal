@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { Wallet } from "types/wallet";
 import * as dfns from "date-fns";
 import CurrencyTypography from "components/CurrencyTypography";
+import PageTitle from "components/PageTitle.tsx";
 
 const Settlement = () => {
   const [pagination, setPagination] = usePagination();
@@ -37,48 +38,51 @@ const Settlement = () => {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center gap-4">
-        <Typography variant="h6">
-          Settlement - {walletTransactionsQueryResult?.data?.page?.total || 0}
-        </Typography>
-        <div className="flex gap-2 items-center">
-          <TextField select size="small" label="Filter" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField select size="small" label="Export" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+    <>
+      <PageTitle>Settlements</PageTitle>
+      <div className="space-y-6">
+        <div className="flex justify-between items-center gap-4">
+          <Typography variant="h6">
+            Settlement - {walletTransactionsQueryResult?.data?.page?.total || 0}
+          </Typography>
+          <div className="flex gap-2 items-center">
+            <TextField select size="small" label="Filter" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select size="small" label="Export" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
         </div>
+        <Paper className="overflow-hidden">
+          <TanStandardTable
+            instance={tableInstance}
+            loading={walletTransactionsQueryResult.isFetching}
+            error={walletTransactionsQueryResult.isError}
+            onEmptyRetry={walletTransactionsQueryResult.refetch}
+            onErrorRetry={walletTransactionsQueryResult.refetch}
+          />
+        </Paper>
       </div>
-      <Paper className="overflow-hidden">
-        <TanStandardTable
-          instance={tableInstance}
-          loading={walletTransactionsQueryResult.isFetching}
-          error={walletTransactionsQueryResult.isError}
-          onEmptyRetry={walletTransactionsQueryResult.refetch}
-          onErrorRetry={walletTransactionsQueryResult.refetch}
-        />{" "}
-      </Paper>
-    </div>
+    </>
   );
 };
 export const Component = Settlement;

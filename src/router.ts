@@ -26,6 +26,7 @@ import CustomerRoutes from "modules/customer/CustomerRoutes.tsx";
 import SettlementRoutes from "modules/settlement/SettlementRoutes";
 import WalletRoutes from "modules/wallet/WalletRoutes";
 import CollectionAccountRoutes from "modules/collection-account/CollectionAccountRoutes.tsx";
+import PayoutRoutes from "modules/payout/PayoutRoutes.tsx";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
                 path: urlConstants.ACCOUNT,
                 lazy: () => import("modules/account/Account"),
                 children: AccountRoutes,
+              },
+              {
+                path: urlConstants.PAYOUT,
+                lazy: () => import("modules/payout/Payout"),
+                children: PayoutRoutes,
               },
               {
                 path: TRANSACTION,

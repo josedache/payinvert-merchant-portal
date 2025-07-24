@@ -31,6 +31,7 @@ import { DASHBOARD, DASHBOARD_ONBOARDING } from "constants/urls";
 import React from "react";
 import useToggle from "hooks/use-toggle";
 import { subsidiaryApi } from "apis/subsidiary";
+import { PAGE_TITLE } from "constants/portal.ts";
 
 function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;
@@ -108,7 +109,7 @@ function AppProtectedHeader(props: AppBarProps) {
               </Icon>
             </IconButton>
 
-            <div></div>
+            <div id={PAGE_TITLE} className="contents" />
 
             <div className="flex-1" />
 

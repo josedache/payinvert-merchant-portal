@@ -12,6 +12,7 @@ import * as dfns from "date-fns";
 import PaymentLinkCreateEdit from "modules/payment-link/features/PaymentLinkCreateEdit.tsx";
 import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction.tsx";
 import usePagination from "hooks/use-pagination.ts";
+import PageTitle from "components/PageTitle.tsx";
 
 const PaymentLinkList = () => {
   const [pagination, setPagination] = usePagination();
@@ -37,59 +38,62 @@ const PaymentLinkList = () => {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center gap-4">
-        <Typography className="text-[18px] font-medium">
-          Payment links - {paymentLinks?.totalItems ?? 0}
-        </Typography>
-        <div className="flex gap-2 items-center">
-          <TextField select size="small" label="Filter" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField select size="small" label="Export" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <PaymentLinkCreateEdit>
-            {({ toggleOpen }) => (
-              <Button
-                startIcon={<Icon icon="ic:twotone-receipt-long" />}
-                onClick={toggleOpen}
-              >
-                Create new link
-              </Button>
-            )}
-          </PaymentLinkCreateEdit>
+    <>
+      <PageTitle>Payment links</PageTitle>
+      <div className="space-y-6">
+        <div className="flex justify-between items-center gap-4">
+          <Typography className="text-[18px] font-medium">
+            Payment links - {paymentLinks?.totalItems ?? 0}
+          </Typography>
+          <div className="flex gap-2 items-center">
+            <TextField select size="small" label="Filter" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select size="small" label="Export" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <PaymentLinkCreateEdit>
+              {({ toggleOpen }) => (
+                <Button
+                  startIcon={<Icon icon="ic:twotone-receipt-long" />}
+                  onClick={toggleOpen}
+                >
+                  Create new link
+                </Button>
+              )}
+            </PaymentLinkCreateEdit>
+          </div>
         </div>
-      </div>
 
-      <Paper>
-        <TanStandardTable
-          instance={tableInstance}
-          loading={paymentLinksQueryResult.isFetching}
-          error={paymentLinksQueryResult.isError}
-          onEmptyRetry={paymentLinksQueryResult.refetch}
-          onErrorRetry={paymentLinksQueryResult.refetch}
-        />
-      </Paper>
-    </div>
+        <Paper>
+          <TanStandardTable
+            instance={tableInstance}
+            loading={paymentLinksQueryResult.isFetching}
+            error={paymentLinksQueryResult.isError}
+            onEmptyRetry={paymentLinksQueryResult.refetch}
+            onErrorRetry={paymentLinksQueryResult.refetch}
+          />
+        </Paper>
+      </div>
+    </>
   );
 };
 export const Component = PaymentLinkList;

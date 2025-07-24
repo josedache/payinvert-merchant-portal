@@ -19,8 +19,9 @@ export const BUSINESS_CUSTOMERS = "/business/customers";
 export const BUSINESS_PAYMENT_LINKS = "/business/payment-links";
 
 export const ACCOUNT = "/account";
-export const ACCOUNT_SETTLEMENTS = "/account/settlements";
-export const ACCOUNT_PAYOUTS = "/account/payouts";
+export const SETTLEMENT = "/settlements";
+export const PAYOUT = "/payouts";
+export const PAYOUT_SETTING = "/payouts/settings";
 export const ACCOUNT_BALANCES = "/account/balances";
 export const ACCOUNT_BALANCE_HISTORY = "/account/balances/history";
 

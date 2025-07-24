@@ -17,6 +17,7 @@ import CollectionAccountCreateEdit from "modules/collection-account/features/Col
 import { CollectionAccount } from "types/collection-account.ts";
 import CollectionAccountTableAction from "modules/collection-account/features/CollectionAccountTableAction.tsx";
 import * as dfns from "date-fns";
+import PageTitle from "components/PageTitle.tsx";
 
 function CollectionAccountList() {
   const [pagination, setPagination] = usePagination();
@@ -47,6 +48,7 @@ function CollectionAccountList() {
 
   return (
     <>
+      <PageTitle>Collection accounts</PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography className="text-[18px] font-medium">
@@ -121,10 +123,10 @@ const columns: ColumnDef<CollectionAccount, any>[] = [
     header: "Account number",
     accessorKey: "accountNumber",
   },
-  {
-    header: "Mobile number",
-    accessorKey: "mobileNumber",
-  },
+  // {
+  //   header: "Mobile number",
+  //   accessorKey: "mobileNumber",
+  // },
   {
     header: "Bank Name",
     accessorKey: "bankName",

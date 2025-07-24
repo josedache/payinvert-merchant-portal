@@ -3,10 +3,11 @@ import { Icon } from "@iconify/react";
 import { subsidiaryApi } from "apis/subsidiary";
 import currency from "currency.js";
 import AnalyticsChip from "components/AnalyticsChip";
-import WalletHistory from "./WalletHistory";
+import WalletHistory from "../features/WalletHistory.tsx";
 import { MakePayout } from "assets/icons";
 import WalletMakePayoutDialog from "../features/WalletMakePayoutDialog";
 import useToggle from "hooks/use-toggle";
+import PageTitle from "components/PageTitle.tsx";
 
 const Wallet = () => {
   const [isMakePayoutDialogOpen, toggleIsMakePayoutDialogOpen] = useToggle();
@@ -25,6 +26,8 @@ const Wallet = () => {
   const complianceInfo = getComplianceInfoQuery?.data;
   return (
     <div>
+      <PageTitle>Wallet</PageTitle>
+
       <div className="flex justify-end gap-2 items-center">
         <Button
           onClick={toggleIsMakePayoutDialogOpen}
