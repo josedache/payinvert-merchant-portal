@@ -1,16 +1,16 @@
 import { Button, Icon, Paper, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { AuthSignupFormikValues } from "modules/auth/types/auth-signup.ts";
+import { AuthSignupFormikValues } from "modules/auth/types/auth-signup";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
-import { SIGNIN, SIGNUP_VERIFY_REQUEST } from "constants/urls.ts";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import PasswordTextField from "components/PasswordTextField.tsx";
+import { SIGNIN, SIGNUP_VERIFY_REQUEST } from "constants/urls";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import PasswordTextField from "components/PasswordTextField";
 import { LoadingButton } from "@mui/lab";
-import { subsidiaryApi } from "apis/subsidiary.ts";
-import AlphabetTextField from "components/AlphabetTextField.tsx";
-import NumberTextField from "components/NumberTextField.tsx";
+import { subsidiaryApi } from "apis/subsidiary";
+import AlphabetTextField from "components/AlphabetTextField";
+import NumberTextField from "components/NumberTextField";
 
 function AuthSignup() {
   const { enqueueSnackbar } = useSnackbar();

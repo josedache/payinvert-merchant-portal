@@ -1,5 +1,5 @@
-import { isBase64DataURL } from "utils/file/is-base64-data-url.ts";
-import { getBase64FileType } from "utils/file/get-base64-file-type.ts";
+import { isBase64DataURL } from "utils/file/is-base64-data-url";
+import { getBase64FileType } from "utils/file/get-base64-file-type";
 
 export function getAssetInfo(src) {
   const result = { name: "src", type: "", mimeType: "" };

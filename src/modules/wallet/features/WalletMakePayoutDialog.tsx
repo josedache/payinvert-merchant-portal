@@ -10,16 +10,16 @@ import {
   Button,
   DialogContent,
 } from "@mui/material";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
 import * as yup from "yup";
-import useStepper from "hooks/use-stepper.ts";
+import useStepper from "hooks/use-stepper";
 import { Fragment, useState } from "react";
 import Countdown from "components/Countdown";
 import { LoadingButton } from "@mui/lab";
 import OtpInput from "components/OtpInput";
 import NumberInput from "components/NumberInput";
 import { generatePath, useNavigate } from "react-router-dom";
-import { TRANSACTION_DETAIL } from "constants/urls.ts";
+import { TRANSACTION_DETAIL } from "constants/urls";
 import CurrencyTextField from "components/CurrencyTextField";
 import { Check } from "assets/icons";
 import { subsidiaryApi } from "apis/subsidiary";

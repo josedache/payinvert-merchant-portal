@@ -7,7 +7,7 @@ import {
   PaletteOptions,
 } from "@mui/material/styles";
 import SlideUpTransition from "components/SlideUpTransition";
-import DateFormat from "enums/date-format.ts";
+import DateFormat from "enums/date-format";
 import { toggleButtonGroupClasses } from "@mui/material";
 import DatePickerTextField from "components/DatePickerTextField";
 

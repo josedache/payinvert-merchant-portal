@@ -2,7 +2,7 @@ import { Button, Icon, Typography } from "@mui/material";
 import { Icon as Iconify } from "@iconify/react";
 import TransactionFilter, {
   TransactionFilterProps,
-} from "modules/transaction/features/TransactionFilter.tsx";
+} from "modules/transaction/features/TransactionFilter";
 
 const TransactionTableHeader = (props: TransactionTableHeaderProps) => {
   const { total, filter, onFilterApply, onExport } = props;

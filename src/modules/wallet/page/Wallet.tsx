@@ -3,11 +3,11 @@ import { Icon } from "@iconify/react";
 import { subsidiaryApi } from "apis/subsidiary";
 import currency from "currency.js";
 import AnalyticsChip from "components/AnalyticsChip";
-import WalletHistory from "../features/WalletHistory.tsx";
+import WalletHistory from "../features/WalletHistory";
 import { MakePayout } from "assets/icons";
 import WalletMakePayoutDialog from "../features/WalletMakePayoutDialog";
 import useToggle from "hooks/use-toggle";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const Wallet = () => {
   const [isMakePayoutDialogOpen, toggleIsMakePayoutDialogOpen] = useToggle();

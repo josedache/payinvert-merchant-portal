@@ -13,14 +13,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import DialogTitleXCloseButton from "components/DialogTitleXCloseButton.tsx";
-import useToggle from "hooks/use-toggle.ts";
+import DialogTitleXCloseButton from "components/DialogTitleXCloseButton";
+import useToggle from "hooks/use-toggle";
 import * as dfns from "date-fns";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import DatePicker from "components/DatePicker.tsx";
-import { getTextFieldHelperTextAndError } from "utils/formik/get-text-field-helper-text-and-error.ts";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import DatePicker from "components/DatePicker";
+import { getTextFieldHelperTextAndError } from "utils/formik/get-text-field-helper-text-and-error";
 import { Icon as Iconify } from "@iconify/react";
 
 function TransactionFilter(props: TransactionFilterProps) {

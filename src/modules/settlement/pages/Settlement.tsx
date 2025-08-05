@@ -3,12 +3,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { walletApi } from "apis/wallet";
 import TanStandardTable from "components/TanStandardTable";
 import useTable from "hooks/use-table";
-import usePagination from "hooks/use-pagination.ts";
+import usePagination from "hooks/use-pagination";
 import { useMemo } from "react";
 import { Wallet } from "types/wallet";
 import * as dfns from "date-fns";
 import CurrencyTypography from "components/CurrencyTypography";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const Settlement = () => {
   const [pagination, setPagination] = usePagination();

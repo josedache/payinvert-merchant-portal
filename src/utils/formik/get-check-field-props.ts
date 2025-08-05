@@ -1,4 +1,4 @@
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
 
 export function getCheckFieldProps(
   formik: any,

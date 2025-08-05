@@ -1,17 +1,17 @@
-import useTable from "hooks/use-table.ts";
+import useTable from "hooks/use-table";
 import { Paper, Typography } from "@mui/material";
-import TanStandardTable from "components/TanStandardTable.tsx";
+import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
-import usePagination from "hooks/use-pagination.ts";
+import usePagination from "hooks/use-pagination";
 import { useMemo, useState } from "react";
-import { walletApi } from "apis/wallet.ts";
-import { Wallet } from "types/wallet.ts";
+import { walletApi } from "apis/wallet";
+import { Wallet } from "types/wallet";
 import { ColumnDef } from "@tanstack/react-table";
 import * as dfns from "date-fns";
-import CurrencyTypography from "components/CurrencyTypography.tsx";
+import CurrencyTypography from "components/CurrencyTypography";
 import { DatePicker } from "@mui/x-date-pickers";
-import { TransactionTypeEnum } from "modules/transaction/enums/TransactionTypeEnum.ts";
-import TransactionDirectionChip from "modules/transaction/features/TransactionDirectionChip.tsx";
+import { TransactionTypeEnum } from "modules/transaction/enums/TransactionTypeEnum";
+import TransactionDirectionChip from "modules/transaction/features/TransactionDirectionChip";
 
 const WalletHistory = () => {
   const [pagination, setPagination] = usePagination();

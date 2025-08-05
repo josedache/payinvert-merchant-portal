@@ -9,16 +9,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import { PayoutAccountType } from "modules/payout/enums/payout-account-type.ts";
-import useTable from "hooks/use-table.ts";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import { PayoutAccountType } from "modules/payout/enums/payout-account-type";
+import useTable from "hooks/use-table";
 import { ColumnDef } from "@tanstack/react-table";
-import PayoutAccountSettingTableAction from "modules/payout/features/PayoutAccountSettingTableAction.tsx";
-import TanStandardTable from "components/TanStandardTable.tsx";
+import PayoutAccountSettingTableAction from "modules/payout/features/PayoutAccountSettingTableAction";
+import TanStandardTable from "components/TanStandardTable";
 import { Icon as Iconify } from "@iconify/react";
-import { cn } from "utils/cn.ts";
-import PageTitle from "components/PageTitle.tsx";
-import { subsidiaryApi } from "apis/subsidiary.ts";
+import { cn } from "utils/cn";
+import PageTitle from "components/PageTitle";
+import { subsidiaryApi } from "apis/subsidiary";
 import { useMemo } from "react";
 
 function PayoutAccountSetting() {

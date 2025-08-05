@@ -2,11 +2,11 @@ import { Icon } from "@iconify/react";
 import { Button, Paper, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import useTable from "hooks/use-table";
-import { PaymentLink } from "types/payment-link.ts";
+import { PaymentLink } from "types/payment-link";
 import { ColumnDef } from "@tanstack/react-table";
-import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction.tsx";
+import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction";
 import { useMemo } from "react";
-import useClipboard from "hooks/use-clipboard.ts";
+import useClipboard from "hooks/use-clipboard";
 import { useSnackbar } from "notistack";
 import * as dfns from "date-fns";
 

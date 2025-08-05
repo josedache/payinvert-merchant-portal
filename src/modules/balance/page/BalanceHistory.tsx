@@ -9,13 +9,13 @@ import {
 } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
-import usePagination from "hooks/use-pagination.ts";
+import usePagination from "hooks/use-pagination";
 import { useMemo } from "react";
-import { walletApi } from "apis/wallet.ts";
-import { Wallet } from "types/wallet.ts";
+import { walletApi } from "apis/wallet";
+import { Wallet } from "types/wallet";
 import { ColumnDef } from "@tanstack/react-table";
 import * as dfns from "date-fns";
-import CurrencyTypography from "components/CurrencyTypography.tsx";
+import CurrencyTypography from "components/CurrencyTypography";
 
 const BalanceHistory = () => {
   const [pagination, setPagination] = usePagination();

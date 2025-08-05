@@ -9,6 +9,8 @@ export const PASSWORD_RESET = "/password/reset";
 export const DASHBOARD = "/";
 export const DASHBOARD_ONBOARDING = "/dashboard/compliance";
 
+export const COMPLIANCE = "/compliance";
+
 export const BUSINESS = "/business";
 export const BUSINESS_TRANSACTIONS = "/business/transactions";
 export const BUSINESS_INVOICES = "/business/invoices";
@@ -34,7 +36,6 @@ export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
 
-export const COMPLIANCE = "/compliance";
 
 export const INVOICE = "/invoice";
 export const INVOICE_DETAIL = "/invoice/:id";

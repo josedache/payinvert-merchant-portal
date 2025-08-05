@@ -1,5 +1,5 @@
-import { baseApi } from "configs/store-query.ts";
-import { COMPLIANCE, USER } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { COMPLIANCE, USER } from "constants/tags";
 
 import {
   initiateNewPayoutRequest,

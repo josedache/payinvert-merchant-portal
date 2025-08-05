@@ -16,7 +16,7 @@ import AnalyticsChip from "components/AnalyticsChip";
 import { useState } from "react";
 import { format } from "date-fns";
 import { Settlements } from "assets/icons";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const chartFilterOptions = [
   {

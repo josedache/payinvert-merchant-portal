@@ -4,11 +4,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import TanStandardTable, {
   TanStandardTableProps,
 } from "components/TanStandardTable";
-import { Order } from "types/order.ts";
+import { Order } from "types/order";
 import * as dfns from "date-fns";
-import CurrencyTypography from "components/CurrencyTypography.tsx";
-import TransactionTableAction from "modules/transaction/features/TransactionTableAction.tsx";
-import TransactionStatus from "modules/transaction/features/TransactionStatus.tsx";
+import CurrencyTypography from "components/CurrencyTypography";
+import TransactionTableAction from "modules/transaction/features/TransactionTableAction";
+import TransactionStatus from "modules/transaction/features/TransactionStatus";
 
 function TransactionTable(props: TransactionTableProps) {
   return <TanStandardTable {...props} />;

@@ -1,5 +1,5 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
-import { CollectionAccount } from "types/collection-account.ts";
+import { ApiRequest, ApiResponse } from "types/api";
+import { CollectionAccount } from "types/collection-account";
 
 export type CollectionAccountListApiRequest = ApiRequest<
   void,

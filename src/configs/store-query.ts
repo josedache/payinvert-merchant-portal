@@ -8,7 +8,7 @@ import { API_BASE_URL } from "constants/env";
 import * as tags from "constants/tags";
 import store from "./store";
 import { logout } from "./store-actions";
-import { InitialState } from "configs/store-slice.ts";
+import { InitialState } from "configs/store-slice";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",

@@ -1,5 +1,5 @@
-import { getTextFieldError } from "utils/formik/get-text-field-error.ts";
-import { getTextFieldHelperText } from "utils/formik/get-text-field-helper-text.ts";
+import { getTextFieldError } from "utils/formik/get-text-field-error";
+import { getTextFieldHelperText } from "utils/formik/get-text-field-helper-text";
 
 /**
  *

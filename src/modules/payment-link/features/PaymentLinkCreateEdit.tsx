@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useSnackbar } from "notistack";
-import useToggle from "hooks/use-toggle.ts";
+import useToggle from "hooks/use-toggle";
 import { useFormik } from "formik";
 import {
   Button,
@@ -12,13 +12,13 @@ import {
   TextField,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import DialogTitleXCloseButton from "components/DialogTitleXCloseButton.tsx";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import CurrencyTextField from "components/CurrencyTextField.tsx";
-import { paymentLinkApi } from "apis/payment-link.ts";
-import { serviceApi } from "apis/service.ts";
+import DialogTitleXCloseButton from "components/DialogTitleXCloseButton";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import CurrencyTextField from "components/CurrencyTextField";
+import { paymentLinkApi } from "apis/payment-link";
+import { serviceApi } from "apis/service";
 import * as yup from "yup";
-import NumberTextField from "components/NumberTextField.tsx";
+import NumberTextField from "components/NumberTextField";
 
 function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
   const { children, onClose, ...restProps } = props;

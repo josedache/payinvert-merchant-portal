@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import * as globalStore from "./store-slice";
 import { baseApi } from "./store-query";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { isEmpty } from "utils/object/is-empty.ts";
+import { isEmpty } from "utils/object/is-empty";
 import { mergeDeep } from "utils/object/merge-deep";
 import { logout, refresh } from "./store-actions";
 import { throttle } from "utils/function/throttle";

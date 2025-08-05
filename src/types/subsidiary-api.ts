@@ -1,5 +1,5 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
-import { AuthUser } from "types/user.ts";
+import { ApiRequest, ApiResponse } from "types/api";
+import { AuthUser } from "types/user";
 import { Bank } from "./bank";
 
 export type SubsidiaryLoginApiRequest = ApiRequest<{

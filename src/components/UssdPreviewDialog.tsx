@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Dialog, DialogContent, DialogProps, Typography } from "@mui/material";
-import useToggle from "hooks/use-toggle.ts";
+import useToggle from "hooks/use-toggle";
 
 function UssdPreviewDialog(props: UssdPreviewDialogProps) {
   const { children, onClose, ...restProps } = props;

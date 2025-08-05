@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import MuiDatePickerProvider from "providers/MuiDatePickerProvider.tsx";
-import ReduxStoreProvider from "providers/ReduxStoreProvider.tsx";
-import MuiThemeProvider from "providers/MuiThemeProvider.tsx";
-import MuiSnackbarProvider from "providers/MuiSnackbarProvider.tsx";
+import MuiDatePickerProvider from "providers/MuiDatePickerProvider";
+import ReduxStoreProvider from "providers/ReduxStoreProvider";
+import MuiThemeProvider from "providers/MuiThemeProvider";
+import MuiSnackbarProvider from "providers/MuiSnackbarProvider";
 
 /**
  * A functional component that sets up various providers and configurations for the application.

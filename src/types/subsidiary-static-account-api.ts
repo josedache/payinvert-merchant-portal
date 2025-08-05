@@ -1,4 +1,4 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
+import { ApiRequest, ApiResponse } from "types/api";
 
 export type SubsidiaryStaticAccountDefaultWebhookViewApiRequest = ApiRequest;
 

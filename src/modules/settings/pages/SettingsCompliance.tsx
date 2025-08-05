@@ -1,5 +1,5 @@
 import SettingComplianceAddEdit from "../features/SettingComplianceAddEdit";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 export default function SettingsCompliance() {
   return (

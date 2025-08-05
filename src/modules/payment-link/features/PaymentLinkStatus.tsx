@@ -1,5 +1,5 @@
 import { Chip, ChipProps } from "@mui/material";
-import { PaymentLink } from "types/payment-link.ts";
+import { PaymentLink } from "types/payment-link";
 
 function PaymentLinkStatus(props: PaymentLinkStatusProps) {
   const { paymentLink, ...restProps } = props;

@@ -31,7 +31,7 @@ import { DASHBOARD, DASHBOARD_ONBOARDING } from "constants/urls";
 import React from "react";
 import useToggle from "hooks/use-toggle";
 import { subsidiaryApi } from "apis/subsidiary";
-import { PAGE_TITLE } from "constants/portal.ts";
+import { PAGE_TITLE } from "constants/portal";
 
 function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;

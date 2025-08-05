@@ -1,5 +1,5 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
-import { Order } from "types/order.ts";
+import { ApiRequest, ApiResponse } from "types/api";
+import { Order } from "types/order";
 
 export type OrderListApiRequest = ApiRequest;
 

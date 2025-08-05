@@ -3,12 +3,12 @@ import TransactionTable, { columns } from "../features/TransactionTable";
 import TransactionsTableHeader from "../features/TransactionTableHeader";
 import { useMemo, useState } from "react";
 import { Paper } from "@mui/material";
-import { orderApi } from "apis/order.ts";
-import usePagination from "hooks/use-pagination.ts";
-import { TransactionFilterState } from "modules/transaction/features/TransactionFilter.tsx";
+import { orderApi } from "apis/order";
+import usePagination from "hooks/use-pagination";
+import { TransactionFilterState } from "modules/transaction/features/TransactionFilter";
 import { useSnackbar } from "notistack";
 import * as dfns from "date-fns";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const TransactionList = () => {
   const { enqueueSnackbar } = useSnackbar();

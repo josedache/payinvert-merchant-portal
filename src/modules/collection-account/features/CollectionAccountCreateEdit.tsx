@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useSnackbar } from "notistack";
-import useToggle from "hooks/use-toggle.ts";
+import useToggle from "hooks/use-toggle";
 import { useFormik } from "formik";
 import {
   Button,
@@ -12,12 +12,12 @@ import {
   TextField,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import DialogTitleXCloseButton from "components/DialogTitleXCloseButton.tsx";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import { collectionAccountApi } from "apis/collection-account.ts";
+import DialogTitleXCloseButton from "components/DialogTitleXCloseButton";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import { collectionAccountApi } from "apis/collection-account";
 import * as yup from "yup";
-import NumberTextField from "components/NumberTextField.tsx";
-import { subsidiaryEnumApi } from "apis/subsidiary-enum.ts";
+import NumberTextField from "components/NumberTextField";
+import { subsidiaryEnumApi } from "apis/subsidiary-enum";
 
 function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
   const { children, onClose, ...restProps } = props;

@@ -1,6 +1,6 @@
-import { baseApi } from "configs/store-query.ts";
-import { SubsidiaryEnum } from "types/subsidiary-enum.ts";
-import { ApiRequest } from "types/api.ts";
+import { baseApi } from "configs/store-query";
+import { SubsidiaryEnum } from "types/subsidiary-enum";
+import { ApiRequest } from "types/api";
 
 export const BASE_URL = "/subsidiary/enums";
 

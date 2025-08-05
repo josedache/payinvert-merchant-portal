@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 function ApiKeyAndWebhook() {
   return (

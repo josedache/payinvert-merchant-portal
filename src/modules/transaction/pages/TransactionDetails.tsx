@@ -1,10 +1,10 @@
 import { Paper, Typography } from "@mui/material";
-import { orderApi } from "apis/order.ts";
+import { orderApi } from "apis/order";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import LoadingContent from "components/LoadingContent.tsx";
+import LoadingContent from "components/LoadingContent";
 import * as dfns from "date-fns";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const TransactionDetails = () => {
   const { id } = useParams();

@@ -1,5 +1,5 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
-import { Country, Currency } from "types/service.ts";
+import { ApiRequest, ApiResponse } from "types/api";
+import { Country, Currency } from "types/service";
 
 export type ServiceCountryListApiRequest = void;
 

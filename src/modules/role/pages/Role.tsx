@@ -1,10 +1,10 @@
 import { Button, ButtonBase, Icon, Paper, Typography } from "@mui/material";
 import { Icon as Iconify } from "@iconify/react";
-import PageTitle from "components/PageTitle.tsx";
-import { subsidiaryDashboardRoleApi } from "apis/subsidiary-dashboard-role.ts";
+import PageTitle from "components/PageTitle";
+import { subsidiaryDashboardRoleApi } from "apis/subsidiary-dashboard-role";
 import { useMemo, useState } from "react";
-import RoleCreateEdit from "modules/role/pages/RoleCreateEdit.tsx";
-import useToggle from "hooks/use-toggle.ts";
+import RoleCreateEdit from "modules/role/pages/RoleCreateEdit";
+import useToggle from "hooks/use-toggle";
 
 const Role = () => {
   const [isCreate, toggleCreate, setCreate] = useToggle();

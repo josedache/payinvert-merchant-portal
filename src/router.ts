@@ -13,8 +13,9 @@ import {
 import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
+import ComplianceRoutes from "modules/compliance/ComplianceRoutes";
 import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
-import RolesRoutes from "modules/role/RoleRoutes.tsx";
+import RolesRoutes from "modules/role/RoleRoutes";
 import TransactionsRoutes from "modules/transaction/TransactionRoutes";
 import SettingsRoutes from "modules/settings/SettingsRoutes";
 import AccountRoutes from "modules/account/AccountRoutes";
@@ -22,7 +23,7 @@ import BusinessRoutes from "modules/business/BusinessRoutes";
 import BalancesRoutes from "modules/balance/BalanceRoutes";
 import InvoicesRoutes from "modules/invoice/InvoicesRoutes";
 import ApiKeyAndWebhookRoutes from "modules/api-key-and-webhook/ApiKeyAndWebhookRoutes";
-import CustomerRoutes from "modules/customer/CustomerRoutes.tsx";
+import CustomerRoutes from "modules/customer/CustomerRoutes";
 import SettlementRoutes from "modules/settlement/SettlementRoutes";
 import WalletRoutes from "modules/wallet/WalletRoutes";
 import CollectionAccountRoutes from "modules/collection-account/CollectionAccountRoutes";
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
               },
               {
                 path: urlConstants.COMPLIANCE,
+                lazy: () => import("modules/compliance/Compliance"),
+                children: ComplianceRoutes,
+              },
+              {
+                path: urlConstants.COMPLIANCE,
                 lazy: () => import("modules/settings/Settings"),
                 children: SettingsRoutes,
               },
@@ -88,7 +94,7 @@ const router = createBrowserRouter([
               {
                 path: ROLES_AND_PERMISSION,
                 lazy: () =>
-                  import("modules/role/Role.tsx"),
+                  import("modules/role/Role"),
                 children: RolesRoutes,
               },
               {

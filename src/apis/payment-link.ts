@@ -1,5 +1,5 @@
-import { baseApi } from "configs/store-query.ts";
-import { PAYMENT_LINK } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { PAYMENT_LINK } from "constants/tags";
 import {
   PaymentLinkCreateApiRequest,
   PaymentLinkCreateApiResponse,
@@ -9,7 +9,7 @@ import {
   PaymentLinkTypesApiResponse,
   UpdatePaymentLinkStatusApiRequest,
   UpdatePaymentLinkStatusApiResponse,
-} from "types/payment-link-api.ts";
+} from "types/payment-link-api";
 
 export const BASE_URL = "/subsidiary/dashboard/payment/link";
 

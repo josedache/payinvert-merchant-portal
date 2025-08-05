@@ -9,16 +9,16 @@ import {
 } from "@mui/material";
 import { Icon as Iconify } from "@iconify/react";
 import useClipboard from "hooks/use-clipboard";
-import { subsidiaryApi } from "apis/subsidiary.ts";
-import PasswordTextField from "components/PasswordTextField.tsx";
+import { subsidiaryApi } from "apis/subsidiary";
+import PasswordTextField from "components/PasswordTextField";
 import { useFormik } from "formik";
 import { LoadingButton } from "@mui/lab";
 import { useSnackbar } from "notistack";
-import { subsidiaryStaticAccountApi } from "apis/subsidiary-static-account.ts";
-import useAuthUser from "hooks/use-auth-user.ts";
-import LoadingContent from "components/LoadingContent.tsx";
-import useToggle from "hooks/use-toggle.ts";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
+import { subsidiaryStaticAccountApi } from "apis/subsidiary-static-account";
+import useAuthUser from "hooks/use-auth-user";
+import LoadingContent from "components/LoadingContent";
+import useToggle from "hooks/use-toggle";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
 
 const ApiKeyAndWebhook = () => {
   const { enqueueSnackbar } = useSnackbar();

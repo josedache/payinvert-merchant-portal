@@ -1,6 +1,6 @@
 import { Typography, TypographyProps } from "@mui/material";
 import { createPortal } from "react-dom";
-import { PAGE_TITLE } from "constants/portal.ts";
+import { PAGE_TITLE } from "constants/portal";
 import { useLayoutEffect, useState } from "react";
 
 function PageTitle(props: TypographyProps) {

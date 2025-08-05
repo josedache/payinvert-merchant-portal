@@ -6,18 +6,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import TanStandardTable from "components/TanStandardTable.tsx";
+import TanStandardTable from "components/TanStandardTable";
 import { ColumnDef } from "@tanstack/react-table";
-import usePagination from "hooks/use-pagination.ts";
-import { collectionAccountApi } from "apis/collection-account.ts";
+import usePagination from "hooks/use-pagination";
+import { collectionAccountApi } from "apis/collection-account";
 import { useMemo } from "react";
-import useTable from "hooks/use-table.ts";
+import useTable from "hooks/use-table";
 import { Icon as Iconify } from "@iconify/react";
-import CollectionAccountCreateEdit from "modules/collection-account/features/CollectionAccountCreateEdit.tsx";
-import { CollectionAccount } from "types/collection-account.ts";
-import CollectionAccountTableAction from "modules/collection-account/features/CollectionAccountTableAction.tsx";
+import CollectionAccountCreateEdit from "modules/collection-account/features/CollectionAccountCreateEdit";
+import { CollectionAccount } from "types/collection-account";
+import CollectionAccountTableAction from "modules/collection-account/features/CollectionAccountTableAction";
 import * as dfns from "date-fns";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 function CollectionAccountList() {
   const [pagination, setPagination] = usePagination();

@@ -1,6 +1,6 @@
-import { baseApi } from "configs/store-query.ts";
-import { ORDER } from "constants/tags.ts";
-import { OrderListApiRequest, OrderListApiResponse } from "types/order-api.ts";
+import { baseApi } from "configs/store-query";
+import { ORDER } from "constants/tags";
+import { OrderListApiRequest, OrderListApiResponse } from "types/order-api";
 
 export const BASE_URL = "/subsidiary/dashboard/orders";
 

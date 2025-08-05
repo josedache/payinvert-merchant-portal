@@ -1,5 +1,5 @@
-import { baseApi } from "configs/store-query.ts";
-import { ROLE } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { ROLE } from "constants/tags";
 import {
   SubsidiaryDashboardRoleApiRequest,
   SubsidiaryDashboardRoleApiResponse,
@@ -9,7 +9,7 @@ import {
   SubsidiaryDashboardRoleListApiResponse,
   SubsidiaryDashboardRoleUpdateApiRequest,
   SubsidiaryDashboardRoleUpdateApiResponse,
-} from "types/subsidiary-dashboard-role-api.ts";
+} from "types/subsidiary-dashboard-role-api";
 
 export const BASE_URL = "/subsidiary/dashboard/role";
 

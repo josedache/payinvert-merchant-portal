@@ -13,7 +13,7 @@ import { INVOICE_ADD, INVOICE_DETAIL, INVOICE_EDIT } from "constants/urls";
 import usePopover from "hooks/use-popover";
 import useTable from "hooks/use-table";
 import { generatePath, Link } from "react-router-dom";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const Invoice = () => {
   const tableInstance = useTable({ data, columns });

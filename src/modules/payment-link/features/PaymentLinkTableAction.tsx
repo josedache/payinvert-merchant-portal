@@ -1,10 +1,10 @@
-import usePopover from "hooks/use-popover.ts";
+import usePopover from "hooks/use-popover";
 import { Button, Icon, IconButton, Popover } from "@mui/material";
 import { Icon as Iconify } from "@iconify/react";
 import { generatePath, Link } from "react-router-dom";
-import { PAYMENT_LINK_DETAIL } from "constants/urls.ts";
-import { PaymentLink } from "types/payment-link.ts";
-import useClipboard from "hooks/use-clipboard.ts";
+import { PAYMENT_LINK_DETAIL } from "constants/urls";
+import { PaymentLink } from "types/payment-link";
+import useClipboard from "hooks/use-clipboard";
 import { useSnackbar } from "notistack";
 import { paymentLinkApi } from "apis/payment-link";
 import { LoadingButton } from "@mui/lab";

@@ -1,11 +1,11 @@
-import { baseApi } from "configs/store-query.ts";
-import { WEBHOOK } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { WEBHOOK } from "constants/tags";
 import {
   SubsidiaryStaticAccountDefaultWebhookCreateApiRequest,
   SubsidiaryStaticAccountDefaultWebhookCreateApiResponse,
   SubsidiaryStaticAccountDefaultWebhookViewApiRequest,
   SubsidiaryStaticAccountDefaultWebhookViewApiResponse,
-} from "types/subsidiary-static-account-api.ts";
+} from "types/subsidiary-static-account-api";
 
 export const BASE_URL = "/subsidiary/static/account";
 

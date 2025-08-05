@@ -1,4 +1,4 @@
-import useToggle from "hooks/use-toggle.ts";
+import useToggle from "hooks/use-toggle";
 import { useSnackbar } from "notistack";
 import {
   ChangeEvent,
@@ -8,7 +8,7 @@ import {
   useMemo,
 } from "react";
 import { useFormik } from "formik";
-import { subsidiaryDashboardRoleApi } from "apis/subsidiary-dashboard-role.ts";
+import { subsidiaryDashboardRoleApi } from "apis/subsidiary-dashboard-role";
 import {
   Button,
   Checkbox,
@@ -22,12 +22,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import LoadingContent from "components/LoadingContent.tsx";
-import { subsidiaryEnumApi } from "apis/subsidiary-enum.ts";
-import DialogTitleXCloseButton from "components/DialogTitleXCloseButton.tsx";
+import LoadingContent from "components/LoadingContent";
+import { subsidiaryEnumApi } from "apis/subsidiary-enum";
+import DialogTitleXCloseButton from "components/DialogTitleXCloseButton";
 import { Icon as Iconify } from "@iconify/react";
 import { LoadingButton } from "@mui/lab";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
 
 function RoleCreateEdit(props: RoleCreateEditProps) {
   const { id, children, onClose, ...restProps } = props;

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logout } from "./store-actions";
-import { AuthUser } from "../types/user.ts";
-import { subsidiaryApi } from "apis/subsidiary.ts";
+import { AuthUser } from "../types/user";
+import { subsidiaryApi } from "apis/subsidiary";
 import * as dfns from "date-fns";
 
 export type InitialState = {

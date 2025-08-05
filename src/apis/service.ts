@@ -1,5 +1,5 @@
-import { baseApi } from "configs/store-query.ts";
-import { PAYMENT_LINK } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { PAYMENT_LINK } from "constants/tags";
 import {
   ServiceBusinessSizesListApiRequest,
   ServiceBusinessSizesListApiResponse,
@@ -7,7 +7,7 @@ import {
   ServiceCountryListApiResponse,
   ServiceCurrencyListApiRequest,
   ServiceCurrencyListApiResponse,
-} from "types/service-api.ts";
+} from "types/service-api";
 
 export const BASE_URL = "/subsidiary/dashboard/service";
 

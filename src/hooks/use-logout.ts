@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { logout as logoutAction } from "configs/store-actions";
 import useStoreDispatch from "./use-store-dispatch";
-import { subsidiaryApi } from "apis/subsidiary.ts";
+import { subsidiaryApi } from "apis/subsidiary";
 import { useSnackbar } from "notistack";
 
 function useLogout() {

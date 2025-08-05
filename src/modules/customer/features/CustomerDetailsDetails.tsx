@@ -1,4 +1,4 @@
-import { Customer } from "types/customer.ts";
+import { Customer } from "types/customer";
 import { Paper, Typography } from "@mui/material";
 
 function CustomerDetailsDetails(props: { customer: Customer }) {

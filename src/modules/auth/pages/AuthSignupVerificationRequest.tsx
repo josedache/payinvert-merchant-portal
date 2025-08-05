@@ -1,11 +1,11 @@
 import { useSnackbar } from "notistack";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { DASHBOARD, SIGNIN } from "constants/urls.ts";
+import { DASHBOARD, SIGNIN } from "constants/urls";
 import { Button, Icon, Paper, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { subsidiaryApi } from "apis/subsidiary.ts";
-import useAuthUser from "hooks/use-auth-user.ts";
-import { IS_VIRTUAL_DEVELOPMENT } from "constants/env.ts";
+import { subsidiaryApi } from "apis/subsidiary";
+import useAuthUser from "hooks/use-auth-user";
+import { IS_VIRTUAL_DEVELOPMENT } from "constants/env";
 
 function AuthSignupVerificationRequest() {
   const { enqueueSnackbar } = useSnackbar();

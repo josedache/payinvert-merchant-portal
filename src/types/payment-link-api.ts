@@ -1,5 +1,5 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
-import { PaymentLink, PaymentLinkType } from "types/payment-link.ts";
+import { ApiRequest, ApiResponse } from "types/api";
+import { PaymentLink, PaymentLinkType } from "types/payment-link";
 
 export type PaymentLinkListApiRequest = ApiRequest<
   void,

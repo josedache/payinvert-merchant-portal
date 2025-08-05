@@ -1,11 +1,11 @@
-import { baseApi } from "configs/store-query.ts";
-import { COLLECTION_ACCOUNT } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { COLLECTION_ACCOUNT } from "constants/tags";
 import {
   CollectionAccountCreateApiRequest,
   CollectionAccountCreateApiResponse,
   CollectionAccountListApiRequest,
   CollectionAccountListApiResponse,
-} from "types/collection-account-api.ts";
+} from "types/collection-account-api";
 
 export const BASE_URL = "/collection-account";
 

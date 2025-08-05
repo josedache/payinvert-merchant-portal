@@ -1,5 +1,5 @@
 import { Chip, ChipProps } from "@mui/material";
-import { Customer } from "types/customer.ts";
+import { Customer } from "types/customer";
 
 function UserStatus(props: UserStatusProps) {
   const { user, ...restProps } = props;

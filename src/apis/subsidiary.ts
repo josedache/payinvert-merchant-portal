@@ -1,5 +1,5 @@
 import { baseApi } from "configs/store-query";
-import { COMPLIANCE, KEY, PAYMENT_LINK, USER } from "constants/tags.ts";
+import { COMPLIANCE, KEY, PAYMENT_LINK, USER } from "constants/tags";
 import { ApiRequest } from "types/api";
 import {
   GetSubsidiaryBankApiResponse,
@@ -43,7 +43,7 @@ import {
   UpdateSubsidiaryComplianceKycDetailsApiResponse,
   UpdateSubsidiaryComplianceProfileApiRequest,
   UpdateSubsidiaryComplianceProfileApiResponse,
-} from "types/subsidiary-api.ts";
+} from "types/subsidiary-api";
 import objectToFormData from "utils/object/object-to-formdata";
 
 export const BASE_URL = "/subsidiary";

@@ -1,9 +1,9 @@
-import { baseApi } from "configs/store-query.ts";
-import { TRANSACTION, WALLET } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { TRANSACTION, WALLET } from "constants/tags";
 import {
   WalletTransactionListApiRequest,
   WalletTransactionListApiResponse,
-} from "types/wallet-api.ts";
+} from "types/wallet-api";
 
 export const BASE_URL = "/subsidiary/dashboard/wallet";
 

@@ -2,8 +2,8 @@ import { useSnackbar } from "notistack";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { DASHBOARD, SIGNIN } from "constants/urls.ts";
-import { extractSearchParams } from "utils/url/extract-search-params.ts";
+import { DASHBOARD, SIGNIN } from "constants/urls";
+import { extractSearchParams } from "utils/url/extract-search-params";
 import {
   Icon,
   Paper,
@@ -13,12 +13,12 @@ import {
   Button,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import OtpInput from "components/OtpInput.tsx";
-import NumberInput from "components/NumberInput.tsx";
-import { subsidiaryApi } from "apis/subsidiary.ts";
-import Countdown from "components/Countdown.tsx";
+import OtpInput from "components/OtpInput";
+import NumberInput from "components/NumberInput";
+import { subsidiaryApi } from "apis/subsidiary";
+import Countdown from "components/Countdown";
 import { useState } from "react";
-import useAuthUser from "hooks/use-auth-user.ts";
+import useAuthUser from "hooks/use-auth-user";
 
 function AuthSignin2fa() {
   const { enqueueSnackbar } = useSnackbar();

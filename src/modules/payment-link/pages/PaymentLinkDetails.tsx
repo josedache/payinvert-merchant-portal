@@ -1,11 +1,11 @@
 import PaymentLinkDetailsTable from "../features/PaymentLinkDetailsTable";
 // import PaymentLinkDetailsProductTable from "../features/PaymentLinkProductList";
-import { paymentLinkApi } from "apis/payment-link.ts";
+import { paymentLinkApi } from "apis/payment-link";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import LoadingContent from "components/LoadingContent.tsx";
-import PaymentLinkTransactionList from "modules/payment-link/features/PaymentLinkTransactionList.tsx";
-import PageTitle from "components/PageTitle.tsx";
+import LoadingContent from "components/LoadingContent";
+import PaymentLinkTransactionList from "modules/payment-link/features/PaymentLinkTransactionList";
+import PageTitle from "components/PageTitle";
 
 const PaymentLinkDetails = () => {
   const { id } = useParams();

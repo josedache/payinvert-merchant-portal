@@ -1,5 +1,5 @@
-import { ApiRequest, ApiResponse } from "types/api.ts";
-import { Customer } from "types/customer.ts";
+import { ApiRequest, ApiResponse } from "types/api";
+import { Customer } from "types/customer";
 
 export type CustomerListApiRequest = ApiRequest;
 

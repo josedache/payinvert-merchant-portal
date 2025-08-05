@@ -4,7 +4,7 @@ import { RouteObject } from "react-router-dom";
 export default [
   {
     path: PAYMENT_LINK,
-    lazy: () => import("modules/payment-link/pages/PaymentLinkList.tsx"),
+    lazy: () => import("modules/payment-link/pages/PaymentLinkList"),
   },
   {
     path: PAYMENT_LINK_DETAIL,

@@ -1,15 +1,15 @@
-import TransactionsTableHeader from "modules/transaction/features/TransactionTableHeader.tsx";
+import TransactionsTableHeader from "modules/transaction/features/TransactionTableHeader";
 import { Paper } from "@mui/material";
 import TransactionTable, {
   columns,
-} from "modules/transaction/features/TransactionTable.tsx";
-import usePagination from "hooks/use-pagination.ts";
-import { orderApi } from "apis/order.ts";
+} from "modules/transaction/features/TransactionTable";
+import usePagination from "hooks/use-pagination";
+import { orderApi } from "apis/order";
 import { useMemo, useState } from "react";
-import useTable from "hooks/use-table.ts";
-import { PaymentLink } from "types/payment-link.ts";
+import useTable from "hooks/use-table";
+import { PaymentLink } from "types/payment-link";
 import { useSnackbar } from "notistack";
-import { TransactionFilterState } from "modules/transaction/features/TransactionFilter.tsx";
+import { TransactionFilterState } from "modules/transaction/features/TransactionFilter";
 import * as dfns from "date-fns";
 
 function PaymentLinkTransactionList(props: PaymentLinkTransactionListProps) {

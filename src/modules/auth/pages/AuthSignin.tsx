@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { AuthSigninFormikValues } from "modules/auth/types/auth-signin.ts";
+import { AuthSigninFormikValues } from "modules/auth/types/auth-signin";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -16,12 +16,12 @@ import {
   DASHBOARD_ONBOARDING,
   SIGNIN_2FA,
   SIGNUP,
-} from "constants/urls.ts";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import PasswordTextField from "components/PasswordTextField.tsx";
-import AuthPasswordResetRequest from "modules/auth/features/AuthPasswordResetRequest.tsx";
+} from "constants/urls";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import PasswordTextField from "components/PasswordTextField";
+import AuthPasswordResetRequest from "modules/auth/features/AuthPasswordResetRequest";
 import { LoadingButton } from "@mui/lab";
-import { subsidiaryApi } from "apis/subsidiary.ts";
+import { subsidiaryApi } from "apis/subsidiary";
 
 function AuthSignin() {
   const { enqueueSnackbar } = useSnackbar();

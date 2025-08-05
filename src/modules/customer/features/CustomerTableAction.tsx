@@ -1,9 +1,9 @@
-import usePopover from "hooks/use-popover.ts";
+import usePopover from "hooks/use-popover";
 import { Button, Popover } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { generatePath, Link } from "react-router-dom";
-import { CUSTOMER_DETAIL } from "constants/urls.ts";
-import { Customer } from "types/customer.ts";
+import { CUSTOMER_DETAIL } from "constants/urls";
+import { Customer } from "types/customer";
 
 const CustomerTableAction = (props: CustomerTableActionProps) => {
   const { customer } = props;

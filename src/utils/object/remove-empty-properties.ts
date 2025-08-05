@@ -1,4 +1,4 @@
-import isObject from "utils/object/is-object.ts";
+import isObject from "utils/object/is-object";
 
 /**
  * @template {{}} T

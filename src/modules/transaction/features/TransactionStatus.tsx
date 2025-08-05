@@ -1,5 +1,5 @@
 import { Chip } from "@mui/material";
-import { Order } from "types/order.ts";
+import { Order } from "types/order";
 
 function TransactionStatus(props: TransactionStatusProps) {
   const { order } = props;

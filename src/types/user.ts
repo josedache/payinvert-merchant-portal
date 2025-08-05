@@ -1,5 +1,5 @@
-import { Notification } from "types/notification.ts";
-import { Subsidiary } from "types/subsidiary.ts";
+import { Notification } from "types/notification";
+import { Subsidiary } from "types/subsidiary";
 
 export type User = {
   id: number;

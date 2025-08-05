@@ -8,7 +8,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { server } from "configs/msw-server";
-import TestingProvider from "providers/TestingProvider.tsx";
+import TestingProvider from "providers/TestingProvider";
 import { ReactElement } from "react";
 
 const allQueries = { ...queries };

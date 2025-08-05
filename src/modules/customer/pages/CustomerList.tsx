@@ -3,12 +3,12 @@ import TanStandardTable from "components/TanStandardTable";
 import useTable from "hooks/use-table";
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Customer } from "types/customer.ts";
-import CustomerStatus from "modules/customer/features/CustomerStatus.tsx";
-import { customerApi } from "apis/customer.ts";
-import CustomerTableAction from "modules/customer/features/CustomerTableAction.tsx";
-import usePagination from "hooks/use-pagination.ts";
-import PageTitle from "components/PageTitle.tsx";
+import { Customer } from "types/customer";
+import CustomerStatus from "modules/customer/features/CustomerStatus";
+import { customerApi } from "apis/customer";
+import CustomerTableAction from "modules/customer/features/CustomerTableAction";
+import usePagination from "hooks/use-pagination";
+import PageTitle from "components/PageTitle";
 
 const CustomerList = () => {
   const [pagination, setPagination] = usePagination();

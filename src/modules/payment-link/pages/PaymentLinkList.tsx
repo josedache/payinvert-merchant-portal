@@ -2,17 +2,17 @@ import { Icon } from "@iconify/react";
 import { Button, MenuItem, Paper, TextField, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import useTable from "hooks/use-table";
-import { paymentLinkApi } from "apis/payment-link.ts";
+import { paymentLinkApi } from "apis/payment-link";
 import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { PaymentLink } from "types/payment-link.ts";
-import PaymentLinkStatus from "modules/payment-link/features/PaymentLinkStatus.tsx";
-import CurrencyTypography from "components/CurrencyTypography.tsx";
+import { PaymentLink } from "types/payment-link";
+import PaymentLinkStatus from "modules/payment-link/features/PaymentLinkStatus";
+import CurrencyTypography from "components/CurrencyTypography";
 import * as dfns from "date-fns";
-import PaymentLinkCreateEdit from "modules/payment-link/features/PaymentLinkCreateEdit.tsx";
-import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction.tsx";
-import usePagination from "hooks/use-pagination.ts";
-import PageTitle from "components/PageTitle.tsx";
+import PaymentLinkCreateEdit from "modules/payment-link/features/PaymentLinkCreateEdit";
+import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction";
+import usePagination from "hooks/use-pagination";
+import PageTitle from "components/PageTitle";
 
 const PaymentLinkList = () => {
   const [pagination, setPagination] = usePagination();

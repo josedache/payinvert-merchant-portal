@@ -1,5 +1,5 @@
 import { Chip, Paper, TextField, Typography } from "@mui/material";
-import PageTitle from "components/PageTitle.tsx";
+import PageTitle from "components/PageTitle";
 
 const InvoiceDetail = () => {
   return (

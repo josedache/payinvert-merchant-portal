@@ -1,7 +1,7 @@
-import usePopover from "hooks/use-popover.ts";
+import usePopover from "hooks/use-popover";
 import { Button, MenuItem, Popover } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { CollectionAccount } from "types/collection-account.ts";
+import { CollectionAccount } from "types/collection-account";
 
 const UserTableAction = () => {
   const popover = usePopover();

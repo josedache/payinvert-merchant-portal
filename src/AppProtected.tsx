@@ -9,7 +9,7 @@ import store from "configs/store";
 import { SIGNIN } from "constants/urls";
 import { CircularProgress } from "@mui/material";
 import Logo from "components/Logo";
-import { subsidiaryApi } from "apis/subsidiary.ts";
+import { subsidiaryApi } from "apis/subsidiary";
 
 function AppProtected() {
   const { logout } = useLogout();

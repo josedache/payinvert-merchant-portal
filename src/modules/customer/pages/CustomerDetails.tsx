@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { customerApi } from "apis/customer.ts";
+import { customerApi } from "apis/customer";
 import { useMemo } from "react";
-import CustomerTransactionList from "modules/customer/features/CustomerTransactionList.tsx";
-import LoadingContent from "components/LoadingContent.tsx";
-import CustomerDetailsDetails from "modules/customer/features/CustomerDetailsDetails.tsx";
-import PageTitle from "components/PageTitle.tsx";
+import CustomerTransactionList from "modules/customer/features/CustomerTransactionList";
+import LoadingContent from "components/LoadingContent";
+import CustomerDetailsDetails from "modules/customer/features/CustomerDetailsDetails";
+import PageTitle from "components/PageTitle";
 
 function CustomerDetails() {
   const { id } = useParams();

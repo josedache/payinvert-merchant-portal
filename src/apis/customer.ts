@@ -1,9 +1,9 @@
-import { baseApi } from "configs/store-query.ts";
-import { CUSTOMER } from "constants/tags.ts";
+import { baseApi } from "configs/store-query";
+import { CUSTOMER } from "constants/tags";
 import {
   CustomerListApiRequest,
   CustomerListApiResponse,
-} from "types/customer-api.ts";
+} from "types/customer-api";
 
 export const BASE_URL = "/subsidiary/dashboard/customers";
 

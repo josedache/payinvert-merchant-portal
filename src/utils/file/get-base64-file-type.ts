@@ -1,4 +1,4 @@
-import { isBase64DataURL } from "utils/file/is-base64-data-url.ts";
+import { isBase64DataURL } from "utils/file/is-base64-data-url";
 
 /**
  *

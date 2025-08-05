@@ -1,7 +1,7 @@
 import { useSnackbar } from "notistack";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { subsidiaryApi } from "apis/subsidiary.ts";
-import { SIGNIN } from "constants/urls.ts";
+import { subsidiaryApi } from "apis/subsidiary";
+import { SIGNIN } from "constants/urls";
 import { Button, CircularProgress, Paper, Typography } from "@mui/material";
 import { useCallback, useEffect } from "react";
 

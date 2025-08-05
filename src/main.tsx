@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import ReduxStoreProvider from "providers/ReduxStoreProvider.tsx";
-import MuiThemeProvider from "./providers/MuiThemeProvider.tsx";
-import MuiDatePickerProvider from "./providers/MuiDatePickerProvider.tsx";
-import MuiSnackbarProvider from "./providers/MuiSnackbarProvider.tsx";
+import ReduxStoreProvider from "providers/ReduxStoreProvider";
+import MuiThemeProvider from "./providers/MuiThemeProvider";
+import MuiDatePickerProvider from "./providers/MuiDatePickerProvider";
+import MuiSnackbarProvider from "./providers/MuiSnackbarProvider";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
-import { PRODUCTION } from "constants/env.ts";
+import { PRODUCTION } from "constants/env";
 
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(

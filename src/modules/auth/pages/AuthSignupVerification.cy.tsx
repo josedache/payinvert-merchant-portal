@@ -1,6 +1,6 @@
-import AuthSignupVerification from "./AuthSignupVerification.tsx";
+import AuthSignupVerification from "./AuthSignupVerification";
 import { createRoutesStub } from "react-router-dom";
-import { SIGNUP_VERIFY } from "constants/urls.ts";
+import { SIGNUP_VERIFY } from "constants/urls";
 
 describe("<AuthSignupVerification />", () => {
   it("renders", () => {

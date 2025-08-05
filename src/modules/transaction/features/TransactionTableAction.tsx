@@ -1,9 +1,9 @@
-import usePopover from "hooks/use-popover.ts";
+import usePopover from "hooks/use-popover";
 import { Button, Popover } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { generatePath, Link } from "react-router-dom";
-import { TRANSACTION_DETAIL } from "constants/urls.ts";
-import { Order } from "types/order.ts";
+import { TRANSACTION_DETAIL } from "constants/urls";
+import { Order } from "types/order";
 
 const TransactionTableAction = (props: TransactionTableActionProps) => {
   const { order } = props;

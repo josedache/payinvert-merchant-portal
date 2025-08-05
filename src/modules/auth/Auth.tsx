@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import AuthBackgroundSvg from "assets/svgs/auth-background.svg?react";
 import { Container } from "@mui/material";
-import Logo from "components/Logo.tsx";
+import Logo from "components/Logo";
 
 function Auth() {
   return (

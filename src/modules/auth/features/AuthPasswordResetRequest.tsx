@@ -1,6 +1,6 @@
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import useToggle from "hooks/use-toggle.ts";
+import useToggle from "hooks/use-toggle";
 import {
   Button,
   Dialog,
@@ -9,12 +9,12 @@ import {
   DialogProps,
   TextField,
 } from "@mui/material";
-import DialogTitleXCloseButton from "components/DialogTitleXCloseButton.tsx";
+import DialogTitleXCloseButton from "components/DialogTitleXCloseButton";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { PASSWORD_RESET } from "constants/urls.ts";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import { subsidiaryApi } from "apis/subsidiary.ts";
+import { PASSWORD_RESET } from "constants/urls";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import { subsidiaryApi } from "apis/subsidiary";
 import { ReactNode } from "react";
 import { LoadingButton } from "@mui/lab";
 

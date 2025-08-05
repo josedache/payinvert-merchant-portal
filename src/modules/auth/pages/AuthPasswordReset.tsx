@@ -3,12 +3,12 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { SIGNIN } from "constants/urls.ts";
-import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
-import PasswordTextField from "components/PasswordTextField.tsx";
+import { SIGNIN } from "constants/urls";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import PasswordTextField from "components/PasswordTextField";
 import { LoadingButton } from "@mui/lab";
-import { subsidiaryApi } from "apis/subsidiary.ts";
-import NumberTextField from "components/NumberTextField.tsx";
+import { subsidiaryApi } from "apis/subsidiary";
+import NumberTextField from "components/NumberTextField";
 
 function AuthPasswordReset() {
   const { enqueueSnackbar } = useSnackbar();

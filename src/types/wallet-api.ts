@@ -1,4 +1,4 @@
-import { ApiPaginationResponse, ApiRequest } from "types/api.ts";
+import { ApiPaginationResponse, ApiRequest } from "types/api";
 
 export type WalletTransactionListApiRequest = ApiRequest;
 
