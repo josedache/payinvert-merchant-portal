@@ -4,7 +4,7 @@ import { ApiRequest } from "types/api.ts";
 
 export const BASE_URL = "/subsidiary/enums";
 
-export const subsidiaryApi = baseApi.injectEndpoints({
+export const subsidiaryEnumApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getSubsidiaryCollectionBankEnums: builder.query<
       SubsidiaryEnum[],
@@ -12,6 +12,18 @@ export const subsidiaryApi = baseApi.injectEndpoints({
     >({
       query: (config) => ({
         url: `${BASE_URL}/collection-bank`,
+        ...config,
+      }),
+    }),
+    getModuleEnums: builder.query<SubsidiaryEnum[], ApiRequest>({
+      query: (config) => ({
+        url: `${BASE_URL}/module`,
+        ...config,
+      }),
+    }),
+    getRoleActionsEnums: builder.query<SubsidiaryEnum[], ApiRequest>({
+      query: (config) => ({
+        url: `${BASE_URL}/role-actions`,
         ...config,
       }),
     }),

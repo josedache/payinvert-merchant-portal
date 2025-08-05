@@ -17,7 +17,7 @@ import { getTextFieldProps } from "utils/formik/get-text-field-props.ts";
 import { collectionAccountApi } from "apis/collection-account.ts";
 import * as yup from "yup";
 import NumberTextField from "components/NumberTextField.tsx";
-import { subsidiaryApi } from "apis/subsidiary-enum.ts";
+import { subsidiaryEnumApi } from "apis/subsidiary-enum.ts";
 
 function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
   const { children, onClose, ...restProps } = props;
@@ -30,7 +30,7 @@ function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
     collectionAccountApi.useCreateCollectionAccountBusinessMutation();
 
   const collectionBankEnumsQueryResult =
-    subsidiaryApi.useGetSubsidiaryCollectionBankEnumsQuery(undefined);
+    subsidiaryEnumApi.useGetSubsidiaryCollectionBankEnumsQuery(undefined);
 
   const collectionBankEnums = collectionBankEnumsQueryResult.data;
 

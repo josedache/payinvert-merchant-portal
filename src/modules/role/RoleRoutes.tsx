@@ -4,6 +4,6 @@ import { RouteObject } from "react-router-dom";
 export default [
   {
     path: ROLES_AND_PERMISSION,
-    lazy: () => import("modules/role-and-permission/pages/RoleAndPermission"),
+    lazy: () => import("modules/role/pages/Role"),
   },
 ] as RouteObject[];

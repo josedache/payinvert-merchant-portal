@@ -61,3 +61,5 @@ export const CUSTOMER_DETAIL = "/customers/:id";
 export const SETTLEMENTS = "/settlements";
 
 export const COLLECTION_ACCOUNT = "/collection-accounts";
+
+export const USER = '/users'

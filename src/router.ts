@@ -14,7 +14,7 @@ import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
 import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
-import RolesAndPermissionsRoutes from "modules/role-and-permission/RoleAndPermissionRoutes";
+import RolesRoutes from "modules/role/RoleRoutes.tsx";
 import TransactionsRoutes from "modules/transaction/TransactionRoutes";
 import SettingsRoutes from "modules/settings/SettingsRoutes";
 import AccountRoutes from "modules/account/AccountRoutes";
@@ -25,8 +25,9 @@ import ApiKeyAndWebhookRoutes from "modules/api-key-and-webhook/ApiKeyAndWebhook
 import CustomerRoutes from "modules/customer/CustomerRoutes.tsx";
 import SettlementRoutes from "modules/settlement/SettlementRoutes";
 import WalletRoutes from "modules/wallet/WalletRoutes";
-import CollectionAccountRoutes from "modules/collection-account/CollectionAccountRoutes.tsx";
-import PayoutRoutes from "modules/payout/PayoutRoutes.tsx";
+import CollectionAccountRoutes from "modules/collection-account/CollectionAccountRoutes";
+import PayoutRoutes from "modules/payout/PayoutRoutes";
+import UserRoutes from "modules/user/UserRoutes";
 
 const router = createBrowserRouter([
   {
@@ -87,8 +88,8 @@ const router = createBrowserRouter([
               {
                 path: ROLES_AND_PERMISSION,
                 lazy: () =>
-                  import("modules/role-and-permission/RoleAndPermission"),
-                children: RolesAndPermissionsRoutes,
+                  import("modules/role/Role.tsx"),
+                children: RolesRoutes,
               },
               {
                 path: SETTINGS_API_WEBHOOKS,
@@ -126,6 +127,11 @@ const router = createBrowserRouter([
                 lazy: () =>
                   import("modules/collection-account/CollectionAccount"),
                 children: CollectionAccountRoutes,
+              },
+              {
+                path: urlConstants.USER,
+                lazy: () => import("modules/user/User"),
+                children: UserRoutes,
               },
             ],
           },

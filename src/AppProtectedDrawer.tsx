@@ -153,18 +153,18 @@ function AppProtectedDrawer() {
                 to: urlsConstant.PAYOUT_SETTING,
                 kycAllow: isActiveClient,
               },
-              // {
-              //   icon: <CustomIcon.RolesPermissions />,
-              //   label: "Roles & Permissions",
-              //   to: urlsConstant.ROLES_AND_PERMISSION,
-              //   kycAllow: isActiveClient,
-              // },
-              // {
-              //   icon: <CustomIcon.UserSubsidiaries />,
-              //   label: "Users",
-              //   to: urlsConstant.SETTINGS_USERS,
-              //   kycAllow: isActiveClient,
-              // },
+              {
+                icon: <CustomIcon.RolesPermissions />,
+                label: "Roles & Permissions",
+                to: urlsConstant.ROLES_AND_PERMISSION,
+                kycAllow: isActiveClient,
+              },
+              {
+                icon: <CustomIcon.UserSubsidiaries />,
+                label: "Users",
+                to: urlsConstant.USER,
+                kycAllow: isActiveClient,
+              },
               // {
               //   icon: <CustomIcon.Preferences />,
               //   label: "Preferences",
