@@ -26,16 +26,23 @@ export default function SettingsComplianceAddEditDirectorsInfo(
           />
 
           {!isPreview ? (
-            <FileUploadInput
-              label="Director's ID"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                formik.setFieldValue("directorIdentity", file);
-              }}
-              {...getTextFieldHelperTextAndError(formik, "directorIdentity")}
-              disabled={isPreview}
-              required
-            />
+            <>
+              <FileUploadInput
+                label="Director's ID"
+                maxSize={10 * 1024 * 1024}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  formik.setFieldValue("directorIdentity", file);
+                }}
+                {...getTextFieldHelperTextAndError(
+                  formik,
+                  "directorIdentity",
+                  "Accepted file formats:  .jpg,  .png,  .pdf , Max. size: 10MB"
+                )}
+                disabled={isPreview}
+                required
+              />
+            </>
           ) : null}
 
           <TextField

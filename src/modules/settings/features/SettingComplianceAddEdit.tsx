@@ -35,7 +35,7 @@ export default function SettingComplianceAddEdit(
 ) {
   const { isInitialOnboarding } = props;
   const { enqueueSnackbar } = useSnackbar();
-  const stepper = useStepper();
+  const stepper = useStepper({initialStep: 2});
   const navigate = useNavigate();
 
   const [isEdit] = useToggle();

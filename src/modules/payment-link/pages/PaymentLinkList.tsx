@@ -13,6 +13,7 @@ import PaymentLinkCreateEdit from "modules/payment-link/features/PaymentLinkCrea
 import PaymentLinkTableAction from "modules/payment-link/features/PaymentLinkTableAction";
 import usePagination from "hooks/use-pagination";
 import PageTitle from "components/PageTitle";
+import NumberTypography from "components/NumberTypography";
 
 const PaymentLinkList = () => {
   const [pagination, setPagination] = usePagination();
@@ -115,7 +116,7 @@ const columns: ColumnDef<PaymentLink, any>[] = [
       !getValue() ? (
         <Typography>No Limit</Typography>
       ) : (
-        <CurrencyTypography>{getValue()}</CurrencyTypography>
+        <NumberTypography>{getValue()}</NumberTypography>
       ),
   },
   {
