@@ -1,18 +1,18 @@
 import { useMemo } from "react";
 import {
+  Avatar,
+  Badge,
+  Collapse,
   Drawer,
+  Icon,
   IconButton,
   List,
+  ListItemButton,
+  Paper,
+  Popover,
   Toolbar,
   Typography,
   useMediaQuery,
-  ListItemButton,
-  Popover,
-  Avatar,
-  Paper,
-  Badge,
-  Collapse,
-  Icon,
 } from "@mui/material";
 import clsx from "clsx";
 import { Link, matchPath, useLocation } from "react-router-dom";
@@ -144,7 +144,7 @@ function AppProtectedDrawer() {
               {
                 icon: <CustomIcon.Compliance />,
                 label: "Compliance Information",
-                to: urlsConstant.COMPLIANCE,
+                to: urlsConstant.SETTINGS_COMPLIANCE,
                 kycAllow: true,
               },
               {
@@ -159,12 +159,12 @@ function AppProtectedDrawer() {
                 to: urlsConstant.ROLES_AND_PERMISSION,
                 kycAllow: isActiveClient,
               },
-              {
-                icon: <CustomIcon.UserSubsidiaries />,
-                label: "Users",
-                to: urlsConstant.USER,
-                kycAllow: isActiveClient,
-              },
+              // {
+              //   icon: <CustomIcon.UserSubsidiaries />,
+              //   label: "Users",
+              //   to: urlsConstant.USER,
+              //   kycAllow: isActiveClient,
+              // },
               // {
               //   icon: <CustomIcon.Preferences />,
               //   label: "Preferences",
@@ -197,7 +197,7 @@ function AppProtectedDrawer() {
           paper: {
             className: clsx(
               collapseToIcon ? "w-[80px]" : "w-[270px]",
-              "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all bg-white",
+              "flex flex-col border-0 pl-4 pr-4 md:pr-0 bg-background-default text-primary-contrastText transition-all bg-white"
               // isLg ? "" : "bg-none"
             ),
           },
@@ -206,7 +206,10 @@ function AppProtectedDrawer() {
       >
         <Toolbar className="flex items-center px-0 pt-4  justify-between ">
           {isLg && (
-            <Paper elevation={0} className="py-4 px-3 w-full flex justify-center">
+            <Paper
+              elevation={0}
+              className="py-4 px-3 w-full flex justify-center"
+            >
               <Logo className="w-full h-full max-w-[150px]" variant="2" />
               {/*<Logo width={48} height={48} className="" variant="1" />*/}
             </Paper>
@@ -310,7 +313,7 @@ function AppProtectedDrawerItem(props: any) {
       // elevation={!!match || !isSubMenu ? 0 : 1}
       elevation={0}
       className={clsx(
-        "mb-6 p-0 mt-0 overflow-hidden",
+        "mb-6 p-0 mt-0 overflow-hidden"
         // !!match || isSubMenu ? "bg-white" : "bg-transparent"
       )}
     >
@@ -358,41 +361,39 @@ function AppProtectedDrawerItem(props: any) {
       {isGroup && (
         <Collapse in={isSubMenu} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {links?.map(
-              ({ label, icon, to, toMatchExclude, ...rest }) => (
-                <ListItemButton
-                  disableRipple
-                  key={label}
-                  selected={
-                    match?.pathnameBase === to &&
-                    !toMatchExclude?.includes(match?.pathname)
-                  }
-                  className={clsx(
-                    "px-4 font-bold rounded-none py-3",
-                    match?.pathnameBase === to &&
-                      !toMatchExclude?.includes(match?.pathname) &&
-                      "bg-primary-lighter text-primary-main"
-                  )}
-                  disabled={!rest?.kycAllow}
-                  component={Link}
-                  to={to}
-                  {...rest}
-                >
-                  {typeof icon === "string" ? (
-                    <Iconify
-                      icon={icon}
-                      className="text-2xl mr-5 text-primary-main"
-                    />
-                  ) : (
-                    <Icon className="text-2xl mr-5 text-primary-main">
-                      {icon}
-                    </Icon>
-                  )}
+            {links?.map(({ label, icon, to, toMatchExclude, ...rest }) => (
+              <ListItemButton
+                disableRipple
+                key={label}
+                selected={
+                  match?.pathnameBase === to &&
+                  !toMatchExclude?.includes(match?.pathname)
+                }
+                className={clsx(
+                  "px-4 font-bold rounded-none py-3",
+                  match?.pathnameBase === to &&
+                    !toMatchExclude?.includes(match?.pathname) &&
+                    "bg-primary-lighter text-primary-main"
+                )}
+                disabled={!rest?.kycAllow}
+                component={Link}
+                to={to}
+                {...rest}
+              >
+                {typeof icon === "string" ? (
+                  <Iconify
+                    icon={icon}
+                    className="text-2xl mr-5 text-primary-main"
+                  />
+                ) : (
+                  <Icon className="text-2xl mr-5 text-primary-main">
+                    {icon}
+                  </Icon>
+                )}
 
-                  <Typography className="font-medium">{label}</Typography>
-                </ListItemButton>
-              )
-            )}
+                <Typography className="font-medium">{label}</Typography>
+              </ListItemButton>
+            ))}
           </List>
         </Collapse>
       )}

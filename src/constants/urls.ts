@@ -29,7 +29,7 @@ export const ACCOUNT_BALANCE_HISTORY = "/account/balances/history";
 
 export const SETTINGS = "/settings";
 export const SETTINGS_BUSINESS = "/settings/business";
-export const SETTINGS_COMPLIANCE_INFO = "/settings/compliance";
+export const SETTINGS_COMPLIANCE = "/settings/compliance";
 export const SETTINGS_PAYOUT_ACCOUNTS = "/settings/payout-accounts";
 export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
 export const SETTINGS_USERS = "/settings/users";

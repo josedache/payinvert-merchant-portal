@@ -1,16 +1,16 @@
 import AppErrorBoundary from "./AppErrorBoundary";
 import { createBrowserRouter } from "react-router-dom";
 
+import * as urlConstants from "constants/urls";
 import {
+  BALANCE,
+  CUSTOMER,
   INVOICE,
   PAYMENT_LINK,
   ROLES_AND_PERMISSION,
-  TRANSACTION,
-  BALANCE,
   SETTINGS_API_WEBHOOKS,
-  CUSTOMER,
+  TRANSACTION,
 } from "constants/urls";
-import * as urlConstants from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
 import ComplianceRoutes from "modules/compliance/ComplianceRoutes";
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
                 children: ComplianceRoutes,
               },
               {
-                path: urlConstants.COMPLIANCE,
+                path: urlConstants.SETTINGS_COMPLIANCE,
                 lazy: () => import("modules/settings/Settings"),
                 children: SettingsRoutes,
               },
@@ -93,8 +93,7 @@ const router = createBrowserRouter([
               },
               {
                 path: ROLES_AND_PERMISSION,
-                lazy: () =>
-                  import("modules/role/Role"),
+                lazy: () => import("modules/role/Role"),
                 children: RolesRoutes,
               },
               {
