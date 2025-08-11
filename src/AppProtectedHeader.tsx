@@ -31,6 +31,7 @@ import { COMPLIANCE_UPDATE, DASHBOARD } from "constants/urls";
 import React from "react";
 import useToggle from "hooks/use-toggle";
 import { PAGE_TITLE } from "constants/portal";
+import ConfirmationDialog from "components/ConfirmationDialog";
 
 function AppProtectedHeader(props: AppBarProps) {
   const { ...restProps } = props;
@@ -46,7 +47,7 @@ function AppProtectedHeader(props: AppBarProps) {
   ] = useToggle();
 
   const infoPopover = usePopover();
-  const { logout } = useLogout();
+  const { logout, isLoading: isLogoutLoading } = useLogout();
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
@@ -108,6 +109,7 @@ function AppProtectedHeader(props: AppBarProps) {
             <div className="flex-1" />
 
             <Switch
+              className="hidden"
               checked={checked}
               disabled={true}
               onChange={handleChange}
@@ -115,7 +117,7 @@ function AppProtectedHeader(props: AppBarProps) {
             />
 
             <IconButton disabled>
-              <Badge variant="dot" color="error">
+              <Badge variant="dot" color="error" badgeContent={0}>
                 <Iconify
                   className="MuiIcon-root"
                   icon="pajamas:notifications"
@@ -159,21 +161,28 @@ function AppProtectedHeader(props: AppBarProps) {
                 <Divider />
 
                 <div className="space-y-2 mt-1">
-                  <ListItemButton
-                    className="rounded-lg"
-                    color="error"
-                    onClick={() => logout()}
-                  >
-                    <Iconify
-                      icon="hugeicons:logout-02"
-                      width="20"
-                      height="20"
-                      className="text-error-main mr-2"
-                    />
-                    <Typography color="error" variant="body2">
-                      Sign out
-                    </Typography>
-                  </ListItemButton>
+                  <ConfirmationDialog
+                    isLoading={isLogoutLoading}
+                    title="Are you sure you want to sign out?"
+                    onConfirm={() => logout()}
+                    triggerChildren={({ toggleOpen }) => (
+                      <ListItemButton
+                        className="rounded-lg"
+                        color="error"
+                        onClick={toggleOpen}
+                      >
+                        <Iconify
+                          icon="hugeicons:logout-02"
+                          width="20"
+                          height="20"
+                          className="text-error-main mr-2"
+                        />
+                        <Typography color="error" variant="body2">
+                          Sign out
+                        </Typography>
+                      </ListItemButton>
+                    )}
+                  />
                 </div>
               </Paper>
             </Popover>

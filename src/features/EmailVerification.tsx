@@ -123,6 +123,7 @@ function EmailVerification(props: EmailVerificationProps) {
     formik.resetForm();
     onClose?.(e, reason);
     setOpen(false);
+    stepper.reset();
   }
 
   return (

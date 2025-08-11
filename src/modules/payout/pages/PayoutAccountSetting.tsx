@@ -1,12 +1,12 @@
 import {
   Button,
-  Divider,
   FormControlLabel,
   Icon,
   Paper,
   Radio,
   RadioGroup,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import { useFormik } from "formik";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
@@ -71,20 +71,29 @@ function PayoutAccountSetting() {
           <div>
             <Typography variant="h6">Account</Typography>
             <Typography variant="body1">
-              Which account would you like to get your earnings?
+              Choose the account to receive your withdrawal.
             </Typography>
           </div>
           <RadioGroup {...getTextFieldProps(formik, "accountType")}>
-            <FormControlLabel
-              value={PayoutAccountType.BANK}
-              control={<Radio />}
-              label="Settle to bank"
-            />
-            <Divider />
+            {/*<FormControlLabel*/}
+            {/*  value={PayoutAccountType.BANK}*/}
+            {/*  control={<Radio />}*/}
+            {/*  label="Settle to bank"*/}
+            {/*/>*/}
+            {/*<Divider />*/}
             <FormControlLabel
               value={PayoutAccountType.PAYINVERT}
               control={<Radio />}
-              label="Settle to Payinvert account"
+              label={
+                <Tooltip title="Your inflows and settlements will be automatically credited to your PayInvert wallet. Click on your dashboard to view your balance">
+                  <span className="flex items-center gap-2">
+                    <span>Settle to Payinvert account</span>
+                    {/*<Icon fontSize="small">*/}
+                    {/*  <Iconify icon="ph:question-duotone" />*/}
+                    {/*</Icon>*/}
+                  </span>
+                </Tooltip>
+              }
             />
           </RadioGroup>
         </Paper>

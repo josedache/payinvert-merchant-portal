@@ -1,7 +1,7 @@
 import {
+  Autocomplete,
   CircularProgress,
   InputAdornment,
-  MenuItem,
   Paper,
   TextField,
   Typography,
@@ -81,26 +81,47 @@ function ComplianceUpdateBankInfo(props: ComplianceUpdateBankDetailsProps) {
         {...getTextFieldProps(formik, "accountNumber")}
       />
 
-      <TextField
-        label="Bank name"
-        select
-        fullWidth
+      {/*<TextField*/}
+      {/*  label="Bank name"*/}
+      {/*  select*/}
+      {/*  fullWidth*/}
+      {/*  disabled={isView}*/}
+      {/*  {...getTextFieldProps(formik, "bankId")}*/}
+      {/*  onChange={(e) => {*/}
+      {/*    formik.setFieldValue(*/}
+      {/*      "bankName",*/}
+      {/*      normalizedBanks?.[e.target.value]?.name || ""*/}
+      {/*    );*/}
+      {/*    formik.setFieldValue("bankId", e.target.value);*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  {banks?.map?.((bank) => (*/}
+      {/*    <MenuItem key={bank.id} value={bank.id}>*/}
+      {/*      {bank.name}*/}
+      {/*    </MenuItem>*/}
+      {/*  ))}*/}
+      {/*</TextField>*/}
+
+      <Autocomplete
+        disablePortal
+        options={banks || []}
         disabled={isView}
-        {...getTextFieldProps(formik, "bankId")}
-        onChange={(e) => {
-          formik.setFieldValue(
-            "bankName",
-            normalizedBanks?.[e.target.value]?.name || ""
-          );
-          formik.setFieldValue("bankId", e.target.value);
+        fullWidth
+        getOptionLabel={(option) => {
+          return option?.name;
         }}
-      >
-        {banks?.map?.((bank) => (
-          <MenuItem key={bank.id} value={bank.id}>
-            {bank.name}
-          </MenuItem>
-        ))}
-      </TextField>
+        isOptionEqualToValue={(option, value) => {
+          return option?.id === value?.id || option === value;
+        }}
+        value={
+          formik.values.bankId ? normalizedBanks?.[formik.values.bankId] : null
+        }
+        onChange={(_, value) => {
+          formik.setFieldValue("bankName", value?.name || "");
+          formik.setFieldValue("bankId", value?.id || "");
+        }}
+        renderInput={(params) => <TextField {...params} label="Bank name" />}
+      />
 
       <TextField
         /*{...getTextFieldProps(formik, "accountName")}*/

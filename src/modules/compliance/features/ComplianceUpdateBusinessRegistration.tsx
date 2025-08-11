@@ -34,7 +34,7 @@ function ComplianceUpdateBusinessRegistration(
 
       <Dropzone
         multiple={false}
-        maxSize={1024 * 1024 * 2}
+        maxSize={1024 * 1024 * 10}
         minSize={1}
         accept={{
           "image/*": ["jpeg", "png"],
@@ -118,7 +118,8 @@ function ComplianceUpdateBusinessRegistration(
                                   </IconButton>
                                 )}
                               </AssetPreviewerDialog>
-                            ) : !isView ? (
+                            ) : null}
+                            {!isView ? (
                               <IconButton
                                 onClick={() => {
                                   formik.setFieldValue(
@@ -154,7 +155,7 @@ function ComplianceUpdateBusinessRegistration(
 
       <Dropzone
         multiple={false}
-        maxSize={1024 * 1024 * 2}
+        maxSize={1024 * 1024 * 10}
         minSize={1}
         accept={{
           "image/*": ["jpeg", "png"],
@@ -236,7 +237,8 @@ function ComplianceUpdateBusinessRegistration(
                                   </IconButton>
                                 )}
                               </AssetPreviewerDialog>
-                            ) : !isView ? (
+                            ) : null}
+                            {!isView ? (
                               <IconButton
                                 onClick={() => {
                                   formik.setFieldValue(

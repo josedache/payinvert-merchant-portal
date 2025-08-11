@@ -119,6 +119,7 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
     formik.resetForm();
     onClose?.(e, reason);
     setOpen(false);
+    stepper.reset();
   }
 
   return (

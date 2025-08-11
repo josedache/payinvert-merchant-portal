@@ -15,7 +15,7 @@ import useTable from "hooks/use-table";
 import { Icon as Iconify } from "@iconify/react";
 import CollectionAccountCreateEdit from "modules/collection-account/features/CollectionAccountCreateEdit";
 import { CollectionAccount } from "types/collection-account";
-import CollectionAccountTableAction from "modules/collection-account/features/CollectionAccountTableAction";
+// import CollectionAccountTableAction from "modules/collection-account/features/CollectionAccountTableAction";
 import * as dfns from "date-fns";
 import PageTitle from "components/PageTitle";
 
@@ -148,12 +148,12 @@ const columns: ColumnDef<CollectionAccount, any>[] = [
   //   accessorKey: "status",
   //   cell: ({ row }) => <CustomerStatus customer={row.original} />,
   // },
-  {
-    header: "Actions",
-    id: "actions",
-    size: 80,
-    cell: ({ row }) => (
-      <CollectionAccountTableAction collectionAccount={row.original} />
-    ),
-  },
+  // {
+  //   header: "Actions",
+  //   id: "actions",
+  //   size: 80,
+  //   cell: ({ row }) => (
+  //     <CollectionAccountTableAction collectionAccount={row.original} />
+  //   ),
+  // },
 ];

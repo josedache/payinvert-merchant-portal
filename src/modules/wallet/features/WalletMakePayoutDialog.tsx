@@ -218,7 +218,7 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
               }}
               numInputs={6}
               shouldAutoFocus
-              inputType="password"
+              inputType="text"
               slot={{ input: NumberInput }}
               slotProps={{
                 input: {

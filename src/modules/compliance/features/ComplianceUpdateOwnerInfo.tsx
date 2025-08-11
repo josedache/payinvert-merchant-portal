@@ -69,7 +69,7 @@ function ComplianceUpdateOwnerInfo(props: ComplianceUpdateOwnerInfoProps) {
 
         <Dropzone
           multiple={false}
-          maxSize={1024 * 1024 * 2}
+          maxSize={1024 * 1024 * 10}
           minSize={1}
           accept={{
             "image/*": ["jpeg", "png"],

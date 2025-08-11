@@ -136,6 +136,7 @@ function BvnVerification(props: BvnVerificationProps) {
     formik.resetForm();
     onClose?.(e, reason);
     setOpen(false);
+    stepper.reset();
   }
 
   return (
