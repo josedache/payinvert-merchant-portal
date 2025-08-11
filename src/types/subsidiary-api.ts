@@ -1,6 +1,10 @@
 import { ApiRequest, ApiResponse } from "types/api";
 import { AuthUser } from "types/user";
 import { Bank } from "./bank";
+import {
+  SubsidiaryCompliance,
+  SubsidiaryComplianceChecker,
+} from "types/subsidiary";
 
 export type SubsidiaryLoginApiRequest = ApiRequest<{
   email: string;
@@ -73,14 +77,20 @@ export type SubsidiaryMeApiRequest = ApiRequest;
 export type SubsidiaryMeApiResponse = SubsidiaryLoginApiResponse;
 
 export type UpdateSubsidiaryComplianceProfileApiRequest = ApiRequest<{
-  businessTypeId: number;
-  countryId: number;
+  businessType: string | number;
   description: string;
   businessName: string;
-  bvn: string;
-  industryId: number;
+  registrationNumber: string;
+  taxIdNumber: string;
 }>;
 export type UpdateSubsidiaryComplianceProfileApiResponse = { message: string };
+
+export type UpdateSubsidiaryComplianceContactApiRequest = ApiRequest<{
+  verifiedPhoneNumber: string;
+  businessAddress: string;
+  email: string;
+}>;
+export type UpdateSubsidiaryComplianceContactApiResponse = { message: string };
 
 export type UpdateSubsidiaryComplianceBankApiRequest = ApiRequest<{
   bankId: string;
@@ -92,57 +102,32 @@ export type UpdateSubsidiaryComplianceBankApiResponse = { message: string };
 
 export type UpdateSubsidiaryComplianceDirectorApiRequest = ApiRequest<{
   FullName: string;
-  Identity: string;
-  IdNumber: string;
+  DocumentType: string;
+  Identity: string | File;
+  Bvn: string;
 }>;
 export type UpdateSubsidiaryComplianceDirectorApiResponse = { message: string };
 
-export type UpdateSubsidiaryComplianceKycDetailsApiRequest = ApiRequest<{
-  Identity: string;
-  ProofOfAddress: string;
+export type UpdateSubsidiaryComplianceOwnerApiRequest = ApiRequest<{
+  FullName: string;
+  DocumentType: string;
+  Identity: string | File;
+  Bvn: string;
 }>;
-export type UpdateSubsidiaryComplianceKycDetailsApiResponse = {
+export type UpdateSubsidiaryComplianceOwnerApiResponse = { message: string };
+
+export type UpdateSubsidiaryComplianceKybDetailsApiRequest = ApiRequest<{
+  CertificateOfIncorporation: string | File;
+  MemoOfAssociation: string | File;
+}>;
+export type UpdateSubsidiaryComplianceKybDetailsApiResponse = {
   message: string;
 };
 
-export type GetSubsidiaryComplianceInfoApiResponse = {
-  profileCompliance: {
-    businessType: {
-      id: number;
-      name: string;
-    };
-    country: {
-      id: number;
-      name: string;
-    };
-    description: string;
-    businessName: string;
-    bvn: string;
-    industry: {
-      id: number;
-      name: string;
-    };
-    compliancePercentage: number;
-  };
-  bankCompliance: {
-    bankId: number | null;
-    bankName: string | null;
-    accountName: string | null;
-    accountNumber: string | null;
-    compliancePercentage: number;
-  };
-  directorCompliance: {
-    idNumber: string | null;
-    fullName: string | null;
-    identity: string | null;
-    compliancePercentage: number;
-  };
-  kycDetailsCompliance: {
-    meansOfIdentification: string | null;
-    proofOfAddress: string | null;
-    compliancePercentage: number;
-  };
-};
+export type GetSubsidiaryComplianceInfoApiResponse = SubsidiaryCompliance;
+
+export type GetSubsidiaryComplianceCheckerApiResponse =
+  SubsidiaryComplianceChecker;
 
 export type GetSubsidiaryBankApiResponse = { banks: Bank[] };
 

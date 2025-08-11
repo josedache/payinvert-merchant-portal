@@ -5,7 +5,7 @@ import LoadingIndicator from "./LoadingIndicator";
 import useDataRef from "hooks/use-data-ref";
 import { cn } from "utils/cn";
 
-function LoadingContent(props: LoadingUIProps) {
+function LoadingContent(props: LoadingContentProps) {
   const {
     fullHeight,
     centered,
@@ -59,7 +59,7 @@ function CustomLoading(props) {
 
 /**
  *
- * @param {LoadingUIProps} props
+ * @param {LoadingContentProps} props
  */
 function renderLoadingDefault(props) {
   const Loading = props.Loading ?? CustomLoading;
@@ -77,7 +77,7 @@ function CustomError(props) {
 
 /**
  *
- * @param {LoadingUIProps} props
+ * @param {LoadingContentProps} props
  */
 function renderErrorDefault(props) {
   const ErrorComponent = props.Error ?? CustomError;
@@ -93,7 +93,7 @@ function renderErrorDefault(props) {
 
 /**
  *
- * @param {LoadingUIProps} props
+ * @param {LoadingContentProps} props
  */
 function renderBlockingDefault(props) {
   const Blocking = props.Blocking ?? "div";
@@ -105,7 +105,7 @@ function renderBlockingDefault(props) {
   );
 }
 
-type LoadingUIProps = {
+export type LoadingContentProps = {
   fullHeight?: boolean;
   centered?: boolean;
   Component?: any;
@@ -113,11 +113,11 @@ type LoadingUIProps = {
   onMount?: () => void;
   loading?: boolean;
   LoadingProps?: any;
-  renderLoading?: (props: LoadingUIProps) => any;
+  renderLoading?: (props: LoadingContentProps) => any;
   error?: boolean;
   Error?: any;
   ErrorProps?: any;
-  renderError?: (props: LoadingUIProps) => any;
+  renderError?: (props: LoadingContentProps) => any;
   errorTitle?: any;
   errorDescription?: any;
   onRetry?: any;
@@ -126,5 +126,5 @@ type LoadingUIProps = {
   blocking?: boolean;
   Blocking?: any;
   BlockingProps?: any;
-  renderBlocking?: (props: LoadingUIProps) => any;
+  renderBlocking?: (props: LoadingContentProps) => any;
 } & Omit<ComponentPropsWithoutRef<"div">, "children">;

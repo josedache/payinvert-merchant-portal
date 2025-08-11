@@ -20,7 +20,7 @@ export const subsidiaryDashboardRoleApi = baseApi.injectEndpoints({
       SubsidiaryDashboardRoleCreateApiRequest
     >({
       query: (config) => ({
-        url: `${BASE_URL}`,
+        url: `${BASE_URL}/create`,
         method: "post",
         ...config,
       }),

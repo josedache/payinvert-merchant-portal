@@ -8,6 +8,7 @@ import {
   useMemo,
 } from "react";
 import { useFormik } from "formik";
+import * as yup from "yup";
 import { subsidiaryDashboardRoleApi } from "apis/subsidiary-dashboard-role";
 import {
   Button,
@@ -19,6 +20,7 @@ import {
   FormControlLabel,
   Icon,
   IconButton,
+  Skeleton,
   TextField,
   Typography,
 } from "@mui/material";
@@ -28,9 +30,10 @@ import DialogTitleXCloseButton from "components/DialogTitleXCloseButton";
 import { Icon as Iconify } from "@iconify/react";
 import { LoadingButton } from "@mui/lab";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import { SubsidiaryDashboardRole } from "types/subsidiary-dashboard-role";
 
 function RoleCreateEdit(props: RoleCreateEditProps) {
-  const { id, children, onClose, ...restProps } = props;
+  const { id, onSuccess, children, onClose, ...restProps } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -62,7 +65,7 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
       { skip: !isEdit }
     );
 
-  const role = roleQueryResult.data?.data;
+  const roleDetails = roleQueryResult.data?.data;
 
   const initialValues = useMemo(() => {
     // const normalizedPermissionModel = role?.permissionModel?.reduce(
@@ -85,8 +88,15 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
     // );
 
     return {
-      name: role?.name ?? "",
-      permissionModel: role?.permissionModel ?? [],
+      name: roleDetails?.role?.name ?? "",
+      permissionModel:
+        roleDetails?.permission?.flatMap((item) =>
+          item.actions.map((action) => ({
+            moduleEnum: item.moduleEnum,
+            action: action.action,
+            value: action.value,
+          }))
+        ) ?? [],
       // permissionModel:
       //   moduleEnums
       //     ?.map((moduleEnum) => {
@@ -108,11 +118,21 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
       //     })
       //     .flatMap((item) => item) ?? [],
     };
-  }, [role, moduleEnums, roleActionsEnums]);
+  }, [roleDetails, moduleEnums, roleActionsEnums]);
 
   const formik = useFormik({
     initialValues,
     enableReinitialize: true,
+    validationSchema: yup.object({
+      name: yup.string().label("Name").trim().required(),
+      permissionModel: yup.array().of(
+        yup.object({
+          moduleEnum: yup.number().label("Module").required(),
+          action: yup.number().label("Action").required(),
+          value: yup.boolean().label("Value").required(),
+        })
+      ),
+    }),
     onSubmit: async (values) => {
       try {
         const func = isEdit ? updateRoleMutation : createRoleMutation;
@@ -129,6 +149,7 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
             variant: "success",
           }
         );
+        onSuccess?.(data?.data ?? roleDetails?.role);
         handleClose();
       } catch (error) {
         enqueueSnackbar(
@@ -154,8 +175,8 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
     {} as {
       [key: string]: [
         {
-          moduleEnum: string;
-          action: string;
+          moduleEnum: number;
+          action: number;
           value: boolean;
         },
         number,
@@ -186,9 +207,9 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
           ) : (
             <div className="flex items-center gap-4">
               <Typography variant="h6" className="font-semibold">
-                {role?.name}
+                {roleDetails?.role?.name}
               </Typography>
-              <IconButton onClick={toggleEditName}>
+              <IconButton onClick={toggleEditName} className="hidden">
                 <Icon>
                   <Iconify icon="mdi:pencil-outline" />
                 </Icon>
@@ -244,8 +265,8 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
                               const [selected, selectedIndex] =
                                 normalizedPermissionModel?.[
                                   JSON.stringify({
-                                    moduleEnum: moduleEnum.name,
-                                    action: roleActionEnum.name,
+                                    moduleEnum: moduleEnum.value,
+                                    action: roleActionEnum.value,
                                   })
                                 ] ?? [];
 
@@ -268,8 +289,8 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
                                         ].value = true;
                                       } else {
                                         newPermissionModel.push({
-                                          moduleEnum: moduleEnum.name,
-                                          action: roleActionEnum.name,
+                                          moduleEnum: moduleEnum.value,
+                                          action: roleActionEnum.value,
                                           value: true,
                                         });
                                       }
@@ -315,7 +336,8 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
   const submitButtonJsx = (
     <LoadingButton
       type="submit"
-      disabled={!formik.isValid || !formik.dirty}
+      // disabled={!formik.isValid || !formik.dirty}
+      disabled={!formik.isValid}
       loading={formik.isSubmitting}
       loadingPosition="end"
       endIcon={<></>}
@@ -331,13 +353,22 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
 
   if (props.view === "content") {
     return (
-      <form onSubmit={formik.handleSubmit as any}>
-        {contentJsx}
-        <div className="flex items-center justify-end gap-2 mt-8">
-          {cancelJsx}
-          {submitButtonJsx}
-        </div>
-      </form>
+      <LoadingContent
+        loading={roleQueryResult.isFetching}
+        error={roleQueryResult.isError}
+        onRetry={roleQueryResult.refetch}
+        renderLoading={renderLoading}
+      >
+        {() => (
+          <form onSubmit={formik.handleSubmit as any}>
+            {contentJsx}
+            <div className="flex items-center justify-start gap-2 mt-8">
+              {onClose ? cancelJsx : null}
+              {submitButtonJsx}
+            </div>
+          </form>
+        )}
+      </LoadingContent>
     );
   }
 
@@ -353,11 +384,22 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
         <DialogTitleXCloseButton onClose={handleClose}>
           {isEdit ? "Update" : "Create"} Role
         </DialogTitleXCloseButton>
-        <DialogContent className="py-4">{contentJsx}</DialogContent>
-        <DialogActions>
-          {cancelJsx}
-          {submitButtonJsx}
-        </DialogActions>
+        <LoadingContent
+          loading={roleQueryResult.isFetching}
+          error={roleQueryResult.isError}
+          onRetry={roleQueryResult.refetch}
+          renderLoading={renderLoading}
+        >
+          {() => (
+            <>
+              <DialogContent className="py-4">{contentJsx}</DialogContent>
+              <DialogActions>
+                {cancelJsx}
+                {submitButtonJsx}
+              </DialogActions>
+            </>
+          )}
+        </LoadingContent>
       </Dialog>
 
       {typeof children === "function"
@@ -369,9 +411,37 @@ function RoleCreateEdit(props: RoleCreateEditProps) {
 
 export default RoleCreateEdit;
 
+export function renderLoading() {
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-1 gap-4 w-full space-y-4">
+        <Skeleton variant="text" className="max-w-[120px]" />
+        {Array(3)
+          .fill(3)
+          .map((i) => (
+            <div key={i} className="space-y-2">
+              <Skeleton variant="text" key={i} className="max-w-[100px]" />
+              <div className="grid grid-cols-4 gap-2">
+                {Array(4)
+                  .fill(4)
+                  .map((i) => (
+                    <div key={i} className="flex items-center gap-1">
+                      <Skeleton variant="rounded" className="w-3 h-3" />
+                      <Skeleton variant="text" className="w-[100px]" />
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+}
+
 export type RoleCreateEditProps = {
   id?: any;
   view?: "content" | "dialog";
+  onSuccess?: (role: SubsidiaryDashboardRole) => void;
   open?: boolean;
   children?:
     | ReactNode

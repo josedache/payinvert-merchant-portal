@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import { subsidiaryApi } from "apis/subsidiary";
 import currency from "currency.js";
 import AnalyticsChip from "components/AnalyticsChip";
+import useAuthUser from "hooks/use-auth-user";
 
 const Balance = () => {
+  const authUser = useAuthUser();
+
   const getDashboardChartQuery =
     subsidiaryApi.useGetSubsidiaryDashboardChartQuery({
       params: { ChartFilter: "Week" },
@@ -16,9 +19,8 @@ const Balance = () => {
   const trend =
     getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
 
-  const getComplianceInfoQuery =
-    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
-  const complianceInfo = getComplianceInfoQuery?.data;
+  const complianceInfo = authUser.compliance;
+  
   return (
     <div className="space-y-8">
       <div className="flex justify-end gap-2 items-center">

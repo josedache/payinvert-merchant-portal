@@ -27,6 +27,7 @@
       "configs/*": ["src/configs/*"],
       "constants/*": ["src/constants/*"],
       "enums/*": ["src/enums/*"],
+      "features/*": ["src/features/*"],
       "modules/*": ["src/modules/*"],
       "hooks/*": ["src/hooks/*"],
       "libs/*": ["src/libs/*"],

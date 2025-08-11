@@ -1,22 +1,27 @@
 import { ApiRequest, ApiResponse } from "types/api";
+import {
+  SubsidiaryDashboardRole,
+  SubsidiaryDashboardRoleDetails,
+} from "types/subsidiary-dashboard-role";
 
 export type SubsidiaryDashboardRoleCreateApiRequest = ApiRequest<{
   name: string;
   permissionModel: {
-    moduleEnum: string;
-    action: string;
+    moduleEnum: number | string;
+    action: number | string;
     value: boolean;
   }[];
 }>;
 
-export type SubsidiaryDashboardRoleCreateApiResponse = ApiResponse;
+export type SubsidiaryDashboardRoleCreateApiResponse =
+  ApiResponse<SubsidiaryDashboardRole>;
 
 export type SubsidiaryDashboardRoleUpdateApiRequest = ApiRequest<
   {
     name: string;
     permissionModel: {
-      moduleEnum: string;
-      action: string;
+      moduleEnum: number | string;
+      action: number | string;
       value: boolean;
     }[];
   },
@@ -25,7 +30,8 @@ export type SubsidiaryDashboardRoleUpdateApiRequest = ApiRequest<
   }
 >;
 
-export type SubsidiaryDashboardRoleUpdateApiResponse = ApiResponse;
+export type SubsidiaryDashboardRoleUpdateApiResponse =
+  ApiResponse<SubsidiaryDashboardRole>;
 
 export type SubsidiaryDashboardRoleListApiRequest = ApiRequest<
   void,
@@ -34,8 +40,11 @@ export type SubsidiaryDashboardRoleListApiRequest = ApiRequest<
   }
 >;
 
-export type SubsidiaryDashboardRoleListApiResponse = ApiResponse;
+export type SubsidiaryDashboardRoleListApiResponse = ApiResponse<
+  SubsidiaryDashboardRole[]
+>;
 
 export type SubsidiaryDashboardRoleApiRequest = ApiRequest;
 
-export type SubsidiaryDashboardRoleApiResponse = ApiResponse;
+export type SubsidiaryDashboardRoleApiResponse =
+  ApiResponse<SubsidiaryDashboardRoleDetails>;

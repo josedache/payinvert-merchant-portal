@@ -48,14 +48,12 @@ export const slice = createSlice({
       .addMatcher(
         subsidiaryApi.endpoints.completeSubsidiaryLogin.matchFulfilled,
         (state, { payload }) => {
-          const token = payload?.token?.accessToken;
           state.authUser = {
             ...state.authUser,
             ...payload,
-            token: token,
             expiresIn: String(dfns.addSeconds(new Date(), 3600)),
-            isAuthenticated: !!token,
-          } as unknown as AuthUser;
+            isAuthenticated: !!payload?.token?.accessToken,
+          } as AuthUser;
         }
       )
       .addMatcher(
@@ -66,6 +64,15 @@ export const slice = createSlice({
             ...state.authUser,
             ...payload,
             token: state.authUser?.token ?? payload?.token?.accessToken,
+          } as AuthUser;
+        }
+      )
+      .addMatcher(
+        subsidiaryApi.endpoints.getSubsidiaryComplianceChecker.matchFulfilled,
+        (state, { payload }) => {
+          state.authUser = {
+            ...state.authUser,
+            compliance: payload,
           } as AuthUser;
         }
       ),

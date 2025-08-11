@@ -7,9 +7,9 @@ export const SIGNIN_2FA = "/signin/2fa";
 export const PASSWORD_RESET = "/password/reset";
 
 export const DASHBOARD = "/";
-export const DASHBOARD_ONBOARDING = "/dashboard/compliance";
 
 export const COMPLIANCE = "/compliance";
+export const COMPLIANCE_UPDATE = "/compliance/update";
 
 export const BUSINESS = "/business";
 export const BUSINESS_TRANSACTIONS = "/business/transactions";
@@ -35,7 +35,6 @@ export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
 export const SETTINGS_USERS = "/settings/users";
 export const SETTINGS_PREFERENCES = "/settings/preferences";
 export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
-
 
 export const INVOICE = "/invoice";
 export const INVOICE_DETAIL = "/invoice/:id";
@@ -63,4 +62,4 @@ export const SETTLEMENTS = "/settlements";
 
 export const COLLECTION_ACCOUNT = "/collection-accounts";
 
-export const USER = '/users'
+export const USER = "/users";

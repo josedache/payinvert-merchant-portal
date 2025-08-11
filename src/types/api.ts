@@ -11,7 +11,8 @@ export type ApiRequest<
 } & Omit<Partial<FetchArgs>, "params" | "body">;
 
 export type ApiResponse<T = any> = {
-  statusCode: number;
+  status: number | string;
+  statusCode: number | string;
   message: string;
   data: T;
   token: string;

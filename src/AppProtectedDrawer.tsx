@@ -61,7 +61,7 @@ function AppProtectedDrawer() {
                     {
                       icon: <CustomIcon.Compliance />,
                       label: "Compliance",
-                      to: urlsConstant.DASHBOARD_ONBOARDING,
+                      to: urlsConstant.COMPLIANCE_UPDATE,
                       kycAllow: true,
                     },
                   ]
@@ -144,7 +144,7 @@ function AppProtectedDrawer() {
               {
                 icon: <CustomIcon.Compliance />,
                 label: "Compliance Information",
-                to: urlsConstant.SETTINGS_COMPLIANCE,
+                to: urlsConstant.COMPLIANCE,
                 kycAllow: true,
               },
               {

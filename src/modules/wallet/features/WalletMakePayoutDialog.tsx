@@ -1,14 +1,14 @@
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import {
+  Button,
   ButtonBase,
+  Dialog,
+  DialogContent,
+  DialogProps,
+  Link as MuiLink,
   Paper,
   Typography,
-  Link as MuiLink,
-  DialogProps,
-  Dialog,
-  Button,
-  DialogContent,
 } from "@mui/material";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
 import * as yup from "yup";
@@ -32,6 +32,7 @@ type WalletMakePayoutDialogProps = {
   open?: boolean;
   onClose?: () => void;
 } & DialogProps;
+
 function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
   const { open, onClose, ...restProps } = props;
   const [countdownDate, setCountdownDate] = useState(getCountdownDate);
@@ -41,9 +42,7 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
   const navigate = useNavigate();
   const stepper = useStepper();
 
-  const getComplianceInfoQuery =
-    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
-  const complianceInfo = getComplianceInfoQuery?.data;
+  const complianceInfo = authUser?.compliance;
 
   const getDashboardChartQuery =
     subsidiaryApi.useGetSubsidiaryDashboardChartQuery({
@@ -359,13 +358,8 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
     >
       <DialogContent className="px-4">
         <LoadingContent
-          loading={
-            getComplianceInfoQuery.isLoading ||
-            getDashboardChartQuery?.isLoading
-          }
-          error={
-            getComplianceInfoQuery.isError || getDashboardChartQuery?.isError
-          }
+          loading={getDashboardChartQuery?.isLoading}
+          error={getDashboardChartQuery?.isError}
         >
           {[step1, step2, step3][stepper.step]}
         </LoadingContent>

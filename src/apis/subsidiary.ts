@@ -4,7 +4,7 @@ import { ApiRequest } from "types/api";
 import {
   GetSubsidiaryBankApiResponse,
   GetSubsidiaryBusinessCategoryListApiResponse,
-  GetSubsidiaryBusinessChartApiResponse,
+  GetSubsidiaryBusinessChartApiResponse, GetSubsidiaryComplianceCheckerApiResponse,
   GetSubsidiaryComplianceInfoApiResponse,
   GetSubsidiaryDashboardUserDetailsApiResponse,
   GetSubsidiaryDropdownApiResponse,
@@ -37,10 +37,14 @@ import {
   SubsidiaryVerificationEmailResendApiResponse,
   UpdateSubsidiaryComplianceBankApiRequest,
   UpdateSubsidiaryComplianceBankApiResponse,
+  UpdateSubsidiaryComplianceContactApiRequest,
+  UpdateSubsidiaryComplianceContactApiResponse,
   UpdateSubsidiaryComplianceDirectorApiRequest,
   UpdateSubsidiaryComplianceDirectorApiResponse,
-  UpdateSubsidiaryComplianceKycDetailsApiRequest,
-  UpdateSubsidiaryComplianceKycDetailsApiResponse,
+  UpdateSubsidiaryComplianceKybDetailsApiRequest,
+  UpdateSubsidiaryComplianceKybDetailsApiResponse,
+  UpdateSubsidiaryComplianceOwnerApiRequest,
+  UpdateSubsidiaryComplianceOwnerApiResponse,
   UpdateSubsidiaryComplianceProfileApiRequest,
   UpdateSubsidiaryComplianceProfileApiResponse,
 } from "types/subsidiary-api";
@@ -192,6 +196,17 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
     }),
+    updateSubsidiaryComplianceContact: builder.mutation<
+      UpdateSubsidiaryComplianceContactApiResponse,
+      UpdateSubsidiaryComplianceContactApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/contact",
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
+    }),
     updateSubsidiaryComplianceBank: builder.mutation<
       UpdateSubsidiaryComplianceBankApiResponse,
       UpdateSubsidiaryComplianceBankApiRequest
@@ -215,12 +230,24 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
     }),
-    updateSubsidiaryComplianceKycDetails: builder.mutation<
-      UpdateSubsidiaryComplianceKycDetailsApiResponse,
-      UpdateSubsidiaryComplianceKycDetailsApiRequest
+    updateSubsidiaryComplianceOwner: builder.mutation<
+      UpdateSubsidiaryComplianceOwnerApiResponse,
+      UpdateSubsidiaryComplianceOwnerApiRequest
     >({
       query: (config) => ({
-        url: BASE_URL + "/dashboard/compliance/kyc-details",
+        url: BASE_URL + "/dashboard/compliance/owner",
+        method: "post",
+        ...config,
+        body: objectToFormData(config.body),
+      }),
+      invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
+    }),
+    updateSubsidiaryComplianceKybDetails: builder.mutation<
+      UpdateSubsidiaryComplianceKybDetailsApiResponse,
+      UpdateSubsidiaryComplianceKybDetailsApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/kyb-details",
         method: "post",
         ...config,
         body: objectToFormData(config.body),
@@ -232,6 +259,13 @@ export const subsidiaryApi = baseApi.injectEndpoints({
       void
     >({
       query: () => `${BASE_URL}/dashboard/compliance`,
+      providesTags: [{ type: COMPLIANCE }],
+    }),
+    getSubsidiaryComplianceChecker: builder.query<
+      GetSubsidiaryComplianceCheckerApiResponse,
+      void
+    >({
+      query: () => `${BASE_URL}/dashboard/compliance/checker`,
       providesTags: [{ type: COMPLIANCE }],
     }),
 

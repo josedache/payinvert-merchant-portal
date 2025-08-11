@@ -8,8 +8,11 @@ import { MakePayout } from "assets/icons";
 import WalletMakePayoutDialog from "../features/WalletMakePayoutDialog";
 import useToggle from "hooks/use-toggle";
 import PageTitle from "components/PageTitle";
+import useAuthUser from "hooks/use-auth-user";
 
 const Wallet = () => {
+  const authUser = useAuthUser();
+
   const [isMakePayoutDialogOpen, toggleIsMakePayoutDialogOpen] = useToggle();
 
   const getDashboardChartQuery =
@@ -21,9 +24,8 @@ const Wallet = () => {
   const trend =
     getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
 
-  const getComplianceInfoQuery =
-    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
-  const complianceInfo = getComplianceInfoQuery?.data;
+  const complianceInfo = authUser?.compliance;
+
   return (
     <div>
       <PageTitle>Wallet</PageTitle>

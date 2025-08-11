@@ -27,10 +27,9 @@ import useSidebarIcon from "hooks/use-sidebar-icon";
 import useAuthUser from "hooks/use-auth-user";
 import useLogout from "hooks/use-logout";
 import { useNavigate } from "react-router-dom";
-import { DASHBOARD, DASHBOARD_ONBOARDING } from "constants/urls";
+import { COMPLIANCE_UPDATE, DASHBOARD } from "constants/urls";
 import React from "react";
 import useToggle from "hooks/use-toggle";
-import { subsidiaryApi } from "apis/subsidiary";
 import { PAGE_TITLE } from "constants/portal";
 
 function AppProtectedHeader(props: AppBarProps) {
@@ -51,14 +50,9 @@ function AppProtectedHeader(props: AppBarProps) {
   const sideNavigation = useSideNavigation();
   const sidebarIcon = useSidebarIcon();
 
-  const getComplianceInfoQuery =
-    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const isComplianceCompleted = Object.keys(
-      getComplianceInfoQuery?.data ?? {}
-    )?.every(
-      (key) => Number(getComplianceInfoQuery?.data?.[key]?.percentage) === 100
+    const isComplianceCompleted = Object.keys(authUser.compliance ?? {})?.every(
+      (key) => Number(authUser.compliance?.[key]?.compliancePercentage) === 100
     );
     const isChecked = event.target.checked;
 
@@ -120,7 +114,7 @@ function AppProtectedHeader(props: AppBarProps) {
               inputProps={{ "aria-label": "controlled" }}
             />
 
-            <IconButton>
+            <IconButton disabled>
               <Badge variant="dot" color="error">
                 <Iconify
                   className="MuiIcon-root"
@@ -246,7 +240,7 @@ const IncompleteKycDialog = (props: DialogProps) => {
                 />
               }
               onClick={() => {
-                navigate(DASHBOARD_ONBOARDING);
+                navigate(COMPLIANCE_UPDATE);
                 props.onClose(null, "backdropClick");
               }}
             >

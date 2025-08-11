@@ -13,7 +13,7 @@ import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import {
   DASHBOARD,
-  DASHBOARD_ONBOARDING,
+  COMPLIANCE_UPDATE,
   SIGNIN_2FA,
   SIGNUP,
 } from "constants/urls";
@@ -59,7 +59,7 @@ function AuthSignin() {
           });
 
           return navigate(
-            !data?.businessDetails?.active ? DASHBOARD_ONBOARDING : DASHBOARD
+            !data?.businessDetails?.active ? COMPLIANCE_UPDATE : DASHBOARD
           );
         } else {
           enqueueSnackbar(

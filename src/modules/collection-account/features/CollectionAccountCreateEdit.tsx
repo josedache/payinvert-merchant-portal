@@ -51,10 +51,10 @@ function CollectionAccountCreateEdit(props: CollectionAccountCreateEditProps) {
       bvn: yup.string().label("BVN").optional(),
       externalId: yup.string().label("Website URL").optional(),
     }),
-    onSubmit: async () => {
+    onSubmit: async (values) => {
       try {
         await createCollectionAccountMutation({
-          body: formik.values,
+          body: values,
         }).unwrap();
 
         enqueueSnackbar("Collection account created successfully", {

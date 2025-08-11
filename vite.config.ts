@@ -17,6 +17,7 @@ export default defineConfig({
       configs: path.resolve(__dirname, "src/configs"),
       constants: path.resolve(__dirname, "src/constants"),
       enums: path.resolve(__dirname, "src/enums"),
+      features: path.resolve(__dirname, "src/features"),
       modules: path.resolve(__dirname, "src/modules"),
       hooks: path.resolve(__dirname, "src/hooks"),
       libs: path.resolve(__dirname, "src/libs"),

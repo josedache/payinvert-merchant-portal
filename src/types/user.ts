@@ -1,5 +1,5 @@
 import { Notification } from "types/notification";
-import { Subsidiary } from "types/subsidiary";
+import { Subsidiary, SubsidiaryComplianceChecker } from "types/subsidiary";
 
 export type User = {
   id: number;
@@ -26,6 +26,7 @@ export type AuthUser = {
   isAuthenticated?: boolean;
   expiresIn?: string;
   user: User;
+  compliance: SubsidiaryComplianceChecker;
   loginHash: string | null;
   envronmentDetail: {
     id: number | null;

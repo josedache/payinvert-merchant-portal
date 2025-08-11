@@ -35,7 +35,7 @@ export default function SettingComplianceAddEdit(
 ) {
   const { isInitialOnboarding } = props;
   const { enqueueSnackbar } = useSnackbar();
-  const stepper = useStepper({initialStep: 2});
+  const stepper = useStepper();
   const navigate = useNavigate();
 
   const [isEdit] = useToggle();
@@ -47,7 +47,7 @@ export default function SettingComplianceAddEdit(
   const [updateComplianceDirectorMutation] =
     subsidiaryApi.useUpdateSubsidiaryComplianceDirectorMutation();
   const [updateComplianceKycDetailsMutation] =
-    subsidiaryApi.useUpdateSubsidiaryComplianceKycDetailsMutation();
+    subsidiaryApi.useUpdateSubsidiaryComplianceKybDetailsMutation();
 
   const getComplianceInfoQuery =
     subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
@@ -148,7 +148,7 @@ export default function SettingComplianceAddEdit(
                 businessName: values?.businessName,
                 bvn: values?.bvn,
                 industryId: values?.industryId,
-              },
+              } as any,
             }).unwrap();
             stepper.go(SettingsComplianceStep.BANK_DETAILS);
             break;
@@ -171,7 +171,7 @@ export default function SettingComplianceAddEdit(
                 IdNumber: values?.IdNumber,
                 FullName: values?.FullName,
                 Identity: values?.directorIdentity,
-              },
+              } as any,
             }).unwrap();
             stepper.next();
             break;
@@ -181,7 +181,7 @@ export default function SettingComplianceAddEdit(
               body: {
                 Identity: values?.KycIdentity,
                 ProofOfAddress: values?.ProofOfAddress,
-              },
+              } as any,
             }).unwrap();
             navigate(SETTINGS_COMPLIANCE);
             enqueueSnackbar("Compliance Submitted and pending approval", {

@@ -17,6 +17,9 @@ function AppProtected() {
   const subsidiaryMeQueryResult =
     subsidiaryApi.useGetSubsidiaryDashboardUserDetailsQuery();
 
+  const complianceInfoQueryResult =
+    subsidiaryApi.useGetSubsidiaryComplianceCheckerQuery();
+
   const authUser = useAuthUser();
 
   useEffect(() => {
@@ -42,9 +45,21 @@ function AppProtected() {
   return (
     <LoadingContent
       fullHeight
-      loading={subsidiaryMeQueryResult.isLoading}
-      error={subsidiaryMeQueryResult.isError}
-      onRetry={subsidiaryMeQueryResult.refetch}
+      loading={
+        subsidiaryMeQueryResult.isLoading || complianceInfoQueryResult.isLoading
+      }
+      error={
+        subsidiaryMeQueryResult.isError || complianceInfoQueryResult.isError
+      }
+      onRetry={() => {
+        if (subsidiaryMeQueryResult.isError) {
+          subsidiaryMeQueryResult.refetch();
+        }
+
+        if (complianceInfoQueryResult.isError) {
+          complianceInfoQueryResult.refetch();
+        }
+      }}
       renderLoading={() => (
         <div className="flex flex-col justify-center items-center h-screen">
           <div>

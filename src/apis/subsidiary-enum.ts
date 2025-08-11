@@ -27,5 +27,17 @@ export const subsidiaryEnumApi = baseApi.injectEndpoints({
         ...config,
       }),
     }),
+    getBusinessTypeEnums: builder.query<SubsidiaryEnum[], ApiRequest>({
+      query: (config) => ({
+        url: `${BASE_URL}/business-type`,
+        ...config,
+      }),
+    }),
+    getDocumentTypeEnums: builder.query<SubsidiaryEnum[], ApiRequest>({
+      query: (config) => ({
+        url: `${BASE_URL}/document-type`,
+        ...config,
+      }),
+    }),
   }),
 });

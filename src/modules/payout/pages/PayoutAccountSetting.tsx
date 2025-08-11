@@ -20,11 +20,12 @@ import { cn } from "utils/cn";
 import PageTitle from "components/PageTitle";
 import { subsidiaryApi } from "apis/subsidiary";
 import { useMemo } from "react";
+import useAuthUser from "hooks/use-auth-user";
 
 function PayoutAccountSetting() {
-  const complianceInfoQueryResult =
-    subsidiaryApi.useGetSubsidiaryComplianceInfoQuery();
-  const complianceInfo = complianceInfoQueryResult?.data;
+  const authUser = useAuthUser();
+
+  const complianceInfo = authUser?.compliance;
 
   const banksQueryResult = subsidiaryApi.useGetSubsidiaryBanksQuery();
   const banks = banksQueryResult?.data?.banks || [];
@@ -39,7 +40,7 @@ function PayoutAccountSetting() {
   });
 
   const bankAccounts = useMemo(() => {
-    const bank = banks.find((bank) => bank.id === formik.values.bankId);
+    const bank = banks.find((bank) => String(bank.id) === formik.values.bankId);
 
     return [
       {
