@@ -38,7 +38,7 @@ function PhoneVerification(props: PhoneVerificationProps) {
   ] = verificationApi.useRequestPhoneVerificationMutation();
 
   const [validatePhoneVerificationMutation] =
-    verificationApi.useValidateEmailVerificationMutation();
+    verificationApi.useValidatePhoneVerificationMutation();
 
   const [countdownDate, setCountdownDate] = useState(getCountdownDate);
 
