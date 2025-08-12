@@ -196,9 +196,7 @@ function ComplianceUpdateOwnerInfo(props: ComplianceUpdateOwnerInfoProps) {
                 <InputAdornment position="end">
                   {complianceInfo?.directorOrOwnerCompliance?.isBvnVerified &&
                   complianceInfo?.directorOrOwnerCompliance?.bvn ===
-                    formik.values.Bvn &&
-                  complianceInfo?.directorOrOwnerCompliance?.fullName ===
-                    formik.values.FullName ? (
+                    formik.values.Bvn ? (
                     <>
                       <Icon color="success">
                         <Iconify icon="ic:twotone-verified" />

@@ -9,7 +9,7 @@ import {
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
 import { LoadingButton } from "@mui/lab";
 import EmailVerification from "features/EmailVerification";
-import PhoneNumberVerification from "features/PhoneNumberVerification";
+import PhoneNumberVerification from "features/PhoneVerification";
 import { Icon as Iconify } from "@iconify/react";
 
 function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
@@ -100,7 +100,7 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
                   ) : !isView ? (
                     <>
                       <PhoneNumberVerification
-                        phoneNumber={formik.values.verifiedPhoneNumber}
+                        mobileNumber={formik.values.verifiedPhoneNumber}
                       >
                         {({
                           formik: verificationFormik,
@@ -110,7 +110,7 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
                         }) => (
                           <LoadingButton
                             size="small"
-                            disabled={!verificationFormik.values.phoneNumber}
+                            disabled={!verificationFormik.values.mobileNumber}
                             loading={verificationFormik.isSubmitting}
                             onClick={async () => {
                               verificationFormik.setSubmitting(true);

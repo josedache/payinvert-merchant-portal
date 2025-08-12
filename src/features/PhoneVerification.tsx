@@ -8,7 +8,6 @@ import {
   DialogProps,
   DialogTitle,
   Link as MuiLink,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
@@ -24,8 +23,8 @@ import OtpInput from "components/OtpInput";
 import NumberInput from "components/NumberInput";
 import Countdown from "components/Countdown";
 
-function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
-  const { initialStep, phoneNumber, children, onClose, ...restProps } = props;
+function PhoneVerification(props: PhoneVerificationProps) {
+  const { initialStep, mobileNumber, children, onClose, ...restProps } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -34,9 +33,9 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
   const stepper = useStepper({ initialStep: initialStep });
 
   const [
-    requestPhoneNumberVerificationMutation,
-    requestPhoneNumberVerificationMutationResult,
-  ] = verificationApi.useRequestEmailVerificationMutation();
+    requestPhoneVerificationMutation,
+    requestPhoneVerificationMutationResult,
+  ] = verificationApi.useRequestPhoneVerificationMutation();
 
   const [validatePhoneVerificationMutation] =
     verificationApi.useValidateEmailVerificationMutation();
@@ -45,14 +44,14 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
 
   const formik = useFormik({
     initialValues: {
-      email: phoneNumber ?? "",
+      mobileNumber: mobileNumber ?? "",
       otp: "",
     },
     enableReinitialize: true,
     validationSchema: yup.object({
       ...[
         {
-          email: yup.string().label("Email").required(),
+          mobileNumber: yup.string().label("Mobile Number").required(),
         },
         { otp: yup.string().label("OTP").required() },
       ][stepper.step],
@@ -60,12 +59,13 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
     onSubmit: async (values) => {
       switch (stepper.step) {
         case 0: {
-          await sendOtp(values.email);
+          await sendOtp(values.mobileNumber);
           stepper.next();
           break;
         }
         case 1: {
           await validateOtp(values.otp);
+          handleClose();
           break;
         }
         default: {
@@ -74,11 +74,11 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
       }
     },
   });
-  
-  async function sendOtp(email: string) {
+
+  async function sendOtp(mobileNumber: string) {
     try {
-      const data = await requestPhoneNumberVerificationMutation({
-        path: { email: email },
+      const data = await requestPhoneVerificationMutation({
+        path: { mobileNumber: mobileNumber },
       }).unwrap();
 
       setCountdownDate(getCountdownDate);
@@ -126,27 +126,18 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
     <>
       <Dialog open={isOpen} fullWidth {...restProps}>
         <DialogTitle>
-          {["Enter BVN Information", "Verify OTP"][stepper.step]}
+          {["Enter Phone Number", "Verify OTP"][stepper.step]}
         </DialogTitle>
         <DialogContent>
           <div className="grid gap-4 py-6">
             {
               [
                 <>
-                  <TextField
-                    label="Full name"
-                    fullWidth
-                    {...getTextFieldProps(
-                      formik,
-                      "fullname",
-                      "As per Government-issued ID"
-                    )}
-                  />
                   <NumberTextField
                     freeSolo
                     maskOptions={{ min: 0, max: 11 }}
-                    {...getTextFieldProps(formik, "bvn")}
-                    label="BVN"
+                    {...getTextFieldProps(formik, "mobileNumber")}
+                    label="Phone Number"
                     fullWidth
                   />
                 </>,
@@ -206,10 +197,12 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
                                     disableRipple
                                     color="primary"
                                     disabled={
-                                      requestPhoneNumberVerificationMutationResult.isLoading
+                                      requestPhoneVerificationMutationResult.isLoading
                                     }
                                     component={MuiLink}
-                                    onClick={() => sendOtp(formik.values.email)}
+                                    onClick={() =>
+                                      sendOtp(formik.values.mobileNumber)
+                                    }
                                     className=""
                                   >
                                     <span className="text-primary-main">
@@ -261,7 +254,7 @@ function PhoneNumberVerification(props: PhoneNumberVerificationProps) {
   );
 }
 
-export default PhoneNumberVerification;
+export default PhoneVerification;
 
 function getCountdownDate() {
   const date = new Date();
@@ -269,9 +262,9 @@ function getCountdownDate() {
   return date;
 }
 
-export type PhoneNumberVerificationProps = {
+export type PhoneVerificationProps = {
   initialStep?: number;
-  phoneNumber?: string;
+  mobileNumber?: string;
   open?: boolean;
   children?:
     | ReactNode
@@ -280,7 +273,7 @@ export type PhoneNumberVerificationProps = {
         isOpen: boolean;
         toggleOpen: () => void;
         setOpen: (p: any) => void;
-        sendOtp: (fullName: string) => any;
+        sendOtp: (mobileNumber: string) => any;
         validateOtp: (otp: string) => any;
         stepper: ReturnType<typeof useStepper>;
       }) => any);

@@ -45,6 +45,26 @@ export type VerificationEmailValidateApiResponse = {
   message: string;
 };
 
+export type VerificationPhoneRequestApiRequest = ApiRequest<
+  void,
+  {
+    mobileNumber: string;
+  }
+>;
+
+export type VerificationPhoneRequestApiResponse = ApiResponse;
+
+export type VerificationPhoneValidateApiRequest = ApiRequest<
+  void,
+  {
+    otp: string;
+  }
+>;
+
+export type VerificationPhoneValidateApiResponse = {
+  message: string;
+};
+
 export type VerificationNameEnquiryApiRequest = ApiRequest<{
   bankCode: string;
   nipBankCode: string;

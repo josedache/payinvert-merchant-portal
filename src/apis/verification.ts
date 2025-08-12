@@ -10,6 +10,9 @@ import {
   VerificationEmailValidateApiResponse,
   VerificationNameEnquiryApiRequest,
   VerificationNameEnquiryApiResponse,
+  VerificationPhoneRequestApiRequest,
+  VerificationPhoneRequestApiResponse, VerificationPhoneValidateApiRequest,
+  VerificationPhoneValidateApiResponse,
   VerificationRcNumberValidateApiRequest,
   VerificationRcNumberValidateApiResponse,
 } from "types/verification-api";
@@ -56,6 +59,27 @@ export const verificationApi = baseApi.injectEndpoints({
     >({
       query: ({ path, ...config }) => ({
         url: `${BASE_URL}/email/validate/${path.otp}`,
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
+    }),
+    requestPhoneVerification: builder.mutation<
+      VerificationPhoneRequestApiResponse,
+      VerificationPhoneRequestApiRequest
+    >({
+      query: ({ path, ...config }) => ({
+        url: `${BASE_URL}/phone/request/${path.mobileNumber}`,
+        method: "post",
+        ...config,
+      }),
+    }),
+    validatePhoneVerification: builder.mutation<
+      VerificationPhoneValidateApiResponse,
+      VerificationPhoneValidateApiRequest
+    >({
+      query: ({ path, ...config }) => ({
+        url: `${BASE_URL}/phone/validate/${path.otp}`,
         method: "post",
         ...config,
       }),
