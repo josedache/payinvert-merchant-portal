@@ -8,7 +8,7 @@ export type PaymentLinkListApiRequest = ApiRequest<
     Type?: string;
     SubsidiaryId?: string;
     BusinessId?: string;
-    Id?: string;
+    Id?: string | number;
     Status?: string;
     Page?: number;
     Limit?: number;
@@ -32,16 +32,32 @@ export type PaymentLinkListApiResponse = {
 export type PaymentLinkCreateApiRequest = ApiRequest<{
   name: string;
   description: string;
-  paymentType: string;
-  amount: number;
-  mobile: string;
-  backgroundImage: string;
-  website: string;
-  currency: string;
+  paymentType: string | number;
+  amount: number | string;
+  // mobile: string;
+  // backgroundImage: string;
+  // website: string;
+  currency: string | number;
   limit: number;
+  paymentLinkId: number;
 }>;
 
 export type PaymentLinkCreateApiResponse = ApiResponse;
+
+export type PaymentLinkEditNewApiRequest = ApiRequest<{
+  name: string;
+  description: string;
+  paymentType: string | number;
+  amount: number | string;
+  // mobile: string;
+  // backgroundImage: string;
+  // website: string;
+  currency: string | number;
+  limit: number;
+  paymentLinkId: number;
+}>;
+
+export type PaymentLinkEditNewApiResponse = ApiResponse;
 
 export type PaymentLinkTypesApiRequest = ApiRequest;
 

@@ -39,7 +39,7 @@ const Analytics = ({ icon, className, label, amount, trend }: TProps) => {
         </Typography>
         <div className="flex items-center gap-2 pt-5">
           <AnalyticsChip label={trend} />
-          <Typography className="text-gray-500">from last week</Typography>
+          <Typography className="text-gray-500">All time</Typography>
         </div>
       </div>
     </Paper>

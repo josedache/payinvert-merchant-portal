@@ -297,7 +297,7 @@ export default BvnVerification;
 
 function getCountdownDate() {
   const date = new Date();
-  date.setTime(date.getTime() + 1000 * 60 * 10);
+  date.setTime(date.getTime() + 1000 * 60 * 5);
   return date;
 }
 

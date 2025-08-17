@@ -1,5 +1,5 @@
 import { baseApi } from "configs/store-query";
-import { COMPLIANCE, USER } from "constants/tags";
+import { COMPLIANCE, USER, WALLET } from "constants/tags";
 
 import {
   initiateNewPayoutRequest,
@@ -21,6 +21,7 @@ export const payoutApi = baseApi.injectEndpoints({
         method: "POST",
         ...config,
       }),
+      invalidatesTags: [WALLET],
     }),
     verifyNewPayout: builder.mutation<
       verifyNewPayoutResponse,
@@ -31,7 +32,7 @@ export const payoutApi = baseApi.injectEndpoints({
         method: "POST",
         ...config,
       }),
-      invalidatesTags: [COMPLIANCE, USER],
+      invalidatesTags: [COMPLIANCE, USER, WALLET],
     }),
   }),
 });

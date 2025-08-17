@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { useSnackbar } from "notistack";
 import useToggle from "hooks/use-toggle";
 import { useFormik } from "formik";
@@ -21,14 +21,19 @@ import * as yup from "yup";
 import NumberTextField from "components/NumberTextField";
 
 function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
-  const { children, onClose, ...restProps } = props;
+  const { id, children, onClose, ...restProps } = props;
 
   const { enqueueSnackbar } = useSnackbar();
+
+  const isEdit = !!id;
 
   const [isOpen, toggleOpen, setOpen] = useToggle();
 
   const [createPaymentLinkMutation] =
     paymentLinkApi.useCreatePaymentLinkMutation();
+
+  const [updatePaymentLinkNewMutation] =
+    paymentLinkApi.useUpdatePaymentLinkNewMutation();
 
   const paymentLinkTypesQueryResult =
     paymentLinkApi.useGetPaymentLinkTypesQuery(undefined);
@@ -39,18 +44,41 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
 
   const currencies = currenciesQueryResult.data?.data;
 
+  const paymentLinkQueryResult = paymentLinkApi.useGetPaymentLinksQuery(
+    useMemo(() => ({ params: { Id: id! } }), [id]),
+    { skip: !id }
+  );
+
+  const paymentLink = paymentLinkQueryResult.data?.items?.[0];
+
+  const initialValues = useMemo(
+    () => ({
+      name: paymentLink?.name ?? "",
+      description: paymentLink?.description ?? "",
+      paymentType: paymentLink?.paymentType
+        ? (paymentLinkTypes?.find(
+            (paymentLinkType) =>
+              paymentLinkType.paymentLinkName == paymentLink?.paymentType
+          )?.code ?? "")
+        : "",
+      amount: paymentLink?.amount ?? 0,
+      // mobile: paymentLink?.mobile ?? "",
+      // backgroundImage: paymentLink?.backgroundImage ?? "",
+      // website: paymentLink?.website ?? "",
+      currency: paymentLink?.currency
+        ? (currencies?.find(
+            (currency) => currency.shortName == paymentLink?.currency
+          )?.id ?? "")
+        : "",
+      limit: paymentLink?.limit ?? 0,
+      paymentLinkId: id,
+    }),
+    [paymentLink, currencies, paymentLinkTypes]
+  );
+
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-      paymentType: "",
-      amount: 0,
-      mobile: "",
-      backgroundImage: "",
-      website: "",
-      currency: "",
-      limit: 0,
-    },
+    initialValues: initialValues,
+    enableReinitialize: true,
     validationSchema: yup.object({
       name: yup.string().label("Link Name").required(),
       description: yup.string().label("Description").required(),
@@ -62,26 +90,36 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
       currency: yup.string().label("Currency").required(),
       limit: yup.number().label("Limit").optional(),
     }),
-    onSubmit: async () => {
+    onSubmit: async (values) => {
       try {
-        await createPaymentLinkMutation({
-          body: formik.values,
+        const func = isEdit
+          ? updatePaymentLinkNewMutation
+          : createPaymentLinkMutation;
+
+        const data = await func({
+          body: { ...values, paymentLinkId: id },
         }).unwrap();
 
-        enqueueSnackbar("Payment link created successfully", {
-          variant: "success",
-        });
+        enqueueSnackbar(
+          data?.message ||
+            `Payment link ${isEdit ? "updated" : "created"} successfully`,
+          {
+            variant: "success",
+          }
+        );
 
         handleClose();
       } catch (error: any) {
         enqueueSnackbar(
           error?.data?.message ||
-            "Failed to create payment link. Please try again.",
+            `Failed to ${isEdit ? "update" : "create"} payment link. Please try again.`,
           { variant: "error" }
         );
       }
     },
   });
+
+  // console.log(formik.errors);
 
   function handleClose(e?: any, reason?: any) {
     formik.resetForm();
@@ -100,7 +138,7 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
           onClose={handleClose}
           className="bg-primary-main text-primary-contrastText"
         >
-          New payment Link
+          {isEdit ? "Edit payment link" : "Create new payment link"}
         </DialogTitleXCloseButton>
         <DialogContent>
           <TextField
@@ -176,13 +214,14 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
           </Button>
           <LoadingButton
             type="submit"
-            disabled={!formik.isValid || !formik.dirty}
+            // disabled={!formik.isValid || !formik.dirty}
+            disabled={!formik.isValid}
             loading={formik.isSubmitting}
             loadingPosition="end"
             endIcon={<></>}
             onClick={formik.handleSubmit as any}
           >
-            Create new link
+            {isEdit ? "Update" : "Create"} link
           </LoadingButton>
         </DialogActions>
       </Dialog>
@@ -196,6 +235,7 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
 export default PaymentLinkCreateEdit;
 
 export type PaymentLinkCreateEditProps = {
+  id?: number;
   open?: boolean;
   children?:
     | ReactNode
@@ -204,4 +244,4 @@ export type PaymentLinkCreateEditProps = {
         toggleOpen: () => void;
         setOpen: (p: any) => void;
       }) => any);
-} & Omit<DialogProps, "children" | "open">;
+} & Omit<DialogProps, "children" | "open" | "id">;

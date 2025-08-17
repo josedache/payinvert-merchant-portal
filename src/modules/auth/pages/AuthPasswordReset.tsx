@@ -10,6 +10,8 @@ import { LoadingButton } from "@mui/lab";
 import { subsidiaryApi } from "apis/subsidiary";
 import NumberTextField from "components/NumberTextField";
 import { Icon as Iconify } from "@iconify/react";
+import Countdown from "components/Countdown";
+import { useState } from "react";
 
 function AuthPasswordReset() {
   const { enqueueSnackbar } = useSnackbar();
@@ -19,6 +21,8 @@ function AuthPasswordReset() {
   const location = useLocation();
 
   const identifier = location.state?.identifier;
+
+  const [countdownDate, setCountdownDate] = useState(getCountdownDate);
 
   const [
     forgotPasswordSubsidiaryMutation,
@@ -95,6 +99,8 @@ function AuthPasswordReset() {
         },
       }).unwrap();
 
+      setCountdownDate(getCountdownDate());
+
       enqueueSnackbar(
         data?.message || "Password reset request sent successful",
         {
@@ -155,22 +161,61 @@ function AuthPasswordReset() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <LoadingButton
-              variant="outlined"
-              fullWidth
-              // size="large"
-              loading={forgotPasswordSubsidiaryMutationResult.isLoading}
-              loadingPosition="end"
-              endIcon={<></>}
-              startIcon={
-                <Icon>
-                  <Iconify icon="mdi:email-resend" />
-                </Icon>
-              }
-              onClick={resendOtp}
-            >
-              Resend OTP
-            </LoadingButton>
+            <Countdown date={countdownDate}>
+              {(countdown) => {
+                const isCodeSent =
+                  countdown.days ||
+                  countdown.minutes ||
+                  countdown.seconds ||
+                  countdown.seconds;
+
+                return (
+                  <>
+                    {isCodeSent ? (
+                      <div className='flex items-center justify-center gap-1'>
+                        <Typography
+                          variant="body2"
+                          color="primary"
+                          className="text-center"
+                        >
+                          Resend OTP in{" "}
+                          <Typography
+                            component="span"
+                            color="primary"
+                            className=""
+                          >
+                            {countdown.minutes}:
+                            {countdown.seconds < 10
+                              ? `0${countdown.seconds}`
+                              : countdown.seconds}
+                          </Typography>
+                        </Typography>
+                      </div>
+                    ) : (
+                      <LoadingButton
+                        variant="outlined"
+                        fullWidth
+                        // size="large"
+                        loading={
+                          forgotPasswordSubsidiaryMutationResult.isLoading
+                        }
+                        loadingPosition="end"
+                        endIcon={<></>}
+                        startIcon={
+                          <Icon>
+                            <Iconify icon="mdi:email-resend" />
+                          </Icon>
+                        }
+                        onClick={resendOtp}
+                      >
+                        Resend OTP
+                      </LoadingButton>
+                    )}
+                  </>
+                );
+              }}
+            </Countdown>
+
             <LoadingButton
               type="submit"
               fullWidth
@@ -204,3 +249,9 @@ function AuthPasswordReset() {
 export default AuthPasswordReset;
 
 export const Component = AuthPasswordReset;
+
+function getCountdownDate() {
+  const date = new Date();
+  date.setTime(date.getTime() + 1000 * 60 * 5);
+  return date;
+}

@@ -11,6 +11,7 @@ import { LoadingButton } from "@mui/lab";
 import { Icon as Iconify } from "@iconify/react";
 import { verificationApi } from "apis/verification";
 import { useSnackbar } from "notistack";
+import NoSpecialCharacterTextField from "components/NoSpecialCharaterTextField";
 
 function ComplianceUpdateProfile(props: ComplianceUpdateProfileProps) {
   const {
@@ -119,7 +120,7 @@ function ComplianceUpdateProfile(props: ComplianceUpdateProfileProps) {
                 },
               }}
             />
-            <TextField
+            <NoSpecialCharacterTextField
               label="Tax identification number (TIN)"
               fullWidth
               disabled={isView}

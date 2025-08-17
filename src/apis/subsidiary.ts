@@ -1,10 +1,11 @@
 import { baseApi } from "configs/store-query";
-import { COMPLIANCE, KEY, PAYMENT_LINK, USER } from "constants/tags";
+import { COMPLIANCE, KEY, PAYMENT_LINK, USER, WALLET } from "constants/tags";
 import { ApiRequest } from "types/api";
 import {
   GetSubsidiaryBankApiResponse,
   GetSubsidiaryBusinessCategoryListApiResponse,
-  GetSubsidiaryBusinessChartApiResponse, GetSubsidiaryComplianceCheckerApiResponse,
+  GetSubsidiaryBusinessChartApiResponse,
+  GetSubsidiaryComplianceCheckerApiResponse,
   GetSubsidiaryComplianceInfoApiResponse,
   GetSubsidiaryDashboardUserDetailsApiResponse,
   GetSubsidiaryDropdownApiResponse,
@@ -292,6 +293,7 @@ export const subsidiaryApi = baseApi.injectEndpoints({
         url: `${BASE_URL}/dashboard/business/chart`,
         ...config,
       }),
+      providesTags: [WALLET],
     }),
 
     getSubsidiaryDropdownEnums: builder.query<

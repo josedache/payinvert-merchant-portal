@@ -3,6 +3,8 @@ import { PAYMENT_LINK } from "constants/tags";
 import {
   PaymentLinkCreateApiRequest,
   PaymentLinkCreateApiResponse,
+  PaymentLinkEditNewApiRequest,
+  PaymentLinkEditNewApiResponse,
   PaymentLinkListApiRequest,
   PaymentLinkListApiResponse,
   PaymentLinkTypesApiRequest,
@@ -42,6 +44,17 @@ export const paymentLinkApi = baseApi.injectEndpoints({
       query: (config) => ({
         url: `${BASE_URL}/create`,
         method: "post",
+        ...config,
+      }),
+      invalidatesTags: [PAYMENT_LINK],
+    }),
+    updatePaymentLinkNew: builder.mutation<
+      PaymentLinkEditNewApiResponse,
+      PaymentLinkEditNewApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/edit/new`,
+        method: "patch",
         ...config,
       }),
       invalidatesTags: [PAYMENT_LINK],

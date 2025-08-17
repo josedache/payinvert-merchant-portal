@@ -67,7 +67,7 @@ function Dashboard() {
                     0
                 )}
               />
-              <Typography className="text-gray-500">from last week</Typography>
+              <Typography className="text-gray-500">All time</Typography>
             </div>
           </div>
         </Paper>

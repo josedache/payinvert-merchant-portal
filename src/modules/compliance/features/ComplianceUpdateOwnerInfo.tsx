@@ -19,6 +19,7 @@ import { getTextFieldError } from "utils/formik/get-text-field-error";
 import AssetPreviewerDialog from "components/AssetPreviewerDialog";
 import { subsidiaryEnumApi } from "apis/subsidiary-enum";
 import BvnVerification from "features/BvnVerification";
+import NoSpecialCharacterTextField from "components/NoSpecialCharaterTextField";
 
 function ComplianceUpdateOwnerInfo(props: ComplianceUpdateOwnerInfoProps) {
   const { formik, complianceInfo, isView } = props;
@@ -41,7 +42,7 @@ function ComplianceUpdateOwnerInfo(props: ComplianceUpdateOwnerInfoProps) {
       </Typography>
 
       <div className="grid grid-cols-1 gap-4">
-        <TextField
+        <NoSpecialCharacterTextField
           label="Full name"
           fullWidth
           disabled={isView}

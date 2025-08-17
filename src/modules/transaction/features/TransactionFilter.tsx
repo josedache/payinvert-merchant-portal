@@ -40,7 +40,7 @@ function TransactionFilter(props: TransactionFilterProps) {
       Status: yup.string().label("Status").optional(),
       FromDate: yup.date().label("From Date").nullable().optional(),
       ToDate: yup.date().label("End Date").nullable().optional(),
-      Channel: yup.number().label("Channel").optional(),
+      Channel: yup.string().label("Channel").optional(),
     }),
     onSubmit: (values) => {
       onFilterApply({ ...values });

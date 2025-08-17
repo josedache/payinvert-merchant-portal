@@ -179,7 +179,7 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
             variant="outlined"
             fullWidth
           >
-            cancel
+            Cancel
           </Button>
           <LoadingButton loading={formik.isSubmitting} type="submit" fullWidth>
             Make Payment
@@ -227,59 +227,57 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
                 },
               }}
             />
-            {!!formik === false && (
-              <Countdown date={countdownDate}>
-                {(countdown) => {
-                  const isCodeSent =
-                    countdown.days ||
-                    countdown.minutes ||
-                    countdown.seconds ||
-                    countdown.seconds;
+            <Countdown date={countdownDate}>
+              {(countdown) => {
+                const isCodeSent =
+                  countdown.days ||
+                  countdown.minutes ||
+                  countdown.seconds ||
+                  countdown.seconds;
 
-                  return (
-                    <>
-                      <div className="flex items-center justify-center">
-                        <Typography className="text-center">
-                          Didn’t receive code?{" "}
-                          {isCodeSent ? (
+                return (
+                  <>
+                    <div className="flex items-center justify-center">
+                      <Typography className="text-center">
+                        Didn’t receive code?{" "}
+                        {isCodeSent ? (
+                          <Typography
+                            variant="body2"
+                            color="primary"
+                            className="text-center"
+                          >
+                            Resend OTP in{" "}
                             <Typography
-                              variant="body2"
+                              component="span"
                               color="primary"
-                              className="text-center"
-                            >
-                              Resend OTP in{" "}
-                              <Typography
-                                component="span"
-                                color="primary"
-                                className=""
-                              >
-                                {countdown.minutes}:
-                                {countdown.seconds < 10
-                                  ? `0${countdown.seconds}`
-                                  : countdown.seconds}
-                              </Typography>
-                            </Typography>
-                          ) : (
-                            <ButtonBase
-                              disableRipple
-                              color="primary"
-                              // disabled={
-                              //   signupYieldUserMutationResult?.isLoading
-                              // }
-                              component={MuiLink}
-                              onClick={sendOtp}
                               className=""
                             >
-                              Resend OTP
-                            </ButtonBase>
-                          )}
-                        </Typography>
-                      </div>
-                    </>
-                  );
-                }}
-              </Countdown>
-            )}
+                              {countdown.minutes}:
+                              {countdown.seconds < 10
+                                ? `0${countdown.seconds}`
+                                : countdown.seconds}
+                            </Typography>
+                          </Typography>
+                        ) : (
+                          <ButtonBase
+                            disableRipple
+                            color="primary"
+                            // disabled={
+                            //   signupYieldUserMutationResult?.isLoading
+                            // }
+                            component={MuiLink}
+                            onClick={sendOtp}
+                            className=""
+                          >
+                            Resend OTP
+                          </ButtonBase>
+                        )}
+                      </Typography>
+                    </div>
+                  </>
+                );
+              }}
+            </Countdown>
           </div>
         }
         <div className="mt-10 grid grid-cols-2 gap-2">
@@ -289,7 +287,7 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
             variant="outlined"
             fullWidth
           >
-            cancel
+            Cancel
           </Button>
           <LoadingButton loading={formik.isSubmitting} type="submit" fullWidth>
             Confirm
@@ -333,7 +331,7 @@ function WalletMakePayoutDialog(props: WalletMakePayoutDialogProps) {
             variant="outlined"
             fullWidth
           >
-            cancel
+            Ok
           </Button>
           <LoadingButton
             disabled
@@ -374,6 +372,6 @@ export const Component = WalletMakePayoutDialog;
 
 function getCountdownDate() {
   const date = new Date();
-  date.setTime(date.getTime() + 1000 * 60 * 10);
+  date.setTime(date.getTime() + 1000 * 60 * 5);
   return date;
 }

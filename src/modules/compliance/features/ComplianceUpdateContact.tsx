@@ -1,16 +1,12 @@
 import { ComplianceUpdateContentProps } from "../types/compliance-update";
-import {
-  Icon,
-  InputAdornment,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Icon, InputAdornment, Paper, Typography } from "@mui/material";
 import { getTextFieldProps } from "utils/formik/get-text-field-props";
 import { LoadingButton } from "@mui/lab";
 import EmailVerification from "features/EmailVerification";
 import PhoneNumberVerification from "features/PhoneVerification";
 import { Icon as Iconify } from "@iconify/react";
+import NoSpecialCharacterTextField from "components/NoSpecialCharaterTextField";
+import NumberTextField from "components/NumberTextField";
 
 function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
   const { formik, isStartupBusiness, complianceInfo, isView } = props;
@@ -26,7 +22,7 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
       </Typography>
 
       <div className="grid grid-cols-1 gap-4">
-        <TextField
+        <NoSpecialCharacterTextField
           label={isStartupBusiness ? "Email address" : "Business email"}
           fullWidth
           disabled={isView}
@@ -79,7 +75,8 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
             },
           }}
         />
-        <TextField
+        <NumberTextField
+          freeSolo
           label={isStartupBusiness ? "Phone number" : "Business phone number"}
           fullWidth
           disabled={isView}
@@ -138,7 +135,7 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
             },
           }}
         />
-        <TextField
+        <NoSpecialCharacterTextField
           label={isStartupBusiness ? "Physical address" : "Business address"}
           fullWidth
           disabled={isView}

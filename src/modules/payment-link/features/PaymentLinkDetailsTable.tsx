@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import useClipboard from "hooks/use-clipboard";
 import { useSnackbar } from "notistack";
 import * as dfns from "date-fns";
+import PaymentLinkCreateEdit from "modules/payment-link/features/PaymentLinkCreateEdit";
 
 const PaymentLinkDetailsTable = (props: PaymentLinkDetailsTableProps) => {
   const { paymentLink } = props;
@@ -29,12 +30,18 @@ const PaymentLinkDetailsTable = (props: PaymentLinkDetailsTableProps) => {
           {paymentLink?.name}
         </Typography>
         <div className="flex gap-2 items-center">
-          <Button
-            variant="outlined"
-            startIcon={<Icon icon="mdi:pencil-outline" />}
-          >
-            Edit link
-          </Button>
+          <PaymentLinkCreateEdit id={paymentLink?.id}>
+            {({ toggleOpen }) => (
+              <Button
+                variant="outlined"
+                startIcon={<Icon icon="mdi:pencil-outline" />}
+                onClick={toggleOpen}
+              >
+                Edit link
+              </Button>
+            )}
+          </PaymentLinkCreateEdit>
+
           <Button
             startIcon={<Icon icon="iconamoon:copy-light" />}
             onClick={() => {
