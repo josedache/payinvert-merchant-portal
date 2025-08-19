@@ -28,6 +28,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { ComplianceBusinessType } from "modules/compliance/enums/compliance-business-type";
 import MediaBreakpoint from "enums/media-breakpoint";
 import useDataRef from "hooks/use-data-ref";
+import getPhoneNumberInfo from "utils/number/get-phone-number-info";
+import getPhoneNumberTest from "utils/formik/get-phone-number-test";
 
 function ComplianceUpdate(props: ComplianceUpdateProps) {
   const { isView } = props;
@@ -175,7 +177,11 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
             ),
         },
         [ComplianceUpdateStep.CONTACT]: {
-          verifiedPhoneNumber: yup.string().label("Phone number").required(),
+          verifiedPhoneNumber: yup
+            .string()
+            .label("Phone number")
+            .test(getPhoneNumberTest())
+            .required(),
           businessAddress: yup.string().label("Address").required(),
           email: yup.string().label("Email").required(),
         },
@@ -237,9 +243,13 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
             break;
           }
           case ComplianceUpdateStep.CONTACT: {
+            const verifiedPhoneNumber = getPhoneNumberInfo(
+              values?.verifiedPhoneNumber
+            )?.nationalNumberNormalized;
+
             await updateComplianceContactMutation({
               body: {
-                verifiedPhoneNumber: values?.verifiedPhoneNumber,
+                verifiedPhoneNumber: verifiedPhoneNumber,
                 businessAddress: values?.businessAddress,
                 email: values?.email,
               },
@@ -317,6 +327,7 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
     },
   });
 
+  // console.log(formik.values);
   // console.log(formik.errors);
 
   const isStartupBusiness =

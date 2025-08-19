@@ -42,14 +42,14 @@ const TransactionTableAction = (props: TransactionTableActionProps) => {
               View details
             </Button>
           </Link>
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Icon icon="entypo:text-document" />}
-            className="mb-2 text-black justify-start"
-          >
-            Refund
-          </Button>
+          {/*<Button*/}
+          {/*  fullWidth*/}
+          {/*  variant="text"*/}
+          {/*  startIcon={<Icon icon="entypo:text-document" />}*/}
+          {/*  className="mb-2 text-black justify-start"*/}
+          {/*>*/}
+          {/*  Refund*/}
+          {/*</Button>*/}
         </div>
       </Popover>
     </div>

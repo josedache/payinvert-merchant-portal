@@ -24,8 +24,8 @@ const WalletHistory = () => {
         params: {
           ...(startDate && endDate
             ? {
-                startDate: new Date(startDate).toISOString(),
-                endDate: new Date(endDate).toISOString(),
+                startDate: dfns.format(startDate, "yyyy-MM-dd"),
+                endDate: dfns.format(endDate, "yyyy-MM-dd"),
               }
             : {}),
           Page: pagination.pageIndex + 1,

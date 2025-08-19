@@ -5,6 +5,7 @@ import { TextField, TextFieldProps } from "@mui/material";
 import { maskitoPhoneOptionsGenerator } from "@maskito/phone";
 import metadata from "libphonenumber-js/mobile/metadata";
 import type { CountryCode } from "libphonenumber-js/core";
+import { parseIncompletePhoneNumber } from "libphonenumber-js";
 
 const PhoneNumberTextField = forwardRef(
   /**
@@ -34,6 +35,8 @@ const PhoneNumberTextField = forwardRef(
     const inputRef = useMaskito({ options });
 
     function handleChange(e) {
+      const value = e.target.value;
+      e.target.value = value && parseIncompletePhoneNumber(value);
       onChange?.(e);
       onInput?.(e);
     }

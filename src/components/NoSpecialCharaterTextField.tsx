@@ -15,7 +15,7 @@ const NoSpecialCharacterTextField = forwardRef(
     ref: any
   ) {
     const {
-      allow = ["@", "&"],
+      allow = ["@", "&", '.', ' '],
       value = "",
       onChange,
       onInput,

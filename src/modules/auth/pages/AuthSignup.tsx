@@ -10,7 +10,9 @@ import PasswordTextField from "components/PasswordTextField";
 import { LoadingButton } from "@mui/lab";
 import { subsidiaryApi } from "apis/subsidiary";
 import AlphabetTextField from "components/AlphabetTextField";
-import NumberTextField from "components/NumberTextField";
+import PhoneNumberTextField from "components/PhoneNumberTextField";
+import getPhoneNumberTest from "utils/formik/get-phone-number-test";
+import getPhoneNumberInfo from "utils/number/get-phone-number-info";
 
 function AuthSignup() {
   const { enqueueSnackbar } = useSnackbar();
@@ -40,7 +42,7 @@ function AuthSignup() {
         .string()
         .label("Mobile Number")
         .trim()
-        .length(11)
+        .test(getPhoneNumberTest())
         .required(),
       businessName: yup
         .string()
@@ -68,9 +70,14 @@ function AuthSignup() {
     }),
     onSubmit: async (values) => {
       try {
+        const mobileNumber = getPhoneNumberInfo(
+          values?.mobileNumber
+        )?.nationalNumberNormalized;
+
         const data = await signupSubsidiaryMutation({
           body: {
             ...values,
+            mobileNumber,
             // password: btoa(values.password ?? ""),
             password: values.password,
             confirmpassword: values.confirmpassword,
@@ -126,9 +133,7 @@ function AuthSignup() {
               {...getTextFieldProps(formik, "userEmail")}
               required
             />
-            <NumberTextField
-              freeSolo
-              maskOptions={{ min: 0, max: 11 }}
+            <PhoneNumberTextField
               fullWidth
               label="Phone number"
               placeholder="Enter your Phone number"

@@ -6,7 +6,8 @@ import EmailVerification from "features/EmailVerification";
 import PhoneNumberVerification from "features/PhoneVerification";
 import { Icon as Iconify } from "@iconify/react";
 import NoSpecialCharacterTextField from "components/NoSpecialCharaterTextField";
-import NumberTextField from "components/NumberTextField";
+import PhoneNumberTextField from "components/PhoneNumberTextField";
+import getPhoneNumberInfo from "utils/number/get-phone-number-info";
 
 function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
   const { formik, isStartupBusiness, complianceInfo, isView } = props;
@@ -75,8 +76,7 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
             },
           }}
         />
-        <NumberTextField
-          freeSolo
+        <PhoneNumberTextField
           label={isStartupBusiness ? "Phone number" : "Business phone number"}
           fullWidth
           disabled={isView}
@@ -87,8 +87,11 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
               endAdornment: (
                 <InputAdornment position="end">
                   {complianceInfo?.contactCompliance?.isPhoneVerified &&
-                  complianceInfo?.contactCompliance?.phoneNumber ===
-                    formik.values.verifiedPhoneNumber ? (
+                  (complianceInfo?.contactCompliance?.phoneNumber ===
+                    formik.values.verifiedPhoneNumber ||
+                    complianceInfo?.contactCompliance?.phoneNumber ===
+                      getPhoneNumberInfo(formik.values.verifiedPhoneNumber)
+                        ?.nationalNumberNormalized) ? (
                     <>
                       <Icon color="success">
                         <Iconify icon="ic:twotone-verified" />
