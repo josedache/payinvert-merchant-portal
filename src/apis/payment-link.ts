@@ -54,7 +54,7 @@ export const paymentLinkApi = baseApi.injectEndpoints({
     >({
       query: (config) => ({
         url: `${BASE_URL}/edit/new`,
-        method: "patch",
+        method: "put",
         ...config,
       }),
       invalidatesTags: [PAYMENT_LINK],
