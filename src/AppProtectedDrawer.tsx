@@ -165,12 +165,12 @@ function AppProtectedDrawer() {
               //   to: urlsConstant.USER,
               //   kycAllow: isActiveClient,
               // },
-              // {
-              //   icon: <CustomIcon.Preferences />,
-              //   label: "Preferences",
-              //   to: urlsConstant.SETTINGS_PREFERENCES,
-              //   kycAllow: isActiveClient,
-              // },
+              {
+                icon: <CustomIcon.Preferences />,
+                label: "Preferences",
+                to: urlsConstant.SETTINGS_PREFERENCES,
+                kycAllow: isActiveClient,
+              },
               {
                 icon: <CustomIcon.ApiWebhooks />,
                 label: "API Keys & Webhooks",

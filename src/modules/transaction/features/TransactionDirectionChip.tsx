@@ -26,6 +26,12 @@ const getTransactionDirectionLabel = (transaction: Wallet) => {
     return "Credit";
   } else if (transaction.amountOnHold) {
     return "Processing";
+  } else if (
+    transaction.reversed ||
+    transaction.isReversal ||
+    transaction.reversalTransaction
+  ) {
+    return "Reversed";
   }
   return "";
 };
@@ -37,6 +43,12 @@ const getTransactionDirectionColor = (transaction: Wallet) => {
     return "success";
   } else if (transaction.amountOnHold) {
     return "warning";
+  } else if (
+    transaction.reversed ||
+    transaction.isReversal ||
+    transaction.reversalTransaction
+  ) {
+    return "info";
   }
   return "default";
 };

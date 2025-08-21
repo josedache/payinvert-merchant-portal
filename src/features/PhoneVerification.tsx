@@ -22,6 +22,7 @@ import NumberTextField from "components/NumberTextField";
 import OtpInput from "components/OtpInput";
 import NumberInput from "components/NumberInput";
 import Countdown from "components/Countdown";
+import getPhoneNumberInfo from "utils/number/get-phone-number-info";
 
 function PhoneVerification(props: PhoneVerificationProps) {
   const { initialStep, mobileNumber, children, onClose, ...restProps } = props;
@@ -77,13 +78,14 @@ function PhoneVerification(props: PhoneVerificationProps) {
 
   async function sendOtp(mobileNumber: string) {
     try {
+      mobileNumber = getPhoneNumberInfo(mobileNumber)?.nationalNumberNormalized;
       const data = await requestPhoneVerificationMutation({
         path: { mobileNumber: mobileNumber },
       }).unwrap();
 
       setCountdownDate(getCountdownDate);
 
-      enqueueSnackbar("An OTP has been sent to your email.", {
+      enqueueSnackbar(data?.message || "An OTP has been sent to your email.", {
         variant: "success",
       });
 
