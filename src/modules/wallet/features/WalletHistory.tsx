@@ -32,10 +32,10 @@ const WalletHistory = () => {
               }
             : {}),
           Page: pagination.pageIndex + 1,
-          Limit: 10,
+          Limit: pagination.pageSize,
         },
       }),
-      [pagination.pageIndex, startDate, endDate]
+      [pagination.pageIndex, pagination.pageSize, startDate, endDate]
     )
   );
 
