@@ -2,7 +2,6 @@ import { Button, Paper, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { subsidiaryApi } from "apis/subsidiary";
 import currency from "currency.js";
-import AnalyticsChip from "components/AnalyticsChip";
 import WalletHistory from "../features/WalletHistory";
 import { MakePayout } from "assets/icons";
 import WalletMakePayoutDialog from "../features/WalletMakePayoutDialog";
@@ -21,8 +20,8 @@ const Wallet = () => {
     });
 
   const amount = getDashboardChartQuery?.data?.availableBalance?.data || 0.0;
-  const trend =
-    getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
+  // const trend =
+  //   getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
 
   const complianceInfo = authUser?.compliance;
 
@@ -63,10 +62,10 @@ const Wallet = () => {
                   "00"}
               </Typography>
             </Typography>
-            <div className="flex items-center gap-2 pt-5">
-              <AnalyticsChip label={String(trend)} />
-              <Typography className="text-gray-500">from last week</Typography>
-            </div>
+            {/*<div className="flex items-center gap-2 pt-5">*/}
+            {/*  <AnalyticsChip label={String(trend)} />*/}
+            {/*  <Typography className="text-gray-500">from last week</Typography>*/}
+            {/*</div>*/}
           </div>
         </Paper>
         <Paper className="space-y-5 p-4 flex gap-2">
