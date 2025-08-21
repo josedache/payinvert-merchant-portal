@@ -68,7 +68,7 @@ function ComplianceUpdateProfile(props: ComplianceUpdateProfileProps) {
         />
 
         {isStartupBusiness ? (
-          <TextField
+          <NoSpecialCharacterTextField
             label="Business description"
             fullWidth
             disabled={isView}
