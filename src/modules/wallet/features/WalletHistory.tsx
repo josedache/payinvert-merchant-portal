@@ -14,7 +14,7 @@ import { TransactionTypeEnum } from "modules/transaction/enums/TransactionTypeEn
 import TransactionDirectionChip from "modules/transaction/features/TransactionDirectionChip";
 
 const WalletHistory = () => {
-  const [pagination, setPagination] = usePagination();
+  const [pagination, setPagination] = usePagination({ pageSize: 50 });
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -44,8 +44,8 @@ const WalletHistory = () => {
   const tableInstance = useTable({
     data: walletTransactions,
     columns,
-    // manualPagination: true,
-    // pageCount: orders?.page?.totalPage ?? 1,
+    manualPagination: true,
+    pageCount: walletTransactionsQueryResult.data?.page?.totalPage ?? 0,
     state: { pagination },
     onPaginationChange: setPagination,
   });
