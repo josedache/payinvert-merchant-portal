@@ -5,7 +5,7 @@ import TransactionFilter, {
 } from "modules/transaction/features/TransactionFilter";
 
 const TransactionTableHeader = (props: TransactionTableHeaderProps) => {
-  const { total, filter, onFilterApply, onExport } = props;
+  const { total, filter, onFilterApply } = props;
 
   return (
     <div className="flex justify-between items-center gap-4">
@@ -31,19 +31,19 @@ const TransactionTableHeader = (props: TransactionTableHeaderProps) => {
           )}
         </TransactionFilter>
 
-        <Button
-          variant="outlined"
-          size="small"
-          endIcon={
-            <Icon>
-              <Iconify icon="icon-park-solid:down-one" />
-            </Icon>
-          }
-          className="bg-white"
-          onClick={onExport}
-        >
-          Export
-        </Button>
+        {/*<Button*/}
+        {/*  variant="outlined"*/}
+        {/*  size="small"*/}
+        {/*  endIcon={*/}
+        {/*    <Icon>*/}
+        {/*      <Iconify icon="icon-park-solid:down-one" />*/}
+        {/*    </Icon>*/}
+        {/*  }*/}
+        {/*  className="bg-white"*/}
+        {/*  onClick={onExport}*/}
+        {/*>*/}
+        {/*  Export*/}
+        {/*</Button>*/}
       </div>
     </div>
   );
