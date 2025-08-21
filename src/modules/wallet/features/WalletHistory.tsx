@@ -60,6 +60,10 @@ const WalletHistory = () => {
               value={startDate} // Initial date range (optional)
               onChange={(value) => {
                 setStartDate(value);
+
+                if (dfns.isValid(value) && dfns.isValid(endDate)) {
+                  setPagination((p) => ({ ...p, pageIndex: 0 }));
+                }
               }}
               maxDate={endDate}
               format="dd/MM/yyyy" // Date format (default is "MM/dd/yyyy")
@@ -77,6 +81,10 @@ const WalletHistory = () => {
               value={endDate}
               onChange={(value) => {
                 setEndDate(value);
+
+                if (dfns.isValid(value) && dfns.isValid(startDate)) {
+                  setPagination((p) => ({ ...p, pageIndex: 0 }));
+                }
               }}
               minDate={startDate}
               format="dd/MM/yyyy"
