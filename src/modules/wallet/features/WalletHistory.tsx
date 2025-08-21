@@ -22,7 +22,10 @@ const WalletHistory = () => {
     useMemo(
       () => ({
         params: {
-          ...(startDate && endDate
+          ...(startDate &&
+          endDate &&
+          dfns.isValid(startDate) &&
+          dfns.isValid(endDate)
             ? {
                 startDate: dfns.format(startDate, "yyyy-MM-dd"),
                 endDate: dfns.format(endDate, "yyyy-MM-dd"),
