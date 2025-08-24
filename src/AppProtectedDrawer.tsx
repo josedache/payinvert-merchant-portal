@@ -168,13 +168,13 @@ function AppProtectedDrawer() {
               {
                 icon: <CustomIcon.Preferences />,
                 label: "Preferences",
-                to: urlsConstant.SETTINGS_PREFERENCES,
+                to: urlsConstant.PREFERENCE,
                 kycAllow: isActiveClient,
               },
               {
                 icon: <CustomIcon.ApiWebhooks />,
                 label: "API Keys & Webhooks",
-                to: urlsConstant.SETTINGS_API_WEBHOOKS,
+                to: urlsConstant.API_WEBHOOKS,
                 kycAllow: isActiveClient,
               },
             ],

@@ -8,8 +8,9 @@ import {
   INVOICE,
   PAYMENT_LINK,
   ROLES_AND_PERMISSION,
-  SETTINGS_API_WEBHOOKS,
+  API_WEBHOOKS,
   TRANSACTION,
+  PREFERENCE,
 } from "constants/urls";
 import AuthRoutes from "modules/auth/AuthRoutes";
 import DashboardRoutes from "modules/dashboard/DashboardRoutes";
@@ -17,7 +18,6 @@ import ComplianceRoutes from "modules/compliance/ComplianceRoutes";
 import PaymentLinksRoutes from "modules/payment-link/PaymentLinkRoutes";
 import RolesRoutes from "modules/role/RoleRoutes";
 import TransactionsRoutes from "modules/transaction/TransactionRoutes";
-import SettingsRoutes from "modules/settings/SettingsRoutes";
 import AccountRoutes from "modules/account/AccountRoutes";
 import BusinessRoutes from "modules/business/BusinessRoutes";
 import BalancesRoutes from "modules/balance/BalanceRoutes";
@@ -29,6 +29,7 @@ import WalletRoutes from "modules/wallet/WalletRoutes";
 import CollectionAccountRoutes from "modules/collection-account/CollectionAccountRoutes";
 import PayoutRoutes from "modules/payout/PayoutRoutes";
 import UserRoutes from "modules/user/UserRoutes";
+import PreferenceRoutes from "modules/preference/PreferenceRoutes";
 
 const router = createBrowserRouter([
   {
@@ -67,11 +68,6 @@ const router = createBrowserRouter([
                 children: ComplianceRoutes,
               },
               {
-                path: urlConstants.SETTINGS_COMPLIANCE,
-                lazy: () => import("modules/settings/Settings"),
-                children: SettingsRoutes,
-              },
-              {
                 path: urlConstants.ACCOUNT,
                 lazy: () => import("modules/account/Account"),
                 children: AccountRoutes,
@@ -97,10 +93,15 @@ const router = createBrowserRouter([
                 children: RolesRoutes,
               },
               {
-                path: SETTINGS_API_WEBHOOKS,
+                path: API_WEBHOOKS,
                 lazy: () =>
                   import("modules/api-key-and-webhook/ApiKeyAndWebhook"),
                 children: ApiKeyAndWebhookRoutes,
+              },
+              {
+                path: PREFERENCE,
+                lazy: () => import("modules/preference/Preference"),
+                children: PreferenceRoutes,
               },
               {
                 path: INVOICE,

@@ -1,0 +1,205 @@
+import {
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  FormGroup,
+  Paper,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { getTextFieldProps } from "utils/formik/get-text-field-props";
+import { subsidiaryDashboardApi } from "apis/subsidiary-dashboard";
+import { useMemo } from "react";
+import { PreferencePaymentMethod } from "modules/preference/enums/preference-payment-method";
+import useAuthUser from "hooks/use-auth-user";
+import { useSnackbar } from "notistack";
+import { Icon as Iconify } from "@iconify/react";
+import { LoadingButton } from "@mui/lab";
+import { getCheckFieldProps } from "utils/formik/get-check-field-props";
+
+function Preference() {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const authUser = useAuthUser();
+
+  const [setAllSubsidiaryDashboardPaymentOptionsMutation] =
+    subsidiaryDashboardApi.useSetAllSubsidiaryDashboardPaymentOptionsMutation();
+
+  const [setSubsidiaryDashboard2faLoginMutation] =
+    subsidiaryDashboardApi.useSetSubsidiaryDashboard2faLoginMutation();
+
+  const subsidiaryDashboardPaymentOptionsQueryResult =
+    subsidiaryDashboardApi.useGetSubsidiaryDashboardPaymentOptionsQuery(
+      undefined
+    );
+
+  const subsidiaryDashboardPaymentOptions =
+    subsidiaryDashboardPaymentOptionsQueryResult.data?.data;
+
+  const subsidiaryDashboard2faLoginQueryResult =
+    subsidiaryDashboardApi.useGetSubsidiaryDashboard2faLoginQuery(undefined);
+
+  const subsidiaryDashboard2faLogin =
+    subsidiaryDashboard2faLoginQueryResult.data?.data;
+
+  const initialValues = useMemo(() => {
+    return {
+      paymentOptions:
+        subsidiaryDashboardPaymentOptions?.map((item) => ({
+          paymentOption: item.code,
+          enabled: item.isEnabled,
+        })) ?? [],
+      twoFA: subsidiaryDashboard2faLogin?.isTwoFAEnabled ?? false,
+    };
+  }, [subsidiaryDashboardPaymentOptions, subsidiaryDashboard2faLogin]);
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    enableReinitialize: true,
+    validationSchema: yup.object({
+      paymentOptions: yup.array().of(
+        yup.object({
+          paymentOption: yup.string().required(),
+          enabled: yup.boolean().required(),
+        })
+      ),
+      twoFA: yup.boolean().required(),
+    }),
+    onSubmit: async () => {
+      try {
+        const [paymentOptionsData] = await Promise.all([
+          setAllSubsidiaryDashboardPaymentOptionsMutation({
+            body: {
+              paymentOptions: formik.values.paymentOptions,
+              businessId: authUser?.businessDetails?.id,
+            },
+          }).unwrap(),
+          setSubsidiaryDashboard2faLoginMutation({
+            body: {
+              twoFA: formik.values.twoFA,
+            },
+          }).unwrap(),
+        ]);
+        enqueueSnackbar(
+          paymentOptionsData?.message || "Preferences updated successfully",
+          {
+            variant: "success",
+          }
+        );
+      } catch (error) {
+        enqueueSnackbar(
+          error?.message ||
+            error?.data?.message ||
+            "Failed to update preferences. Please try again.",
+          {
+            variant: "error",
+          }
+        );
+      }
+    },
+  });
+
+  return (
+    <>
+      <div className="max-w-xl mx-auto">
+        <Paper elevation={0} className="p-4 md:p-6 space-y-4">
+          <div className="space-y-4">
+            <div>
+              <Typography variant="h6">Transactions</Typography>
+              <Typography variant="body1">
+                Who should be charged transaction fees
+              </Typography>
+            </div>
+            <RadioGroup {...getTextFieldProps(formik, "transactionCharge")}>
+              {[
+                { value: "a", label: "Charge me the transaction fees" },
+                {
+                  value: "b",
+                  label: "Charge my customers the transaction fees",
+                },
+              ].map((props) => (
+                <FormControlLabel
+                  key={props.label}
+                  control={<Radio />}
+                  {...props}
+                />
+              ))}
+            </RadioGroup>
+          </div>
+          <Divider />
+          <div className="space-y-4">
+            <div>
+              <Typography variant="h6">Payment configurations</Typography>
+              <Typography variant="body1">
+                Configure customer payment preferences
+              </Typography>
+            </div>
+            <FormGroup>
+              {formik.values.paymentOptions?.map((option, index) => {
+                const formikKey = `paymentOptions.${index}.enabled`;
+                return (
+                  <FormControlLabel
+                    key={option.paymentOption}
+                    control={
+                      <Checkbox {...getCheckFieldProps(formik, formikKey)} />
+                    }
+                    label={
+                      {
+                        [PreferencePaymentMethod.CARD]: "Enable card payment",
+                        [PreferencePaymentMethod.USSD]: "Enable USSD",
+                        [PreferencePaymentMethod.BANK_TRANSFER]:
+                          "Enable bank transfer",
+                        [PreferencePaymentMethod.QR_CODE]:
+                          "Enable QR code payment",
+                        ["INTERNATIONAL_PAYMENT"]:
+                          "Enable international payment",
+                      }[option.paymentOption] ?? option.paymentOption
+                    }
+                  />
+                );
+              })}
+            </FormGroup>
+          </div>
+          <Divider />
+          <div className="space-y-4">
+            <div>
+              <Typography variant="h6">Other preferences</Typography>
+            </div>
+            <FormGroup>
+              {[
+                {
+                  key: "twoFA",
+                  label: "Enable Two Factor Authentication for login",
+                },
+              ].map(({ key, ...props }) => (
+                <FormControlLabel
+                  key={props.label}
+                  control={<Checkbox {...getCheckFieldProps(formik, key)} />}
+                  {...props}
+                />
+              ))}
+            </FormGroup>
+          </div>
+          <Divider />
+          <LoadingButton
+            startIcon={
+              <Iconify icon="humbleicons:check" width="20" height="20" />
+            }
+            fullWidth
+            loading={formik.isSubmitting}
+            onClick={formik.handleSubmit as any}
+          >
+            Save
+          </LoadingButton>
+        </Paper>
+      </div>
+    </>
+  );
+}
+
+export const Component = Preference;
+
+export default Preference;

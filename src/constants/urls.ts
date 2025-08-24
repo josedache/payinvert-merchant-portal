@@ -28,13 +28,10 @@ export const ACCOUNT_BALANCES = "/account/balances";
 export const ACCOUNT_BALANCE_HISTORY = "/account/balances/history";
 
 export const SETTINGS = "/settings";
-export const SETTINGS_BUSINESS = "/settings/business";
-export const SETTINGS_COMPLIANCE = "/settings/compliance";
-export const SETTINGS_PAYOUT_ACCOUNTS = "/settings/payout-accounts";
-export const SETTINGS_ROLES_AND_PERMISSIONS = "/settings/roles-and-permissions";
-export const SETTINGS_USERS = "/settings/users";
-export const SETTINGS_PREFERENCES = "/settings/preferences";
-export const SETTINGS_API_WEBHOOKS = "/settings/api-webhooks";
+
+export const PREFERENCE = "/preferences";
+
+export const API_WEBHOOKS = "/api-webhooks";
 
 export const INVOICE = "/invoice";
 export const INVOICE_DETAIL = "/invoice/:id";

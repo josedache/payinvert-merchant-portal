@@ -6,8 +6,4 @@ export default [
     path: DASHBOARD,
     lazy: () => import("modules/dashboard/pages/Dashboard"),
   },
-  // {
-  //   path: COMPLIANCE_UPDATE,
-  //   lazy: () => import("modules/dashboard/pages/DashboardOnboarding"),
-  // },
 ] as RouteObject[];
