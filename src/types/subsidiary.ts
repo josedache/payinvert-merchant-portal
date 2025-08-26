@@ -59,6 +59,14 @@ export type SubsidiaryCompliance = {
 };
 
 export type SubsidiaryComplianceChecker = {
+  agreementCompliance: {
+    dateCreated: string;
+    termOfServiceSigned: string;
+    slaSigned: string;
+    msaSigned: string;
+    signedBy: string;
+    compliancePercentage: number;
+  };
   profileCompliance: {
     businessTypeEnum: number;
     businessType: {

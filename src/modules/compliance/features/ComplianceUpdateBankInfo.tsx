@@ -111,10 +111,12 @@ function ComplianceUpdateBankInfo(props: ComplianceUpdateBankDetailsProps) {
           return option?.name;
         }}
         isOptionEqualToValue={(option, value) => {
-          return option?.id === value?.id || option === value;
+          return option?.id == value?.id || option === value;
         }}
         value={
-          formik.values.bankId ? normalizedBanks?.[formik.values.bankId] : null
+          formik.values.bankId && normalizedBanks?.[formik.values.bankId]
+            ? normalizedBanks?.[formik.values.bankId]
+            : null
         }
         onChange={(_, value) => {
           formik.setFieldValue("bankName", value?.name || "");

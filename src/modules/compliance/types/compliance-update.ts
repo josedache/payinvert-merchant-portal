@@ -25,6 +25,11 @@ export type ComplianceUpdateFormikValues = {
 
   CertificateOfIncorporation: string | File;
   MemoOfAssociation: string | File;
+
+  termOfServiceSigned: boolean;
+  slaSigned: boolean;
+  msaSigned: boolean;
+  signedBy: string;
 };
 
 export interface ComplianceUpdateContentDataRef {

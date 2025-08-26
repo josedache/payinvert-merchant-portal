@@ -28,6 +28,9 @@ function Preference() {
   const [setAllSubsidiaryDashboardPaymentOptionsMutation] =
     subsidiaryDashboardApi.useSetAllSubsidiaryDashboardPaymentOptionsMutation();
 
+  const [toggleSubsidiaryDashboardInternationalPaymentMutation] =
+    subsidiaryDashboardApi.useToggleSubsidiaryDashboardInternationalPaymentMutation();
+
   const [setSubsidiaryDashboard2faLoginMutation] =
     subsidiaryDashboardApi.useSetSubsidiaryDashboard2faLoginMutation();
 
@@ -38,6 +41,14 @@ function Preference() {
 
   const subsidiaryDashboardPaymentOptions =
     subsidiaryDashboardPaymentOptionsQueryResult.data?.data;
+
+  const subsidiaryDashboardInternationalPaymentViewQueryResult =
+    subsidiaryDashboardApi.useGetSubsidiaryDashboardInternationalPaymentViewQuery(
+      undefined
+    );
+
+  const subsidiaryDashboardInternationalPaymentView =
+    subsidiaryDashboardInternationalPaymentViewQueryResult.data?.data;
 
   const subsidiaryDashboard2faLoginQueryResult =
     subsidiaryDashboardApi.useGetSubsidiaryDashboard2faLoginQuery(undefined);
@@ -52,13 +63,18 @@ function Preference() {
           paymentOption: item.code,
           enabled: item.isEnabled,
         })) ?? [],
+      enableInternationalPayment:
+        subsidiaryDashboardInternationalPaymentView?.enabled ?? false,
       twoFA: subsidiaryDashboard2faLogin?.isTwoFAEnabled ?? false,
     };
-  }, [subsidiaryDashboardPaymentOptions, subsidiaryDashboard2faLogin]);
+  }, [
+    subsidiaryDashboardPaymentOptions,
+    subsidiaryDashboardInternationalPaymentView,
+    subsidiaryDashboard2faLogin,
+  ]);
 
   const formik = useFormik({
     initialValues: initialValues,
-    enableReinitialize: true,
     validationSchema: yup.object({
       paymentOptions: yup.array().of(
         yup.object({
@@ -66,14 +82,22 @@ function Preference() {
           enabled: yup.boolean().required(),
         })
       ),
+      enableInternationalPayment: yup.boolean().required(),
       twoFA: yup.boolean().required(),
     }),
+    enableReinitialize: true,
     onSubmit: async () => {
       try {
         const [paymentOptionsData] = await Promise.all([
           setAllSubsidiaryDashboardPaymentOptionsMutation({
             body: {
               paymentOptions: formik.values.paymentOptions,
+              businessId: authUser?.businessDetails?.id,
+            },
+          }).unwrap(),
+          toggleSubsidiaryDashboardInternationalPaymentMutation({
+            body: {
+              enabled: formik.values.enableInternationalPayment,
               businessId: authUser?.businessDetails?.id,
             },
           }).unwrap(),
@@ -161,6 +185,17 @@ function Preference() {
                   />
                 );
               })}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...getCheckFieldProps(
+                      formik,
+                      "enableInternationalPayment"
+                    )}
+                  />
+                }
+                label="Enable international payment"
+              />
             </FormGroup>
           </div>
           <Divider />

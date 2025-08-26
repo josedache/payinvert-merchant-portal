@@ -19,6 +19,7 @@ import ComplianceUpdateContact from "modules/compliance/features/ComplianceUpdat
 import ComplianceUpdateOwnerInfo from "modules/compliance/features/ComplianceUpdateOwnerInfo";
 import ComplianceUpdateBusinessRegistration from "modules/compliance/features/ComplianceUpdateBusinessRegistration";
 import ComplianceUpdateBankInfo from "modules/compliance/features/ComplianceUpdateBankInfo";
+import ComplianceUpdateAgreement from "modules/compliance/features/ComplianceUpdateAgreement";
 import clsx from "clsx";
 import { subsidiaryApi } from "apis/subsidiary";
 import LoadingContent from "components/LoadingContent";
@@ -57,6 +58,9 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
   const [updateComplianceKybDetailsMutation] =
     subsidiaryApi.useUpdateSubsidiaryComplianceKybDetailsMutation();
 
+  const [updateSubsidiaryComplianceAgreementMutation] =
+    subsidiaryApi.useUpdateSubsidiaryComplianceAgreementMutation();
+
   const complianceInfoQueryResult =
     subsidiaryApi.useGetSubsidiaryComplianceCheckerQuery();
 
@@ -83,6 +87,9 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
     [ComplianceUpdateStep.BANK_INFO]: !(
       complianceInfo?.bankCompliance?.compliancePercentage < 100
     ),
+    [ComplianceUpdateStep.AGREEMENT]: !(
+      complianceInfo?.agreementCompliance?.compliancePercentage < 100
+    ),
   };
 
   const initialStep = isView
@@ -103,7 +110,9 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                 : ComplianceUpdateStep.DIRECTOR_INFO
               : !completenessMap[ComplianceUpdateStep.BANK_INFO]
                 ? ComplianceUpdateStep.BANK_INFO
-                : undefined;
+                : !completenessMap[ComplianceUpdateStep.AGREEMENT]
+                  ? ComplianceUpdateStep.AGREEMENT
+                  : undefined;
 
   const stepper = useStepper({
     initialStep,
@@ -137,8 +146,14 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
 
       bankId: complianceInfo?.bankCompliance?.bankId ?? "",
       bankName: complianceInfo?.bankCompliance?.bankName ?? "",
-      accountName: complianceInfo?.bankCompliance?.accountName ?? "",
+      accountName: complianceInfo?.bankCompliance?.accountName ??  "",
       accountNumber: complianceInfo?.bankCompliance?.accountNumber ?? "",
+
+      termOfServiceSigned:
+        complianceInfo?.agreementCompliance?.termOfServiceSigned ?? false,
+      slaSigned: complianceInfo?.agreementCompliance?.slaSigned ?? false,
+      msaSigned: complianceInfo?.agreementCompliance?.msaSigned ?? false,
+      signedBy: complianceInfo?.agreementCompliance?.signedBy ?? "",
     } as ComplianceUpdateFormikValues;
   }, [complianceInfo]);
 
@@ -220,6 +235,9 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
             .matches(/^[0-9]+$/, "Account Number must be a number")
             .required(),
         },
+        [ComplianceUpdateStep.AGREEMENT]: {
+          signedBy: yup.string().required("Full Name is required"),
+        },
       }[stepper.step],
     }),
     onSubmit: async (values) => {
@@ -230,7 +248,7 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
             break;
           }
           case ComplianceUpdateStep.PROFILE: {
-            await updateComplianceProfileMutation({
+            const data = await updateComplianceProfileMutation({
               body: {
                 businessType: values.businessType,
                 description: values.description,
@@ -239,6 +257,11 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                 taxIdNumber: values.taxIdNumber,
               },
             }).unwrap();
+
+            enqueueSnackbar(data?.message || "Profile Information Submitted", {
+              variant: "success",
+            });
+
             stepper.next();
             break;
           }
@@ -247,13 +270,17 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
               values?.verifiedPhoneNumber
             )?.nationalNumberNormalized;
 
-            await updateComplianceContactMutation({
+            const data = await updateComplianceContactMutation({
               body: {
                 verifiedPhoneNumber: verifiedPhoneNumber,
                 businessAddress: values?.businessAddress,
                 email: values?.email,
               },
             }).unwrap();
+
+            enqueueSnackbar(data?.message || "Contact Information Submitted", {
+              variant: "success",
+            });
 
             if (isStartupBusiness) {
               stepper.go(ComplianceUpdateStep.OWNER_INFO);
@@ -263,7 +290,7 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
             break;
           }
           case ComplianceUpdateStep.BUSINESS_REGISTRATION: {
-            await updateComplianceKybDetailsMutation({
+            const data = await updateComplianceKybDetailsMutation({
               body: {
                 CertificateOfIncorporation:
                   values.CertificateOfIncorporation instanceof Blob
@@ -275,11 +302,14 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                     : null,
               },
             }).unwrap();
+            enqueueSnackbar(data?.message || "Business Information Submitted", {
+              variant: "success",
+            });
             stepper.go(ComplianceUpdateStep.DIRECTOR_INFO);
             break;
           }
           case ComplianceUpdateStep.OWNER_INFO: {
-            await updateComplianceOwnerMutation({
+            const data = await updateComplianceOwnerMutation({
               body: {
                 FullName: values?.FullName,
                 Identity:
@@ -288,11 +318,14 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                 Bvn: values.Bvn,
               },
             }).unwrap();
+            enqueueSnackbar(data?.message || "Owner Information Submitted", {
+              variant: "success",
+            });
             stepper.go(ComplianceUpdateStep.BANK_INFO);
             break;
           }
           case ComplianceUpdateStep.DIRECTOR_INFO: {
-            await updateComplianceDirectorMutation({
+            const data = await updateComplianceDirectorMutation({
               body: {
                 FullName: values?.FullName,
                 Identity: values?.Identity,
@@ -300,11 +333,14 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                 Bvn: values.Bvn,
               },
             }).unwrap();
+            enqueueSnackbar(data?.message || "Director Information Submitted", {
+              variant: "success",
+            });
             stepper.next();
             break;
           }
           case ComplianceUpdateStep.BANK_INFO: {
-            await updateComplianceBankMutation({
+            const data = await updateComplianceBankMutation({
               body: {
                 bankId: values?.bankId,
                 bankName: values?.bankName,
@@ -312,10 +348,28 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                 accountNumber: values?.accountNumber,
               },
             }).unwrap();
-            navigate(COMPLIANCE);
+            enqueueSnackbar(data?.message || "Bank information Submitted", {
+              variant: "success",
+            });
+            stepper.next();
+            break;
+          }
+          case ComplianceUpdateStep.AGREEMENT: {
+            const data = await updateSubsidiaryComplianceAgreementMutation({
+              body: {
+                termOfServiceSigned: values.termOfServiceSigned,
+                slaSigned: values.slaSigned,
+                msaSigned: values.msaSigned,
+                signedBy: values.signedBy,
+              },
+            }).unwrap();
+            enqueueSnackbar(data?.message || "Agreement Submitted", {
+              variant: "success",
+            });
             enqueueSnackbar("Compliance Submitted and pending approval", {
               variant: "success",
             });
+            navigate(COMPLIANCE);
             break;
           }
         }
@@ -378,6 +432,10 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
       title: "Account Setup",
       body: <ComplianceUpdateBankInfo {...contentProps} />,
     },
+    {
+      title: "Agreement",
+      body: <ComplianceUpdateAgreement {...contentProps} />,
+    },
   ];
 
   const content = contents[stepper.step];
@@ -436,9 +494,9 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                     <StepLabel
                       className={clsx("space-x-2", isView && "cursor-pointer")}
                       onClick={() => {
-                        if (isView) {
+                        // if (isView) {
                           stepper.go(index);
-                        }
+                        // }
                       }}
                     >
                       {content.title}

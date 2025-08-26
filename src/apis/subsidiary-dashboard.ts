@@ -5,6 +5,10 @@ import {
   SubsidiaryDashboard2faLoginSetApiResponse,
   SubsidiaryDashboard2faLoginViewNewApiRequest,
   SubsidiaryDashboard2faLoginViewNewApiResponse,
+  SubsidiaryDashboardInternationalPaymentToggleApiRequest,
+  SubsidiaryDashboardInternationalPaymentToggleApiResponse,
+  SubsidiaryDashboardInternationalPaymentViewNewApiRequest,
+  SubsidiaryDashboardInternationalPaymentViewNewApiResponse,
   SubsidiaryDashboardPaymentOptionsSetAllApiRequest,
   SubsidiaryDashboardPaymentOptionsSetAllApiResponse,
   SubsidiaryDashboardPaymentOptionsSetApiRequest,
@@ -54,7 +58,7 @@ export const subsidiaryDashboardApi = baseApi.injectEndpoints({
       SubsidiaryDashboard2faLoginSetApiRequest
     >({
       query: (config) => ({
-        url: `${BASE_URL}/2fa/login/set`,
+        url: `${BASE_URL}/2fa/login/set/new`,
         method: "post",
         ...config,
       }),
@@ -66,6 +70,27 @@ export const subsidiaryDashboardApi = baseApi.injectEndpoints({
     >({
       query: (config) => ({
         url: `${BASE_URL}/2fa/login/view/new`,
+        ...config,
+      }),
+      providesTags: [PREFERENCE],
+    }),
+    toggleSubsidiaryDashboardInternationalPayment: builder.mutation<
+      SubsidiaryDashboardInternationalPaymentToggleApiResponse,
+      SubsidiaryDashboardInternationalPaymentToggleApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/international-payment/toggle`,
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [PREFERENCE],
+    }),
+    getSubsidiaryDashboardInternationalPaymentView: builder.query<
+      SubsidiaryDashboardInternationalPaymentViewNewApiResponse,
+      SubsidiaryDashboardInternationalPaymentViewNewApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/international-payment/view`,
         ...config,
       }),
       providesTags: [PREFERENCE],

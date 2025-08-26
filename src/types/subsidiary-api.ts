@@ -124,6 +124,16 @@ export type UpdateSubsidiaryComplianceKybDetailsApiResponse = {
   message: string;
 };
 
+export type UpdateSubsidiaryComplianceAgreementApiRequest = ApiRequest<{
+  termOfServiceSigned: boolean;
+  slaSigned: boolean;
+  msaSigned: boolean;
+  signedBy: string;
+}>;
+export type UpdateSubsidiaryComplianceAgreementApiResponse = {
+  message: string;
+};
+
 export type GetSubsidiaryComplianceInfoApiResponse = SubsidiaryCompliance;
 
 export type GetSubsidiaryComplianceCheckerApiResponse =

@@ -6,6 +6,7 @@ export enum ComplianceUpdateStep {
   OWNER_INFO,
   DIRECTOR_INFO,
   BANK_INFO,
+  AGREEMENT,
 }
 
 export default ComplianceUpdateStep;

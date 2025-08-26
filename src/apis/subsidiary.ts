@@ -36,6 +36,8 @@ import {
   SubsidiarySignupApiResponse,
   SubsidiaryVerificationEmailResendApiRequest,
   SubsidiaryVerificationEmailResendApiResponse,
+  UpdateSubsidiaryComplianceAgreementApiRequest,
+  UpdateSubsidiaryComplianceAgreementApiResponse,
   UpdateSubsidiaryComplianceBankApiRequest,
   UpdateSubsidiaryComplianceBankApiResponse,
   UpdateSubsidiaryComplianceContactApiRequest,
@@ -252,6 +254,17 @@ export const subsidiaryApi = baseApi.injectEndpoints({
         method: "post",
         ...config,
         body: objectToFormData(config.body),
+      }),
+      invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
+    }),
+    updateSubsidiaryComplianceAgreement: builder.mutation<
+      UpdateSubsidiaryComplianceAgreementApiResponse,
+      UpdateSubsidiaryComplianceAgreementApiRequest
+    >({
+      query: (config) => ({
+        url: BASE_URL + "/dashboard/compliance/agreement",
+        method: "post",
+        ...config,
       }),
       invalidatesTags: [{ type: USER }, { type: COMPLIANCE }],
     }),
