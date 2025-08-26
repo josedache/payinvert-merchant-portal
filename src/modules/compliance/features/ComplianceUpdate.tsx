@@ -146,7 +146,7 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
 
       bankId: complianceInfo?.bankCompliance?.bankId ?? "",
       bankName: complianceInfo?.bankCompliance?.bankName ?? "",
-      accountName: complianceInfo?.bankCompliance?.accountName ??  "",
+      accountName: complianceInfo?.bankCompliance?.accountName ?? "",
       accountNumber: complianceInfo?.bankCompliance?.accountNumber ?? "",
 
       termOfServiceSigned:
@@ -494,9 +494,9 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
                     <StepLabel
                       className={clsx("space-x-2", isView && "cursor-pointer")}
                       onClick={() => {
-                        // if (isView) {
+                        if (isView) {
                           stepper.go(index);
-                        // }
+                        }
                       }}
                     >
                       {content.title}
