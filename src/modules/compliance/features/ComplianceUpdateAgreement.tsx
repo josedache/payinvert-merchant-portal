@@ -31,6 +31,7 @@ function ComplianceUpdateAgreement(props: ComplianceUpdateAgreementProps) {
       <div className="space-y-4">
         <div>
           <FormControlLabel
+            disabled={isView}
             className="ml-0 mr-0"
             labelPlacement="start"
             label="Accept terms of Service (TOS)"
@@ -48,7 +49,7 @@ function ComplianceUpdateAgreement(props: ComplianceUpdateAgreementProps) {
           >
             {({ toggleOpen }) => (
               <FormControlLabel
-                disabled={!formik.values.termOfServiceSigned}
+                disabled={isView || !formik.values.termOfServiceSigned}
                 className="ml-0 mr-0"
                 labelPlacement="start"
                 label="Read and accept Payinvert Merchant Service E-Agreement"
@@ -74,7 +75,7 @@ function ComplianceUpdateAgreement(props: ComplianceUpdateAgreementProps) {
           >
             {({ toggleOpen }) => (
               <FormControlLabel
-                disabled={!formik.values.msaSigned}
+                disabled={isView || !formik.values.msaSigned}
                 className="ml-0 mr-0"
                 labelPlacement="start"
                 label="Read and accept Payinvert Service Level Agreement"
