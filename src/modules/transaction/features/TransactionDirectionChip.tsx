@@ -20,35 +20,45 @@ export default function TransactionDirectionChip(
 }
 
 const getTransactionDirectionLabel = (transaction: Wallet) => {
-  if (transaction.debit) {
-    return "Debit";
-  } else if (transaction.credit) {
-    return "Credit";
-  } else if (transaction.amountOnHold) {
-    return "Processing";
-  } else if (
-    transaction.reversed ||
-    transaction.isReversal ||
-    transaction.reversalTransaction
-  ) {
-    return "Reversed";
-  }
-  return "";
+  // if (transaction.debit) {
+  //   return "Debit";
+  // } else if (transaction.credit) {
+  //   return "Credit";
+  // } else if (transaction.amountOnHold) {
+  //   return "Processing";
+  // } else if (
+  //   transaction.reversed ||
+  //   transaction.isReversal ||
+  //   transaction.reversalTransaction
+  // ) {
+  //   return "Reversed";
+  // }
+  // return "";
+
+  return transaction?.transactionType;
 };
 
 const getTransactionDirectionColor = (transaction: Wallet) => {
-  if (transaction.debit) {
-    return "error";
-  } else if (transaction.credit) {
+  if (transaction.transactionType?.toLowerCase() === "credit") {
     return "success";
-  } else if (transaction.amountOnHold) {
-    return "warning";
-  } else if (
-    transaction.reversed ||
-    transaction.isReversal ||
-    transaction.reversalTransaction
-  ) {
-    return "info";
   }
+  if (transaction.transactionType?.toLowerCase() === "debit") {
+    return "error";
+  }
+
   return "default";
+  // if (transaction.debit) {
+  //   return "error";
+  // } else if (transaction.credit) {
+  //   return "success";
+  // } else if (transaction.amountOnHold) {
+  //   return "warning";
+  // } else if (
+  //   transaction.reversed ||
+  //   transaction.isReversal ||
+  //   transaction.reversalTransaction
+  // ) {
+  //   return "info";
+  // }
+  // return "default";
 };

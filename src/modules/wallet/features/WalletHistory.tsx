@@ -10,7 +10,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import * as dfns from "date-fns";
 import CurrencyTypography from "components/CurrencyTypography";
 import { DatePicker } from "@mui/x-date-pickers";
-import { TransactionTypeEnum } from "modules/transaction/enums/TransactionTypeEnum";
+// import { TransactionTypeEnum } from "modules/transaction/enums/TransactionTypeEnum";
 import TransactionDirectionChip from "modules/transaction/features/TransactionDirectionChip";
 
 const WalletHistory = () => {
@@ -119,45 +119,43 @@ export default WalletHistory;
 const columns: ColumnDef<Wallet, any>[] = [
   {
     header: "Date",
-    accessorKey: "date",
+    accessorKey: "dateCreated",
     cell: ({ getValue }) =>
       getValue() ? (
         <Typography>
-          {dfns.format(
-            new Date(getValue()[0], getValue()[1] - 1, getValue()[2]),
-            "dd MMM yyyy"
-          )}
+          {dfns.format(new Date(getValue()), "dd MMM yyyy pp")}
         </Typography>
       ) : null,
   },
   {
     header: "Amount",
-    accessorKey: "amount",
+    accessorKey: "transactionAmount",
     cell: ({ getValue }) => (
       <CurrencyTypography>{getValue()}</CurrencyTypography>
     ),
   },
   {
     header: "Direction",
-    accessorKey: "direction",
+    accessorKey: "transactionType",
     cell: ({ row }) => <TransactionDirectionChip transaction={row?.original} />,
   },
-  {
-    header: "Balance",
-    accessorKey: "runningBalance",
-    cell: ({ getValue }) => (
-      <CurrencyTypography>{getValue()}</CurrencyTypography>
-    ),
-  },
+  // {
+  //   header: "Balance",
+  //   accessorKey: "runningBalance",
+  //   cell: ({ getValue }) => (
+  //     <CurrencyTypography>{getValue()}</CurrencyTypography>
+  //   ),
+  // },
   {
     header: "Details",
     cell: ({ row }) => (
       <Typography className="text-gray-500">
-        {(row?.original?.transactionType
-          ?.transactionTypeEnum as unknown as TransactionTypeEnum) ===
-        TransactionTypeEnum.AMOUNT_HOLD
-          ? "Processing"
-          : row?.original?.transactionType?.value}
+        {/*{(row?.original?.transactionType*/}
+        {/*  ?.transactionTypeEnum as unknown as TransactionTypeEnum) ===*/}
+        {/*TransactionTypeEnum.AMOUNT_HOLD*/}
+        {/*  ? "Processing"*/}
+        {/*  : row?.original?.transactionType?.value}*/}
+        {row.original?.paymentReference}
       </Typography>
     ),
   },

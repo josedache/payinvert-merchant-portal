@@ -1,4 +1,4 @@
-import { Chip, MenuItem, Paper, TextField, Typography } from "@mui/material";
+import { MenuItem, Paper, TextField, Typography } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
 import { walletApi } from "apis/wallet";
 import TanStandardTable from "components/TanStandardTable";
@@ -109,16 +109,16 @@ const columns: ColumnDef<Wallet, any>[] = [
       <CurrencyTypography>{getValue()}</CurrencyTypography>
     ),
   },
-  {
-    header: "Direction",
-    accessorKey: "direction",
-    cell: ({ row }) => (
-      <Chip
-        label={row.original.debit ? "Debit" : "Credit"}
-        color={row.original.debit ? "error" : "success"}
-      />
-    ),
-  },
+  // {
+  //   header: "Direction",
+  //   accessorKey: "direction",
+  //   cell: ({ row }) => (
+  //     <Chip
+  //       label={row.original.debit ? "Debit" : "Credit"}
+  //       color={row.original.debit ? "error" : "success"}
+  //     />
+  //   ),
+  // },
   {
     header: "Balance",
     accessorKey: "runningBalance",

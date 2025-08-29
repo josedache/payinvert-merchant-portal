@@ -1,5 +1,5 @@
 import useTable from "hooks/use-table";
-import { Button, Chip, Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
 import usePagination from "hooks/use-pagination";
@@ -106,16 +106,16 @@ const columns: ColumnDef<Wallet, any>[] = [
       <CurrencyTypography>{getValue()}</CurrencyTypography>
     ),
   },
-  {
-    header: "Direction",
-    accessorKey: "direction",
-    cell: ({ row }) => (
-      <Chip
-        label={row.original.debit ? "Debit" : "Credit"}
-        color={row.original.debit ? "error" : "success"}
-      />
-    ),
-  },
+  // {
+  //   header: "Direction",
+  //   accessorKey: "direction",
+  //   cell: ({ row }) => (
+  //     <Chip
+  //       label={row.original.debit ? "Debit" : "Credit"}
+  //       color={row.original.debit ? "error" : "success"}
+  //     />
+  //   ),
+  // },
   {
     header: "Balance",
     accessorKey: "runningBalance",

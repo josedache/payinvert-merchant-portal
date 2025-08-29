@@ -1,9 +1,9 @@
-import { Button, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { subsidiaryApi } from "apis/subsidiary";
 import currency from "currency.js";
 import WalletHistory from "../features/WalletHistory";
-import { MakePayout } from "assets/icons";
+// import { MakePayout } from "assets/icons";
 import WalletMakePayoutDialog from "../features/WalletMakePayoutDialog";
 import useToggle from "hooks/use-toggle";
 import PageTitle from "components/PageTitle";
@@ -30,12 +30,12 @@ const Wallet = () => {
       <PageTitle>Wallet</PageTitle>
 
       <div className="flex justify-end gap-2 items-center">
-        <Button
-          onClick={toggleIsMakePayoutDialogOpen}
-          startIcon={<MakePayout />}
-        >
-          Make Payout
-        </Button>
+        {/*<Button*/}
+        {/*  onClick={toggleIsMakePayoutDialogOpen}*/}
+        {/*  startIcon={<MakePayout />}*/}
+        {/*>*/}
+        {/*  Make Payout*/}
+        {/*</Button>*/}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
