@@ -177,6 +177,12 @@ function AppProtectedDrawer() {
                 to: urlsConstant.API_WEBHOOKS,
                 kycAllow: isActiveClient,
               },
+              {
+                icon: <CustomIcon.HelpAndSupport />,
+                label: "Help & Support",
+                to: urlsConstant.SUPPORT,
+                kycAllow: true,
+              },
             ],
           },
         ],

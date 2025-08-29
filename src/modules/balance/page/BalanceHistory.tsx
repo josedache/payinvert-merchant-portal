@@ -1,12 +1,5 @@
 import useTable from "hooks/use-table";
-import {
-  Button,
-  Chip,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Chip, Paper, Typography } from "@mui/material";
 import TanStandardTable from "components/TanStandardTable";
 import { Icon } from "@iconify/react";
 import usePagination from "hooks/use-pagination";
@@ -46,33 +39,35 @@ const BalanceHistory = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center gap-4">
-        <Typography variant="h6">Balance history - 20</Typography>
-        <div className="flex gap-2 items-center">
-          <TextField select size="small" label="Filter" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField select size="small" label="Export" className="w-24">
-            {[
-              {
-                value: "all",
-                label: "Export",
-              },
-            ].map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
+        <Typography variant="h6">
+          Balance history - {walletTransactions?.length ?? 0}
+        </Typography>
+        {/*<div className="flex gap-2 items-center">*/}
+        {/*  <TextField select size="small" label="Filter" className="w-24">*/}
+        {/*    {[*/}
+        {/*      {*/}
+        {/*        value: "all",*/}
+        {/*        label: "Export",*/}
+        {/*      },*/}
+        {/*    ].map((option) => (*/}
+        {/*      <MenuItem key={option.value} value={option.value}>*/}
+        {/*        {option.label}*/}
+        {/*      </MenuItem>*/}
+        {/*    ))}*/}
+        {/*  </TextField>*/}
+        {/*  <TextField select size="small" label="Export" className="w-24">*/}
+        {/*    {[*/}
+        {/*      {*/}
+        {/*        value: "all",*/}
+        {/*        label: "Export",*/}
+        {/*      },*/}
+        {/*    ].map((option) => (*/}
+        {/*      <MenuItem key={option.value} value={option.value}>*/}
+        {/*        {option.label}*/}
+        {/*      </MenuItem>*/}
+        {/*    ))}*/}
+        {/*  </TextField>*/}
+        {/*</div>*/}
       </div>
 
       <Paper>

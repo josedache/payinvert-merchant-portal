@@ -60,3 +60,5 @@ export const SETTLEMENTS = "/settlements";
 export const COLLECTION_ACCOUNT = "/collection-accounts";
 
 export const USER = "/users";
+
+export const SUPPORT = '/support';

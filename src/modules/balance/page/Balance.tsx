@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { subsidiaryApi } from "apis/subsidiary";
 import currency from "currency.js";
-import AnalyticsChip from "components/AnalyticsChip";
+// import AnalyticsChip from "components/AnalyticsChip";
 import useAuthUser from "hooks/use-auth-user";
 
 const Balance = () => {
@@ -16,8 +16,8 @@ const Balance = () => {
     });
 
   const amount = getDashboardChartQuery?.data?.availableBalance?.data || 0.0;
-  const trend =
-    getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
+  // const trend =
+  //   getDashboardChartQuery?.data?.availableBalance?.percentage || "0";
 
   const complianceInfo = authUser.compliance;
   
@@ -64,10 +64,10 @@ const Balance = () => {
                   "00"}
               </Typography>
             </Typography>
-            <div className="flex items-center gap-2 pt-5">
-              <AnalyticsChip label={String(trend)} />
-              <Typography className="text-gray-500">from last week</Typography>
-            </div>
+            {/*<div className="flex items-center gap-2 pt-5">*/}
+            {/*  <AnalyticsChip label={String(trend)} />*/}
+            {/*  <Typography className="text-gray-500">from last week</Typography>*/}
+            {/*</div>*/}
           </div>
         </Paper>
         <Paper className="space-y-5 p-4 flex gap-2">

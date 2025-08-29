@@ -139,6 +139,10 @@ const router = createBrowserRouter([
                 lazy: () => import("modules/user/User"),
                 children: UserRoutes,
               },
+              {
+                path: urlConstants.SUPPORT,
+                lazy: () => import("modules/support/Support"),
+              },
             ],
           },
         ],
