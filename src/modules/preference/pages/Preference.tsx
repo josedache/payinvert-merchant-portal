@@ -134,15 +134,15 @@ function Preference() {
             <div>
               <Typography variant="h6">Transactions</Typography>
               <Typography variant="body1">
-                Who should be charged transaction fees
+                Who pays the transaction fees?
               </Typography>
             </div>
             <RadioGroup {...getTextFieldProps(formik, "transactionCharge")}>
               {[
-                { value: "a", label: "Charge me the transaction fees" },
+                { value: "a", label: "I will pay the fees" },
                 {
                   value: "b",
-                  label: "Charge my customers the transaction fees",
+                  label: "My customers will pay the fees",
                 },
               ].map((props) => (
                 <FormControlLabel

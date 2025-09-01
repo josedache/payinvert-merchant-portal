@@ -23,7 +23,7 @@ const TransactionTableHeader = (props: TransactionTableHeaderProps) => {
                   <Iconify icon="icon-park-solid:down-one" />
                 </Icon>
               }
-              className="bg-white"
+              className="bg-white hidden"
               onClick={toggleOpen}
             >
               Filter
