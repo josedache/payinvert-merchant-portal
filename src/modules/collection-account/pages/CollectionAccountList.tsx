@@ -48,7 +48,9 @@ function CollectionAccountList() {
 
   return (
     <>
-      <PageTitle>Collection accounts</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Collection accounts" }]}>
+        Collection accounts
+      </PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography className="text-[18px] font-medium">

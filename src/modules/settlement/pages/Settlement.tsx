@@ -39,7 +39,9 @@ const Settlement = () => {
 
   return (
     <>
-      <PageTitle>Settlements</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Settlements" }]}>
+        Settlements
+      </PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography variant="h6">

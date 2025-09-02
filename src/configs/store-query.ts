@@ -1,10 +1,14 @@
 import {
   BaseQueryApi,
-  FetchArgs,
   createApi,
+  FetchArgs,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
-import { API_BASE_URL } from "constants/env";
+import {
+  API_BASE_URL,
+  SUPPORT_API_BASE_URL,
+  SUPPORT_API_KEY,
+} from "constants/env";
 import * as tags from "constants/tags";
 import store from "./store";
 import { logout } from "./store-actions";
@@ -40,6 +44,29 @@ export const baseApi = createApi({
 
       return response;
     },
+  }),
+  endpoints: () => ({}),
+}).enhanceEndpoints({ addTagTypes: Object.values(tags) });
+
+export const supportApi = createApi({
+  reducerPath: "support",
+  baseQuery: customFetchBaseQuery({
+    baseUrl: `${SUPPORT_API_BASE_URL}/api`,
+    prepareHeaders(headers) {
+      headers = new Headers(headers);
+
+      if (SUPPORT_API_KEY) {
+        headers.set("x-api-key", `${SUPPORT_API_KEY}`);
+      }
+
+      headers.set("ngrok-skip-browser-warning", "true");
+
+      return headers;
+    },
+    // fetchFn: async (...arg) => {
+    //   const response = await fetch(...arg);
+    //   return response;
+    // },
   }),
   endpoints: () => ({}),
 }).enhanceEndpoints({ addTagTypes: Object.values(tags) });

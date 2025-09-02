@@ -1,10 +1,21 @@
 import { Chip, Paper, TextField, Typography } from "@mui/material";
 import PageTitle from "components/PageTitle";
+import { INVOICE } from "constants/urls";
 
 const InvoiceDetail = () => {
   return (
     <>
-      <PageTitle>Invoices  <span className="mx-2 text-text-secondary">&gt;</span> Invoice details</PageTitle>
+      <PageTitle
+        breadcrumbs={[
+          { label: "Invoices", to: INVOICE },
+          {
+            label: "Invoice details",
+          },
+        ]}
+      >
+        Invoices <span className="mx-2 text-text-secondary">&gt;</span> Invoice
+        details
+      </PageTitle>
 
       <div className="max-w-xl mx-auto space-y-8">
         <Typography variant="h6" className="font-semibold">

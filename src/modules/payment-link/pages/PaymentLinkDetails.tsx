@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import LoadingContent from "components/LoadingContent";
 import PaymentLinkTransactionList from "modules/payment-link/features/PaymentLinkTransactionList";
 import PageTitle from "components/PageTitle";
+import { PAYMENT_LINK } from "constants/urls";
 
 const PaymentLinkDetails = () => {
   const { id } = useParams();
@@ -19,7 +20,15 @@ const PaymentLinkDetails = () => {
 
   return (
     <>
-      <PageTitle>
+      <PageTitle
+        breadcrumbs={[
+          {
+            label: "Payment links",
+            to: PAYMENT_LINK,
+          },
+          { label: paymentLink?.name ?? "Payment link details" },
+        ]}
+      >
         Payment links <span className="mx-2 text-text-secondary">&gt;</span>{" "}
         {paymentLink?.name ?? "Payment link details"}
       </PageTitle>

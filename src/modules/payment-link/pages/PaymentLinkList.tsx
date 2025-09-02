@@ -40,7 +40,9 @@ const PaymentLinkList = () => {
 
   return (
     <>
-      <PageTitle>Payment links</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Payment links" }]}>
+        Payment links
+      </PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography className="text-[18px] font-medium">

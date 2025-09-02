@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import LoadingContent from "components/LoadingContent";
 import * as dfns from "date-fns";
 import PageTitle from "components/PageTitle";
+import { TRANSACTION } from "constants/urls";
 
 const TransactionDetails = () => {
   const { id } = useParams();
@@ -18,7 +19,15 @@ const TransactionDetails = () => {
 
   return (
     <>
-      <PageTitle>Transactions  <span className="mx-2 text-text-secondary">&gt;</span> Transaction details</PageTitle>
+      <PageTitle
+        breadcrumbs={[
+          { label: "Transactions", to: TRANSACTION },
+          { label: "Transaction details" },
+        ]}
+      >
+        Transactions <span className="mx-2 text-text-secondary">&gt;</span>{" "}
+        Transaction details
+      </PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography className="text-[18px] font-medium">

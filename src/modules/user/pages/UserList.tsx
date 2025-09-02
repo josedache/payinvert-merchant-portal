@@ -49,7 +49,7 @@ function UserList() {
 
   return (
     <>
-      <PageTitle>Users</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Users" }]}>Users</PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography className="text-[18px] font-medium">

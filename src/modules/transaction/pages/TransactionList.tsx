@@ -71,7 +71,9 @@ const TransactionList = () => {
 
   return (
     <>
-      <PageTitle>Transactions</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Transactions" }]}>
+        Transactions
+      </PageTitle>
       <div className="space-y-6">
         <TransactionsTableHeader
           total={orders?.page?.total}

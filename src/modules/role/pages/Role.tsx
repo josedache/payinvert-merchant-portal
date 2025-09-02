@@ -30,7 +30,9 @@ const Role = () => {
 
   return (
     <>
-      <PageTitle>Roles & Permissions</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Roles & Permissions" }]}>
+        Roles & Permissions
+      </PageTitle>
       <div className="flex flex-wrap gap-2">
         <div className="space-y-6 p-4 w-full max-w-sm">
           <LoadingContent

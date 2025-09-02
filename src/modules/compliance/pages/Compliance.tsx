@@ -4,7 +4,7 @@ import ComplianceUpdate from "modules/compliance/features/ComplianceUpdate";
 export default function Compliance() {
   return (
     <>
-      <PageTitle>Compliance</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Compliance" }]}>Compliance</PageTitle>
       <ComplianceUpdate isView />
     </>
   );

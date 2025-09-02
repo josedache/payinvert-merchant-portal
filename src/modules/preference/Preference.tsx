@@ -4,7 +4,9 @@ import PageTitle from "components/PageTitle";
 function ApiKeyAndWebhook() {
   return (
     <>
-      <PageTitle>Preferences</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Preferences" }]}>
+        Preferences
+      </PageTitle>
       <Outlet />
     </>
   );

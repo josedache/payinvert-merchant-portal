@@ -4,7 +4,9 @@ import ComplianceUpdateScaffold from "modules/compliance/features/ComplianceUpda
 function ComplianceUpdate() {
   return (
     <>
-      <PageTitle>Compliance Update</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Compliance Update" }]}>
+        Compliance Update
+      </PageTitle>
       <ComplianceUpdateScaffold />
     </>
   );

@@ -27,7 +27,7 @@ const Wallet = () => {
 
   return (
     <div>
-      <PageTitle>Wallet</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Wallet" }]}>Wallet</PageTitle>
 
       <div className="flex justify-end gap-2 items-center">
         {/*<Button*/}

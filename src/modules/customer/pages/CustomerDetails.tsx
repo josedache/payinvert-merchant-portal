@@ -5,20 +5,29 @@ import CustomerTransactionList from "modules/customer/features/CustomerTransacti
 import LoadingContent from "components/LoadingContent";
 import CustomerDetailsDetails from "modules/customer/features/CustomerDetailsDetails";
 import PageTitle from "components/PageTitle";
+import { CUSTOMER } from "constants/urls";
 
 function CustomerDetails() {
   const { id } = useParams();
 
   const customerQueryResult = customerApi.useGetCustomersQuery(
     useMemo(() => ({ params: { id: id } }), [id]),
-    { skip: !id },
+    { skip: !id }
   );
 
   const customer = customerQueryResult.data?.data?.items?.[0];
 
   return (
     <>
-      <PageTitle>Customers  <span className="mx-2 text-text-secondary">&gt;</span> Customer information</PageTitle>
+      <PageTitle
+        breadcrumbs={[
+          { label: "Customers", to: CUSTOMER },
+          { label: "Customer information" },
+        ]}
+      >
+        Customers <span className="mx-2 text-text-secondary">&gt;</span>{" "}
+        Customer
+      </PageTitle>
       <LoadingContent
         loading={customerQueryResult.isLoading}
         error={customerQueryResult.isError}
