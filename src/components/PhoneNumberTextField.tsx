@@ -23,14 +23,22 @@ const PhoneNumberTextField = forwardRef(
       ...restProps
     } = props;
 
-    const options = useMemo(
-      () =>
-        maskitoPhoneOptionsGenerator({
-          countryIsoCode,
-          metadata,
-        }) satisfies MaskitoOptions,
-      [countryIsoCode]
-    );
+    const options = useMemo(() => {
+      const baseOptions = maskitoPhoneOptionsGenerator({
+        countryIsoCode,
+        metadata,
+      });
+
+      return {
+        ...baseOptions,
+        postprocessors: [
+          (result) => ({
+            ...result,
+            value: result.value.replace(/-/g, " "),
+          }),
+        ],
+      } satisfies MaskitoOptions;
+    }, [countryIsoCode]);
 
     const inputRef = useMaskito({ options });
 

@@ -79,7 +79,7 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
         <PhoneNumberTextField
           label={isStartupBusiness ? "Phone number" : "Business phone number"}
           fullWidth
-          disabled={isView}
+          // disabled={isView}
           required
           {...getTextFieldProps(formik, "verifiedPhoneNumber")}
           slotProps={{
