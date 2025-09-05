@@ -2,7 +2,7 @@ import { Button, Paper, Typography } from "@mui/material";
 import { cn } from "utils/cn";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import { BALANCE } from "constants/urls";
+import { WALLET } from "constants/urls";
 import AnalyticsChip from "components/AnalyticsChip";
 import currency from "currency.js";
 
@@ -54,7 +54,7 @@ const AnalyticsWithLink = ({
         </div>
       </div>
       <div className="flex justify-end p-1 bg-green-50">
-        <Link to={BALANCE}>
+        <Link to={WALLET}>
           <Button variant="text" endIcon={<Icon icon="uil:arrow-right" />}>
             View balance
           </Button>

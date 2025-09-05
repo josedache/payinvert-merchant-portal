@@ -16,7 +16,7 @@ import ComplianceUpdateAgreementDocument from "modules/compliance/features/Compl
 import { ComplianceAgreementDocumentType } from "modules/compliance/enums/compliance-agreement-document-type";
 
 function ComplianceUpdateAgreement(props: ComplianceUpdateAgreementProps) {
-  const { formik, isView } = props;
+  const { backButtonJsx, formik, isView } = props;
 
   return (
     <Paper
@@ -24,9 +24,12 @@ function ComplianceUpdateAgreement(props: ComplianceUpdateAgreementProps) {
       onSubmit={formik.handleSubmit}
       className="w-full max-w-xl p-6 space-y-4"
     >
-      <Typography variant="h6" className="font-semibold">
-        Agreement
-      </Typography>
+      <div className="flex items-center gap-1">
+        {backButtonJsx}
+        <Typography variant="h6" className="font-semibold">
+          Agreement
+        </Typography>
+      </div>
 
       <div className="space-y-4">
         <div>

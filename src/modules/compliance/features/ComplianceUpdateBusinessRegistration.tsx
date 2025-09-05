@@ -18,7 +18,7 @@ import { useSnackbar } from "notistack";
 function ComplianceUpdateBusinessRegistration(
   props: ComplianceUpdateBusinessRegistrationProps
 ) {
-  const { formik, isView } = props;
+  const { backButtonJsx, formik, isView } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -28,9 +28,12 @@ function ComplianceUpdateBusinessRegistration(
       onSubmit={formik.handleSubmit}
       className="w-full max-w-xl p-6 space-y-4"
     >
-      <Typography variant="h6" className="font-semibold">
-        Business Registration
-      </Typography>
+      <div className="flex items-center gap-1">
+        {backButtonJsx}
+        <Typography variant="h6" className="font-semibold">
+          Business Registration
+        </Typography>
+      </div>
 
       <Dropzone
         multiple={false}

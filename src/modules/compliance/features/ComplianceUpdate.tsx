@@ -1,4 +1,6 @@
 import {
+  Icon,
+  IconButton,
   Paper,
   Skeleton,
   Step,
@@ -388,7 +390,14 @@ function ComplianceUpdate(props: ComplianceUpdateProps) {
     formik.values.businessType === ComplianceBusinessType.START_UP;
   const isRegisteredBusiness = !isStartupBusiness;
 
+  const backButtonJsx = (
+    <IconButton edge="start" size="small" onClick={() => stepper.previous()}>
+      <Icon>arrow_back</Icon>
+    </IconButton>
+  );
+
   const dataRef = useDataRef({
+    backButtonJsx,
     isView,
     formik,
     stepper,
