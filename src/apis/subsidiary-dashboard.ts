@@ -1,3 +1,6 @@
+/* eslint-disable */
+/* prettier-ignore-start */
+
 import { baseApi } from "configs/store-query";
 import { PREFERENCE } from "constants/tags";
 import {
@@ -15,6 +18,10 @@ import {
   SubsidiaryDashboardPaymentOptionsSetApiResponse,
   SubsidiaryDashboardPaymentOptionsViewNewApiRequest,
   SubsidiaryDashboardPaymentOptionsViewNewApiResponse,
+  SubsidiaryDashboardSetWhoPayFeeApiRequest,
+  SubsidiaryDashboardSetWhoPayFeeApiResponse,
+  SubsidiaryDashboardWhoPayFeeApiRequest,
+  SubsidiaryDashboardWhoPayFeeApiResponse,
 } from "types/subsidiary-dashboard-api";
 
 export const BASE_URL = "/subsidiary/dashboard";
@@ -84,6 +91,27 @@ export const subsidiaryDashboardApi = baseApi.injectEndpoints({
         ...config,
       }),
       invalidatesTags: [PREFERENCE],
+    }),
+    setSubsidiaryDashboardWhoPayFee: builder.mutation<
+      SubsidiaryDashboardSetWhoPayFeeApiResponse,
+      SubsidiaryDashboardSetWhoPayFeeApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/payment/fees/set/new`,
+        method: "post",
+        ...config,
+      }),
+      invalidatesTags: [PREFERENCE],
+    }),
+    getSubsidiaryDashboardWhoPayFee: builder.query<
+      SubsidiaryDashboardWhoPayFeeApiResponse,
+      SubsidiaryDashboardWhoPayFeeApiRequest
+    >({
+      query: (config) => ({
+        url: `${BASE_URL}/payment/fees/view/new`,
+        ...config,
+      }),
+      providesTags: [PREFERENCE],
     }),
     getSubsidiaryDashboardInternationalPaymentView: builder.query<
       SubsidiaryDashboardInternationalPaymentViewNewApiResponse,

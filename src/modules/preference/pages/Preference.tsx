@@ -53,6 +53,16 @@ function Preference() {
   const subsidiaryDashboard2faLoginQueryResult =
     subsidiaryDashboardApi.useGetSubsidiaryDashboard2faLoginQuery(undefined);
 
+  //transaction fee section
+  const subsidiaryDashboardWhoPayFeeQueryResult =
+    subsidiaryDashboardApi.useGetSubsidiaryDashboardWhoPayFeeQuery(undefined);
+
+  const [setSubsidiaryDashboardWhoPayFeeMutation] =
+    subsidiaryDashboardApi.useSetSubsidiaryDashboardWhoPayFeeMutation();
+
+  const subsidiaryDashboardWhoPay =
+    subsidiaryDashboardWhoPayFeeQueryResult.data?.data;
+
   const subsidiaryDashboard2faLogin =
     subsidiaryDashboard2faLoginQueryResult.data?.data;
 
@@ -66,6 +76,7 @@ function Preference() {
       enableInternationalPayment:
         subsidiaryDashboardInternationalPaymentView?.enabled ?? false,
       twoFA: subsidiaryDashboard2faLogin?.isTwoFAEnabled ?? false,
+      feeBearer: subsidiaryDashboardWhoPay?.code || "",
     };
   }, [
     subsidiaryDashboardPaymentOptions,
@@ -84,6 +95,12 @@ function Preference() {
       ),
       enableInternationalPayment: yup.boolean().required(),
       twoFA: yup.boolean().required(),
+      feeBearer: yup.string().required(),
+      // businessId: yup.string().required(),
+      // percentage: yup.string().required(),
+      // feeBearer: '',
+      // businessId: '',
+      // percentage: '',
     }),
     enableReinitialize: true,
     onSubmit: async () => {
@@ -104,6 +121,13 @@ function Preference() {
           setSubsidiaryDashboard2faLoginMutation({
             body: {
               twoFA: formik.values.twoFA,
+            },
+          }).unwrap(),
+          setSubsidiaryDashboardWhoPayFeeMutation({
+            body: {
+              businessId: authUser?.businessDetails?.id,
+              feeBearer: formik.values.feeBearer,
+              percentage: "1.0",
             },
           }).unwrap(),
         ]);
@@ -137,11 +161,11 @@ function Preference() {
                 Who pays the transaction fees?
               </Typography>
             </div>
-            <RadioGroup {...getTextFieldProps(formik, "transactionCharge")}>
+            <RadioGroup {...getTextFieldProps(formik, "feeBearer")}>
               {[
-                { value: "a", label: "I will pay the fees" },
+                { value: "BBF", label: "I will pay the fees" },
                 {
-                  value: "b",
+                  value: "CBF",
                   label: "My customers will pay the fees",
                 },
               ].map((props) => (
