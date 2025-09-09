@@ -79,12 +79,12 @@ function AppProtectedDrawer() {
                 to: urlsConstant.TRANSACTION,
                 kycAllow: isActiveClient,
               },
-              {
-                icon: <CustomIcon.UserSubsidiaries />,
-                label: "Users",
-                to: urlsConstant.USER,
-                kycAllow: isActiveClient,
-              },
+              // {
+              //   icon: <CustomIcon.UserSubsidiaries />,
+              //   label: "Users",
+              //   to: urlsConstant.USER,
+              //   kycAllow: isActiveClient,
+              // },
               // {
               //   icon: <CustomIcon.Invoices />,
               //   label: "Invoices",

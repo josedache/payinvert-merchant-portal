@@ -20,7 +20,7 @@ import PageTitle from "components/PageTitle";
 import UserStatus from "modules/user/features/UserStatus";
 import UserTableAction from "modules/user/features/UserTableAction";
 import { CollectionAccount } from "types/collection-account";
-import * as CustomIcon from "assets/icons";
+// import * as CustomIcon from "assets/icons";
 
 import { useSnackbar } from "notistack";
 import { useState } from "react";
