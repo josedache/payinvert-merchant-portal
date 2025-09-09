@@ -11,3 +11,4 @@ export const WEBHOOK = "WEBHOOK";
 export const API_KEY = "API_KEY";
 export const ROLE = 'ROLE';
 export const PREFERENCE = 'PREFERENCE';
+export const SUPPORT_CATEGORY = 'SUPPORT_CATEGORY';

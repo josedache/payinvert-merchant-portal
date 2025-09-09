@@ -20,7 +20,7 @@ const Invoice = () => {
 
   return (
     <>
-      <PageTitle>Invoices</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Invoices" }]}>Invoices</PageTitle>
 
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">

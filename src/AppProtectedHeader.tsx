@@ -149,6 +149,7 @@ function AppProtectedHeader(props: AppBarProps) {
                     className="font-semibold capitalize text-gray-600"
                     noWrap
                   >
+                    Welcome back,{" "}
                     {[authUser?.user?.firstName, authUser?.user?.lastName]
                       .map((name) => name?.toLocaleLowerCase())
                       .join(" ")}

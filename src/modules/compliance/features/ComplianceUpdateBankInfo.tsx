@@ -18,7 +18,7 @@ import { getTextFieldError } from "utils/formik/get-text-field-error";
 import { getTextFieldHelperText } from "utils/formik/get-text-field-helper-text";
 
 function ComplianceUpdateBankInfo(props: ComplianceUpdateBankDetailsProps) {
-  const { formik, dataRef, isView } = props;
+  const { backButtonJsx, formik, dataRef, isView } = props;
   const getBanksQuery = subsidiaryApi.useGetSubsidiaryBanksQuery();
   const banks = getBanksQuery?.data?.banks || [];
 
@@ -68,9 +68,12 @@ function ComplianceUpdateBankInfo(props: ComplianceUpdateBankDetailsProps) {
       onSubmit={formik.handleSubmit}
       className="w-full max-w-xl p-6 space-y-4"
     >
-      <Typography variant="h6" className="font-semibold">
-        Account Setup
-      </Typography>
+      <div className='flex items-center gap-1'>
+        {backButtonJsx}
+        <Typography variant="h6" className="font-semibold">
+          Account Setup
+        </Typography>
+      </div>
 
       <NumberTextField
         freeSolo

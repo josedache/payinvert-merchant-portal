@@ -10,7 +10,8 @@ import PhoneNumberTextField from "components/PhoneNumberTextField";
 import getPhoneNumberInfo from "utils/number/get-phone-number-info";
 
 function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
-  const { formik, isStartupBusiness, complianceInfo, isView } = props;
+  const { backButtonJsx, formik, isStartupBusiness, complianceInfo, isView } =
+    props;
 
   return (
     <Paper
@@ -18,9 +19,12 @@ function ComplianceUpdateContact(props: ComplianceUpdateContactProps) {
       onSubmit={formik.handleSubmit}
       className="w-full max-w-xl p-6 space-y-4"
     >
-      <Typography variant="h6" className="font-semibold">
-        Contact Setup
-      </Typography>
+      <div className="flex items-center gap-1">
+        {backButtonJsx}
+        <Typography variant="h6" className="font-semibold">
+          Contact Setup
+        </Typography>
+      </div>
 
       <div className="grid grid-cols-1 gap-4">
         <NoSpecialCharacterTextField

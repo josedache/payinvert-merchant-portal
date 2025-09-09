@@ -35,7 +35,7 @@ const CustomerList = () => {
 
   return (
     <>
-      <PageTitle>Customers</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Customers" }]}>Customers</PageTitle>
       <div className="space-y-6">
         <div className="flex justify-between items-center gap-4">
           <Typography className="text-[18px] font-medium">

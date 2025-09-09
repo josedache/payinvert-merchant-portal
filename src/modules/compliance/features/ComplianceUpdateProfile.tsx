@@ -15,6 +15,7 @@ import NoSpecialCharacterTextField from "components/NoSpecialCharaterTextField";
 
 function ComplianceUpdateProfile(props: ComplianceUpdateProfileProps) {
   const {
+    backButtonJsx,
     formik,
     isStartupBusiness,
     isRegisteredBusiness,
@@ -54,6 +55,7 @@ function ComplianceUpdateProfile(props: ComplianceUpdateProfileProps) {
       onSubmit={formik.handleSubmit}
       className="w-full max-w-xl p-6 space-y-4"
     >
+      {backButtonJsx}
       <Typography variant="h6" className="font-semibold">
         Profile Setup
       </Typography>

@@ -62,7 +62,9 @@ function PayoutAccountSetting() {
 
   return (
     <>
-      <PageTitle>Payout accounts</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Payout accounts" }]}>
+        Payout accounts
+      </PageTitle>
       <div className="space-y-4">
         <Paper
           variant="outlined"

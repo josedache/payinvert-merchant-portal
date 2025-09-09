@@ -49,7 +49,7 @@ function Dashboard() {
 
   return (
     <>
-      <PageTitle>Dashboard</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Dashboard" }]}>Dashboard</PageTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         <Paper className="p-4 flex gap-2">
           <div className="size-12 shrink-0 grid place-items-center rounded-full text-pink-500 bg-pink-50 mt-2">

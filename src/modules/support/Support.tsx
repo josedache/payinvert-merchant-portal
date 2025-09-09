@@ -12,11 +12,21 @@ import {
 import useToggle from "hooks/use-toggle";
 import { useState } from "react";
 import { cn } from "utils/cn";
+import { supportCategoryApi } from "apis/support-category";
+import { SupportCategoryHierarchy } from "types/support-category";
+import LoadingContent from "components/LoadingContent";
 
 function Support() {
+  const categoryHierarchyListQueryResult =
+    supportCategoryApi.useGetCategoryHierarchyQuery(undefined);
+
+  const categoryHierarchyList = categoryHierarchyListQueryResult.data;
+
   return (
     <>
-      <PageTitle>Help & Support</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "Help & Support" }]}>
+        Help & Support
+      </PageTitle>
       <div className="flex gap-4">
         <div className="w-1/3 space-y-6">
           <Typography variant="body2">Need more help?</Typography>
@@ -50,16 +60,31 @@ function Support() {
             >
               Chat with us directly from WhatsApp.
             </Button>
-            <Typography variant="caption" className='block mt-1'>
+            <Typography variant="caption" className="block mt-1">
               (Live chat available Monday–Friday, 9AM–5PM WAT){" "}
             </Typography>
           </div>
         </div>
         <div className="flex-1">
           <Paper elevation={0} className="p-4 space-y-4">
-            {[1, 2, 3, 4, 5].map((a) => {
-              return <FaqGroup key={a} />;
-            })}
+            <LoadingContent
+              loading={categoryHierarchyListQueryResult.isLoading}
+              error={categoryHierarchyListQueryResult.isError}
+              onRetry={categoryHierarchyListQueryResult.refetch}
+            >
+              {() => (
+                <>
+                  {categoryHierarchyList?.map((categoryHierarchy) => {
+                    return (
+                      <FaqGroup
+                        key={categoryHierarchy.id}
+                        categoryHierarchy={categoryHierarchy}
+                      />
+                    );
+                  })}
+                </>
+              )}
+            </LoadingContent>
           </Paper>
         </div>
       </div>
@@ -71,7 +96,9 @@ export const Component = Support;
 
 export default Support;
 
-function FaqGroup() {
+function FaqGroup(props: { categoryHierarchy: SupportCategoryHierarchy }) {
+  const { categoryHierarchy } = props;
+
   const [isCollapsed, toggleCollapsed] = useToggle();
 
   const [itemId, setItemId] = useState(-1);
@@ -89,7 +116,7 @@ function FaqGroup() {
         onClick={toggleCollapsed}
         className="w-full flex items-center justify-between gap-4"
       >
-        <Typography variant="h6">Payments & Transactions</Typography>
+        <Typography variant="h6">{categoryHierarchy?.name}</Typography>
         {isCollapsed ? (
           <IconButton
             disableRipple
@@ -106,10 +133,10 @@ function FaqGroup() {
         )}
       </ButtonBase>
       <Collapse in={isCollapsed}>
-        {[1, 2, 3].map((_, index) => {
+        {categoryHierarchy.questions?.map((question, index) => {
           const selected = itemId === index;
           return (
-            <div key={_}>
+            <div key={question.title}>
               {index ? <Divider /> : null}
               <div className="py-2">
                 <ButtonBase
@@ -118,7 +145,7 @@ function FaqGroup() {
                   className="w-full flex items-center justify-between gap-4"
                 >
                   <Typography color="primary" variant="body1">
-                    How do I create a payment link?
+                    {question.title}
                   </Typography>
                   {selected ? (
                     <IconButton disableRipple size="small">
@@ -131,11 +158,7 @@ function FaqGroup() {
                   )}
                 </ButtonBase>
                 <Collapse in={selected}>
-                  <Typography>
-                    Easily create and customize payment links for single or
-                    recurring transactions, share them with customers, and
-                    manage payments seamlessly in one place.
-                  </Typography>
+                  <Typography>{question.answer}</Typography>
                 </Collapse>
               </div>
             </div>

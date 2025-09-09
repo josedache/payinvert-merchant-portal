@@ -33,6 +33,7 @@ export type ComplianceUpdateFormikValues = {
 };
 
 export interface ComplianceUpdateContentDataRef {
+  backButtonJsx: any;
   formik: FormikProps<ComplianceUpdateFormikValues>;
   stepper: any;
   isInitialOnboarding?: boolean;

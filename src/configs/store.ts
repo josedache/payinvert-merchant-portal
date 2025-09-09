@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import * as globalStore from "./store-slice";
-import { baseApi } from "./store-query";
+import { baseApi, supportApi } from "./store-query";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { isEmpty } from "utils/object/is-empty";
 import { mergeDeep } from "utils/object/merge-deep";
@@ -11,6 +11,7 @@ import * as tags from "constants/tags";
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
+    [supportApi.reducerPath]: supportApi.reducer,
     [globalStore.slice.reducerPath]: globalStore.slice.reducer,
   },
   preloadedState: loadState({
@@ -19,7 +20,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       baseApi.middleware,
-      rtkqOnResetMiddleware(baseApi)
+      supportApi.middleware,
+      rtkqOnResetMiddleware(baseApi, supportApi)
     ),
 });
 

@@ -22,7 +22,7 @@ import BvnVerification from "features/BvnVerification";
 import NoSpecialCharacterTextField from "components/NoSpecialCharaterTextField";
 
 function ComplianceUpdateOwnerInfo(props: ComplianceUpdateOwnerInfoProps) {
-  const { formik, complianceInfo, isView } = props;
+  const { backButtonJsx, formik, complianceInfo, isView } = props;
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -37,9 +37,12 @@ function ComplianceUpdateOwnerInfo(props: ComplianceUpdateOwnerInfoProps) {
       onSubmit={formik.handleSubmit}
       className="w-full max-w-xl p-6 space-y-4"
     >
-      <Typography variant="h6" className="font-semibold">
-        Owner Setup
-      </Typography>
+      <div className="flex items-center gap-1">
+        {backButtonJsx}
+        <Typography variant="h6" className="font-semibold">
+          Owner Setup
+        </Typography>
+      </div>
 
       <div className="grid grid-cols-1 gap-4">
         <NoSpecialCharacterTextField

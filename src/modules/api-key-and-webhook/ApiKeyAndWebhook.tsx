@@ -4,7 +4,9 @@ import PageTitle from "components/PageTitle";
 function ApiKeyAndWebhook() {
   return (
     <>
-      <PageTitle>API keys & Webhooks</PageTitle>
+      <PageTitle breadcrumbs={[{ label: "API keys & Webhooks" }]}>
+        API keys & Webhooks
+      </PageTitle>
       <Outlet />
     </>
   );

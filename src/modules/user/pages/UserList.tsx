@@ -117,30 +117,55 @@ function UserList() {
 
   return (
     <>
-      <PageTitle>Users</PageTitle>
-      {userStage === "EMPTY" && (
-        <div className="min-w-full md:min-h-[650px] flex flex-col justify-center items-center mx-auto ">
-          <div className="p-4 md:p-8 w-full md:w-2/5 rounded-lg shadow bg-white gap-3 flex flex-col items-center">
-            <CustomIcon.AddUser />
-            <h1 className="text-xl font-bold">Create your first user</h1>
-            <div className="text-sm text-center">
-              Currently, no users exist. Create one now to manage your business
-              better, improve efficiency, and unlock smoother operations.
-            </div>
-            <Button
-              onClick={() => setUserState("CREATE")}
-              className="w-full"
-              startIcon={
-                <Icon>
-                  <Iconify icon="mdi:user-add-outline" />
-                </Icon>
-              }
-            >
-              Create new user
-            </Button>
+      <PageTitle breadcrumbs={[{ label: "Users" }]}>Users</PageTitle>
+      <div className="space-y-6">
+        <div className="flex justify-between items-center gap-4">
+          <Typography className="text-[18px] font-medium">
+            {/*Users - {collectionAccounts?.page?.total ?? 0}*/}
+            Users - (0)
+          </Typography>
+          <div className="flex gap-2 items-center">
+            <TextField select size="small" label="Filter" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField select size="small" label="Export" className="w-24">
+              {[
+                {
+                  value: "all",
+                  label: "Export",
+                },
+              ].map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <CollectionAccountCreateEdit>
+              {({ toggleOpen }) => (
+                <Button
+                  onClick={toggleOpen}
+                  startIcon={
+                    <Icon>
+                      <Iconify icon="mdi:user-add" />
+                    </Icon>
+                  }
+                >
+                  Add new user
+                </Button>
+              )}
+            </CollectionAccountCreateEdit>
           </div>
         </div>
-      )}
+      </div>
 
       {userStage === "NOT_EMPTY" && (
         <div className="space-y-6">

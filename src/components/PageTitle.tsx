@@ -1,9 +1,11 @@
-import { Typography, TypographyProps } from "@mui/material";
 import { createPortal } from "react-dom";
 import { PAGE_TITLE } from "constants/portal";
 import { useLayoutEffect, useState } from "react";
+import PageBreadcrumbs, {
+  PageBreadcrumbsProps,
+} from "components/PageBreadcrumb";
 
-function PageTitle(props: TypographyProps) {
+function PageTitle(props: PageBreadcrumbsProps) {
   const [container, setContainer] = useState<HTMLElement | null>(getContainer);
 
   useLayoutEffect(() => {
@@ -24,7 +26,7 @@ function PageTitle(props: TypographyProps) {
 
   if (!container) return null;
 
-  return createPortal(<Typography variant="h6" {...props} />, container);
+  return createPortal(<PageBreadcrumbs {...props} />, container);
 }
 
 export default PageTitle;
