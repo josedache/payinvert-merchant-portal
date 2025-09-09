@@ -54,3 +54,18 @@ export type SubsidiaryDashboardInternationalPaymentViewNewApiResponse =
     requestedAt: null | string;
     updatedAt: null | string;
   }>;
+
+export type SubsidiaryDashboardWhoPayFeeApiRequest = ApiRequest;
+export type SubsidiaryDashboardWhoPayFeeApiResponse = ApiResponse<{
+  whoBearsFee: string;
+  percentage: number;
+  code: string;
+}>;
+
+export type SubsidiaryDashboardSetWhoPayFeeApiRequest = ApiRequest<{
+  feeBearer: string;
+  businessId: string | number;
+  percentage: string;
+}>;
+
+export type SubsidiaryDashboardSetWhoPayFeeApiResponse = ApiResponse;

@@ -80,6 +80,12 @@ function AppProtectedDrawer() {
                 kycAllow: isActiveClient,
               },
               // {
+              //   icon: <CustomIcon.UserSubsidiaries />,
+              //   label: "Users",
+              //   to: urlsConstant.USER,
+              //   kycAllow: isActiveClient,
+              // },
+              // {
               //   icon: <CustomIcon.Invoices />,
               //   label: "Invoices",
               //   to: urlsConstant.INVOICE,
@@ -159,12 +165,6 @@ function AppProtectedDrawer() {
                 to: urlsConstant.ROLES_AND_PERMISSION,
                 kycAllow: isActiveClient,
               },
-              // {
-              //   icon: <CustomIcon.UserSubsidiaries />,
-              //   label: "Users",
-              //   to: urlsConstant.USER,
-              //   kycAllow: isActiveClient,
-              // },
               {
                 icon: <CustomIcon.Preferences />,
                 label: "Preferences",

@@ -38,7 +38,10 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
   const paymentLinkTypesQueryResult =
     paymentLinkApi.useGetPaymentLinkTypesQuery(undefined);
 
-  const paymentLinkTypes = paymentLinkTypesQueryResult.data?.paymentLinkTypes;
+  const paymentLinkTypes =
+    paymentLinkTypesQueryResult.data?.paymentLinkTypes?.filter(
+      (el) => el.paymentLinkName !== "Default"
+    );
 
   const currenciesQueryResult = serviceApi.useGetCurrenciesQuery(undefined);
 
@@ -83,7 +86,20 @@ function PaymentLinkCreateEdit(props: PaymentLinkCreateEditProps) {
       name: yup.string().label("Link Name").required(),
       description: yup.string().label("Description").required(),
       paymentType: yup.string().label("Payment Type").optional(),
-      amount: yup.number().label("Amount").optional(),
+      amount: yup
+        .number()
+        .transform((value, originalValue) =>
+          originalValue === "" ? null : value
+        )
+        .nullable()
+        .test(
+          "amount-range",
+          "Amount must be 0 or between ₦200 and ₦100,000,000",
+          (value) =>
+            value === null ||
+            value === 0 ||
+            (value >= 200 && value <= 100000000)
+        ),
       mobile: yup.string().label("Mobile").optional(),
       backgroundImage: yup.string().label("Background Image").optional(),
       website: yup.string().label("Website URL").optional(),

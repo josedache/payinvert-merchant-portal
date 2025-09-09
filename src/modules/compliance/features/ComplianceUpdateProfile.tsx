@@ -31,9 +31,10 @@ function ComplianceUpdateProfile(props: ComplianceUpdateProfileProps) {
   ] = verificationApi.useValidateRcNumberVerificationMutation();
 
   async function handleValidateRcNumber() {
+    const val = formik.values.registrationNumber.replace(/[\s-]/g, "");
     try {
       const data = await validateRcNumberVerificationMutation({
-        path: { rcNumber: formik.values.registrationNumber },
+        path: { rcNumber: val },
       }).unwrap();
 
       enqueueSnackbar(data?.message || "RC number validated successfully.", {

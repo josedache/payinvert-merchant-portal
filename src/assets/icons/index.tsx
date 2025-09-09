@@ -20,3 +20,6 @@ export { default as Wallet } from "assets/icons/wallet.svg?react";
 export { default as MakePayout } from "assets/icons/make-payout.svg?react";
 export { default as Check } from "assets/icons/check.svg?react";
 export { default as HelpAndSupport } from "assets/icons/help.svg?react";
+export { default as AddUser } from "assets/icons/add-user.svg?react";
+export { default as EditUser } from "assets/icons/edit-user.svg?react";
+export { default as DeleteUser } from "assets/icons/delete-user.svg?react";
