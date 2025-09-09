@@ -222,7 +222,7 @@ const renderHeaderCell: TanStandardTableProps["slotRenderers"]["headerCell"] =
             props.classes?.headerCell,
             HeaderCellProps?.className,
             isRelative &&
-            "TanStandardTable__table__header__row__cell--relative",
+              "TanStandardTable__table__header__row__cell--relative",
             isAbsolute && "TanStandardTable__table__header__row__cell--absolute"
           ),
           style: {
@@ -237,23 +237,25 @@ const renderHeaderCell: TanStandardTableProps["slotRenderers"]["headerCell"] =
             {headerCell.isPlaceholder
               ? null
               : props.flexRender(
-                headerCell.column.columnDef.header,
-                headerCell.getContext()
-              )}
+                  headerCell.column.columnDef.header,
+                  headerCell.getContext()
+                )}
             <div
               {...{
                 onMouseDown: headerCell.getResizeHandler(),
                 onTouchStart: headerCell.getResizeHandler(),
-                className: `TanStandardTable__resizer ${headerCell.column.getIsResizing()
-                  ? "TanStandardTable__resizing"
-                  : ""
-                  }`,
+                className: `TanStandardTable__resizer ${
+                  headerCell.column.getIsResizing()
+                    ? "TanStandardTable__resizing"
+                    : ""
+                }`,
                 style: {
                   transform:
                     instance.options.columnResizeMode === "onEnd" &&
-                      headerCell.column.getIsResizing()
-                      ? `translateX(${instance.getState().columnSizingInfo.deltaOffset
-                      }px)`
+                    headerCell.column.getIsResizing()
+                      ? `translateX(${
+                          instance.getState().columnSizingInfo.deltaOffset
+                        }px)`
                       : "",
                 },
               }}
@@ -451,7 +453,7 @@ const renderFooterCell: TanStandardTableProps["slotRenderers"]["footerCell"] =
             FooterCellProps?.className,
             props.classes?.footerCell,
             isRelative &&
-            "TanStandardTable__table__footer__row__cell--relative",
+              "TanStandardTable__table__footer__row__cell--relative",
             isAbsolute && "TanStandardTable__table__footer__row__cell--absolute"
           ),
           style: {
@@ -466,9 +468,9 @@ const renderFooterCell: TanStandardTableProps["slotRenderers"]["footerCell"] =
             {footerCell.isPlaceholder
               ? null
               : props.flexRender(
-                footerCell.column.columnDef.footer,
-                footerCell.getContext()
-              )}
+                  footerCell.column.columnDef.footer,
+                  footerCell.getContext()
+                )}
           </>
         )}
       </FooterCell>
@@ -558,7 +560,9 @@ const renderEmpty: TanStandardTableProps["slotRenderers"]["empty"] =
           ),
         }}
       >
-        {EmptyProps?.children || <EmptyContent className='w-[424px] text-center' />}
+        {EmptyProps?.children || (
+          <EmptyContent className="w-[424px] text-center" />
+        )}
       </Empty>
     );
   };

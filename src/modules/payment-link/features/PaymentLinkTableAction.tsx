@@ -88,21 +88,23 @@ const PaymentLinkTableAction = (props: PaymentLinkListActionProps) => {
               View details
             </Button>
           </Link>
-          <Button
-            fullWidth
-            variant="text"
-            startIcon={<Iconify icon="iconamoon:copy-light" />}
-            className="mb-2 text-black justify-start"
-            onClick={() =>
-              clipboard.writeText(paymentLink.paymentLinkUrl, () =>
-                enqueueSnackbar("Payment link copied to clipboard", {
-                  variant: "success",
-                })
-              )
-            }
-          >
-            Copy link
-          </Button>
+          {paymentLink?.isActive && (
+            <Button
+              fullWidth
+              variant="text"
+              startIcon={<Iconify icon="iconamoon:copy-light" />}
+              className="mb-2 text-black justify-start"
+              onClick={() =>
+                clipboard.writeText(paymentLink.paymentLinkUrl, () =>
+                  enqueueSnackbar("Payment link copied to clipboard", {
+                    variant: "success",
+                  })
+                )
+              }
+            >
+              Copy link
+            </Button>
+          )}
         </div>
       </Popover>
     </div>
